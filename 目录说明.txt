@@ -1,0 +1,22 @@
+
+app
+	存放应用的所有源代码
+
+build
+	编译输出目录
+
+lib
+	第三方库, 且没有纳入npm管理的, 目前是bootstrap和jquery
+
+node_modules
+	其它所有模块, 包含react
+
+index.html
+	首页, 也是浏览器唯一需要载入的页面
+
+package.json
+	npm生成的包管理文件, 可忽略
+
+webpack.config.js
+	webpack打包工程文件
+	

@@ -1,0 +1,63 @@
+﻿
+React开发环境搭建(Windows)
+
+
+1. 安装Node.js
+
+    去官网https://nodejs.org 下载 V4.4.3 LTS版本安装.
+
+2. 把项目git仓库克隆到本地
+
+    git clone https://......bird.git bird
+
+    完毕后执行下述命令:
+
+    cd bird
+    npm init
+
+    npm init会要求回答一系列问题, 用默认值即可.
+
+3. 安装各种工具
+
+   npm --registry http://registry.npm.taobao.org install webpack webpack-dev-server babel-cli typings -g
+
+   或
+
+   npm install webpack webpack-dev-server babel-cli typings -g
+
+4. 安装React智能提示
+
+   typings install react --ambient --save
+   typings install node --ambient --save
+   typings install lodash --save
+
+
+5. 安装各种包
+
+   npm --registry http://registry.npm.taobao.org install  react react-dom react-addons-css-transition-group babel-core babel-loader babelify babel-preset-react babel-preset-es2015 url-loader postcss-loader eventbusjs style-loader css-loader --save
+
+
+6. 安装代码编辑工具Visual Studio Code
+
+    https://www.visualstudio.com/products/code-vs 
+
+    安装完毕之后需要重新启动.
+
+    之后在工程目录键入 "code ." 即可在Visual Studio Code中
+
+
+7. 编译打包
+
+   在工程目录输入命令webpack。
+
+8. 试运行
+
+   在工程目录输入 webpack-dev-server , 此命令首先编译打包，然后运行一个web server，端口由webpack.config.js指定，一般是9999, 此时用浏览器访问
+
+   http://localhost:9999/ 
+
+    即可看到运行效果。
+
+    webpack-dev-server会监测文件改变，即时编译打包并动态刷新页面，不用手工处理，速度很快，推荐使用。
+
+    webpack-dev-server是在内存打包，并不改变磁盘文件。当使用其它的web server测试时，要用webpack打包。

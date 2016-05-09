@@ -1,0 +1,79 @@
+
+React自定义组件编写规范 V1.0
+
+
+1. 代码缩进为4个空格;
+
+2. 代码应包含必要的注释;
+
+3. 变量和函数名采用驼峰式命名法;
+
+4. 组件的属性必须在代码中明确列出, 并指定类型;
+
+    例:
+
+    var SideBar = React.createClass({
+
+    	...
+
+	    propTypes: {
+	    	style: React.PropTypes.string.isRequired,
+        	itemPath: React.PropTypes.array.isRequired,
+        	itemName: React.PropTypes.array.isRequired,
+        	otherProp: React.PropTypes.string //可选属性
+    	},
+
+    	...
+    };
+
+
+5.  大部分情况下, 组件都需要提供一个style属性，组件的使用者通过style来指定组件的位置和宽高等信息;
+
+	例：
+   
+	var ImageButton = React.createClass({
+	  	
+	  	propTypes: {
+	  	 	//组件被指定的内联样式
+	    	style: React.PropTypes.string.isRequired,
+    	},
+
+	  	render: function() {
+
+	  		//把指定的style和内定的style结合起来, 其结果作为最外层元素的内联样式
+
+	  		var myStyle = {backgroundColor:"white"};
+
+			var finalStyle = $.extend({}, style, myStyle);
+
+	  		return (
+	  			<div style={finalStyle}>
+
+		   			<div style={{
+								width:"100%",
+								height:"50%",
+								textAlign:"center",
+								fontSize:"14pt"
+					   		   }} >
+		   				<img src={this.props.src} style={{width:"40pt",height:"40pt"}}/>
+		   			</div>
+		   		
+		   			<div style={{
+
+		   							width:"100%",
+		   							height:"50%",
+		   							textAlign:"center",
+		   							fontSize:"14pt",
+		   							marginTop:"8pt"
+		   					   }}>
+		   				{this.props.title}
+		   			</div>
+		   		</div> 
+
+			);
+	  }
+	});
+
+	固定在页面某一位置的组件， 比如header/footer, 可不提供style，组件自行决定位置和宽高。
+
+	

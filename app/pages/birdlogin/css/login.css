@@ -1,0 +1,16 @@
+
+.loginheader {
+    background-image:url('../image/head.png');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+.flexbox-container {
+     display: -ms-flex;
+     display: -webkit-flex;
+     display: flex;
+     -ms-flex-align: center;
+     -webkit-align-items: center;
+     -webkit-box-align: center;
+     align-items: center;
+ }

@@ -1,0 +1,22 @@
+.example-enter {
+  left:100%
+}
+
+.example-enter.example-enter-active {
+  left: 0px;
+  transition: left 300ms linear;
+}
+
+.example-leave {
+  left: 0px;
+}
+
+.example-leave.example-leave-active {
+  left: -100%;
+  transition: left 300ms linear;
+}
+
+.imnumber {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
