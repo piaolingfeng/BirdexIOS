@@ -10,7 +10,7 @@ global.app = {
     xxx: "dddd"
 };
 
-var LoginWindow = require('../pages/myorders/myorders.js');
+var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
 
 /*代表整个应用的组件*/    
 var App = React.createClass({

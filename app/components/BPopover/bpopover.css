@@ -1,0 +1,14 @@
+
+
+.popitem {
+    min-width: 50px;
+    color: #333;
+    white-space: nowrap;
+    cursor:default;
+    background-color: #ffffff;
+    text-align: center    
+}
+
+.popitem:hover {
+  color:red
+}
