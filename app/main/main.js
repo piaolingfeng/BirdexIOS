@@ -3,14 +3,16 @@ var ReactDOM = require('react-dom');
 var EventBus = require('eventbusjs');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
+
 require('./css/main.css');
 
-/*全局变量*/
-global.app = {
-    xxx: "dddd"
-};
+var gVar = require("./global.js");
 
-var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
+var LoginWindow = require('../pages/birdlogin/login.js');
+var Portal = require('../pages/portal/portal.js');
+var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
+
 
 /*代表整个应用的组件*/    
 var App = React.createClass({
@@ -34,6 +36,8 @@ var App = React.createClass({
             Page = require('../pages/storage/storage.js');   
         }
 
+        console.log("App changePage");
+
         this.setState({curPage:Page});
     },
   
@@ -44,25 +48,46 @@ var App = React.createClass({
 
     render: function() {
     
-        var Child = this.state.curPage;
-    
-        this.uniqueKey = this.uniqueKey + 1;
-    
-        console.log("uniquekey is " + this.uniqueKey);
+        var child = React.cloneElement(this.props.children, {key:this.props.location.pathname});
 
         return (
-                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-                    <Child key={this.uniqueKey} />
+                <ReactCSSTransitionGroup transitionName={gVar.pageTranType} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+                    {child}
                 </ReactCSSTransitionGroup>);
     }
 });
 
+var AppWrapper = React.createClass({
+    render: function () {
+         return <App ref={function(theApp) {global.theApp = theApp;}} pathname={this.props.location.pathname} />;
+    }
+});
 
 ReactDOM.render(
-    <App ref = {function(theApp) {
-                    global.theApp = theApp;
-                }} />,
-
+    <Router ref={   
+                    function(r) {
+                        global.router = r;
+                        global.router.history.listenBefore(location => {
+                            if (location.action == "PUSH")
+                                gVar.pageTranType = "pagepush";
+                            else if (location.action == "POP")
+                                gVar.pageTranType = "pagepop";
+                            else
+                                gVar.pageTranType = "PUSH";
+                        });
+                    }
+                }
+            history={browserHistory}>
+             
+        <Route path="/" component={App}> 
+            <IndexRoute component={LoginWindow}/> 
+            <Route path="login" component={LoginWindow} /> 
+            <Route path="portal" component={Portal} />
+            <Route path="popmenu" component={TestPopMenu} />
+            
+        </Route> 
+    </Router>,
+    
     document.getElementById('app')
 );
 

@@ -1,6 +1,9 @@
 
 var React = require('react');
 var EventBus = require('eventbusjs');
+import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
+
+var gVar = require('../../main/global.js');
 
 require('./css/login.css');
 
@@ -11,14 +14,14 @@ var LW = React.createClass({
 
 	login: function () {
 
-		EventBus.dispatch("changePage", null, "portal");
-
+		gVar.pushPage("portal");
+		
 		return;
 
 	},
 
   	render: function() {
-  		return (
+		return (
 		<div style={{position:"absolute",top:0,width:"100%",height:"100%"}}>
 			
 			<div>

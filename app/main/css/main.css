@@ -1,18 +1,40 @@
-.example-enter {
+/*页面前进动画*/
+
+.pagepush-enter {
   left:100%
 }
 
-.example-enter.example-enter-active {
+.pagepush-enter.pagepush-enter-active {
   left: 0px;
   transition: left 300ms linear;
 }
 
-.example-leave {
+.pagepush-leave {
   left: 0px;
 }
 
-.example-leave.example-leave-active {
+.pagepush-leave.pagepush-leave-active {
   left: -100%;
+  transition: left 300ms linear;
+}
+
+/*页面后退动画*/
+
+.pagepop-enter {
+  left:-100%
+}
+
+.pagepop-enter.pagepop-enter-active {
+  left: 0px;
+  transition: left 300ms linear;
+}
+
+.pagepop-leave {
+  left: 0px;
+}
+
+.pagepop-leave.pagepop-leave-active {
+  left: 100%;
   transition: left 300ms linear;
 }
 
