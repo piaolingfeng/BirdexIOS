@@ -13,7 +13,8 @@ var LoginWindow = require('../pages/birdlogin/login.js');
 var Portal = require('../pages/portal/portal.js');
 var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
 
-
+// var LoginWindow = require('../pages/myorders/myorders.js');
+// var LoginWindow = require('../fragments/inventory/inventory.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
