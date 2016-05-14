@@ -9,6 +9,7 @@ var LunBo = require('../../components/carousel/carousel.js');
 var IMNumber = require('../../components/IMNumber/im_number.js');
 var ImageButton = require('../../components/ImageButton/ImageButton.js');
 
+var showDialog = require('../../components/BDialog/bdialog.js');
 
 var btnImage1 = require('./image/dingdan.png');
 var btnImage2 = require('./image/yubao.png');
@@ -128,6 +129,8 @@ var MainPage = React.createClass({
   				
   			</div>;
 
+		var dlgBody = <ul><li>aaaaaaaaaaaaaa</li><li>bbbbbbbbbbbbb</li></ul>;
+		
   		return (
 
   		<div style={{position:"absolute",top:0,width:"100%",height:"100%",backgroundColor:"#F9F9F9",color:"#818181"}}>
@@ -166,8 +169,8 @@ var MainPage = React.createClass({
   			</div>
 
   			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:60, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>客服</button>
+				<button onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
+				<button onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}}  style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>客服</button>
 				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>帮助</button>
 				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>我的</button>
 			</div>
