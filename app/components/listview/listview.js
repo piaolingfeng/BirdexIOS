@@ -58,7 +58,7 @@ componentDidMount: function () {
     var flag=true;
 	myScroll = new iScroll('wrapper', {
 		scrollbarClass: 'myScrollbar', /* 重要样式 */
-		useTransition: true, /* 此属性不知用意，本人从true改为false */
+		useTransition: true, /* 此属性不知用意从true改为false */
         
         hScroll        : false,
          	vScroll        : true,
