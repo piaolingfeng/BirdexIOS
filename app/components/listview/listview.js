@@ -91,7 +91,8 @@ componentDidMount: function () {
 			// 	pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
 			// 	this.minScrollY = -pullDownOffset;
 			// } else 
-            if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+            //修改上拉的时候同时造成刷新 -51为顶部的高度
+            if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')&&this.y<-51) {
 				pullUpEl.className = 'flip';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始加载...';
 				this.maxScrollY = this.maxScrollY;
