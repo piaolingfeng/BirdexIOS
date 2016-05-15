@@ -1,0 +1,56 @@
+.orderdetail_background_img{
+      /*text-align: center;*/
+      width: 100%;
+      color: white;
+      padding: 8px;
+      -webkit-border-radius: 8px;
+      background-color: white;
+}
+.orderdetail_head{
+    padding: 8px;
+    padding-bottom: 0px;
+}
+.orderdetail_left{
+    display: inline-block;
+    text-align: right;
+    width: 24%;
+    padding: 6px;
+    padding-left: 0px;
+}
+.orderdetail_right{
+    display: inline-block;
+    text-align: left;
+    width: 76%;
+}
+
+.orderdetail_status{
+    color: #F5A623;
+    float: right;
+}
+.orderdetail_right_div_padding{
+    padding: 10px;
+    padding-left: 4px;
+}
+div,td,span,button{
+    font-size: 14px;
+}
+.orderdetail_right_blue_color{
+    color: #13A7DF;
+}
+.orderdetail_right_red_color{
+    color: red;
+}
+.orderdetail_img{
+    box-sizing: content-box;
+    height: 10px; 
+    margin-bottom: 4px; 
+}
+.orderdetail_marginleft_id{
+    margin-left: 6px; 
+}
+.orderdetail_address{
+    clear: both;
+    padding-left: 4px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+}

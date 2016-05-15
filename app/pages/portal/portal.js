@@ -16,61 +16,54 @@ var btnImage3 = require('./image/kucun.png');
 var btnImage4 = require('./image/jinxiaocun.png');
 var btnImage5 = require('./image/zhichu.png');
 var btnImage6 = require('./image/zhanghu.png');
-
+var Addbutton = require('../../components/AddButton/addbutton.js');
 var MainPage = React.createClass({
 
 	firstEnter:true,
 
-	//今日数据描述信息
-	todayData: {
-		dataTitle:["今日已入库", "今日已出库", "今日待出库",
-					"异常订单", "今日运输中", "审核不通过",
- 					"今日已签收", "审核不通过", "库存紧张", "待确认"],
- 		dataCount:["?","?","?","?","?","?","?","?","?","?"], //保存每个类别的数值
- 		dataOrder:[3,0,1,2], //控制显示的顺序, -1表示对应的项不
-	},
+	
 
 	refreshData: function () {
-
-						this.todayData.dataCount[0] = 10;
-		     			this.todayData.dataCount[1] = 100;
-		     			this.todayData.dataCount[2] = 0;
-		     			this.todayData.dataCount[3] = 2;
-		     			this.todayData.dataCount[4] = 10;
-		     			this.todayData.dataCount[5] = 100;
-		     			this.todayData.dataCount[6] = 10;
-		     			this.todayData.dataCount[7] = 100;
-		     			this.todayData.dataCount[8] = 10;
-		     			this.todayData.dataCount[9] = 100;
+						
+						gVar.todayData.dataCount[0] = 10;
+		     			gVar.todayData.dataCount[1] = 100;
+		     			gVar.todayData.dataCount[2] = 0;
+		     			gVar.todayData.dataCount[3] = 2;
+		     			gVar.todayData.dataCount[4] = 10;
+		     			gVar.todayData.dataCount[5] = 100;
+		     			gVar.todayData.dataCount[6] = 10;
+		     			gVar.todayData.dataCount[7] = 100;
+		     			gVar.todayData.dataCount[8] = 10;
+		     			gVar.todayData.dataCount[9] = 100;
 
 		     			this.setState({});
 		return;
 
-		$.post("http://127.0.0.1/birdapi/company/stat",
-				{ "app_debug": "1", "user_code":global.user_code, "company_code":global.company_code},
-				function(response, status, xhr){
+		// $.post("http://127.0.0.1/birdapi/company/stat",
+		// 		{ "app_debug": "1", "user_code":global.user_code, "company_code":global.company_code},
+		// 		function(response, status, xhr){
 		     		
-		     		if (status != "success")
-		     		{
-		     			alert("error");
-		     		}
-		     		else
-		     		{	
-		     			this.todayData.dataCount[0] = response.data.exception_order_count;
-		     			this.todayData.dataCount[1] = response.data.no_pass_order_count;
-		     			this.todayData.dataCount[2] = response.data.no_pass_storage_count;
-		     			this.todayData.dataCount[3] = response.data.today_checkout_order_count;
-		     			this.todayData.dataCount[4] = response.data.today_confirm_storage_count;
-		     			this.todayData.dataCount[5] = response.data.today_sign_order_count;
-		     			this.todayData.dataCount[6] = response.data.today_wait_checkout_order_count;
-		     			this.todayData.dataCount[7] = response.data.transport_order_count;
-		     			this.todayData.dataCount[8] = response.data.wait_confirm_storage_count;
-		     			this.todayData.dataCount[9] = response.data.warning_stock_count;
+		//      		if (status != "success")
+		//      		{
+		//      			alert("error");
+		//      		}
+		//      		else
+		//      		{	
+		//      			this.todayData.dataCount[0] = response.data.exception_order_count;
+		//      			this.todayData.dataCount[1] = response.data.no_pass_order_count;
+		//      			this.todayData.dataCount[2] = response.data.no_pass_storage_count;
+		//      			this.todayData.dataCount[3] = response.data.today_checkout_order_count;
+		//      			this.todayData.dataCount[4] = response.data.today_confirm_storage_count;
+		//      			this.todayData.dataCount[5] = response.data.today_sign_order_count;
+		//      			this.todayData.dataCount[6] = response.data.today_wait_checkout_order_count;
+		//      			this.todayData.dataCount[7] = response.data.transport_order_count;
+		//      			this.todayData.dataCount[8] = response.data.wait_confirm_storage_count;
+		//      			this.todayData.dataCount[9] = response.data.warning_stock_count;
 
-		     			this.setState({});
-		     		}
-			   	}.bind(this), 
-			   	"json");
+		//      			this.setState({});
+		//      		}
+		// 	   	}.bind(this), 
+		// 	   	"json");
 
 	},
 
@@ -81,16 +74,16 @@ var MainPage = React.createClass({
 
 	render: function() {
 
-		var el = new Array(10);
+		var el = new Array(gVar.todayData.dataTitle.length);
 		var elCount = 0;
 
-		for (var i = 0; i < 10; i++)
+		for (var i = 0; i < gVar.todayData.dataTitle.length; i++)
 		{
-			var index = this.todayData.dataOrder[i];
+			var index = gVar.todayData.dataOrder[i];
 			if (index != null && index != -1)
 			{
-				var count = this.todayData.dataCount[index];
-				var title = this.todayData.dataTitle[index];
+				var count = gVar.todayData.dataCount[index];
+				var title = gVar.todayData.dataTitle[index];
 
 				if (this.firstEnter)
 				{
@@ -125,6 +118,11 @@ var MainPage = React.createClass({
 	  					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
 	  					{elCount > 5 ? el[5] : <IMNumber number="" prompt="" />}
 	  				</div> : ""}
+				<div className="flexbox-container">
+					<Addbutton />
+					<IMNumber number="" prompt="" />
+					<IMNumber number="" prompt="" />
+				</div>
   				
   			</div>;
 

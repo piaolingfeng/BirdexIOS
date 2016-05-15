@@ -1,0 +1,18 @@
+.titlebar_img{
+    float: left;
+    box-sizing: content-box;
+    height: 20px;
+}
+.titlebar_menu{
+    float: right;
+    box-sizing: content-box;
+    height: 20px;
+    display: none;
+}
+.titlebar_save{
+    display: inline-block;
+    visibility: hidden;
+}
+.titlebar_right{
+    float: right;
+}

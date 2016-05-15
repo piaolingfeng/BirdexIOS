@@ -1,0 +1,17 @@
+.predictdetail_right_span{
+    float:right;
+    margin-left: 5px;
+}
+.predictdetail_btn{
+    float: right;
+    height: 26px;
+    padding: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 8px;
+    background-color: white;
+    color: #13A7DF;
+    border: 1px #13A7DF #13A7DF;
+    border-color: #13A7DF;
+    border-radius:4px;
+}

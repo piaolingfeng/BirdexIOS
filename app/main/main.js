@@ -10,8 +10,8 @@ global.app = {
     xxx: "dddd"
 };
 
-var LoginWindow = require('../pages/birdlogin/login.js');
-
+// var LoginWindow = require('../pages/birdlogin/login.js');
+var LoginWindow = require('../pages/todayData/todayData.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -32,6 +32,9 @@ var App = React.createClass({
         }
         else if (pageName == "storage") {
             Page = require('../pages/storage/storage.js');   
+        }else if(pageName == "todayData"){
+            // alert("todayData");
+            Page = require('../pages/todayData/todayData.js'); 
         }
 
         this.setState({curPage:Page});

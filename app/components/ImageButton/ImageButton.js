@@ -2,7 +2,7 @@
 var React = require('react');
 
 var ImageButton = React.createClass({
-  	
+	  
   	render: function() {
 
   		return (
