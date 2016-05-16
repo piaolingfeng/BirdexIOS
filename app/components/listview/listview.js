@@ -21,13 +21,16 @@ var  ListView  = React.createClass({
         //是否含有上拉
         showUpload:React.PropTypes.bool,
         //是否含有下拉
-        showDownload:React.PropTypes.bool
+        showDownload:React.PropTypes.bool,
+        //距离上部高度
+        marginTop:React.PropTypes.number
     },
     getDefaultProps: function() {
         //设置默认属性
         return {
             showUpload: true,
-            showDownload:true
+            showDownload:true,
+            marginTop:0
         };
     },
     pullUpAction :function() {
@@ -127,7 +130,9 @@ componentDidMount: function () {
         for(var i=0;i<this.state.listitems.length;i++){
             datasource.push(<li>{this.props.getItems(i)}</li>);
         }
-        return (<div id="wrapper"><div id="scroller"   >
+        return (<div id="wrapper" style={{
+            top:this.props.marginTop+"px"
+        }}><div id="scroller"   >
         <div id="pullDown" >
 			<span className="pullDownIcon"></span><span className="pullDownLabel">下拉刷新...</span>
 		</div>
