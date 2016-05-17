@@ -25,6 +25,7 @@ require("./css/todaydata.css");
 var TodayDataItem=React.createClass({
     
     select:function (a,e) {
+        // console.log(arguments);
         // alert(e);
 //         (function(e)
 //    {
@@ -64,7 +65,7 @@ var TodayDataItem=React.createClass({
         var count = this.props.count;
         var idcheck = "check"+count;
         return(
-            <div className="todaydata_head" onClick={this.select.bind(this,count)} >
+            <div className="todaydata-item_head" onClick={this.select.bind(this,count)} >
                     <span ref="name" className="todaydata_text">{name}</span>
                     <div className="checkbox checkbox-slider--c" style={{float:"right",marginTop:"15px"}}>
                         <label>
@@ -112,12 +113,13 @@ var TodayDataList = React.createClass({
             arraylist[i]=<TodayDataItem  name={gVar.todayData.dataTitle[i]} count={i}/>;
          };
         return (
-            <div style={{backgroundColor:gVar.Color_background}}>
-                <Titlebar bgColor=""/>
-                <div id="todaydata_div"> </div>
-                {arraylist}
+            <div className="titlebar_extend_head" style={{backgroundColor:gVar.Color_white}}>
+                <Titlebar  title="数据看板"/>
+                <div className="titlebar_head_down" style={{paddingTop:gVar.Padding_titlebar}}>
+                    <div id="todaydata_div"> </div>
+                    {arraylist}
+                </div>
             </div>
-            
             );
     }
  

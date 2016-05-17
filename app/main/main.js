@@ -3,15 +3,28 @@ var ReactDOM = require('react-dom');
 var EventBus = require('eventbusjs');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
+
 require('./css/main.css');
 
-/*全局变量*/
-global.app = {
-    xxx: "dddd"
-};
+var gVar = require("./global.js");
 
 // var LoginWindow = require('../pages/birdlogin/login.js');
-var LoginWindow = require('../pages/todayData/todayData.js');
+var TodayData = require('../pages/todayData/todayData.js');
+var MessageDetail = require('../pages/messagedetail/messagedetail.js');
+var OrderDetail = require('../pages/orderdetail/orderdetail.js');
+var Predictdetail = require('../pages/predictdetail/predictdetail.js');
+var MyTool = require('../pages/mytool/mytool.js');
+
+var LoginWindow = require('../pages/birdlogin/login.js');
+var Portal = require('../pages/portal/portal.js');
+var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
+//库存
+// var inventory=require('../pages/inventory/inventory.js');
+// var LoginWindow = require('../pages/myorders/myorders.js');
+// var LoginWindow = require('../fragments/inventory/inventory.js');
+// var LoginWindow = require('../fragments/geren/geren.js');
+// var LoginWindow = require('../pages/storage/storage.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -37,6 +50,8 @@ var App = React.createClass({
             Page = require('../pages/todayData/todayData.js'); 
         }
 
+        console.log("App changePage");
+
         this.setState({curPage:Page});
     },
   
@@ -47,25 +62,50 @@ var App = React.createClass({
 
     render: function() {
     
-        var Child = this.state.curPage;
-    
-        this.uniqueKey = this.uniqueKey + 1;
-    
-        console.log("uniquekey is " + this.uniqueKey);
+        var child = React.cloneElement(this.props.children, {key:this.props.location.pathname});
 
         return (
-                <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-                    <Child key={this.uniqueKey} />
+                <ReactCSSTransitionGroup transitionName={gVar.pageTranType} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+                    {child}
                 </ReactCSSTransitionGroup>);
     }
 });
 
+var AppWrapper = React.createClass({
+    render: function () {
+         return <App ref={function(theApp) {global.theApp = theApp;}} pathname={this.props.location.pathname} />;
+    }
+});
 
 ReactDOM.render(
-    <App ref = {function(theApp) {
-                    global.theApp = theApp;
-                }} />,
-
+    <Router ref={   
+                    function(r) {
+                        global.router = r;
+                        global.router.history.listenBefore(location => {
+                            if (location.action == "PUSH")
+                                gVar.pageTranType = "pagepush";
+                            else if (location.action == "POP")
+                                gVar.pageTranType = "pagepop";
+                            else
+                                gVar.pageTranType = "PUSH";
+                        });
+                    }
+                }
+            history={browserHistory}>
+             
+        <Route path="/" component={App}> 
+            <IndexRoute component={LoginWindow}/> 
+            <Route path="login" component={LoginWindow} /> 
+            <Route path="portal" component={Portal} />
+            <Route path="popmenu" component={TestPopMenu} />
+            <Route path="todayData" component={TodayData} /> 
+            <Route path="mytool" component={MyTool}/>
+            <Route path="predictdetail" component={Predictdetail}/>
+            <Route path="orderdetail" component={OrderDetail}/>
+            <Route path="messagedetail" component={MessageDetail}/>
+        </Route> 
+    </Router>,
+    
     document.getElementById('app')
 );
 

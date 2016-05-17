@@ -21,7 +21,7 @@ div,p,span,td{
     width: 33.15%;
     text-align: center;
     padding: 6px;
-    background-color: #f5f4f4;
+    background-color: #FAFAFA;
 }
 .orderlist_line{
     float:left;
@@ -63,6 +63,7 @@ div,p,span,td{
 .orderstatus_text{
     color: #13A7DF;
     padding: 7px;
+    /*background-color: #f5f4f4;*/
 }
 .orderstatus_laydown{
     height: 8px;

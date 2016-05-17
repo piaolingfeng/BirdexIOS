@@ -9,6 +9,7 @@ var LunBo = require('../../components/carousel/carousel.js');
 var IMNumber = require('../../components/IMNumber/im_number.js');
 var ImageButton = require('../../components/ImageButton/ImageButton.js');
 
+var showDialog = require('../../components/BDialog/bdialog.js');
 
 var btnImage1 = require('./image/dingdan.png');
 var btnImage2 = require('./image/yubao.png');
@@ -21,7 +22,9 @@ var MainPage = React.createClass({
 
 	firstEnter:true,
 
-	
+	textpop(){
+		gVar.pushPage("popmenu");
+	},
 
 	refreshData: function () {
 						
@@ -97,8 +100,8 @@ var MainPage = React.createClass({
 		}
 
 		this.firstEnter = false;
-
-		var dataBoard =  <div style={{width:"100%",backgroundColor:"#FFFFFF",border:"1px solid #D5D5D5"}}>
+		//border:"1px solid #D5D5D5"
+		var dataBoard =  <div style={{width:"100%",backgroundColor:"#FFFFFF"}}>
   				<div className="flexbox-container">
   					{elCount > 0 ? el[0] : {null}}
   					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
@@ -126,21 +129,23 @@ var MainPage = React.createClass({
   				
   			</div>;
 
+		var dlgBody = <ul><li>aaaaaaaaaaaaaa</li><li>bbbbbbbbbbbbb</li></ul>;
+		
   		return (
 
   		<div style={{position:"absolute",top:0,width:"100%",height:"100%",backgroundColor:"#F9F9F9",color:"#818181"}}>
   			<LunBo />
-  			<div style={{width:"95%",margin:"10px auto 10px 5%", fontSize:"16pt", color:"#7F7F7F"}}>
+  			<div style={{width:"95%",margin:"10px auto 10px 5%", fontSize:"13pt", color:"#7F7F7F"}}>
   				数据看板
   			</div>
   			
   			{dataBoard}
 
-  			<div style={{width:"95%",margin:"10px auto 10px 5%", fontSize:"16pt", color:"#7F7F7F"}}>
+  			<div style={{width:"95%",margin:"10px auto 10px 5%", fontSize:"13pt", color:"#7F7F7F"}}>
   				管理工具
   			</div>
-
-  			<div style={{width:"100%",backgroundColor:"#FFFFFF",border:"1px solid #D5D5D5"}}>
+			  
+  			<div style={{width:"100%",backgroundColor:"#FFFFFF",paddingBottom:"55px"}}>
   				<div className="flexbox-container">
   					<ImageButton src={btnImage1} title="订单管理" />
   					<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
@@ -150,7 +155,6 @@ var MainPage = React.createClass({
   					
   					<ImageButton src={btnImage3} title="库存管理" />
   				</div>
-  				<hr style={{width:"90%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"1px"}}></hr>
   				<div className="flexbox-container">
   					<ImageButton src={btnImage4} title="进销存管理" />
   					<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
@@ -163,11 +167,11 @@ var MainPage = React.createClass({
   				
   			</div>
 
-  			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:60, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>客服</button>
+  			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:55, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
+				<button onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
+				<button onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}}  style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>客服</button>
 				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>帮助</button>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>我的</button>
+				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}} onClick={this.textpop}>我的</button>
 			</div>
 
         </div> 

@@ -1,6 +1,6 @@
 {
   "ambientDependencies": {
-    "node": "registry:dt/node#4.0.0+20160505172921",
+    "node": "registry:dt/node#4.0.0+20160509154515",
     "react": "registry:dt/react#0.14.0+20160423065914"
   },
   "dependencies": {

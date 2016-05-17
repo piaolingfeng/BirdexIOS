@@ -20,7 +20,7 @@ var Status=React.createClass({
                     </span>
                     <div className="orderlist_clear"></div>
                 </div>
-                <div className="orderstatus_text">共10个数据</div>
+                <div className="orderstatus_text" style={{backgroundColor:gVar.Color_background}}>共10个数据</div>
             </div>
         );
     }

@@ -2,7 +2,7 @@ var React=require("react");
 require("./css/orderlist.css");
 var copy = require("./images/copy.png");
 var gVar = require("../../main/global.js");
-
+var OrderProduct =require('./orderproduct.js');
 var OrderList = React.createClass({
     copy:function(){
         alert();
@@ -18,9 +18,19 @@ var OrderList = React.createClass({
         
     },
     
+    changeToDetail(){
+        gVar.pushPage('orderdetail');
+    },
+    
     render:function(){
+        
+        var product = new Array();
+        for(var i=0; i <3;i++){
+            product.push(<OrderProduct />);
+        }
+        
         return (
-            <div style={{backgroundColor:gVar.Color_white,marginTop:"15px"}}>
+            <div style={{backgroundColor:gVar.Color_white,marginTop:"10px"}} onClick={this.changeToDetail}>
                 <div className="orderlist_head">
                     <div ref="copy"  onClick={this.copy} style={{float:"left"}}>
                         <span ref="orderName" style={{color:gVar.Color_title}}>BHdadfafds</span>
@@ -30,8 +40,9 @@ var OrderList = React.createClass({
                     <div ref="status" className="orderlist_statu">已出库</div>
                 </div>
                 <hr style={{height:"1px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
-                <div id="orderlist" style={{height:"50px"}}></div>
-                <hr style={{height:"1px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
+                
+                {product}
+                
                 <div ref="orderError" className="orderlist_head orderlist_error">此姓名和身份证已验证过</div>
                 <div >
                     <span ref="logisticsTracking" className="orderlist_btn" >物流跟踪</span>

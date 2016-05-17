@@ -18,6 +18,7 @@ module.exports = {
     
   // we will use webpack-dev-server
   devServer: {
+    historyApiFallback: true,
     inline: true, // reload on the fly (auto refresh)
     port: 9999 // which port to run the server on
   },

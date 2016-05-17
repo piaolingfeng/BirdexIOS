@@ -13,5 +13,7 @@
 }
 .predicitonlist_head{
     padding: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
     background-color: white;
 }

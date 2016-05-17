@@ -16,7 +16,7 @@ var PredictProduct = React.createClass({
     
     render:function(){
         return(
-           <div className="orderdetail_head">
+           <div style={{marginTop:"5px"}}>
                 <div className="orderdetail_background_img">
                     <table style={{width:"100%"}}>
                         <tr>
