@@ -74,7 +74,6 @@ var MainPage = React.createClass({
 
 		setTimeout(this.refreshData, 500);
 	},
-
 	render: function() {
 
 		var el = new Array(gVar.todayData.dataTitle.length);
@@ -147,22 +146,20 @@ var MainPage = React.createClass({
 			  
   			<div style={{width:"100%",backgroundColor:"#FFFFFF",paddingBottom:"55px"}}>
   				<div className="flexbox-container">
-  					<ImageButton src={btnImage1} title="订单管理" />
+  					<ImageButton src={btnImage1} title="订单管理" index={1}/>
   					<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 
-  					<ImageButton src={btnImage2} title="预报管理" />
+  					<ImageButton src={btnImage2} title="预报管理" index={2}/>
   					<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
   					
-  					<ImageButton src={btnImage3} title="库存管理" />
+  					<ImageButton src={btnImage3} title="库存管理" index={3}/>
   				</div>
   				<div className="flexbox-container">
-  					<ImageButton src={btnImage4} title="进销存管理" />
-  					<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
-
-  					<ImageButton src={btnImage5} title="我的支出" />
+  					<ImageButton src={btnImage5} title="我的支出" index={4}/>
   					<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
   					
-  					<ImageButton src={btnImage6} title="帐户充值" />
+  					<ImageButton src={btnImage6} title="帐户充值" index={5}/>
+					  
   				</div>
   				
   			</div>

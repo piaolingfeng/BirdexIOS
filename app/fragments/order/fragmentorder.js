@@ -20,9 +20,10 @@ var FragmentOrder = React.createClass({
     render:function(){
         return(
             <div style={{backgroundColor:gVar.Color_background}}>
-               
-               <div>
-                    <ListView getItems={this.getItem}/>
+               <Search />
+               <Status />
+               <div >
+                    <ListView getItems={this.getItem} marginTop={180}/>
                </div>
             </div>
         );

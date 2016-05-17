@@ -1,5 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+
+require('react-fastclick');
+
 var EventBus = require('eventbusjs');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
@@ -20,9 +23,9 @@ var LoginWindow = require('../pages/birdlogin/login.js');
 var Portal = require('../pages/portal/portal.js');
 var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
 //库存
-// var inventory=require('../pages/inventory/inventory.js');
+// var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
 // var LoginWindow = require('../pages/myorders/myorders.js');
-// var LoginWindow = require('../fragments/inventory/inventory.js');
+var Inventory = require('../fragments/inventory/inventory.js');
 // var LoginWindow = require('../fragments/geren/geren.js');
 // var LoginWindow = require('../pages/storage/storage.js');
 /*代表整个应用的组件*/    
@@ -103,6 +106,7 @@ ReactDOM.render(
             <Route path="predictdetail" component={Predictdetail}/>
             <Route path="orderdetail" component={OrderDetail}/>
             <Route path="messagedetail" component={MessageDetail}/>
+            <Route path="inventory" component={Inventory} /> 
         </Route> 
     </Router>,
     
