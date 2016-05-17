@@ -1,6 +1,8 @@
 var React=require('react');
 require('./css/simpletablayout.css');
 var $magicLine ;
+//设置选中的tab索引
+var selectIndex=0;
 var SimpleTabLayout=React.createClass({
     getInitialState:function(){
         return {defualtIndex:0}
@@ -17,6 +19,10 @@ var SimpleTabLayout=React.createClass({
         return {tabsText:[],
             defualtIndex:0};
     },
+    componentWillMount:function(){
+        //设置默认选中的
+        selectIndex=this.props.defualtIndex;
+    },
     componentDidMount:function(){
         $magicLine = $(".tablayout-line");
         $magicLine
@@ -26,18 +32,23 @@ var SimpleTabLayout=React.createClass({
         .data("origWidth", $magicLine.width());
     },
     handlerTab:function(index,ele){
-        var $el = $(ele.target);
-        // var leftPos = $el.parent().position().left;
-        // var newWidth = $el.parent().width();
-        var leftPos = $el.position().left;
-        var newWidth = $el.width();
-        $magicLine.stop().animate({
-            left: leftPos,
-            width: newWidth
-        });
-        this.setState({defualtIndex:index});
-        if(this.props.selectTab){
-            this.props.selectTab(index);
+        if(index!=selectIndex){
+            var $el = $(ele.target);
+            // var leftPos = $el.parent().position().left;
+            // var newWidth = $el.parent().width();
+            var leftPos = $el.position().left;
+            var newWidth = $el.width();
+            $magicLine.stop().animate({
+                left: leftPos,
+                width: newWidth
+            });
+        
+            this.setState({defualtIndex:index});
+            if(this.props.selectTab){
+               this.props.selectTab(index);
+             }
+            //记录新的索引值
+            selectIndex=index;
         }
     },
     render:function(){

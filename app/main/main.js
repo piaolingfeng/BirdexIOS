@@ -16,8 +16,9 @@ var LoginWindow = require('../pages/birdlogin/login.js');
 var Portal = require('../pages/portal/portal.js');
 var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
 //库存
+// var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
 // var LoginWindow = require('../pages/myorders/myorders.js');
-// var LoginWindow = require('../fragments/inventory/inventory.js');
+var Inventory = require('../fragments/inventory/inventory.js');
 // var LoginWindow = require('../fragments/geren/geren.js');
 // var LoginWindow = require('../pages/storage/storage.js');
 /*代表整个应用的组件*/    
@@ -90,6 +91,7 @@ ReactDOM.render(
             <Route path="login" component={LoginWindow} /> 
             <Route path="portal" component={Portal} />
             <Route path="popmenu" component={TestPopMenu} />
+            <Route path="inventory" component={Inventory} /> 
         </Route> 
     </Router>,
     
