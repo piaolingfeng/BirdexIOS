@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactList from 'react-list';
 require('./css/inventory.css');
 var InventoryItem=require('./inventoryitem.js');
 var WillinItem=require('./willinitem.js');
@@ -13,9 +12,6 @@ var SimpleTabLayout=require('../../components/tablayout/simpletablayout.js');
 var LimitView=require('./limitview.js');
 var listitem=[];
 var Inventory = React.createClass({
-  inventorylist:{
-    
-  },
   getInitialState:function() {
     return {
       inventoryIndex:0,
@@ -54,24 +50,10 @@ var Inventory = React.createClass({
       listitem.push(<InventoryItem />);
       listitem.push(<InventoryItem />);
     }
-    //   if(this.state.inventoryIndex==0){
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //  }else if(this.state.inventoryIndex==1){
-    //     listitem.push(<WillinItem />);
-    //     listitem.push(<WillinItem />);
-    //     listitem.push(<WillinItem />);
-    //   }else{
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //   }
       this.setState({flag:!this.state.flag});
-      console.log(this.state.flag);
     },
     selectTab:function(index){
-      console.log(index);
+      listitem=[];
       this.setState({inventoryIndex:index});
       return ;
     },

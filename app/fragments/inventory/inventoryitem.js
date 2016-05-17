@@ -38,7 +38,8 @@ var InventoryInfo = React.createClass({
             } > hello,weisuohuang </div> <table className = "table inventory_item_info"
             style = {
                 {
-                    width: "100%"
+                    width: "100%",
+                    marginBottom:"0px"
                 }
             } >
             <thead style = {
