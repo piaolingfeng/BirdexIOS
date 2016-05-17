@@ -6,6 +6,10 @@ var ImageButton = React.createClass({
 	  
 	pageChange: function(){
 		gVar.pushPage("mytool");
+		// const nextLocation = global.router.history.createLocation({ pathname: "mytool", state: { title:"ddddd" } });
+		// global.router.history.push(nextLocation)
+		// // global.router.history.push({ pathname: "mytool", state: { title:"ddddd" } }); 
+		// console.log(global.router);
 		return;
 	},  
 	  

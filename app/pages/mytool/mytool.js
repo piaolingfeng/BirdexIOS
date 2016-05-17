@@ -14,6 +14,7 @@ var MyTool =React.createClass({
     },
     
     render:function(){
+        // console(global.router.location);
         var title = this.props.title+"";
         
         return(

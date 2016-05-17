@@ -36,6 +36,7 @@ var gVar = {
     //切换到新页面
     pushPage: function (pathname) {
         gVar.pageTranType="pagepush";
+        // console.log(global.router.history);
         global.router.history.push(pathname);
     },
     

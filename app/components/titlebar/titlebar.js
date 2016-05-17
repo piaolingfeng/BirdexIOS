@@ -43,8 +43,10 @@ var Titlebar = React.createClass({
     
     menuItemClick: function (index) {
 		console.log("popover click item " + index);
-        if(!this.props.menuFunc)
+        if(this.props.menuFunc){
             gVar.pushPage("mytool");
+            // global.router.histroy.push({ pathname: "mytool", state: { title:"ddddd" } }); 
+        }
         else
             this.props.menuFunc(index);
         // return;
