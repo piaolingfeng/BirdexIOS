@@ -79,7 +79,6 @@ var MainPage = React.createClass({
 
 		setTimeout(this.refreshData, 500);
 	},
-
 	render: function() {
 
 		var el = new Array(10);

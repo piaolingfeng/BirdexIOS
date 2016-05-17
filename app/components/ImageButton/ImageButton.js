@@ -1,8 +1,10 @@
 
 var React = require('react');
-
+var gVar = require('../../main/global.js');
 var ImageButton = React.createClass({
-  	
+  	onClickHandle:function(index) {
+		  gVar.pushPage("inventory");
+	},
   	render: function() {
 
   		return (
@@ -12,7 +14,7 @@ var ImageButton = React.createClass({
   							margin:"auto",
   							textAlign:"center",
   							padding:"10px"
-  						}}>
+  						}} onClick={this.onClickHandle.bind(this,6)}>
 	   			<div style={{
 							width:"100%",
 							height:"50%",

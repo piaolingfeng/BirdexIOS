@@ -18,7 +18,7 @@ body {
 }
 
 #header {
-	position:absolute;
+	/*position:absolute;*/
 	top:0; left:0;
 	width:100%;
 	height:45px;
@@ -52,10 +52,11 @@ body {
 }
 
 #wrapper {
-	position:absolute; z-index:1;
-	top:45px; bottom:48px; left:0;
+	/*position:absolute; */
+	z-index:1;
+	top:0px; bottom:0px; left:0;
 	width:100%;
-	background:#555;
+	/*background:#f5f4f4;*/
 	overflow:auto;
 }
 
@@ -79,16 +80,18 @@ body {
 }
 
 #scroller li {
-	padding:0 10px;
+	/*padding:0 10px;*/
 	/*height:40px;*/
-	line-height:40px;
-	border-bottom:1px solid #ccc;
+	/*line-height:40px;*/
+	/*border-bottom:1px solid #ccc;
 	border-top:1px solid #fff;
-	background-color:#fafafa;
+	background-color:#fafafa;*/
 	font-size:14px;
     /*解决第一个li不能在左边对齐
     float: left;
     width: 100%;*/
+	/*设置间距
+	margin-top:10px;*/
 }
 
 #scroller li > a {
@@ -105,7 +108,7 @@ body {
 	height:40px;
 	line-height:40px;
 	padding:5px 10px;
-	border-bottom:1px solid #ccc;
+	/*border-bottom:1px solid #ccc;*/
 	font-weight:bold;
 	font-size:14px;
 	color:#888;

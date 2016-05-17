@@ -1,28 +1,81 @@
 import React from 'react'
 import ReactList from 'react-list';
-// import SwipeViews from 'react-swipe-views';
 require('./css/inventory.css');
 var InventoryItem=require('./inventoryitem.js');
 var WillinItem=require('./willinitem.js');
 
 var ListView=require('../../components/listview/listview.js');
+//tablayout
+var TabLayout=require('../../components/tablayout/tablayout.js');
+//简单的tab设置
+var SimpleTabLayout=require('../../components/tablayout/simpletablayout.js');
+//查询限制条件
+var LimitView=require('./limitview.js');
 var listitem=new Array();
 var Inventory = React.createClass({
-  renderItem:function(index){
+  getInitialState:function() {
+    return {inventoryIndex:0};
+  },
+  renderItem:function(){
+    var cache=new Array();
+    if(this.state.inventoryIndex==0){
+      cache.push(<InventoryItem />);
+      cache.push(<InventoryItem />);
+      cache.push(<InventoryItem />);
+    }else if(this.state.inventoryIndex==1){
+      cache.push(<WillinItem />);
+      cache.push(<WillinItem />);
+      cache.push(<WillinItem />);
+    }else{
+      cache.push(<InventoryItem />);
+      cache.push(<InventoryItem />);
+      cache.push(<InventoryItem />);
+    }
+    
       if(listitem.length>0){
         if(listitem.length>=(index+1)){
           //数组已经含有
-          return (<WillinItem />);
+          return cache;
         }else{
           //数组不含有需要进行网络请求
-          return (<WillinItem />);
+          return cache;
         }
       }else{
-        return (<WillinItem />);
+        return cache;
       }
     },
+    selectTab:function(index){
+      console.log(index);
+      this.setState({inventoryIndex:index});
+      return ;
+    },
+    componentWillUpdate: function() {  
+        console.log("-456");  
+    },
+    componentDidUpdate: function() {  
+        console.log("-789");  
+    },
+    selectLimitItem:function(index){
+      //设置选择条件的
+      return;
+    },
   render:function(){
-    return <ListView getItems={this.renderItem}/>;
+    return (<div>
+    <SimpleTabLayout selectTab={this.selectTab} tabsText={["在库商品","待入库商品","超预警商品"]} />
+    <LimitView />
+    <div>
+    <ListView   getItems={this.renderItem} />
+    </div>
+    </div>);
+    // return (<div>
+    // <TabLayout selectTab={this.selectTab} tabsText={["wang","hu","zhao","qian","qin","kan","liu","han"]} 
+    // tabsWidth={[60,60,60,60,60,60,60,60]}/>
+    // <SimpleTabLayout selectTab={this.selectTab} tabsText={["在库商品","待入库商品","超预警商品"]} />
+    // <LimitView />
+    // <div>
+    // <ListView  marginTop={117} getItems={this.renderItem}/>
+    // </div>
+    // </div>);
   }
 });
 // var Inventory = React.createClass({
@@ -44,22 +97,3 @@ var Inventory = React.createClass({
 //                 }
 //             });
 module.exports=Inventory;
-      //           <SwipeViews>
-      //   <div title="Tab 1" style={{
-      //       backgroundColor:"#00000"
-      //   }}>
-      //     Page 1
-      //   </div>
-      //   <div title="Tab 2">
-      //     Page 2
-      //   </div>
-      //   <div title="Tab 3">
-      //     Page 3
-      //   </div>
-      //   <div title="Tab 4">
-      //     Page 4
-      //   </div>
-      //   <div title="Tab 5">
-      //     Page 5
-      //   </div>
-      // </SwipeViews>
