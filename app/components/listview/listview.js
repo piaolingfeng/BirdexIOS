@@ -43,7 +43,7 @@ var  ListView  = React.createClass({
         // lvcompotent.setState({listitems: lvcompotent.state.listitems.concat(lvcompotent.props.getItems(12))});
         // if(this.props.pullUpHandler){
           try {
-              this.props.pullUpHandler();
+              lvcompotent.props.pullUpHandler();
           } catch (error) {
               console.log(error);
           }
@@ -61,7 +61,7 @@ var  ListView  = React.createClass({
         // lvcompotent.setState({listitems: lvcompotent.state.listitems.concat(lvcompotent.props.getItems(12))});
         // if(this.props.pullDownHandler){
           try {
-              this.props.pullDownHandler();
+              lvcompotent.props.pullDownHandler();
           } catch (error) {
               console.log(error);
           }
@@ -147,9 +147,10 @@ componentDidMount: function () {
     },
     render:function () {
         var datasource=[];
-        for(var i=0;i<this.props.getItems().length;i++){
+        var ListItems=this.props.getItems();
+        for(var i=0;i<ListItems.length;i++){
             // datasource.push(<li>{this.props.getItems(i)}</li>);
-            datasource.push(<li>{this.props.getItems()[i]}</li>);
+            datasource.push(<li>{ListItems[i]}</li>);
         }
         return (<div id="wrapper" style={{
             top:this.props.marginTop+"px"
