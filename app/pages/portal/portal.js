@@ -143,7 +143,7 @@ var MainPage = React.createClass({
   		return (
 
   		<div style={{position:"absolute",top:0,width:"100%",height:"100%",backgroundColor:"#F9F9F9",color:"#818181"}}>
-  			<ReactPullToRefresh onRefresh={this.handlePullDownRefresh}>
+  			
 				<LunBo />
 				<div style={{width:"95%",margin:"10px auto 10px 5%", fontSize:"13pt", color:"#7F7F7F"}}>
 					数据看板
@@ -174,7 +174,7 @@ var MainPage = React.createClass({
 					</div>
 					
 				</div>
-			</ReactPullToRefresh>
+			
   			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:55, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
 				<button onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
 				<button onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}}  style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>客服</button>
