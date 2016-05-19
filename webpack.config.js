@@ -37,9 +37,13 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       },
+      { test: /\.woff$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf$/,  loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+      { test: /\.eot$/,  loader: "file-loader" },
+      { test: /\.svg$/,  loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
       { test: /\.css$/, loader: 'style-loader!css-loader!postcss-loader' },
       { test: /\.(jpg)$/, loader: 'url-loader?limit=8192'},
-      { test: /\.(png)$/, loader: 'url-loader?limit=8192000'}
+      { test: /\.(png)$/, loader: 'url-loader?limit=8192'}
     ]
   },
 
