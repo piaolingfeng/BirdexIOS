@@ -5,6 +5,20 @@ var gVar = require("../../main/global.js");
 require("./css/search.css");
 var Search = React.createClass({
     
+    keyDown(event){
+        // console.log("dddd")
+        // console.log(event.keyCode);
+        // alert(event.keyCode);
+        if(event.keyCode == 13){//搜索
+            // console.log(this.refs.exampleInputAmount.value);//input是value
+            this.props.SearchFunc(this.refs.exampleInputAmount.value);
+        }
+    },
+    
+    propTypes:{
+        SearchFunc:React.PropTypes.func.isRequired
+    },
+    
     openScan:function(){
       alert("open camera!");  
       return ;
@@ -15,7 +29,8 @@ var Search = React.createClass({
             <div  style={{backgroundColor:gVar.Color_background,padding:"10px"}}>
                 <div className="input-group">
                     <div className="input-group-addon search_div" ></div>
-                    <input type="text" className="form-control search_input" id="exampleInputAmount" placeholder="请输入关键字..."/>
+                    <input type="text" className="form-control search_input" ref="exampleInputAmount" placeholder="请输入关键字..."
+                    onKeyDown={this.keyDown}/>
                     <div className="input-group-addon search_scan" onClick={this.openScan}></div>
                 </div>
             </div>

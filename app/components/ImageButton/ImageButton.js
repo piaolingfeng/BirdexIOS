@@ -7,8 +7,15 @@ var ImageButton = React.createClass({
 	pageChange: function(index){
 		if(index==5){
 			gVar.pushPage("inventory");
-		}else
-			gVar.pushPage("mytool");
+		}else{
+			// var para = {paraName:"paraValue"};
+			// gVar.pushPage({pathname:"portal", state:para});
+			// 读取:
+			// this.props.localtion.state
+			var param = {titleIndex:index};
+			gVar.pushPage({pathname:"mytool", state:param});
+			// sessionStorage.setItem("mytool_title",);
+		}
 		// const nextLocation = global.router.history.createLocation({ pathname: "mytool", state: { title:"ddddd" } });
 		// global.router.history.push(nextLocation)
 		// // global.router.history.push({ pathname: "mytool", state: { title:"ddddd" } }); 
@@ -27,9 +34,8 @@ var ImageButton = React.createClass({
 		  
   		return (
   			<div onClick={this.pageChange.bind(this,index)} style={{
-  							width:"30%",
+  							width:"33%",
   							float:"left",
-  							margin:"auto",
   							textAlign:"center",
   							padding:"10px"
   						}}>

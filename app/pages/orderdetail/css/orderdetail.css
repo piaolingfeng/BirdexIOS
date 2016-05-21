@@ -29,7 +29,8 @@
     float: right;
 }
 .orderdetail_right_div_padding{
-    padding: 10px;
+    height: 36px;
+    line-height: 36px;
     padding-left: 4px;
 }
 div,td,span,button{
