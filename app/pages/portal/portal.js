@@ -26,6 +26,14 @@ var MainPage = React.createClass({
 	textpop(){
 		gVar.pushPage("popmenu");
 	},
+	
+	myMessage(){
+		gVar.pushPage("MyMessage");
+	},
+	
+	myaccount(){
+		gVar.pushPage("MyAccount");
+	},	
 
 	refreshData: function () {
 						
@@ -178,8 +186,9 @@ var MainPage = React.createClass({
   			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:55, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
 				<button onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
 				<button onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}}  style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>客服</button>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>帮助</button>
+				<button onClick={this.myMessage} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>消息</button>
 				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}} onClick={this.textpop}>我的</button>
+				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}} onClick={this.myaccount}>账户</button>
 			</div>
 
         </div> 
