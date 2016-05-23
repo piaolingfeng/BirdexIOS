@@ -4,8 +4,9 @@
 }
 .predictdetail_btn{
     float: right;
-    height: 26px;
-    padding: 3px;
+    height: 30px;
+    line-height: 30px;
+    /*padding: 3px;*/
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 8px;
@@ -14,4 +15,5 @@
     border: 1px #13A7DF #13A7DF;
     border-color: #13A7DF;
     border-radius:4px;
+    margin-top: 6px;
 }

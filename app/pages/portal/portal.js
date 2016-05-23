@@ -19,6 +19,11 @@ var btnImage4 = require('./image/jinxiaocun.png');
 var btnImage5 = require('./image/zhichu.png');
 var btnImage6 = require('./image/zhanghu.png');
 var Addbutton = require('../../components/AddButton/addbutton.js');
+
+require('./portal.css')
+
+var fragmentMyMessage = require('../mymessage/mymessage.js');
+
 var MainPage = React.createClass({
 
 	firstEnter:true,
@@ -143,6 +148,29 @@ var MainPage = React.createClass({
 	  					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
 	  					{elCount > 5 ? el[5] : <IMNumber number="" prompt="" />}
 	  				</div> : ""}
+				{elCount > 6 ? <hr style={{width:"100%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"1px"}}></hr>
+	  				: ""}
+
+	  			{elCount > 6 ?
+	  				<div className="flexbox-container">
+	  					{elCount > 3 ? el[6] : <IMNumber number="" prompt="" />}
+	  					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
+	  					{elCount > 4 ? el[7] : <IMNumber number="" prompt="" />}
+	  					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
+	  					{elCount > 5 ? el[8] : <IMNumber number="" prompt="" />}
+	  				</div> : ""}
+				
+				{elCount > 6 ? <hr style={{width:"100%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"1px"}}></hr>
+	  				: ""}
+
+	  			{elCount > 9 ?
+	  				<div className="flexbox-container">
+	  					{elCount > 3 ? el[9] : <IMNumber number="" prompt="" />}
+	  					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
+	  					{elCount > 4 ? el[10] : <IMNumber number="" prompt="" />}
+	  					<div style={{float:"left",width:"1px",height:"50px", background:"#CBCBCB"}}></div>
+	  					{elCount > 5 ? el[11] : <IMNumber number="" prompt="" />}
+	  				</div> : ""}	  
 				<div className="flexbox-container">
 					<Addbutton />
 					<IMNumber number="" prompt="" />
@@ -152,7 +180,7 @@ var MainPage = React.createClass({
   			</div>;
 
 		var dlgBody = <ul><li>aaaaaaaaaaaaaa</li><li>bbbbbbbbbbbbb</li></ul>;
-		
+		// <button className="portal_btn" onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}} >消息</button>
   		return (
 
   		<div style={{position:"absolute",top:0,width:"100%",height:"100%",backgroundColor:"#F9F9F9",color:"#818181"}}>
@@ -170,28 +198,28 @@ var MainPage = React.createClass({
 				
 				<div style={{width:"100%",backgroundColor:"#FFFFFF",paddingBottom:"55px"}}>
 					<div className="flexbox-container">
-						<ImageButton src={btnImage1} title="订单管理" index={1}/>
+						<ImageButton src={btnImage1} title="订单管理" index={0}/>
 						<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 
-						<ImageButton src={btnImage2} title="预报管理" index={2}/>
+						<ImageButton src={btnImage2} title="预报管理" index={1}/>
 						<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 						
-						<ImageButton src={btnImage3} title="库存管理" index={3}/>
+						<ImageButton src={btnImage3} title="库存管理" index={2}/>
 					</div>
 					<div className="flexbox-container">
-						<ImageButton src={btnImage5} title="我的支出" index={4}/>
+						<ImageButton src={btnImage5} title="我的支出" index={3}/>
 						<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 						
-						<ImageButton src={btnImage6} title="帐户充值" index={5}/>
+						<ImageButton src={btnImage6} title="帐户充值" index={4}/>
 						
 					</div>
 				</div>
 				<div style={{height:"30vh"}}></div>
 			</ReactPullToRefresh>	
   			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:55, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
-				<button onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>首页</button>
-				<button onClick={this.myMessage} style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}}>消息</button>
-				<button style={{ borderStyle:"none", backgroundColor:"transparent", width:"25%"}} onClick={this.tabBarClick.bind(this,3)}>我的</button>
+				<button className="portal_btn" onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}}>首页</button>
+				<button className="portal_btn" onClick={this.myMessage}>消息</button>
+				<button className="portal_btn"  onClick={this.tabBarClick.bind(this,3)}>我的</button>
 			</div>
 
         </div> 

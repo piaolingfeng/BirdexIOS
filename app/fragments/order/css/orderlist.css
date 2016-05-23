@@ -1,6 +1,6 @@
 .orderlist_img{
     margin-left: 8px;
-    height: 20px;
+    height: 16px;
     padding: 3px;
 }
 div,p,span,td{
@@ -24,6 +24,7 @@ div,p,span,td{
     padding-left: 0px;
     padding-right: 0px;
     background-color: #FAFAFA;
+    margin: auto;
 }
 .orderlist_line{
     float:left;
@@ -32,7 +33,7 @@ div,p,span,td{
     vertical-align: middle;
     box-sizing: border-box;
     background-color: #D7D7D7;
-    margin: auto;
+    /*margin: auto;*/
 }
 
 .orderlist_clear{
@@ -51,7 +52,6 @@ div,p,span,td{
     display: none;
 }
 .orderproduct_error{
-    display: none;
     color: red;
     float: right;    
 }
@@ -59,7 +59,9 @@ div,p,span,td{
     float: left;
     width: 33.15%;
     text-align: center;
-    padding: 12px;
+    /*padding: 12px;*/
+    padding-top: 12px;
+    padding-bottom: 12px;
     background-color: #ffffff;
 }
 .orderstatus_text{

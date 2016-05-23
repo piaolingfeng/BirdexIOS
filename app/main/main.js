@@ -25,7 +25,7 @@ var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
 //库存s
 // var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
 // var LoginWindow = require('../pages/myorders/myorders.js');
-var Inventory = require('../pages/myinventory/myinventory.js');
+// var Inventory = require('../pages/myinventory/myinventory.js');
 var ChangeAddress = require('../pages/changeadress/changeaddress.js');
 var LogisticsTracking = require('../pages/logistics/logistics.js');
 var MyMessage = require('../pages/mymessage/mymessage.js');
@@ -124,7 +124,6 @@ ReactDOM.render(
             <Route path="predictdetail" component={Predictdetail}/>
             <Route path="orderdetail" component={OrderDetail}/>
             <Route path="messagedetail" component={MessageDetail}/>
-            <Route path="inventory" component={Inventory} /> 
 
             <Route path="instockdetail" component={InStockDetail} /> 
             <Route path="willindetail" component={WillInDetail} /> 

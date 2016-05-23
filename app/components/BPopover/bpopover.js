@@ -30,10 +30,10 @@ var BPopover = React.createClass({
         // event.cancelBubble = true;
         // event.preventDefault();
         // ReactDOM.findDOMNode(this.refs.item_click);
-        document.getElementById('item_click').onclick=null;
+        // document.getElementById('item_click').onclick=null;
         // this.refs.item_click.onClick=null;
-        console.log(idx);
-        console.log(arguments);
+        // console.log(idx);
+        // console.log(arguments);
         ReactDOM.findDOMNode(this.refs.triggerref).click();
         this.props.menuItemClick(idx);
     },
