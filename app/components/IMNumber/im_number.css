@@ -1,0 +1,13 @@
+.im_number_head{
+    width: 30%;
+    float: left;
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.im_number_text{
+    width: 100%;
+    height: 50%;
+    text-align: center;
+}

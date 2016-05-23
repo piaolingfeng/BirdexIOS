@@ -5,4 +5,11 @@
 .inventory_item_info td:nth-child(n+2) {
     text-align: center;
 }
-
+.instockdetail_dialog_item{
+    -moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius:10px;            /* W3C syntax */
+    background-color: #ffffff;
+    padding: 8px 5px;
+    margin: 8px 5px;
+}

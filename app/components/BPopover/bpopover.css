@@ -1,14 +1,20 @@
 
 
 .popitem {
-    min-width: 50px;
-    color: #333;
+    min-width: 75px;
+    color: #9b9b9b;
     white-space: nowrap;
     cursor:default;
     background-color: #ffffff;
-    text-align: center    
+    text-align: center;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;    
 }
 
 .popitem:hover {
-  color:red
+  color:#13A7DF
+}
+.bpopover_pop{
+  padding: 0px;
 }

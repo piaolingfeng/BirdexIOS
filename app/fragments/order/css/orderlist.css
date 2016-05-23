@@ -1,0 +1,84 @@
+.orderlist_img{
+    margin-left: 8px;
+    height: 20px;
+    padding: 3px;
+}
+div,p,span,td{
+    font-size: 14px;
+    color: #9b9b9b
+}
+.orderlist_statu{
+    width: 30%;
+    text-align: center;
+    margin: auto;
+    color: #13A7DF;
+}
+.orderlist_head{
+    padding: 7px;
+}
+.orderlist_btn{
+    float: left;
+    width: 33.15%;
+    text-align: center;
+    padding: 6px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #FAFAFA;
+}
+.orderlist_line{
+    float:left;
+    width: 1px;
+    height: 32px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-color: #D7D7D7;
+    margin: auto;
+}
+
+.orderlist_clear{
+    clear: both;
+}
+.orderproduct_count{
+    float: right;
+    margin-right: 10px;
+    color: #666666;
+}
+.orderproduct_product_name{
+    margin-top: 7px;
+}
+.orderlist_error{
+    color: red;
+    display: none;
+}
+.orderproduct_error{
+    display: none;
+    color: red;
+    float: right;    
+}
+.orderstatus{
+    float: left;
+    width: 33.15%;
+    text-align: center;
+    padding: 12px;
+    background-color: #ffffff;
+}
+.orderstatus_text{
+    color: #13A7DF;
+    padding: 7px;
+    /*background-color: #f5f4f4;*/
+}
+.orderstatus_laydown{
+    height: 8px;
+    margin-bottom: 5px;
+    margin-left: 7px;
+}
+.orderlist_status_line{
+    float:left;
+    width: 1px;
+    height: 28px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-color: #D7D7D7;
+    margin-top: 8px;
+    margin-bottom: 6px;
+}

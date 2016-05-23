@@ -1,0 +1,19 @@
+.predictionlist_predict{
+    float: left;
+    color: #13A7DF;
+    
+}
+.predictionlist_status{
+     width: 30%;
+    text-align: center;
+    margin: auto;
+}
+.predictionlist_place{
+    float: right;
+}
+.predicitonlist_head{
+    padding: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+    background-color: white;
+}

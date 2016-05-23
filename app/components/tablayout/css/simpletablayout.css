@@ -22,7 +22,7 @@
      display: inline-block;
      float:left;
 }
-.tablayout-line{
+.simpletablayout-line{
     position:absolute;
     bottom:-2px;
     left:0;

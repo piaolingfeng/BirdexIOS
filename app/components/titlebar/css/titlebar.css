@@ -1,0 +1,42 @@
+.titlebar_img{
+    float: left;
+    box-sizing: content-box;
+    height: 20px;
+}
+.titlebar_menu{
+    float: right;
+    box-sizing: content-box;
+    height: 20px;
+}
+.titlebar_save{
+    display: inline-block;
+    /*visibility: hidden;*/
+}
+.titlebar_right{
+    float: right;
+}
+
+.titlebar_title{
+    width: 50%;
+    left: 0px;
+    top: 0px;
+    margin: auto;
+}
+.titlebar_head{
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 100
+}
+.titlebar_head_down{
+    top: 0px;
+    left: 0px;
+    padding-top: 50px;
+}
+.titlebar_extend_head{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}

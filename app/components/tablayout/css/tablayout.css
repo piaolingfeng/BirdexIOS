@@ -2,9 +2,10 @@
 	position: relative;
 	z-index: 1;
 	width: 100%;
-	background: #ccc;
+	/*background: #ccc;*/
 	overflow: hidden;
 	-ms-touch-action: none;
+	/*border-bottom: 1px solid #ddd;*/
 }
 
 #scroller_tablayout {
@@ -41,17 +42,22 @@
 	float: left;
 	line-height: 160px;
 	/*border-right: 1px solid #ccc;*/
-	border-bottom: 1px solid #ddd;
+	/*border-bottom: 1px solid #ddd;*/
 	background-color: #fafafa;
 	font-size: 14px;
 	overflow: hidden;
 	text-align: center;
-	color: #505050;
+	/*color: #505050;*/
 }
-#wrapper_tablayout,#scroller_tablayout,#scroller_tablayout ul,#scroller_tablayout li ,#scroller_tablayout a{
+#wrapper_tablayout,#scroller_tablayout,#scroller_tablayout ul,#scroller_tablayout li {
 	height: 40px;
 	line-height:40px;
+	/*color:#505050;*/
 }
-#scroller_tablayout a:visited {
+.item_tablayout{
+	color: #505050;
+}
+.current_tablayout{
     color: #ff7800;
 }
+

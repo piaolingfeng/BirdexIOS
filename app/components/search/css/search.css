@@ -1,0 +1,21 @@
+ .search_div{
+    background-image: url("../images/ic_search.png");
+    background-size: 70%,70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 15px;
+}
+
+.search_input{
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.search_scan{
+   background-image: url("../images/scan_code.png");
+    background-size: 85%,85%;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 35px;
+    padding: 15px;
+}

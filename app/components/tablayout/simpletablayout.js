@@ -24,12 +24,12 @@ var SimpleTabLayout=React.createClass({
         selectIndex=this.props.defualtIndex;
     },
     componentDidMount:function(){
-        $magicLine = $(".tablayout-line");
-        $magicLine
-        .width($(".current_tab").width())
-        .css("left", $(".current_tab").position().left)
-        .data("origLeft", $magicLine.position().left)
-        .data("origWidth", $magicLine.width());
+        $magicLine = $(".simpletablayout-line");
+        // $magicLine
+        // .width($(".current_tab").width())
+        // .css("left", $(".current_tab").position().left)
+        // .data("origLeft", $magicLine.position().left)
+        // .data("origWidth", $magicLine.width());
     },
     handlerTab:function(index,ele){
         if(index!=selectIndex){
@@ -68,7 +68,7 @@ var SimpleTabLayout=React.createClass({
             tabwidth=100/this.props.tabsText.length+"%";
         }
         return (<div className="nav_simple_tablayout"><ul>
-        {tabs}<li className="tablayout-line" style={{
+        {tabs}<li className="simpletablayout-line" style={{
             width:tabwidth
         }}></li>
         </ul></div>);

@@ -1,0 +1,46 @@
+.pickdate{
+    width:90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    height: 35px;
+}
+.pickdate_start ,.pickdate_sure,.pickdate_end{
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+.pickdate_start{
+    width: 35%;
+    /*-moz-border-radius: 8px; */     /* Gecko browsers */
+    -webkit-border-radius: 8px 0px 0px 8px;   /* Webkit browsers */
+    border-radius:8px 0px 0px 8px;
+    border-top: 1px solid #00ACFF;
+    border-left: 1px solid #00ACFF;
+    border-bottom: 1px solid #03A9F4;
+    padding-left: 8px;
+    border-right: none;
+    background-color: #ffffff;
+}
+.pickdate_end{
+    width: 35%;
+    border-top: 1px solid #00ACFF;
+    border-left: 1px solid #00ACFF;
+    border-bottom: 1px solid #03A9F4;
+    padding-left: 8px;
+    border-right: none;
+    background-color: #ffffff;
+}
+.pickdate_sure{
+    width: 30%;
+    -webkit-border-radius: 0px 8px 8px 0px;   /* Webkit browsers */
+    border-radius:0px 8px 8px 0px;
+    background-color: #2196F3;
+    color: #ffffff;
+    
+    
+}

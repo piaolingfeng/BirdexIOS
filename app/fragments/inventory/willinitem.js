@@ -1,6 +1,9 @@
 var React=require('react');
-
+var gVar = require('../../main/global.js');
 var WillinItem=React.createClass({
+    itemOnClick:function(){
+        gVar.pushPage("willindetail");
+    },
     render:function () {
         var eles=[];
         for(var i=0;i<5;i++){
