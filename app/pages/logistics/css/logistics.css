@@ -1,0 +1,56 @@
+.logistics-maindiv {
+    position: absolute;
+    background-color: #FFFFFF;
+    top: 0;
+    width: 100%;
+    height: 100%
+}
+
+.logistics-row {
+    width: 90%;
+    text-align: left;
+    margin: 0 auto;
+    padding-top: 5px;
+}
+
+.logistics-span {
+    color: #666666;
+    font-size: 16px;
+}
+
+.logistics-span-float {
+    float: right;
+    font-size: 16px;
+    color: #F5A623
+}
+
+.logistics-phone {
+    color: #13A7DF;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.logistics-button {
+    float: right;
+    margin-top: 0px;
+    height: 20px;
+    background: #13A7DF;
+}
+
+.logistics-trackdiv {
+    position: absolute;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+    height: 80px;
+    background-color: #F8F8F8
+}
+
+.logistics-trackdiv-child {
+    height: 1px;
+    width: 16.66%;
+    background: #D7D7D7;
+    margin-top: 30px;
+    display: inline;
+    float: left
+}

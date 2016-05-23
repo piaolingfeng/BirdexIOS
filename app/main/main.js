@@ -22,10 +22,16 @@ var MyTool = require('../pages/mytool/mytool.js');
 var LoginWindow = require('../pages/birdlogin/login.js');
 var Portal = require('../pages/portal/portal.js');
 var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
-//库存
+//库存s
 // var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
 // var LoginWindow = require('../pages/myorders/myorders.js');
 var Inventory = require('../pages/myinventory/myinventory.js');
+var ChangeAddress = require('../pages/changeadress/changeaddress.js');
+var LogisticsTracking = require('../pages/logistics/logistics.js');
+var MyMessage = require('../pages/mymessage/mymessage.js');
+var MyMessageMenu = require('../pages/mymessagemenu/mymessagemenu.js');
+var MyAccount = require('../pages/myaccount/myaccount.js');
+var AccountManager = require('../pages/accountmanager/accountmanager.js');
 // var LoginWindow = require('../fragments/geren/geren.js');
 // var LoginWindow = require('../pages/storage/storage.js');
 //库存详情
@@ -108,7 +114,7 @@ ReactDOM.render(
                 }
             history={browserHistory}>
              
-        <Route path="/" component={App}> 
+        <Route path="/" component={App}> s
             <IndexRoute component={LoginWindow}/> 
             <Route path="login" component={LoginWindow} /> 
             <Route path="portal" component={Portal} />
@@ -119,12 +125,21 @@ ReactDOM.render(
             <Route path="orderdetail" component={OrderDetail}/>
             <Route path="messagedetail" component={MessageDetail}/>
             <Route path="inventory" component={Inventory} /> 
+
             <Route path="instockdetail" component={InStockDetail} /> 
             <Route path="willindetail" component={WillInDetail} /> 
             <Route path="myoutlay" component={MyOutlay} /> 
             <Route path="recharge" component={Recharge} /> 
             <Route path="mine" component={Mine} /> 
             <Route path="about" component={About} /> 
+
+            <Route path="changeaddress" component={ChangeAddress}/>
+            <Route path="logistics" component={LogisticsTracking}/>
+            <Route path="mymessage" component={MyMessage}/>
+            <Route path="mymessagemenu" component={MyMessageMenu}/>
+            <Route path="myaccount" component={MyAccount}/>
+            <Route path="accountmanager" component={AccountManager}/>
+
         </Route> 
     </Router>,
     

@@ -8,14 +8,20 @@ var OrderList = React.createClass({
         alert();
     },
     
-    logisticsTracking:function(){},
-    
-    contactCustomer:function() {
-        
+    logisticsTracking:function(e){
+          e.stopPropagation();
+        gVar.pushPage({pathname:"logistics",state:""});
     },
     
-    changeAddr:function(){
-        
+    contactCustomer:function(e) {
+         e.stopPropagation();
+         
+    },
+    
+    changeAddr:function(e){
+        // console.log(e+"ddd");
+        e.stopPropagation();
+        gVar.pushPage({pathname:"changeaddress",state:""});
     },
     
     changeToDetail(){
@@ -45,11 +51,11 @@ var OrderList = React.createClass({
                 
                 <div ref="orderError" className="orderlist_head orderlist_error">此姓名和身份证已验证过</div>
                 <div >
-                    <span ref="logisticsTracking" className="orderlist_btn" >物流跟踪</span>
+                    <span ref="logisticsTracking" className="orderlist_btn" onClick={this.logisticsTracking}>物流跟踪</span>
                     <span className="orderlist_line"></span>
-                    <span ref="contactCustomer " className="orderlist_btn" >联系客服</span>
+                    <span ref="contactCustomer " className="orderlist_btn" onClick={this.contactCustomer}>联系客服</span>
                     <span className="orderlist_line"></span>
-                    <span ref="changeAddr" className="orderlist_btn" >修改地址</span>
+                    <span ref="changeAddr" className="orderlist_btn" onClick={this.changeAddr}>修改地址</span>
                     <div className="orderlist_clear"></div>
                 </div>
             </div>
