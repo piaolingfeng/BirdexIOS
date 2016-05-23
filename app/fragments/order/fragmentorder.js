@@ -214,6 +214,11 @@ var FragmentOrder = React.createClass({
         this.getOrderList();
     },
 
+     //上拉加载
+    pullUpEvent(){
+        requestEntity.page_no++;
+        this.getOrderList();
+    },
 
     //初始化
     getInitialState() {
@@ -265,7 +270,7 @@ var FragmentOrder = React.createClass({
                     todaySetParams={this.todaySetParams}
                     dataCount={dataCount}/>
                 <div >
-                    <ListView getItems={this.getItem} marginTop={180}/>
+                    <ListView getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent}/>
                 </div>
             </div>
         );

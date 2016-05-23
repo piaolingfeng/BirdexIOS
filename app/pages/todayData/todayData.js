@@ -116,7 +116,6 @@ var TodayDataList = React.createClass({
             <div className="titlebar_extend_head" style={{backgroundColor:gVar.Color_white}}>
                 <Titlebar  title="数据看板"/>
                 <div className="titlebar_head_down" style={{paddingTop:gVar.Padding_titlebar}}>
-                    <div id="todaydata_div"> </div>
                     {arraylist}
                 </div>
             </div>

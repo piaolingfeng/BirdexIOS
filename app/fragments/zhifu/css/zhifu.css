@@ -3,8 +3,8 @@
     -webkit-border-radius: 8px;   /* Webkit browsers */
     border-radius:8px;
     background-color: #ffffff;
-    margin: 20px auto 0px auto;
-    padding: 8px 6px;
+    margin: 30px auto 0px auto;
+    padding: 10px 8px;
     /*position: absolute;*/
     width: 90%;
 }
@@ -29,6 +29,7 @@
     background-repeat: no-repeat;
     display: block;
     float: left;
+    margin-right: 5px;
 }
 .pay_style_item{
     margin-top: 10px;

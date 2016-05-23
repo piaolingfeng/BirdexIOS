@@ -3,6 +3,7 @@ require('./css/zhifu.css');
 var zhifubao1=require('./image/alipay48x48.png');
 var paySelected=require('./image/selectreveal.png');
 var radio=require('./image/radio.png');
+var gVar = require('../../main/global.js');
 var ZhiFu=React.createClass({
     defualtValues:{
         selectIndex:-1
@@ -22,6 +23,8 @@ var ZhiFu=React.createClass({
     },
     render:function(){
         return (<div style={{
+            backgroundColor:gVar.Color_background,
+            height:'100%',
             overflow:"hidden"
         }}>
             <div style={{width:"100%",display:"inline-block",marginTop:"15px"}}>
