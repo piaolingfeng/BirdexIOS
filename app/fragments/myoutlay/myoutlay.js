@@ -5,14 +5,16 @@ var ReactList=require('react-list');
 require('./css/pickdate.css');
 require('./css/myoutlay.css');
 //日历选择器 http://www.lrxin.com/archives-792.html
-require('./js/mobiscroll_002.js');
-require('./js/mobiscroll_004.js');
-require('./css/mobiscroll_002.css');
-require('./css/mobiscroll.css');
-require('./js/mobiscroll.js');
-require('./js/mobiscroll_003.js');
-require('./js/mobiscroll_005.js');
+//必须放在引用该页面之外的前面
+// require('./js/mobiscroll.core.js');
+// require('./js/mobiscroll_004.js');
+require('./css/mobiscroll.core.css');
+require('./css/mobiscroll.datetime.css');
+// require('./js/mobiscroll.datetime.js');
+// require('./js/mobiscroll_003.js');
+// require('./js/mobiscroll.android-ics.js');
 require('./css/mobiscroll_003.css');
+require('./css/mobiscroll.android-ics.css');
 
 
 
@@ -31,7 +33,7 @@ var PickDate=React.createClass({
 			opt.default = {
 				theme: 'android-ics light', //皮肤样式
 		        display: 'modal', //显示方式 
-		        mode: 'Clickpick', //日期选择模式
+		        mode: 'mix', //日期选择模式
 				dateFormat: 'yyyy-mm-dd',
 				lang: 'zh',
 				showNow: true,
@@ -41,7 +43,7 @@ var PickDate=React.createClass({
 			};
 
 		  	$(".pickdate_start").mobiscroll($.extend(opt['date'], opt['default']));
-              $(".pickdate_end").mobiscroll($.extend(opt['date'], opt['default']));
+            $(".pickdate_end").mobiscroll($.extend(opt['date'], opt['default']));
         });
     },
     render:function(){
