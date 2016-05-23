@@ -43,7 +43,7 @@ var MyOutlay=require('../fragments/myoutlay/myoutlay.js');
 //账户充值
 var Recharge=require('../pages/recharge/recharge.js');
 //我的页面
-var Mine=require('../pages/mine/mine.js');
+// var Mine=require('../pages/mine/mine.js');
 //关于页面
 var About=require('../pages/about/about.js');
 /*代表整个应用的组件*/    
@@ -97,7 +97,7 @@ var AppWrapper = React.createClass({
          return <App ref={function(theApp) {global.theApp = theApp;}} pathname={this.props.location.pathname} />;
     }
 });
-
+// <Route path="mine" component={Mine} /> 
 ReactDOM.render(
     <Router ref={   
                     function(r) {
@@ -129,7 +129,7 @@ ReactDOM.render(
             <Route path="willindetail" component={WillInDetail} /> 
             <Route path="myoutlay" component={MyOutlay} /> 
             <Route path="recharge" component={Recharge} /> 
-            <Route path="mine" component={Mine} /> 
+            
             <Route path="about" component={About} /> 
 
             <Route path="changeaddress" component={ChangeAddress}/>

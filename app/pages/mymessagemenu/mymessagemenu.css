@@ -1,0 +1,19 @@
+.mymessagemenu_item{
+    margin-top: 10px;
+    background: #fff;
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+.mymessagemenu_item_title{
+    font-size: 16px;
+    color: #666666;
+}
+
+
+
+.mymessagemenu_item_context{
+    font-size: 16px;
+    color: #666666;
+    margin-left: 10px;
+}

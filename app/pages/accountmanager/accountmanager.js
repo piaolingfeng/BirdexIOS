@@ -232,7 +232,8 @@ var AM = React.createClass({
     render:function() {
         return (
             <div className="am-maindiv">
-                <TitleBar  title="账户管理" menu="true"/>
+                <TitleBar  title="账户管理" />
+                
                 <div className="panel-group" id="accordion">
                     <div className="panel panel-default" style={{marginTop:80}}>
                         <div onClick={this.divclick.bind(this,"base")} className="panel-heading" style={{backgroundColor:"#FFFFFF"}} data-toggle="collapse" data-parent="#accordion" 

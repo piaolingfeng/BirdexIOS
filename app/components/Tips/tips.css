@@ -1,0 +1,13 @@
+.tipBox{
+    position:absolute;
+    width: auto;
+    height: auto;
+    border: 1px solid #303D42;
+    background-color: ＃000;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 8px; 
+    display:none;
+    margin:0 3%;
+    opacity: 0.5;
+}

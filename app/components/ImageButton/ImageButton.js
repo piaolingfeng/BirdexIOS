@@ -5,9 +5,9 @@ require("./imagebutton.css");
 var ImageButton = React.createClass({
 	  
 	pageChange: function(index){
-		if(index==3){
-			gVar.pushPage("inventory");
-		}else{
+		// if(index==3){
+		// 	gVar.pushPage("inventory");
+		// }else{
 			// var para = {paraName:"paraValue"};
 			// gVar.pushPage({pathname:"portal", state:para});
 			// 读取:
@@ -15,7 +15,7 @@ var ImageButton = React.createClass({
 			var param = {titleIndex:index};
 			gVar.pushPage({pathname:"mytool", state:param});
 			// sessionStorage.setItem("mytool_title",);
-		}
+		// }
 		// const nextLocation = global.router.history.createLocation({ pathname: "mytool", state: { title:"ddddd" } });
 		// global.router.history.push(nextLocation)
 		// // global.router.history.push({ pathname: "mytool", state: { title:"ddddd" } }); 

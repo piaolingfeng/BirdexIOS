@@ -49,7 +49,6 @@ div,p,span,td{
 }
 .orderlist_error{
     color: red;
-    display: none;
 }
 .orderproduct_error{
     color: red;

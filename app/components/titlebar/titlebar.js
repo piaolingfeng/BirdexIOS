@@ -14,7 +14,7 @@ var BPopover = require('../BPopover/bpopover.js');
 //titlebar 是浮动的div,所以titlebar的外层div需要设置paddingtop的属性让元素往下移动：50px;
 //参考page下面的todaydata的使用方式
 // menuFunc={this.menuFunc},menuFunc是menu回调,不传默认跳转mytool页面
-//backNoneDisplay 默认不传,若传则代表不显示title的返回
+//backNoneDisplay 默认不传,若传false则代表不显示title的返回
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
     
@@ -56,7 +56,8 @@ var Titlebar = React.createClass({
 	},
     
     settingClick(){
-        alert("set");
+        // alert("set");
+        gVar.pushPage("mymessagemenu");
     },
     
     render:function(){

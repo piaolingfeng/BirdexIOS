@@ -74,6 +74,10 @@ var OrderList = React.createClass({
         //     product.push(<OrderProduct />);
         // }
         var orderEntity = this.props.orderEntity;
+        var orderErrorDisplay = "none";
+        if(orderEntity.verify_fail_detail != null && orderEntity.verify_fail_detail != ''){
+            orderErrorDisplay = 'block';
+        }
         return (
             <div style={{ backgroundColor: gVar.Color_white, marginTop: "10px" }} onClick={this.changeToDetail}>
                 <div className="orderlist_head">
@@ -88,7 +92,7 @@ var OrderList = React.createClass({
 
                 {productList}
 
-                <div ref="orderError" className="orderlist_head orderlist_error">{orderEntity.verify_fail_detail}</div>
+                <div ref="orderError" className="orderlist_head orderlist_error" style={{display:orderErrorDisplay}}>{orderEntity.verify_fail_detail}</div>
                 <div className="flexbox-container" style={{ backgroundColor: "#FAFAFA" }}>
                     <span ref="logisticsTracking" className="orderlist_btn" >物流跟踪</span>
                     <span className="orderlist_line"></span>

@@ -32,7 +32,7 @@ var gVar = {
     //padding
     Padding_head: "14px",
     Padding_text_head: "12px",
-    Padding_titlebar: "50px",
+    Padding_titlebar: "48px",
     //切换到新页面
     pushPage: function (pathname) {
         gVar.pageTranType = "pagepush";

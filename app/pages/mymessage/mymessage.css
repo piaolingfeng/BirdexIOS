@@ -1,0 +1,25 @@
+.mymessage_item{
+    margin-top: 15px;
+    width: 100%;
+    background: #fff;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.mymessage_img{
+    margin-left: 20px;
+    height: 30px;
+}
+
+.mymessage_item_text{
+    font-size: 15px;
+    color: #666666;
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+.mymessage_badge{
+    background: red;
+    vertical-align: middle;
+    margin-left: 15px;
+}

@@ -19,7 +19,7 @@ var OrderDetail = React.createClass({
     },
     changeAddr: function () {
         var params = { order_code: Data.data.order_code }
-        gVar.pushPage({ pathname: "", state: params });
+        gVar.pushPage({ pathname: "changeaddress", state: params });
         // alert("changeAddr");
     },
 

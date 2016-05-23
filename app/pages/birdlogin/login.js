@@ -54,11 +54,12 @@ var LW = React.createClass({
 				localStorage.setItem('company_short_name', data.data.company_short_name);
 				localStorage.setItem('user_code', data.data.user_code); 
 				console.log(data);
-				gVar.pushPage("portal");	
 			} catch (e) { 
 				// alert(e);
+				console.log(e);
 				alert("您处于无痕浏览，无法为您保存"); 
 			}
+			gVar.pushPage("portal");
 		}
 		// console.log(data.data.company_code);
         // editor.putString("company_code", user.getCompany_code());
