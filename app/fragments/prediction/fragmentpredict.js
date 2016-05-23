@@ -195,6 +195,12 @@ var FragmentPrediciton = React.createClass({
         this.getPredicitionList();
     },
     
+    //上拉加载
+    pullUpEvent(){
+        requestEntity.page_no++;
+        this.getPredicitionList();
+    },
+    
     getInitialState(){
         // console.log("FragmentPrediciton");
         // predictList = new Array();
@@ -239,7 +245,7 @@ var FragmentPrediciton = React.createClass({
                     todaySetParams={this.todaySetParams}
                     dataCount={dataCount}/>
                 <div >
-                    <ListView getItems={this.getItem} marginTop={180}/>
+                    <ListView getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent}/>
                </div>
             </div>
         );   

@@ -24,21 +24,10 @@ var OrderList = React.createClass({
         //alert(clipboardswfdata);
     },
 
-    logisticsTracking: function () {
-
-    },
-
-    contactCustomer: function () {
-
-    },
-
-    changeAddr: function () {
-
-    },
 
     changeToDetail() {
-        var param = {order_code:this.props.orderEntity.order_code}
-        gVar.pushPage({pathname:'orderdetail',state:param});
+        var param = { order_code: this.props.orderEntity.order_code }
+        gVar.pushPage({ pathname: 'orderdetail', state: param });
     },
 
     componentDidMount() {
@@ -55,15 +44,25 @@ var OrderList = React.createClass({
             this.refs.changeAddr_line.style.display = "none";
             this.refs.changeAddr.style.display = "none";
         }
-            console.log(this.props.orderEntity.verify_fail_detail);
-        if (this.props.orderEntity.verify_fail_detail != null) {
-            this.refs.orderError.style.display = "block";
-            // $('#orderError').css({"display": "block"});
-        } else {
-            this.refs.orderError.style.display = "none";
-            // $('#orderError').css("display", "none");
-        }
     },
+
+    logisticsTracking: function (e) {
+        e.stopPropagation();
+        gVar.pushPage({ pathname: "logistics", state: "" });
+    },
+
+    contactCustomer: function (e) {
+        e.stopPropagation();
+
+    },
+
+    changeAddr: function (e) {
+        // console.log(e+"ddd");
+        e.stopPropagation();
+        gVar.pushPage({ pathname: "changeaddress", state: "" });
+    },
+
+
 
     render: function () {
         var productList = [];
@@ -96,6 +95,7 @@ var OrderList = React.createClass({
                     <span ref="contactCustomer " className="orderlist_btn" >联系客服</span>
                     <span ref="changeAddr_line"className="orderlist_line"></span>
                     <span ref="changeAddr" className="orderlist_btn" >修改地址</span>
+                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                     <div className="orderlist_clear"></div>
                 </div>
             </div>
