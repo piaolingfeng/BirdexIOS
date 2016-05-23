@@ -1,0 +1,20 @@
+.myoutlay_list_head0{
+    /*-moz-border-radius: 8px; */     /* Gecko browsers */
+    -webkit-border-radius: 8px 8px 0px 0px;   /* Webkit browsers */
+    border-radius:8px 8px 0px 0px;
+    background-color: #03A9F4;
+    padding-top:8px;
+    padding-bottom: 8px;
+    margin-top: 10px;
+}
+.myoutlay_list_head0,.myoutlay_list_item{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.myoutlay_list_head1,.myoutlay_list_head2{
+    color: #ffffff;
+    font-size: 16px;
+}
+.myoutlay_list_head2{
+    float: right;
+}

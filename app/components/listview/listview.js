@@ -27,14 +27,17 @@ var  ListView  = React.createClass({
         //是否含有下拉
         showDownload:React.PropTypes.bool,
         //距离上部高度
-        marginTop:React.PropTypes.number
+        marginTop:React.PropTypes.number,
+        //背景颜色
+        backGroud:React.PropTypes.string
     },
     getDefaultProps: function() {
         //设置默认属性
         return {
             showUpload: true,
             showDownload:true,
-            marginTop:0
+            marginTop:0,
+            backGroud:"#ffffff"
         };
     },
     pullUpAction :function() {
@@ -143,7 +146,7 @@ componentDidMount: function () {
 	
 	setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
     //初始化绑定iScroll控件 
-    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     },
     render:function () {
         var datasource=[];
@@ -158,7 +161,7 @@ componentDidMount: function () {
         <div id="pullDown" >
 			<span className="pullDownIcon"></span><span className="pullDownLabel">下拉刷新...</span>
 		</div>
-        <ul id="thelist">
+        <ul id="thelist" style={{backgroundColor:this.props.backGroud}}>
         {
             datasource
         }

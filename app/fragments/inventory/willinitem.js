@@ -1,6 +1,9 @@
 var React=require('react');
-
+var gVar = require('../../main/global.js');
 var WillinItem=React.createClass({
+    itemOnClick:function(){
+        gVar.pushPage("willindetail");
+    },
     render:function () {
         var eles=[];
         for(var i=0;i<5;i++){
@@ -19,7 +22,8 @@ var WillinItem=React.createClass({
                             paddingTop:"5px"
                         }
                     }><table className="table" style={{
-            width:"100%"
+            width:"100%",
+            marginBottom:"0px"
         }}>
         <tbody>
         <tr><td colSpan="2" style={{

@@ -25,7 +25,7 @@ var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
 //库存s
 // var LoginWindow = require('../pages/testpopmenu/testpopmenu.js');
 // var LoginWindow = require('../pages/myorders/myorders.js');
-var Inventory = require('../fragments/inventory/inventory.js');
+// var Inventory = require('../pages/myinventory/myinventory.js');
 var ChangeAddress = require('../pages/changeadress/changeaddress.js');
 var LogisticsTracking = require('../pages/logistics/logistics.js');
 var MyMessage = require('../pages/mymessage/mymessage.js');
@@ -34,6 +34,18 @@ var MyAccount = require('../pages/myaccount/myaccount.js');
 var AccountManager = require('../pages/accountmanager/accountmanager.js');
 // var LoginWindow = require('../fragments/geren/geren.js');
 // var LoginWindow = require('../pages/storage/storage.js');
+//库存详情
+var InStockDetail=require('../pages/instockdetail/instockdetail.js');
+//待入库详情
+var WillInDetail=require('../pages/willindetail/willindetail.js');
+//我的支出
+var MyOutlay=require('../fragments/myoutlay/myoutlay.js');
+//账户充值
+var Recharge=require('../pages/recharge/recharge.js');
+//我的页面
+var Mine=require('../pages/mine/mine.js');
+//关于页面
+var About=require('../pages/about/about.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -112,13 +124,21 @@ ReactDOM.render(
             <Route path="predictdetail" component={Predictdetail}/>
             <Route path="orderdetail" component={OrderDetail}/>
             <Route path="messagedetail" component={MessageDetail}/>
-            <Route path="inventory" component={Inventory} /> 
+
+            <Route path="instockdetail" component={InStockDetail} /> 
+            <Route path="willindetail" component={WillInDetail} /> 
+            <Route path="myoutlay" component={MyOutlay} /> 
+            <Route path="recharge" component={Recharge} /> 
+            <Route path="mine" component={Mine} /> 
+            <Route path="about" component={About} /> 
+
             <Route path="changeaddress" component={ChangeAddress}/>
             <Route path="logistics" component={LogisticsTracking}/>
             <Route path="mymessage" component={MyMessage}/>
             <Route path="mymessagemenu" component={MyMessageMenu}/>
             <Route path="myaccount" component={MyAccount}/>
             <Route path="accountmanager" component={AccountManager}/>
+
         </Route> 
     </Router>,
     

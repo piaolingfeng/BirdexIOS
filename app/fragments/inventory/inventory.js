@@ -1,21 +1,18 @@
 import React from 'react'
-// import ReactList from 'react-list';
 require('./css/inventory.css');
 var InventoryItem=require('./inventoryitem.js');
 var WillinItem=require('./willinitem.js');
 
 var ListView=require('../../components/listview/listview.js');
-//tablayout
-var TabLayout=require('../../components/tablayout/tablayout.js');
+
 //简单的tab设置
 var SimpleTabLayout=require('../../components/tablayout/simpletablayout.js');
 //查询限制条件
 var LimitView=require('./limitview.js');
+//搜索条件
+var Search = require('../../components/search/search.js');
 var listitem=[];
 var Inventory = React.createClass({
-  inventorylist:{
-    
-  },
   getInitialState:function() {
     return {
       inventoryIndex:0,
@@ -54,24 +51,10 @@ var Inventory = React.createClass({
       listitem.push(<InventoryItem />);
       listitem.push(<InventoryItem />);
     }
-    //   if(this.state.inventoryIndex==0){
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //  }else if(this.state.inventoryIndex==1){
-    //     listitem.push(<WillinItem />);
-    //     listitem.push(<WillinItem />);
-    //     listitem.push(<WillinItem />);
-    //   }else{
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //     listitem.push(<InventoryItem />);
-    //   }
       this.setState({flag:!this.state.flag});
-      console.log(this.state.flag);
     },
     selectTab:function(index){
-      console.log(index);
+      listitem=[];
       this.setState({inventoryIndex:index});
       return ;
     },
@@ -79,12 +62,20 @@ var Inventory = React.createClass({
       //设置选择条件的
       return;
     },
+    limitClick:function(index){
+      
+    },
+    popMenuItemClick:function(index){
+      
+    },
   render:function(){
-    return (<div>
+    return (<div >
     <SimpleTabLayout selectTab={this.selectTab} tabsText={["在库商品","待入库商品","超预警商品"]} />
-    <LimitView />
-    <div>
-    <ListView marginTop={77} pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />
+    <Search />
+    <LimitView limitClick={this.limitClick} popMenuItemClick={this.popMenuItemClick}/>
+    <div style={{color:"#039FFF",paddingLeft:"10px",backgroundColor:"#f5f4f4",textAlign:"left",width:"100%"}}>共有57条数据</div>
+    <div >
+    <ListView marginTop={199} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />
     </div>
     </div>);
     // return (<div>

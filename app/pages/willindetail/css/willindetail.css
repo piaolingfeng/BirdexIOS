@@ -1,0 +1,46 @@
+.willin_item{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+/*div.willin_item_left不能用空格间隔*/
+div.willin_item_left,div.willin_item_right{
+    display: inline-block;
+}
+tr .willin_item_left{
+    width: 30%;
+    text-align: right;
+}
+.other_commodity{
+    text-align: right;
+    color: #039FFF;
+}
+.willin_item_right1{
+    width: 20%;
+}
+td.willin_item_left{
+    padding-right: 0px;
+}
+td.willin_item_right1{
+    padding-left: 0px;
+}
+.other_commodity{
+    font-size: 12px;
+}
+/******修改对话框原有样式*****/
+.modal-content{
+    background-color: #e4e4e4;
+}
+.modal-header,.modal-body{
+    padding: 5px 8px;
+}
+.modal-title{
+    font-size: 16px;
+}
+.willindetail_dialog_item{
+    -moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius:10px;            /* W3C syntax */
+}
+.modal-header{
+    border-bottom: 1px solid #ddd;
+}

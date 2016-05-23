@@ -31,6 +31,11 @@ var MainPage = React.createClass({
 	textpop(){
 		gVar.pushPage("popmenu");
 	},
+	tabBarClick:function(index){
+		if(index==3){
+			gVar.pushPage("mine");
+		}
+	},
 	
 	myMessage(){
 		gVar.pushPage("MyMessage");
@@ -175,7 +180,7 @@ var MainPage = React.createClass({
   			</div>;
 
 		var dlgBody = <ul><li>aaaaaaaaaaaaaa</li><li>bbbbbbbbbbbbb</li></ul>;
-		
+		// <button className="portal_btn" onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}} >消息</button>
   		return (
 
   		<div style={{position:"absolute",top:0,width:"100%",height:"100%",backgroundColor:"#F9F9F9",color:"#818181"}}>
@@ -193,19 +198,19 @@ var MainPage = React.createClass({
 				
 				<div style={{width:"100%",backgroundColor:"#FFFFFF",paddingBottom:"55px"}}>
 					<div className="flexbox-container">
-						<ImageButton src={btnImage1} title="订单管理" index={1}/>
+						<ImageButton src={btnImage1} title="订单管理" index={0}/>
 						<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 
-						<ImageButton src={btnImage2} title="预报管理" index={2}/>
+						<ImageButton src={btnImage2} title="预报管理" index={1}/>
 						<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 						
-						<ImageButton src={btnImage3} title="库存管理" index={3}/>
+						<ImageButton src={btnImage3} title="库存管理" index={2}/>
 					</div>
 					<div className="flexbox-container">
-						<ImageButton src={btnImage5} title="我的支出" index={4}/>
+						<ImageButton src={btnImage5} title="我的支出" index={3}/>
 						<div style={{float:"left",width:"1px",height:"50px", background:"transparent"}}></div>
 						
-						<ImageButton src={btnImage6} title="帐户充值" index={5}/>
+						<ImageButton src={btnImage6} title="帐户充值" index={4}/>
 						
 					</div>
 				</div>
@@ -213,8 +218,8 @@ var MainPage = React.createClass({
 			</ReactPullToRefresh>	
   			<div className="flexbox-container" style={{position:"fixed", bottom:0, height:55, width:"100%", backgroundColor:"#F0F0F0", fontSize:"16pt"}}>
 				<button className="portal_btn" onClick={function (){showDialog("请输入复核原因", "input", function () {}, function () {});}}>首页</button>
-				<button className="portal_btn" onClick={function (){showDialog("请输入复核原因", dlgBody, function () {}, function () {});}} >消息</button>
-				<button className="portal_btn" onClick={this.textpop}>我的</button>
+				<button className="portal_btn" onClick={this.myMessage}>消息</button>
+				<button className="portal_btn"  onClick={this.tabBarClick.bind(this,3)}>我的</button>
 			</div>
 
         </div> 

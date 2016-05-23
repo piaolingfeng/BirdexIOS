@@ -1,0 +1,35 @@
+.input_recharge_num,.pay_type,.pay_now{
+    -moz-border-radius: 8px;      /* Gecko browsers */
+    -webkit-border-radius: 8px;   /* Webkit browsers */
+    border-radius:8px;
+    background-color: #ffffff;
+    margin: 20px auto 0px auto;
+    padding: 8px 6px;
+    /*position: absolute;*/
+    width: 90%;
+}
+.input_recharge_num input:focus{
+    outline:none;
+}
+.pay_now:focus{
+    outline:none;
+}
+.pay_style_item{
+    float:left;
+    width:50%;
+    height:20px;
+    margin: auto;
+    vertical-align: middle;
+}
+.pay_style_radio{
+    width: 20px;
+    height: 20px;
+    background-image:  url("../image/radio.png") ;
+    background-position: -90px 0;
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+}
+.pay_style_item{
+    margin-top: 10px;
+}

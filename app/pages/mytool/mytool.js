@@ -2,8 +2,11 @@ var React = require('react');
 var gVar = require('../../main/global.js');
 var FragmentOrder = require('../../fragments/order/fragmentorder.js');
 var FragmentPredict = require('../../fragments/prediction/fragmentpredict.js');
+// var FragmentMyOutlay = require('../../fragments/myoutlay/myoutlay.js');
+var FragmentRecharge = require('../../fragments/zhifu/zhifu.js');
+var FragmentInventory = require('../../fragments/inventory/inventory.js');
+
 var TitleBar = require('../../components/titlebar/titlebar.js');
-var FragmenInventory = require('../../fragments/inventory/inventory.js')
 var currentPosition =0;//当前页面位置
 var targetPosition = 0;
 var MyTool =React.createClass({
@@ -62,13 +65,13 @@ var MyTool =React.createClass({
                 displayPage = <FragmentPredict todayDataName = {this.state.data.todayDataName}/>;
                 break;
              case 2:
-                displayPage = <FragmenInventory />;
+                displayPage = <FragmenInventory todayDataName = {this.state.data.todayDataName}/>;
                 break;
              case 3:
-                displayPage = <FragmenInventory />;
+                displayPage = <FragmentRecharge />;
                 break;
              case 4:
-                displayPage = <FragmenInventory />;
+                displayPage = null;
                 break;
         }
         return(

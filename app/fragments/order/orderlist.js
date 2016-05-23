@@ -95,7 +95,6 @@ var OrderList = React.createClass({
                     <span ref="contactCustomer " className="orderlist_btn" >联系客服</span>
                     <span ref="changeAddr_line"className="orderlist_line"></span>
                     <span ref="changeAddr" className="orderlist_btn" >修改地址</span>
-                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                     <div className="orderlist_clear"></div>
                 </div>
             </div>

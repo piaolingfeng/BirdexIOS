@@ -5,7 +5,7 @@ require("./imagebutton.css");
 var ImageButton = React.createClass({
 	  
 	pageChange: function(index){
-		if(index==5){
+		if(index==3){
 			gVar.pushPage("inventory");
 		}else{
 			// var para = {paraName:"paraValue"};
