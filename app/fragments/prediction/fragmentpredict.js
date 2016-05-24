@@ -7,7 +7,7 @@ var Status = require('../order/status.js');
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var Search = require('../../components/search/search.js');
 var ListView = require('../../components/listview/listview.js');
-
+var toast = require('../../util/Tips/tips.js');
 var predictList = null;
 
 var timeNameList = null;
@@ -86,6 +86,7 @@ var FragmentPrediciton = React.createClass({
                 if (requestEntity.page_no > 1) {
                     if (data.data.storages.length == 0 && requestEntity.page_no > 1) {
                         // T.showShort(MyApplication.getInstans(), "已经是最后一页");
+                        toast("已经是最后一页");
                     } else {
                         // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
                         // orderListEntities.getData().setOrders(OrderAdapter.getList());
@@ -96,7 +97,7 @@ var FragmentPrediciton = React.createClass({
                 }
                 else {
                     var list = [];
-                    console.log(gVar.createOrderEntity());
+                    // console.log(gVar.createOrderEntity());
                     // orderList = data.data.orders;
                     for (var i = 0; i < data.data.storages.length; i++) {
                         list.push(<PredictionList predictEntity={data.data.storages[i]}/>);
@@ -104,7 +105,8 @@ var FragmentPrediciton = React.createClass({
                     predictList = list;//将数据给orderlist
                 }
             } else {
-                console.log(data.data);
+                // console.log();
+                toast(data.data);
             }
         }
         this.setState({ data: "" });
@@ -120,11 +122,12 @@ var FragmentPrediciton = React.createClass({
             dataType: 'json',
             cache: false,
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 this.dealPredictList(data);
             }.bind(this),
             error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
        });
     },
@@ -150,7 +153,8 @@ var FragmentPrediciton = React.createClass({
                 this.setState({ data: "data" });
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
         });
     },
@@ -175,7 +179,8 @@ var FragmentPrediciton = React.createClass({
                 this.setState({ data: "data" });
             }.bind(this),
             error: function(xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
        });
     },
@@ -232,6 +237,11 @@ var FragmentPrediciton = React.createClass({
     render:function(){
         //<TitleBar title="预报管理"/>
         // console.log(statusList);
+        var list = <ListView getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background}/>;
+        if(predictList!=null && predictList.length==0){
+            list = <div style={{width:"100%",height:"100%",textAlign:"center",fontSize:"22px",marginTop:"100px"}}>暂时没有数据哦！</div>;
+        }
+        
         return(
             <div style={{ backgroundColor: gVar.Color_background }}>
                <Search SearchFunc={this.SearchFunc}/>
@@ -245,7 +255,7 @@ var FragmentPrediciton = React.createClass({
                     todaySetParams={this.todaySetParams}
                     dataCount={dataCount}/>
                 <div >
-                    <ListView getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent}/>
+                    {list}
                </div>
             </div>
         );   

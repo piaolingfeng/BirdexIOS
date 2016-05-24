@@ -112,7 +112,8 @@ var Geren = React.createClass({
     componentDidMount: function () { },
     
     logout:function(){
-        
+        gVar.pushPage("login");
+        // console.log(global.router);
     },
     
     render: function () {

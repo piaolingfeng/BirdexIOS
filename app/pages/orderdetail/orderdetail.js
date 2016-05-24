@@ -7,6 +7,7 @@ var right = require("./images/right.png");
 var error = require("./images/error.png");
 var OrderDetailProduct = require("./orderdetailproduct.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
+var toast = require('../../util/Tips/tips.js');
 var Data = null;
 
 var OrderDetail = React.createClass({
@@ -48,7 +49,8 @@ var OrderDetail = React.createClass({
                 this.dealOrderDetail(data);
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
         });
     },
@@ -59,7 +61,8 @@ var OrderDetail = React.createClass({
             if (data.error == 0) {
                 Data = data;
             } else {
-                console.log(data.data);
+                // console.log(data.data);
+                toast(data.data);
             }
         }
         this.setState({ data: "" });
@@ -106,6 +109,8 @@ var OrderDetail = React.createClass({
             $('#changeAddr').click(function () {
                 func.changeAddr();
             });
+        }else{
+             toast("当前状态不能修改地址哦!");
         }
     },
 

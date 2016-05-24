@@ -167,7 +167,7 @@ componentDidMount: function () {
         }
         </ul>
         <div id="pullUp">
-			<span className="pullUpIcon" ></span><span className="pullUpLabel">上拉加载更多...</span>
+			<span className="pullUpIcon" ></span><span className="pullUpLabel" style={{width:"100%"}}>上拉加载更多...</span>
 		</div>
         </div>
         <div style={{

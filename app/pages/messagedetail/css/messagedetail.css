@@ -7,9 +7,11 @@ div,p,span,td{
     float: right;
 }
 .messagedetail_padding{
-    padding: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 .messagedetail_text_dark{
+    line-height: 28px;
     color: #666666;
 }
 .messagedetail_text_red{
@@ -41,4 +43,12 @@ div,p,span,td{
 .messagedetail_head{
     width: 100%;
     height: 100%;
+}
+
+.messagedetail_count{
+    float: right;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #13A7DF;
+    vertical-align: middle;
 }

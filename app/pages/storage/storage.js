@@ -1,7 +1,8 @@
 
 var React = require('react');
 
-var NavHeader = require('../../components/NavHeader/NavHeader.js');
+// var NavHeader = require('../../components/NavHeader/NavHeader.js');
+var Titlebar
 
 var StoragePage = React.createClass({
 
@@ -17,8 +18,9 @@ var StoragePage = React.createClass({
 	},
 
 	render: function() {
+		// <NavHeader />
 		return (<div>
-					<NavHeader />
+					
 					<div className="container">
 						<ol className="nav nav-pills nav-justified">
 							<li><a href="">在库商品</a></li>

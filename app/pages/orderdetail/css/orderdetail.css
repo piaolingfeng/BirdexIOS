@@ -1,6 +1,6 @@
 .orderdetail_background_img{
       /*text-align: center;*/
-      width: 100%;
+      /*width: 100%;*/
       color: white;
       padding: 8px;
       -webkit-border-radius: 8px;
@@ -8,7 +8,7 @@
       margin-top: 5px;
 }
 .orderdetail_head{
-    padding: 8px;
+    padding: 5px;
     padding-bottom: 0px;
 }
 .orderdetail_left{
