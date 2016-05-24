@@ -30,6 +30,9 @@ var SimpleTabLayout=React.createClass({
         // .css("left", $(".current_tab").position().left)
         // .data("origLeft", $magicLine.position().left)
         // .data("origWidth", $magicLine.width());
+        // if(this.props.defualtIndex!=0){
+        //     this.setState({defualtIndex:2});
+        // }
     },
     handlerTab:function(index,ele){
         if(index!=selectIndex){
@@ -43,7 +46,7 @@ var SimpleTabLayout=React.createClass({
                 width: newWidth
             });
         
-            this.setState({defualtIndex:index});
+            // this.setState({defualtIndex:index});
             if(this.props.selectTab){
                this.props.selectTab(index);
              }
@@ -51,12 +54,22 @@ var SimpleTabLayout=React.createClass({
             selectIndex=index;
         }
     },
+    componentDidUpdate:function(){
+        // if(selectIndex!=0){
+            
+            var $el = $('.nav_simple_tablayout').find('li').eq(this.props.defualtIndex);
+            var leftPos = $el.position().left;
+            $magicLine.stop().animate({
+                left: leftPos
+            });
+        // }
+    },
     render:function(){
         var tabs=new Array();
         var tabwidth="100%";
         for(var i=0;i<this.props.tabsText.length;i++){
             var tabClass="item_tab";
-            if(i==this.state.defualtIndex){
+            if(i==this.props.defualtIndex){
                 tabClass+=" current_tab ";
             }
             tabs.push(<li className={tabClass} style={{
@@ -64,6 +77,7 @@ var SimpleTabLayout=React.createClass({
             }} onClick={this.handlerTab.bind(this,i)}>{this.props.tabsText[i]}</li>);
             //}} onClick={this.handlerTab.bind(this,i)}><a href="#">{this.props.tabsText[i]}</a></li>);
         }
+        
         if(this.props.tabsText.length!=0){
             tabwidth=100/this.props.tabsText.length+"%";
         }
