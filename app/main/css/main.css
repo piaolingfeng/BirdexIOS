@@ -1,41 +1,41 @@
 /*页面前进动画*/
 
 .pagepush-enter {
-  left:100%
+  -webkit-transform: translate3d(375px, 0, 0);
 }
 
 .pagepush-enter.pagepush-enter-active {
-  left: 0px;
-  transition: left 300ms linear;
+  transition: -webkit-transform  300ms linear;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .pagepush-leave {
-  left: 0px;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .pagepush-leave.pagepush-leave-active {
-  left: -100%;
-  transition: left 300ms linear;
+   transition: -webkit-transform  300ms linear;
+  -webkit-transform: translate3d(-375px, 0, 0);
 }
 
 /*页面后退动画*/
 
 .pagepop-enter {
-  left:-100%
+  -webkit-transform: translate3d(-375px, 0, 0);
 }
 
 .pagepop-enter.pagepop-enter-active {
-  left: 0px;
-  transition: left 300ms linear;
+  transition: -webkit-transform  300ms linear;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .pagepop-leave {
-  left: 0px;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .pagepop-leave.pagepop-leave-active {
-  left: 100%;
-  transition: left 300ms linear;
+  transition: -webkit-transform  300ms linear;
+  -webkit-transform: translate3d(375px, 0, 0);
 }
 
 .imnumber {
