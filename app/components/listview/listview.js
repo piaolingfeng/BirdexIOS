@@ -28,8 +28,12 @@ var  ListView  = React.createClass({
         showDownload:React.PropTypes.bool,
         //距离上部高度
         marginTop:React.PropTypes.number,
-        //背景颜色
-        backGroud:React.PropTypes.string
+        //item背景颜色
+        backGroud:React.PropTypes.string,
+        //距离底部高度
+        marginBottom:React.PropTypes.number,
+        //下拉条背景颜色
+        showUploadBgColor:React.PropTypes.string,
     },
     getDefaultProps: function() {
         //设置默认属性
@@ -153,9 +157,9 @@ componentDidMount: function () {
             datasource.push(<li>{ListItems[i]}</li>);
         }
         return (<div id="wrapper" style={{
-            top:this.props.marginTop+"px"
+            top:this.props.marginTop+"px",bottom:this.props.marginBottom+"px"
         }}><div id="scroller"   >
-        <div id="pullDown" >
+        <div id="pullDown" style={{visibility:this.props.showUpload?"visible":"hidden"}}>
 			<span className="pullDownIcon"></span><span className="pullDownLabel">下拉刷新...</span>
 		</div>
         <ul id="thelist" style={{backgroundColor:this.props.backGroud}}>
@@ -163,7 +167,7 @@ componentDidMount: function () {
             datasource
         }
         </ul>
-        <div id="pullUp">
+        <div id="pullUp" style={{display:this.props.showDownload?"":"none"}}>
 			<span className="pullUpIcon" ></span><span className="pullUpLabel" style={{width:"100%"}}>上拉加载更多...</span>
 		</div>
         </div>
