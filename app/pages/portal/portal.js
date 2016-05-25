@@ -71,7 +71,7 @@ var MainPage = React.createClass({
 				{displayPage}
 				<div  style={{ position: "fixed", bottom: 0, height: 55, width: "100%", backgroundColor: "#F0F0F0", fontSize: "16pt" }}>
 					<hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
-					<div className="flexbox-container" style={{height:55}}>
+					<div className="flexbox-container" style={{height:55,zIndex:"1000"}}>
 						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 1) }>首页</button>
 						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 2) }>消息</button>
 						<button className="portal_btn"  onClick={this.tabBarClick.bind(this, 3) }>我的</button>

@@ -3,3 +3,8 @@
     height: 50%;
     text-align: center;
 }
+.imagebutton_div{
+    width: 33%;
+    padding: 10px;
+    box-sizing: border-box;
+}

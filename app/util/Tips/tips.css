@@ -3,11 +3,12 @@
     width: auto;
     height: auto;
     border: 1px solid #303D42;
-    background-color: ＃000;
+    background-color: #111;
     color: #fff;
     border-radius: 5px;
     padding: 5px 8px; 
     display:none;
-    margin:0 3%;
+    z-index:100000;
+    margin:0 16px;
     opacity: 0.5;
 }

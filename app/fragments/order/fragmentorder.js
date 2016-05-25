@@ -5,7 +5,7 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var Search = require('../../components/search/search.js');
 var OrderList = require('./orderlist.js');
 var ListView = require('../../components/listview/listview.js');
-
+var toast = require('../../util/Tips/tips.js');
 var orderList = null;
 
 // var statusNameList = null;
@@ -37,20 +37,20 @@ var FragmentOrder = React.createClass({
     },
 
     warehouseFunc(index) {
-        requestEntity.page_no='1';//状态切换时都要恢复page的页数
+        requestEntity.page_no = '1';//状态切换时都要恢复page的页数
         requestEntity.warehouse_code = warehouseList[index].warehouse_code;
         this.getOrderList();
     },
 
     statusFunc(index) {
-        requestEntity.page_no='1';//状态切换时都要恢复page的页数
+        requestEntity.page_no = '1';//状态切换时都要恢复page的页数
         requestEntity.status = statusList[index].status;
         requestEntity.statusName = statusList[index].status_name;
         this.getOrderList();
     },
 
     timeFunc(index) {
-        requestEntity.page_no='1';//状态切换时都要恢复page的页数
+        requestEntity.page_no = '1';//状态切换时都要恢复page的页数
         var end_date = '';
         if (index != 0) {
             end_date = timeUtil.getCurrentDateFormat();
@@ -84,7 +84,7 @@ var FragmentOrder = React.createClass({
             for (var i = 0; i < statusList.length; i++) {
                 var name = statusList[i].status_name;
                 if (dealStatus[length] == name) {
-                    reStatusList.push (statusList[i]);
+                    reStatusList.push(statusList[i]);
                     break;
                 }
             }
@@ -95,13 +95,14 @@ var FragmentOrder = React.createClass({
 
     //处理订单列表的逻辑
     dealOrderList(data) {
-        if (data!= null) {
+        if (data != null) {
             if (data.error == 0) {
                 dataCount = data.data.count;//赋值
                 // console.log(dataCount);
                 if (requestEntity.page_no > 1) {
                     if (data.data.orders.length == 0 && requestEntity.page_no > 1) {
                         // T.showShort(MyApplication.getInstans(), "已经是最后一页");
+                        toast("已经是最后一页");
                     } else {
                         // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
                         // orderListEntities.getData().setOrders(OrderAdapter.getList());
@@ -120,7 +121,8 @@ var FragmentOrder = React.createClass({
                     orderList = list;//将数据给orderlist
                 }
             } else {
-                console.log(data.data);
+                // console.log(data.data);
+                toast(data.data);
             }
         }
         this.setState({ data: "" });
@@ -139,10 +141,11 @@ var FragmentOrder = React.createClass({
             success: function (data) {
                 // this.setState({ data: data })
                 this.dealOrderList(data);
-                console.log(data);
+                // console.log(data);
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                toast(err.toString());
+                // console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
     },
@@ -168,7 +171,8 @@ var FragmentOrder = React.createClass({
                 this.setState({ data: "data" });
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
         });
     },
@@ -194,7 +198,8 @@ var FragmentOrder = React.createClass({
                 this.setState({ data: "data" });
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
         });
     },
@@ -214,8 +219,8 @@ var FragmentOrder = React.createClass({
         this.getOrderList();
     },
 
-     //上拉加载
-    pullUpEvent(){
+    //上拉加载
+    pullUpEvent() {
         requestEntity.page_no++;
         this.getOrderList();
     },
@@ -257,6 +262,10 @@ var FragmentOrder = React.createClass({
     render: function () {
         // console.log(warehouseList);
         // console.log(statusList);
+        var list = <ListView getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background}/>;
+        if(orderList!=null && orderList.length==0){
+            list = <div style={{width:"100%",height:"100%",textAlign:"center",fontSize:"22px",marginTop:"100px"}}>暂时没有数据哦！</div>;
+        }
         return (
             <div style={{ backgroundColor: gVar.Color_background }}>
                 <Search SearchFunc={this.SearchFunc}/>
@@ -270,7 +279,7 @@ var FragmentOrder = React.createClass({
                     todaySetParams={this.todaySetParams}
                     dataCount={dataCount}/>
                 <div >
-                    <ListView getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent}/>
+                    {list}
                 </div>
             </div>
         );

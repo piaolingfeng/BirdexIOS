@@ -12,6 +12,7 @@ var Addbutton = React.createClass({
   							margin:"auto",
   							textAlign:"center",
   							padding:"25px",
+                              boxSizing:"border-box"
   						}} onClick={this.changepage}>
 	   			<img src={add_btn} style={{height:"14px"}}/>
 
