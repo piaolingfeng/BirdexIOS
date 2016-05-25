@@ -12,10 +12,11 @@ var LimitView=require('./limitview.js');
 //搜索条件
 var Search = require('../../components/search/search.js');
 var listitem=[];
+var inventoryIndex=0;
 var Inventory = React.createClass({
   componentDidMount:function(){
     if(this.props.todayDataName){
-      
+      inventoryIndex=2;
       this.setState({inventoryIndex:2});
     }
   },
@@ -61,6 +62,7 @@ var Inventory = React.createClass({
     },
     selectTab:function(index){
       listitem=[];
+      inventoryIndex=index;
       this.setState({inventoryIndex:index});
       return ;
     },
@@ -75,8 +77,9 @@ var Inventory = React.createClass({
       
     },
   render:function(){
+    console.log(inventoryIndex);
     return (<div >
-    <SimpleTabLayout selectTab={this.selectTab} defualtIndex={this.state.inventoryIndex} tabsText={["在库商品","待入库商品","超预警商品"]} />
+    <SimpleTabLayout selectTab={this.selectTab} defualtIndex={inventoryIndex} tabsText={["在库商品","待入库商品","超预警商品"]} />
     <Search />
     <LimitView limitClick={this.limitClick} popMenuItemClick={this.popMenuItemClick}/>
     <div style={{color:"#039FFF",paddingLeft:"10px",backgroundColor:"#f5f4f4",textAlign:"left",width:"100%"}}>共有57条数据</div>

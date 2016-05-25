@@ -21,7 +21,7 @@ var WillinItem=React.createClass({
                             backgroundColor:"#ffffff",
                             paddingTop:"5px"
                         }
-                    }><table className="table" style={{
+                    } onClick={this.itemOnClick.bind(this)} ><table className="table" style={{
             width:"100%",
             marginBottom:"0px"
         }}>
