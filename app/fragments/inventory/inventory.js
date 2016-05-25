@@ -11,16 +11,20 @@ var SimpleTabLayout=require('../../components/tablayout/simpletablayout.js');
 var LimitView=require('./limitview.js');
 //搜索条件
 var Search = require('../../components/search/search.js');
-var listitem=[];
-var inventoryIndex=0;
+// var listitem=[];
+// var inventoryIndex=0;
 var Inventory = React.createClass({
+  privateProps:{
+    listitem:[]
+  },
   componentDidMount:function(){
     if(this.props.todayDataName){
-      inventoryIndex=2;
+      // inventoryIndex=2;
       this.setState({inventoryIndex:2});
     }
   },
   getInitialState:function() {
+    this.privateProps.listitem=[];
     return {
       inventoryIndex:0,
       //对状态修改进行数据切换
@@ -30,39 +34,39 @@ var Inventory = React.createClass({
   renderItem:function(){
     // var listitem=new Array();
     if(this.state.inventoryIndex==0){
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
     }else if(this.state.inventoryIndex==1){
-      listitem.push(<WillinItem />);
-      listitem.push(<WillinItem />);
-      listitem.push(<WillinItem />);
+      this.privateProps.listitem.push(<WillinItem />);
+      this.privateProps.listitem.push(<WillinItem />);
+      this.privateProps.listitem.push(<WillinItem />);
     }else{
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
     }
-    return listitem;
+    return this.privateProps.listitem;
     },
     pullUpEvent:function(){
       if(this.state.inventoryIndex==0){
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
     }else if(this.state.inventoryIndex==1){
-      listitem.push(<WillinItem />);
-      listitem.push(<WillinItem />);
-      listitem.push(<WillinItem />);
+      this.privateProps.listitem.push(<WillinItem />);
+      this.privateProps.listitem.push(<WillinItem />);
+      this.privateProps.listitem.push(<WillinItem />);
     }else{
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
-      listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
+      this.privateProps.listitem.push(<InventoryItem />);
     }
       this.setState({flag:!this.state.flag});
     },
     selectTab:function(index){
-      listitem=[];
-      inventoryIndex=index;
+      this.privateProps.listitem=[];
+      // inventoryIndex=index;
       this.setState({inventoryIndex:index});
       return ;
     },
@@ -77,9 +81,8 @@ var Inventory = React.createClass({
       
     },
   render:function(){
-    console.log(inventoryIndex);
     return (<div >
-    <SimpleTabLayout selectTab={this.selectTab} defualtIndex={inventoryIndex} tabsText={["在库商品","待入库商品","超预警商品"]} />
+    <SimpleTabLayout selectTab={this.selectTab} defualtIndex={this.state.inventoryIndex} tabsText={["在库商品","待入库商品","超预警商品"]} />
     <Search />
     <LimitView limitClick={this.limitClick} popMenuItemClick={this.popMenuItemClick}/>
     <div style={{color:"#039FFF",paddingLeft:"10px",backgroundColor:"#f5f4f4",textAlign:"left",width:"100%"}}>共有57条数据</div>

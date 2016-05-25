@@ -2,11 +2,14 @@ var React=require('react');
 require('./css/simpletablayout.css');
 var $magicLine ;
 //设置选中的tab索引
-var selectIndex=0;
+// var selectIndex=0;
 var SimpleTabLayout=React.createClass({
-    getInitialState:function(){
-        return {defualtIndex:0}
-    },
+    // privateProps:{
+    //     selectIndex:0
+    // },
+    // getInitialState:function(){
+    //     return {defualtIndex:0}
+    // },
     propTypes:{
         //tab的文本
         tabsText:React.PropTypes.array,
@@ -21,10 +24,17 @@ var SimpleTabLayout=React.createClass({
     },
     componentWillMount:function(){
         //设置默认选中的
-        selectIndex=this.props.defualtIndex;
+        // selectIndex=this.props.defualtIndex;
+        // this.privateProps.selectIndex=this.props.defualtIndex;
     },
     componentDidMount:function(){
         $magicLine = $(".simpletablayout-line");
+        
+         var $el = $('.nav_simple_tablayout').find('li').eq(this.props.defualtIndex);
+            var leftPos = $el.position().left;
+            $magicLine.stop().animate({
+                left: leftPos
+            });
         // $magicLine
         // .width($(".current_tab").width())
         // .css("left", $(".current_tab").position().left)
@@ -35,7 +45,7 @@ var SimpleTabLayout=React.createClass({
         // }
     },
     handlerTab:function(index,ele){
-        if(index!=selectIndex){
+        if(index!=this.props.defualtIndex){
             var $el = $(ele.target);
             // var leftPos = $el.parent().position().left;
             // var newWidth = $el.parent().width();
@@ -45,13 +55,12 @@ var SimpleTabLayout=React.createClass({
                 left: leftPos,
                 width: newWidth
             });
-        
-            // this.setState({defualtIndex:index});
             if(this.props.selectTab){
                this.props.selectTab(index);
              }
+            this.setState({defualtIndex:index});
             //记录新的索引值
-            selectIndex=index;
+            // this.privateProps.selectIndex=index;
         }
     },
     componentDidUpdate:function(){
