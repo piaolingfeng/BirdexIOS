@@ -14,7 +14,7 @@ require('./css/mobiscroll.datetime.css');
 // require('./js/mobiscroll_003.js');
 // require('./js/mobiscroll.android-ics.js');
 require('./css/mobiscroll_003.css');
-require('./css/mobiscroll.android-ics.css');
+// require('./css/mobiscroll.android-ics.css');
 
 
 

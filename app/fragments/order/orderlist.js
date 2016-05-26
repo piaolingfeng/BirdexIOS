@@ -47,8 +47,13 @@ var OrderList = React.createClass({
     },
 
     logisticsTracking: function (e) {
+        var param = { 
+            order_code: this.props.orderEntity.order_code ,
+            Status_name:this.props.orderEntity.status_name,
+            Receiver_mobile:this.props.orderEntity.receiver_mobile,
+        }
         e.stopPropagation();
-        gVar.pushPage({ pathname: "logistics", state: "" });
+        gVar.pushPage({ pathname: "logistics", state: param });
     },
 
     contactCustomer: function (e) {
@@ -57,14 +62,16 @@ var OrderList = React.createClass({
     },
 
     changeAddr: function (e) {
+        var param = { order_code: this.props.orderEntity.order_code }
         // console.log(e+"ddd");
         e.stopPropagation();
-        gVar.pushPage({ pathname: "changeaddress", state: "" });
+        gVar.pushPage({ pathname: "changeaddress", state: param });
     },
 
 
 
     render: function () {
+        console.log(this.props.orderEntity);
         var productList = [];
         var product = this.props.orderEntity.products;
         for (var i = 0; i < product.length; i++) {
@@ -94,11 +101,11 @@ var OrderList = React.createClass({
 
                 <div ref="orderError" className="orderlist_head orderlist_error" style={{display:orderErrorDisplay}}>{orderEntity.verify_fail_detail}</div>
                 <div className="flexbox-container" style={{ backgroundColor: "#FAFAFA" }}>
-                    <span ref="logisticsTracking" className="orderlist_btn" >物流跟踪</span>
+                    <span ref="logisticsTracking" className="orderlist_btn" onClick={this.logisticsTracking}>物流跟踪</span>
                     <span className="orderlist_line"></span>
-                    <span ref="contactCustomer " className="orderlist_btn" >联系客服</span>
+                    <span ref="contactCustomer " className="orderlist_btn" onClick={this.contactCustomer}>联系客服</span>
                     <span ref="changeAddr_line"className="orderlist_line"></span>
-                    <span ref="changeAddr" className="orderlist_btn" >修改地址</span>
+                    <span ref="changeAddr" className="orderlist_btn" onClick={this.changeAddr}>修改地址</span>
                     <div className="orderlist_clear"></div>
                 </div>
             </div>

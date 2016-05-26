@@ -5,22 +5,24 @@ var back_chevron = require("./images/back_chevron.png");
 var gVar = require("../../main/global.js");
 require("./css/titlebar.css");
 var BPopover = require('../BPopover/bpopover.js');
-
+var refresh = require('./images/refresh.png');
 //props.title,传标题名字进来
 //props.save,副标题,只传副标题时,默认标题颜色为灰色,
-//props.bGcolor 传标题背景色.
+//props.bgColor 传标题背景色.
 //props.menu,传值时表示显示，true时为menu,false表示为设置
 //props.setting 传值时表示显示
 //titlebar 是浮动的div,所以titlebar的外层div需要设置paddingtop的属性让元素往下移动：50px;
 //参考page下面的todaydata的使用方式
 // menuFunc={this.menuFunc},menuFunc是menu回调,不传默认跳转mytool页面
 //backNoneDisplay 默认不传,若传false则代表不显示title的返回
+//refreshFunc reflesh回调，默认隐藏
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
     
     propTypes:{
         menuFunc: React.PropTypes.func,
         backNoneDisplay:React.PropTypes.any,
+        refreshFunc:React.PropTypes.func,
     },
     
     componentDidMount:function(){
@@ -60,15 +62,20 @@ var Titlebar = React.createClass({
         gVar.pushPage("mymessagemenu");
     },
     
+    refreshClick(){
+        this.props.refreshFunc();
+    },
+    
     render:function(){
         var bg_color = gVar.Color_blue_head;
-        if(this.props.bgColor!=null){
-            bg_color = this.props.bgColor;
-        }
+        
         var title = this.props.title;
         var save = this.props.save;
         if(save!=null&&this.props.bgColor==null){//默认不传头部颜色的情况下
             bg_color = gVar.Color_gray_head;
+        }
+        if(this.props.bgColor!=null){
+            bg_color = this.props.bgColor;
         }
         var menuImg_display = "none";
         var settingImg_display = "none";
@@ -85,6 +92,10 @@ var Titlebar = React.createClass({
         var mytrigger = <img className="titlebar_menu" ref="menu" src={menu} 
                 style={{padding:gVar.Padding_head,display:menuImg_display}}/>;
         // var mytrigger = <div style={{textAlign:"center"}}><img src={birdpic} /></div>;
+        var refreshDisplay = "none";
+        if(this.props.refreshFunc){
+            refreshDisplay = 'block'
+        }
         return (
         <div className="titlebar_head" style={{
             backgroundColor:bg_color,
@@ -95,6 +106,8 @@ var Titlebar = React.createClass({
                 <span className="titlebar_save" ref="save" style={{color:gVar.Color_white,fontSize:gVar.FontSize_title_head,padding:gVar.Padding_text_head,margin:"auto",fontWeight:"bold"}}>{save}</span>
                 <img className="titlebar_menu" ref="menu" src={ic_setting} 
                 style={{padding:gVar.Padding_head,display:settingImg_display}} onClick={this.settingClick}/>
+                <img className="titlebar_menu" src={refresh} 
+                style={{padding:gVar.Padding_head,display:refreshDisplay}} onClick={this.refreshClick}/>
                 <BPopover menuItem={gVar.mytool}
 						  menuItemClick={this.menuItemClick}
 				          triggerComp={mytrigger}
