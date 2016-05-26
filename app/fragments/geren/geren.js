@@ -118,7 +118,8 @@ var Geren = React.createClass({
     
     render: function () {
         return (<div style = {{
-            overflow: "hidden"
+            overflow: "hidden",
+            paddingBottom:"70px"
         }} >
             <GerenList / >
             <input type = "button" className = "btn  btn-primary geren_exit" onClick={this.logout}

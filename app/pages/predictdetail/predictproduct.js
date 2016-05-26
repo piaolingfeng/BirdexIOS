@@ -166,7 +166,7 @@ var PredictProduct = React.createClass({
                                         <span ref="upcCode" className="predictdetail_right_span">{product.upc}</span>
                                         <span className="predictdetail_right_span">UPC: </span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -178,7 +178,7 @@ var PredictProduct = React.createClass({
                                     <div className="orderdetail_right_div_padding">
                                         <span ref="productName">{product.name}</span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -194,7 +194,7 @@ var PredictProduct = React.createClass({
                                         <span  className="predictdetail_right_span">{product.damaged_nums}</span>
                                         <span className="predictdetail_right_span">异常数量: </span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -206,7 +206,7 @@ var PredictProduct = React.createClass({
                                     <div className="orderdetail_right_div_padding">
                                         <span >{product.expired_date}</span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -218,7 +218,7 @@ var PredictProduct = React.createClass({
                                     <div className="orderdetail_right_div_padding">
                                         <span ref="remarks">{product.remark.msg}</span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -240,7 +240,7 @@ var PredictProduct = React.createClass({
                             <td className="orderdetail_left">复核原因: </td>
                             <td className="orderdetail_right">
                                 <div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                     <div className="orderdetail_right_div_padding">
                                         <span ref="remarks">{product.review_remark}</span>
                                     </div>

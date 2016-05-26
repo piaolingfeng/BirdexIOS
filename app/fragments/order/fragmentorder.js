@@ -22,6 +22,7 @@ var timeStartList = ['', timeUtil.getCurrentDateFormat(),
 var requestEntity = null;
 var dataCount = 0;
 
+var Data = null;
 // 对Date的扩展，将 Date 转化为指定格式的String   
 // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，   
 // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)   
@@ -95,6 +96,7 @@ var FragmentOrder = React.createClass({
 
     //处理订单列表的逻辑
     dealOrderList(data) {
+        Data = data;
         if (data != null) {
             if (data.error == 0) {
                 dataCount = data.data.count;//赋值
@@ -113,7 +115,7 @@ var FragmentOrder = React.createClass({
                 }
                 else {
                     var list = [];
-                    console.log(gVar.createOrderEntity());
+                    // console.log(gVar.createOrderEntity());
                     // orderList = data.data.orders;
                     for (var i = 0; i < data.data.orders.length; i++) {
                         list.push(<OrderList orderEntity={data.data.orders[i]}/>);
@@ -231,9 +233,9 @@ var FragmentOrder = React.createClass({
         console.log('fragmentorder getInitialState');
         dataCount = 0;
         orderList = new Array();
-        statusList = new Array(gVar.createStatusEntity());
+        statusList = new Array();//gVar.createStatusEntity()
         // warehouseList = new Array({name:'',warehouse_code:''});
-        warehouseList = new Array(gVar.createWarehouseEntity());
+        warehouseList = new Array();//gVar.createWarehouseEntity()
         requestEntity = gVar.createRequestEntity();//按照工厂方法创建初始实体类
         // var time = new Date().Format("yyyy-MM-dd");
         // console.log(time.get);
@@ -250,6 +252,7 @@ var FragmentOrder = React.createClass({
     },
 
     componentDidMount() {
+        // console.log(Data,"text");
         console.log('fragmentorder componentDidMount');
         this.getAllWarehouse();
         this.getOrderListState();//获取所有状态

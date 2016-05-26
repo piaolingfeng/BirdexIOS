@@ -39,7 +39,7 @@ var MsgStockWarnning = React.createClass({
                         <span >库存预警消息</span>
                         <span className="messagedetail_right">{entity.created_date}</span>
                     </div>
-                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                     <div onClick={this.copy.bind(this,entity.msg_content.external_no)}>
                         <span className="messagedetail_text_dark">商品编码: </span>
                         <span className="messagedetail_text_dark messagedetail_margin_left">{entity.msg_content.external_no}</span>

@@ -16,6 +16,17 @@ var ListView = React.createClass({
 
         return {}
     },
+    
+    handRefresh(){//手动调用刷新,可以解决刚开始时拖不动的情况
+        if (myScroll) {
+                myScroll.refresh();
+            }
+    },
+    
+    destory(){
+        myScroll = null;
+    },
+    
     propTypes: {
         //回调的方法获取item
         getItems: React.PropTypes.func.isRequired,
@@ -150,7 +161,7 @@ var ListView = React.createClass({
 
         });
 
-        setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+        // setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
         //初始化绑定iScroll控件 
         // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     },

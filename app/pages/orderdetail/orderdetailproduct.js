@@ -22,7 +22,7 @@ var OrderDetailProduct = React.createClass({
                                     <div className="orderdetail_right_div_padding">
                                         <span ref="upcCode">{product.upc}</span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -34,7 +34,7 @@ var OrderDetailProduct = React.createClass({
                                     <div className="orderdetail_right_div_padding">
                                         <span ref="productCode">{product.external_no}</span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>
@@ -46,7 +46,7 @@ var OrderDetailProduct = React.createClass({
                                     <div className="orderdetail_right_div_padding">
                                         <span ref="productName">{product.name}</span>
                                     </div>
-                                    <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                    <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                 </div>
                             </td>
                         </tr>

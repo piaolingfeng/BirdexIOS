@@ -112,9 +112,9 @@ var MM = React.createClass({
         }
         return (
 
-            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }}>
+            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background}}>
                 <Titlebar title="我的消息" backNoneDisplay={backNoneDisplay} setting="true" />
-                <div className="titlebar_head_down">
+                <div className="titlebar_head_down" >
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,0)}>
                         <img src={warning} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存预警消息</span>
@@ -136,7 +136,7 @@ var MM = React.createClass({
                         <span className="mymessage_item_text">审核不通过订单</span>
                         <span className="badge mymessage_badge" >50</span>
                     </div>
-                    <div id="accoutException" onClick={this.messageMenu} className="mymessage_item" onClick={this.onItemClick.bind(this,4)} >
+                    <div id="accoutException" className="mymessage_item" onClick={this.onItemClick.bind(this,4)} >
                         <img src={account} className="mymessage_img"/>
                         <span className="mymessage_item_text">账户异常</span>
                         <span className="badge mymessage_badge" >50</span>
