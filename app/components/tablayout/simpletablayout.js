@@ -56,7 +56,6 @@ var SimpleTabLayout=React.createClass({
     },
     componentDidUpdate:function(){
         // if(selectIndex!=0){
-            
             var $el = $('.nav_simple_tablayout').find('li').eq(this.props.defualtIndex);
             var leftPos = $el.position().left;
             $magicLine.stop().animate({
@@ -77,10 +76,12 @@ var SimpleTabLayout=React.createClass({
             }} onClick={this.handlerTab.bind(this,i)}>{this.props.tabsText[i]}</li>);
             //}} onClick={this.handlerTab.bind(this,i)}><a href="#">{this.props.tabsText[i]}</a></li>);
         }
-        
+        var left="0%";
         if(this.props.tabsText.length!=0){
             tabwidth=100/this.props.tabsText.length+"%";
+            left=this.props.defualtIndex*100/this.props.tabsText.length+"%";
         }
+        //,left:left
         return (<div className="nav_simple_tablayout"><ul>
         {tabs}<li className="simpletablayout-line" style={{
             width:tabwidth

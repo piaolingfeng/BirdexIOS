@@ -38,7 +38,7 @@ var WillInDetail=React.createClass({
         }else{
             var items=new Array();
             for(var i=0;i<3;i++){
-                items.push(<tr><td colSpan="4" style={{
+                items.push(<tr><td colSpan="3" style={{
                     borderTop:"1px dashed #ddd"
                 }}>
                     <div className="willin_item"><div className="willin_item_left">创建时间：</div><div className="willin_item_right">2016-03-14 9:32:14</div></div>
@@ -52,21 +52,18 @@ var WillInDetail=React.createClass({
                </td></tr>);
             }
             return (<table className="table">
-            <thead><tr style={{width:"100%"}}>
+            <thead><tr style={{width:"100%",backgroundColor:"#e5e5e5"}}>
             <td className="willin_item_left" style={{
                 paddingRight:"0px"
             }}>待入仓库：</td>
             <td className="willin_item_right1" style={{
                 paddingLeft:"0px"
             }}>美国仓</td>
-            <td className="willin_item_left" style={{
-                paddingRight:"0px"
-            }}>数量：</td>
-            <td className="willin_item_right1" style={{
-                paddingLeft:"0px"
-            }}>20</td>
+            <td className="willin_item_right2" style={{
+                paddingLeft:"0px",textAlign:"right"
+            }}>数量：20</td>
             </tr></thead>
-            <tbody>
+            <tbody style={{backgroundColor:"#eeeeee"}}>
                 {items}
             </tbody>
             </table>);
