@@ -13,6 +13,7 @@ function showModalPage(modalPage) {
         domNode = document.createElement("div");
         domNode.setAttribute("id", "modalPage2198");
         domNode.setAttribute("style", "z-index:99999;position:absolute;left:0;right:0;width:100%;height:100%;background-color:#FFFFFF;");
+        domNode.setAttribute("class", "page-fadein");
         document.body.appendChild(domNode);
     }
     
@@ -23,8 +24,14 @@ function hideModalPage() {
     var domNode = document.getElementById("modalPage2198");
     if (domNode != null)
     {
-        ReactDOM.unmountComponentAtNode(domNode);
-        document.body.removeChild(domNode);
+        domNode.setAttribute("class", "page-fadeout");
+        //ReactDOM.unmountComponentAtNode(domNode);
+        //document.body.removeChild(domNode);
+        domNode.addEventListener('webkitAnimationEnd', function (){
+            console.log("webkitAnimationEnd");
+            ReactDOM.unmountComponentAtNode(this);
+            document.body.removeChild(this);
+        });
         return true;
     }
     else
