@@ -41,7 +41,7 @@ var MainPage = React.createClass({
         // var titleIndex = this.state.data.titleIndex;//获取索引,setState的数据未更新过来,
         // console.log(currentPosition+"shouldComponentUpdate"+targetPosition); 
         if (currentPosition == targetPosition) {
-			console.log(false);
+			// console.log(false);
             return false;//render将不会被调用
         }
         else {

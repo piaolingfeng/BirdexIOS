@@ -114,7 +114,7 @@ ReactDOM.render(
                 }
             history={browserHistory}>
              
-        <Route path="/" component={App}> s
+        <Route path="/" component={App}> 
             <IndexRoute component={LoginWindow}/> 
             <Route path="login" component={LoginWindow} /> 
             <Route path="portal" component={Portal} />

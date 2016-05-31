@@ -46,10 +46,12 @@ var TodayDataItem = React.createClass({
             $("#check" + a).prop("checked", false);
             // console.log(false);
             var params =[gVar.todayData.dataTitle[a],false];
+            gVar.todayData.IsDisplay[a] = false;
             EventBus.dispatch("indexListChange",null,params);
         }
         else {
             $("#check" + a).prop("checked", true);
+            gVar.todayData.IsDisplay[a] = true;
             var params =[gVar.todayData.dataTitle[a],true];
             // console.log(true);
             EventBus.dispatch("indexListChange",null,params);

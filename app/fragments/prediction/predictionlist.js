@@ -7,12 +7,15 @@ var gVar = require('../../main/global.js');
 var PredictionList = React.createClass({
     
     changePageToDetail(){
+        this.props.cachePredictListFunc(this.props.position);
         var param = {storage_code:this.props.predictEntity.storage_code}
         gVar.pushPage({pathname:'predictdetail',state:param});
     },
     
     propTypes:{
         predictEntity:React.PropTypes.object.isRequired,
+        cachePredictListFunc:React.PropTypes.func,
+        position:React.PropTypes.number,
     },
     
     render:function(){

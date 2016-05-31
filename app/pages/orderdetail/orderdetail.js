@@ -30,16 +30,18 @@ var OrderDetail = React.createClass({
     },
 
     componentDidMount: function () {
-        EventBus.addEventListener("changeAddr", this.setAddr, this);
+        if (!EventBus.hasEventListener("changeAddr"))//没有注册就注册
+            EventBus.addEventListener("changeAddr", this.setAddr, this);
         shouldUpdate =false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
         this.getOrderDetail();
     },
 
     componentWillUnmount(){
-        EventBus.removeEventListener("changeAddr", this.setAddr, this)
+        EventBus.dispatch("clearCacheOrderList");//清除页面详情
+        EventBus.removeEventListener("changeAddr", this.setAddr, this);
     },
 
-    //获取订单所有状态
+    //获取订单详情
     getOrderDetail: function () {
         var params = {
             app_debug: 1,
@@ -62,7 +64,8 @@ var OrderDetail = React.createClass({
             error: function (xhr, status, err) {
                 // console.error(this.props.url, status, err.toString());
                 toast(err.toString());
-            }.bind(this)
+            }.bind(this),
+            timeout: 5000,
         });
     },
 

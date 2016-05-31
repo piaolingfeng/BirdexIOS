@@ -11,6 +11,7 @@ var IMNumber = require('../../components/IMNumber/im_number.js');
 var ImageButton = require('../../components/ImageButton/ImageButton.js');
 
 var showDialog = require('../../components/BDialog/bdialog.js');
+var toast = require('../../util/Tips/tips.js');
 
 var btnImage1 = require('./image/dingdan.png');
 var btnImage2 = require('./image/yubao.png');
@@ -40,12 +41,17 @@ Array.prototype.remove = function (val) {
 
 var FragmentIndex = React.createClass({
 
+    params:{
+        myScroll:null,
+    },
+
     componentWillUnmount() {
-        // EventBus.removeEventListener("TodayDataSave", this.saveDisplayList, this)
-        console.log("componentWillUnmount");
+        EventBus.removeEventListener("TodayDataSave", this.saveDisplayList, this)
+        console.log("FragmentIndex componentWillUnmount");
         if (request) {
             request.abort();
         }
+        this.params.myScroll = null;
         if (listviewInd) {
             listviewInd.destory();
         }
@@ -77,7 +83,7 @@ var FragmentIndex = React.createClass({
             cache: false,
             success: function (data) {
                 // this.setState({ data: data })
-                // console.log(myScroll);
+                console.log("success");
                 this.dealTodayData(data);
             }.bind(this),
             error: function (xhr, status, err) {
@@ -85,7 +91,8 @@ var FragmentIndex = React.createClass({
                 // console.error(this.props.url, status, err.toString());
             }.bind(this),
             complete: function (XMLHttpRequest, textStatus) {
-                this; //调用本次ajax请求时传递的options参数 
+                //调用本次ajax请求时传递的options参数 
+                console.log("complete");
                 if (myScroll != null) {
                     myScroll.refresh();
                 }
@@ -113,7 +120,7 @@ var FragmentIndex = React.createClass({
                     // localStorage.setItem("displayList",today.displayList.toString());
                     EventBus.dispatch("saveDisplayList");
                 } else {
-                    today.displayList = this.parseString(localStorage.getItem("displayList"));//获取并解析列表
+                    today.displayList = this.parseString(localStorage.getItem("displayList") + "");//获取并解析列表
                     // for(var i = 0; i < today.dataTitle.length; i++){
                     //     today.IsDisplay[i] = localStorage.getItem(today.dataTitle[i]);
                     // }
@@ -211,8 +218,10 @@ var FragmentIndex = React.createClass({
     },
 
     componentDidMount: function () {
-        EventBus.addEventListener("saveDisplayList", this.saveDisplayList, this);
-        EventBus.addEventListener("indexListChange", this.indexListChange, this);
+        if (!EventBus.hasEventListener("saveDisplayList"))//没有注册就注册
+            EventBus.addEventListener("saveDisplayList", this.saveDisplayList, this);
+        if (!EventBus.hasEventListener("indexListChange"))//没有注册就注册
+            EventBus.addEventListener("indexListChange", this.indexListChange, this);
         var enter = localStorage.getItem("firstEnter");
         console.log("componentDidMount");
         if (!enter || enter == true) {
@@ -221,10 +230,20 @@ var FragmentIndex = React.createClass({
             localStorage.setItem("firstEnter", false);
         }
         // localStorage.clear();
-        if (Data == null) {
+        // console.log(this.params.myScroll);
+        // if(this.params.myScroll!=null){
+            // this.params.myScroll.refresh();
+        // }
+        // if (Data == null) {
             this.getTodayData();
-        }
-        listviewInd.handRefresh();
+        // }else{
+            // this.setState({});
+        // }
+        // if(this.params.myScroll!=null){
+        //     this.params.myScroll.refresh();
+        // }
+        // listviewInd.handRefresh();
+        // this.setState({});
         // setTimeout(, 1000);
     },
 
@@ -321,6 +340,7 @@ var FragmentIndex = React.createClass({
 
     //获取listview列表
     getItems() {
+        console.log("getItems");
         var list = new Array();
         list.push(<LunBo />);
         list.push(<div style={{ width: "95%", margin: "10px auto 10px 5%", fontSize: "13pt", color: "#7F7F7F", fontWeight: 600 }}>
@@ -335,9 +355,18 @@ var FragmentIndex = React.createClass({
     },
 
     componentDidUpdate() {//手动调用刷新,可以解决刚开始时拖不动的情况
-        console.log( "componentDidUpdate");
-        listviewInd.handRefresh();
+        
+        // listviewInd.handRefresh();
+        // if(this.params.myScroll!=null){
+            // console.log(this.params.myScroll,"componentDidUpdate");
+            this.params.myScroll.refresh();
+        // }
         // alert("handRefresh");
+    },
+
+    getCoreObject(myScroll){
+        //  console.log(myScroll);
+        this.params.myScroll = myScroll;
     },
 
     getInitialState() {
@@ -357,7 +386,7 @@ var FragmentIndex = React.createClass({
 
                 <ListView ref={function (theApp) { listviewInd = theApp; } } showUpload={true} showDownload={false} marginTop={0}
                     pullDownHandler={this.pullDownHandler} getItems={this.getItems}
-                    backGroud={gVar.Color_background} marginBottom={55}/>
+                    backGroud={gVar.Color_background} marginBottom={55} getCoreObject={this.getCoreObject}/>
 
             </div>
         );
