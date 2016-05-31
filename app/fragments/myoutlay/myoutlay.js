@@ -70,10 +70,10 @@ var MyOutlay=React.createClass({
     render:function() {
         //<TabLayout selectTab={this.selectTab} tabsText={["所有","运费支出","仓租","关税","充值记录","其他"]} tabsWidth={[60,80,60,60,80,60]}/>
         //<ListView  marginTop={117} getItems={this.getItem}/>
-        return (<div>
+        return (<div style={{backgroundColor:"#f5f4f4"}}>
         <TabLayout selectTab={this.selectTab} tabsText={["所有","运费支出","仓租","关税","充值记录","其他"]} tabsWidth={[60,80,60,60,80,60]}/>
         <PickDate />
-        <div style={{margin:"0px 10px"}}>
+        <div style={{margin:"0px 10px",backgroundColor:"#ffffff"}}>
         <div className="myoutlay_list_head0"><span className="myoutlay_list_head1">订单号</span><span className="myoutlay_list_head2">支出金额</span></div>
         <ReactList itemRenderer={this.renderItem} length="30" />
         </div>

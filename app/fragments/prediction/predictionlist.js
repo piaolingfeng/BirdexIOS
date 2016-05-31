@@ -24,7 +24,7 @@ var PredictionList = React.createClass({
                     <div ref="predictStatus" className="predictionlist_status">{this.props.predictEntity.status_name}</div>
                     <div className="orderlist_clear"></div>
                 </div>
-                <hr style={{width:"100%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"1px"}}></hr>
+                <hr style={{width:"100%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"0.5px"}}></hr>
             </div>
         );
     }

@@ -17,13 +17,23 @@ var logo = "";
 var MA = React.createClass({
 
     recharge: function () {
-        gVar.pushPage("accountmanager");
+        // gVar.pushPage("recharge");
+        var param = {titleIndex:4};
+			gVar.pushPage({pathname:"mytool", state:param});
     },
 
 
     componentDidMount:function() {
         // 初始化数据
         this.init();
+        
+
+        // $("body").children().click(function () {
+        //     $("#oAIHFEFUH").hide();
+        // });
+
+
+
     },
 
     init:function name(params) {
@@ -113,6 +123,15 @@ var MA = React.createClass({
             }
         }
     },
+    
+    detail:function name(params) {
+        var param = {titleIndex:3};
+		gVar.pushPage({pathname:"mytool", state:param});
+    },
+    
+    error:function name(params) {
+        $('#logo').attr("src",head);
+    },
 
     render: function () {
         return (
@@ -120,7 +139,7 @@ var MA = React.createClass({
                 <TitleBar  title="我的账户" menu="true" menuFunc={this.menuFunc}/>
                 <div className="titlebar_head_down">
                     <div style={{ backgroundImage: 'url(' + headbg + ')', height: 250, width: "100%", textAlign: "center", marginBottom: 20 }}>
-                        <img id="logo" className="img-circle" src={head} style={{ height: "100px", width: "100px", marginTop: "70px" }} />
+                        <img id="logo" className="img-circle" src={head} style={{ height: "100px", width: "100px", marginTop: "70px" }} onError={this.error} />
                         <div style={{ marginTop: 10 }}>
                             <span id="company_name" style={{ color: "#FFFFFF", fontSize: 17 }}>欢迎您！</span>
                         </div>
@@ -173,7 +192,7 @@ var MA = React.createClass({
                     </div>
 
                     <div style={{ width: "20%", textAlign: "center", margin: "20px auto" }}>
-                        <span style={{ fontSize: 16, color: "#979797" }}>收支明细</span>
+                        <span onClick={this.detail} style={{ fontSize: 16, color: "#979797" }}>收支明细</span>
                     </div>
                 </div>
             </div>

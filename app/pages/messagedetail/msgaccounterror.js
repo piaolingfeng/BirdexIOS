@@ -7,34 +7,43 @@ var read_Status = require("./images/read_status.png");
 
 var MsgAccountError = React.createClass({
     
+    propTypes:{
+       messageEntity:React.PropTypes.object.isRequired, 
+    },
+    
     recharge:function(){
-        alert("recharge");
+        // alert("recharge");
+        var param = {titleIndex:4};
+			gVar.pushPage({pathname:"mytool", state:param});
     },
     
     render:function(){
+        var entity = this.props.messageEntity;
+        // console.log(entity);
+         var read  = "none";
+        if(entity.read_status=="1"){
+            read = 'none';
+        }else{
+            read = 'block';
+        }
         return(
             <div className="orderdetail_head">
                 <div className="orderdetail_background_img">
                     <div className="messagedetail_padding">
-                        <img ref="readStatus" src={read_Status} className="orderlist_img messagedetail_read_status" ></img>
+                        <img src={read_Status} className="orderlist_img messagedetail_read_status" style={{display:read}}></img>
                         <span >账户异常</span>
-                        <span ref="creatTime" className="messagedetail_right">2014-04-22 23:00</span>
+                        <span  className="messagedetail_right">{entity.created_date}</span>
                     </div>
-                    <hr style={{height:"1px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
+                    <hr style={{height:"0.5px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
                     
                     <div className="messagedetail_padding ">
-                        <span className="messagedetail_text_dark">亲爱的:</span>
-                        <span ref="name" className="messagedetail_text_dark">ddddd</span>
-                        <span className="messagedetail_text_dark">,截止到目前为止,您有</span>
-                        <span ref="orderCount" className="messagedetail_text_dark">22</span>
-                        <span className="messagedetail_text_dark">笔订单出库,将产生</span>
-                        <span ref="free" className="messagedetail_text_dark">4099999</span>
-                        <span className="messagedetail_text_dark">元运费,您的账户余额为</span>
-                        <span ref="balance" className="messagedetail_text_dark">343433</span>
-                        <span ref="name" className="messagedetail_text_dark">,可能造成部分订单无法正常扣取费用,为避免影响订单配送时效,请尽快充值!</span>
+                        <span className="messagedetail_text_dark">亲爱的: {entity.msg_content.company_name},截止到目前为止,您有
+                        {entity.msg_content.order_count}笔订单出库,将产生{entity.msg_content.cost}元运费,您的账户余额为
+                        {entity.msg_content.wallet}
+                        ,可能造成部分订单无法正常扣取费用,为避免影响订单配送时效,请尽快充值!</span>
                     </div>
                     <div style={{display:"inline-block",width:"100%"}}>
-                         <button onClick={this.recharge} ref="recharge" type="button" className="accounterror_btn" >马上充值</button>
+                         <button onClick={this.recharge} type="button" className="accounterror_btn" >马上充值</button>
                     </div>
                     
                 </div>

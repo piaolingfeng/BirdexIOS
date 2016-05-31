@@ -71,7 +71,7 @@ var OrderList = React.createClass({
 
 
     render: function () {
-        console.log(this.props.orderEntity);
+        // console.log(this.props.orderEntity);
         var productList = [];
         var product = this.props.orderEntity.products;
         for (var i = 0; i < product.length; i++) {
@@ -88,14 +88,14 @@ var OrderList = React.createClass({
         return (
             <div style={{ backgroundColor: gVar.Color_white, marginTop: "10px" }} onClick={this.changeToDetail}>
                 <div className="orderlist_head">
-                    <div ref="copy"  onClick={this.copy} style={{ float: "left" }}>
-                        <span id="orderName" style={{ color: gVar.Color_title }}>{orderEntity.order_oms_no}</span>
+                    <div ref="copy"  onClick={this.copy} style={{ float: "left"}}>
+                        <span id="orderName" style={{ color: gVar.Color_title,fontSize:"13px"}}>{orderEntity.order_oms_no}</span>
                         <img className="orderlist_img" src={copy}></img>
                     </div>
-                    <div ref="time" style={{ float: "right", color: gVar.Color_title }}>{orderEntity.created_time}</div>
-                    <div ref="status" className="orderlist_statu">{orderEntity.status_name}</div>
+                    <div ref="time" style={{ float: "right", color: gVar.Color_title,fontSize:"13px"}}>{orderEntity.created_time}</div>
+                    <div ref="status" className="orderlist_statu" style={{fontSize:"13px"}}>{orderEntity.status_name}</div>
                 </div>
-                <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
 
                 {productList}
 

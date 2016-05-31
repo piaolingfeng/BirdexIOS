@@ -23,7 +23,7 @@ var MyTool = React.createClass({
     },
 
     componentDidMount() {
-        // console.log(FragmentOrder);
+
     },
 
     getInitialState() {

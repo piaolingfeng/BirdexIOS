@@ -28,13 +28,17 @@ var  ListView  = React.createClass({
         showDownload:React.PropTypes.bool,
         //距离上部高度
         marginTop:React.PropTypes.number,
-        //背景颜色
-        backGroud:React.PropTypes.string
+        //item背景颜色
+        backGroud:React.PropTypes.string,
+        //距离底部高度
+        marginBottom:React.PropTypes.number,
+        //下拉条背景颜色
+        showUploadBgColor:React.PropTypes.string,
     },
     getDefaultProps: function() {
         //设置默认属性
         return {
-            showUpload: true,
+            showUpload: false,
             showDownload:true,
             marginTop:0,
             backGroud:"#ffffff"
@@ -42,35 +46,35 @@ var  ListView  = React.createClass({
     },
     pullUpAction :function() {
     var lvcompotent=this;
-	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+	// setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
         // lvcompotent.setState({listitems: lvcompotent.state.listitems.concat(lvcompotent.props.getItems(12))});
         // if(this.props.pullUpHandler){
           try {
-              lvcompotent.props.pullUpHandler();
+              lvcompotent.props.pullUpHandler(myScroll);
           } catch (error) {
               console.log(error);
           }
         // }else{
             // alert(1);
         // }
-		myScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
+		// myScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
         
-	}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
+	// }, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 },
     
     pullDownAction:function(){
         var lvcompotent=this;
-	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+	// setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
         // lvcompotent.setState({listitems: lvcompotent.state.listitems.concat(lvcompotent.props.getItems(12))});
         // if(this.props.pullDownHandler){
           try {
-              lvcompotent.props.pullDownHandler();
+              lvcompotent.props.pullDownHandler(myScroll);
           } catch (error) {
               console.log(error);
           }
         // }
-		myScroll.refresh();		//数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
-	}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
+		// myScroll.refresh();		//数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
+	// }, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 },
 componentDidMount: function () {
     //对滑动的初始化
@@ -108,34 +112,31 @@ componentDidMount: function () {
 			}
 		},
 		onScrollMove: function () {
-			// if (this.y > 5 && !pullDownEl.className.match('flip')) {
-			// 	pullDownEl.className = 'flip';
-			// 	pullDownEl.querySelector('.pullDownLabel').innerHTML = '松手开始更新...';
-			// 	this.minScrollY = 0;
-			// } else if (this.y < 5 && pullDownEl.className.match('flip')) {
-			// 	pullDownEl.className = '';
-			// 	pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
-			// 	this.minScrollY = -pullDownOffset;
-			// } else 
-            //修改上拉的时候同时造成刷新 -51为顶部的高度
-            if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')&&this.y<-51) {
+			if (this.y > 5 && !pullDownEl.className.match('flip')&&lvcompotent.props.showUpload) {
+				pullDownEl.className = 'flip';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = '松手开始更新...';
+				this.minScrollY = 0;
+			} else if (this.y < 5 && pullDownEl.className.match('flip')&&lvcompotent.props.showUpload) {
+				pullDownEl.className = '';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+				this.minScrollY = -pullDownOffset;
+			} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')&&this.y<-51&&lvcompotent.props.showDownload) { //修改上拉的时候同时造成刷新 -51为顶部的高度
 				pullUpEl.className = 'flip';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始加载...';
 				this.maxScrollY = this.maxScrollY;
-			} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+			} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')&&lvcompotent.props.showDownload) {
 				pullUpEl.className = '';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
 				this.maxScrollY = pullUpOffset;
 			}
 		},
 		onScrollEnd: function () {
-			// if (pullDownEl.className.match('flip')) {
-			// 	pullDownEl.className = 'loading';
-			// 	pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';				
-			// 	// pullDownAction();	// Execute custom function (ajax call?)
-            //     lvcompotent.pullDownAction();
-			// } else 
-            if (pullUpEl.className.match('flip')) {
+			if (pullDownEl.className.match('flip')&&lvcompotent.props.showUpload) {
+				pullDownEl.className = 'loading';
+				pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';				
+				// pullDownAction();	// Execute custom function (ajax call?)
+                lvcompotent.pullDownAction();
+			} else if (pullUpEl.className.match('flip')&&lvcompotent.props.showDownload) {
 				pullUpEl.className = 'loading';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';				
 				// pullUpAction();	// Execute custom function (ajax call?)
@@ -156,9 +157,9 @@ componentDidMount: function () {
             datasource.push(<li>{ListItems[i]}</li>);
         }
         return (<div id="wrapper" style={{
-            top:this.props.marginTop+"px"
+            top:this.props.marginTop+"px",bottom:this.props.marginBottom+"px"
         }}><div id="scroller"   >
-        <div id="pullDown" >
+        <div id="pullDown" style={{visibility:this.props.showUpload?"visible":"hidden"}}>
 			<span className="pullDownIcon"></span><span className="pullDownLabel">下拉刷新...</span>
 		</div>
         <ul id="thelist" style={{backgroundColor:this.props.backGroud}}>
@@ -166,8 +167,8 @@ componentDidMount: function () {
             datasource
         }
         </ul>
-        <div id="pullUp">
-			<span className="pullUpIcon" ></span><span className="pullUpLabel">上拉加载更多...</span>
+        <div id="pullUp" style={{display:this.props.showDownload?"":"none"}}>
+			<span className="pullUpIcon" ></span><span className="pullUpLabel" style={{width:"100%"}}>上拉加载更多...</span>
 		</div>
         </div>
         <div style={{

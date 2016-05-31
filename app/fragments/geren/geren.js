@@ -112,12 +112,14 @@ var Geren = React.createClass({
     componentDidMount: function () { },
     
     logout:function(){
-        
+        gVar.pushPage("login");
+        // console.log(global.router);
     },
     
     render: function () {
         return (<div style = {{
-            overflow: "hidden"
+            overflow: "hidden",
+            paddingBottom:"70px"
         }} >
             <GerenList / >
             <input type = "button" className = "btn  btn-primary geren_exit" onClick={this.logout}

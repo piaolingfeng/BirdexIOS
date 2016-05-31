@@ -78,22 +78,6 @@ var timeUtil = {
         var start = new Date(stop.setYear((stop.getFullYear()-1))).Format("yyyy-MM-dd");
         return start;
     },
-    /** 
-     * 返回上一个月的第一天Date类型 
-     * @param year 年 
-     * @param month 月 
-     **/
-    getPriorMonthFirstDay(year, month) {
-        //年份为0代表,是本年的第一月,所以不能减    
-        if (month == 0) {
-            month = 11;//月份为上年的最后月份    
-            year--;//年份减1    
-            return new Date(year, month, 1);
-        }
-        //否则,只减去月份    
-        month--;
-        return new Date(year, month, 1);;
-    },
 
 }
 

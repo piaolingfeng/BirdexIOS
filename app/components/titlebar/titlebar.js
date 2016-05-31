@@ -26,7 +26,7 @@ var Titlebar = React.createClass({
     },
     
     componentDidMount:function(){
-        
+
     },
     
     back:function () {
@@ -46,7 +46,11 @@ var Titlebar = React.createClass({
     //     return; 
     // },
     
+
     menuItemClick: function (index) {
+        console.log(arguments);
+        var e = arguments[1];
+        e.stopPropagation();
         if(!this.props.menuFunc){
             var param = {titleIndex:index};
 			gVar.pushPage({pathname:"mytool", state:param});

@@ -225,6 +225,39 @@ var AM = React.createClass({
         console.log(data);
         if(0==data.error){
             
+            var marketsName = "";
+            var marketsNameArr = data.data.markets_name;
+            console.log(marketsNameArr);
+            for(var i=0;i<marketsNameArr.length;i++){
+                var name = marketsNameArr[i].name;
+                if(i>0){
+                    marketsName += ",";
+                }
+                marketsName += name;
+            }
+            
+            var busName = "";
+            var busNameArr = data.data.business_models_name;
+            console.log(busNameArr);
+            for(var i=0;i<busNameArr.length;i++){
+                var name = busNameArr[i].name;
+                if(i>0){
+                    busName += ",";
+                }
+                busName += name;
+            }
+            
+            var qgName = "";
+            var qgNameArr = data.data.qg_models_name;
+            console.log(qgNameArr);
+            for(var i=0;i<qgNameArr.length;i++){
+                var name = qgNameArr[i].name;
+                if(i>0){
+                    qgName += ",";
+                }
+                qgName += name;
+            }
+            
             companyBaseData = [
                 {
                     name:"签约公司名称：",
@@ -240,7 +273,7 @@ var AM = React.createClass({
                 },
                 {
                     name:"总部所在地：",
-                    value:data.data.province_id + data.data.city_id + data.data.area_id,
+                    value:data.data.province + data.data.city + data.data.area,
                     type:0,
                     width:100 
                 }
@@ -256,7 +289,7 @@ var AM = React.createClass({
             zhuyingitemData = [
                 {
                     name:"主营市场：",
-                    value:data.data.markets,
+                    value:marketsName,
                     type:0,
                     width:120
                 },
@@ -331,13 +364,13 @@ var AM = React.createClass({
             yewuModel = [
                 {
                     name:"业务模式：",
-                    value:data.data.business_models,
+                    value:busName,
                     type:0,
                     width:75
                 },
                 {
                     name:"清关服务：",
-                    value:data.data.qg_models,
+                    value:qgName,
                     type:1,
                     width:75
                 }

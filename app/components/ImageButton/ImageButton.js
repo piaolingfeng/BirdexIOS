@@ -33,12 +33,7 @@ var ImageButton = React.createClass({
 			index=0; 
 		  
   		return (
-  			<div onClick={this.pageChange.bind(this,index)} style={{
-  							width:"33%",
-  							float:"left",
-  							textAlign:"center",
-  							padding:"10px"
-  						}}>
+  			<div onClick={this.pageChange.bind(this,index)} className="imagebutton_div" style={{boxSizing:"border-box"}}>
 	   			<div style={{
 							width:"100%",
 							height:"50%",

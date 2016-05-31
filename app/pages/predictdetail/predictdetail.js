@@ -5,8 +5,9 @@ var React = require("react");
 var gVar = require("../../main/global.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var PredictProduct = require('./predictproduct.js')
-
+var toast = require('../../util/Tips/tips.js');
 var Data = null;
+// var ListView = require('../../components/listview/listview.js');
 
 var PredictDetail = React.createClass({
 
@@ -35,19 +36,21 @@ var PredictDetail = React.createClass({
                 this.dealPredicitDetail(data);
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
         });
     },
 
     //处理预报详情
     dealPredicitDetail(data) {
-        console.log(data);
+        // console.log(data);
         if (data != null) {
             if (data.error == 0) {
                 Data = data;
             } else {
-                console.log(data.data);
+                // console.log(data.data);
+                toast(data.data);
             }
         }
         this.setState({ data: "" });
@@ -77,7 +80,8 @@ var PredictDetail = React.createClass({
 
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                // console.error(this.props.url, status, err.toString());
+                toast(err.toString());
             }.bind(this)
         });
     },
@@ -86,9 +90,10 @@ var PredictDetail = React.createClass({
     dealConfirmStorage: function (data) {
         if (data != null) {
             if (data.error == 0) {
-                alert(data.data);
+                // alert(data.data);
                 //  $('#confirm').css({"display":"none"});
-                alert("确认成功");
+                // alert("确认成功");
+                toast("确认成功");
                 var products = Data.data.products;
                 for (var i = 0; i < products.length; i++) {
                     Data.data.products[i].status_name = "已入库";
@@ -96,7 +101,8 @@ var PredictDetail = React.createClass({
                 }
                 // product.status_name="已入库"
             } else {
-                alert(data.data);
+                // alert(data.data);
+                toast(data.data);
                 // var products = Data.data.products;
                 // for (var i = 0; i < products.length; i++) {
                 //     Data.data.products[i].status_name = "已入库";
@@ -108,10 +114,6 @@ var PredictDetail = React.createClass({
             }
         }
         this.setState({ data: "" });
-    },
-
-    componentDidUpdate(){
-       
     },
 
     //初始化
@@ -130,6 +132,11 @@ var PredictDetail = React.createClass({
                 // console.log(detailData.products[i]);
                 products.push(<PredictProduct product = {detailData.products[i]}/>);
             };
+        }
+        // console.log(detailData);
+        var errorDisplay = "block";
+        if(detailData.verify_fail_detail == null || detailData.verify_fail_detail == ""){
+            errorDisplay = 'none';
         }
         return (
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }} >
@@ -209,6 +216,10 @@ var PredictDetail = React.createClass({
                                         </div>
                                     </div>
                                 </td>
+                            </tr>
+                            
+                            <tr>
+                                <div style={{display:errorDisplay,padding:"6px",color:"red"}}>{detailData.verify_fail_detail}</div>
                             </tr>
                         </table>
                     </div>

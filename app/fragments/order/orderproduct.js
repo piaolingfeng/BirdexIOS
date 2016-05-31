@@ -23,7 +23,7 @@ var OrderProduct = React.createClass({
                         <span className="orderproduct_count" style={{ marginRight: "0" }}>x</span>
                     </div>
                 </div>
-                <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
             </div>
         );
     }
