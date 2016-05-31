@@ -17,6 +17,17 @@ var Status = React.createClass({
         timeList: [],
     },
 
+    componentWillUnmount(){
+        // this.params.warehouseList = [];//内容是一样的
+        this.params.statusList=[];
+        // this.params.timeList=[];//内容是一样的
+    },
+
+    // componentWillReceiveProps(nextprops){
+        
+    //     console.log(nextprops,"status_componentWillReceiveProps");
+    // },
+
     propTypes: {
         warehouseFunc: React.PropTypes.func.isRequired,//仓库选择回调
         statusFunc: React.PropTypes.func.isRequired,//状态选择回调

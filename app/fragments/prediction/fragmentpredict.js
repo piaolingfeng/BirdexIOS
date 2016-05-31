@@ -256,12 +256,12 @@ var FragmentPrediciton = React.createClass({
     },
 
     //通过详情页面发出一个事件,清除缓存
-    clearCachePredictListFunc() {
-        // console.log("clearCacheOrderListFunc");直接清除的话会影响其他页面传递的属性，属性也是通过sessionStorage保存的
-        sessionStorage.removeItem("PredictRequestEntity");
-        sessionStorage.removeItem("PredictPostion");
-        // sessionStorage.clear();
-    },
+    // clearCachePredictListFunc() {
+    //     // console.log("clearCacheOrderListFunc");直接清除的话会影响其他页面传递的属性，属性也是通过sessionStorage保存的
+    //     sessionStorage.removeItem("PredictRequestEntity");
+    //     sessionStorage.removeItem("PredictPostion");
+    //     // sessionStorage.clear();
+    // },
 
     // //今日数据进入后的回调方法设置参数请求网络
     // todaySetParams: function (statusIndex, timeindex) {
@@ -321,8 +321,8 @@ var FragmentPrediciton = React.createClass({
     //判断是否是恢复数据,再判断入口初始化数据
     componentDidMount() {
         console.log('fragmentpredict componentDidMount');
-        if (!EventBus.hasEventListener("clearCachePredictList"))//没有注册就注册
-            EventBus.addEventListener("clearCachePredictList", this.clearCachePredictListFunc, this);
+        // if (!EventBus.hasEventListener("clearCachePredictList"))//没有注册就注册
+        //     EventBus.addEventListener("clearCachePredictList", this.clearCachePredictListFunc, this);
 
         if (warehouseList == null || warehouseList.length == 0) {
             this.getAllWarehouse();
@@ -336,6 +336,8 @@ var FragmentPrediciton = React.createClass({
             requestEntity = JSON.parse(sessionStorage.getItem("PredictRequestEntity"));
             this.params.predictPosition = parseInt(sessionStorage.getItem("PredictPostion"));
             // orderList = JSON.parse(sessionStorage.getItem("orderList"));
+            sessionStorage.removeItem("PredictRequestEntity");
+            sessionStorage.removeItem("PredictPostion");
             console.log("获取本地缓存");
             // if (this.params.myScroll) {
             //     // console.log(listviewInd, "ddd", (this.params.predictPosition + 1));
@@ -344,7 +346,7 @@ var FragmentPrediciton = React.createClass({
             if (listviewInd instanceof Object) {
                 listviewInd.scrollToElement(this.params.predictPosition + 1);
             }
-            this.setState({});//恢复刷新的数据
+            // this.setState({});//恢复刷新的数据
         } else {//非返回界面，即正常人口
             // dataCount = 0;//不需要恢复状态的时候，在这里初始化变量
             requestEntity = gVar.createRequestEntity();

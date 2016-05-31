@@ -22,9 +22,9 @@ var OrderDetail = React.createClass({
         alert("phoneCall");
     },
     changeAddr: function () {
+        console.log(global.router);
         var params = { order_code: Data.data.order_code }
-        gVar.pushPage({ pathname: "changeaddress", state: params });
-        // alert("changeAddr");
+        gVar.pushPage({ pathname: "changeaddress", state: params },true);
     },
 
     setAddr(e,params){
@@ -36,11 +36,6 @@ var OrderDetail = React.createClass({
             EventBus.addEventListener("changeAddr", this.setAddr, this);
         shouldUpdate =false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
         this.getOrderDetail();
-    },
-
-    componentWillUnmount(){
-        EventBus.dispatch("clearCacheOrderList");//清除页面详情
-        EventBus.removeEventListener("changeAddr", this.setAddr, this);
     },
 
     //获取订单详情
@@ -70,7 +65,7 @@ var OrderDetail = React.createClass({
             timeout: 5000,
         });
     },
-
+    //处理详情列表
     dealOrderDetail(data) {
         console.log(data);
         if (data != null) {
@@ -88,8 +83,11 @@ var OrderDetail = React.createClass({
         Data = null;
         return null;
     },
-
-
+    //返回时的回调
+    backCallBack(){
+        // EventBus.dispatch("clearCacheOrderList");//清除页面详情
+        EventBus.removeEventListener("changeAddr", this.setAddr, this);
+    },
 
     componentDidUpdate() {
         if (!Data || !Data.data)
@@ -153,7 +151,7 @@ var OrderDetail = React.createClass({
         }
         return (
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }} >
-                <TitleBar  save="订单详情"/>
+                <TitleBar  save="订单详情" backCallBack={this.backCallBack}/>
                 <div className="titlebar_head_down orderdetail_head" style={{ paddingTop: gVar.Padding_titlebar }}>
                     <div className="orderdetail_background_img">
                         <table style={{ width: "100%" }}>

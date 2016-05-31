@@ -32,13 +32,13 @@ var requestEntity = null;//请求网络实体
 // 例子：   
 // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423   
 // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18   
-var listviewInd=null;
+var listviewInd = null;
 var FragmentOrder = React.createClass({
     params: {
         myScroll: "",
-        dataCount:0,
-        orderPosition:0,
-         timeList: ["不限时间", "今日", "近一周", "近一个月", "近三个月", "近一年"],
+        dataCount: 0,
+        orderPosition: 0,
+        timeList: ["不限时间", "今日", "近一周", "近一个月", "近三个月", "近一年"],
         timeStartList: ['', timeUtil.getCurrentDateFormat(),
             timeUtil.getNearWeek(), timeUtil.getNearMouth(),
             timeUtil.getNearThreeMouth(), timeUtil.getNearYear()],
@@ -292,12 +292,12 @@ var FragmentOrder = React.createClass({
     },
 
     //通过详情页面发出一个事件,清除缓存
-    clearCacheOrderListFunc() {
-        // console.log("clearCacheOrderListFunc");直接清除的话会影响其他页面传递的属性，属性也是通过sessionStorage保存的
-        sessionStorage.removeItem("OrderRequestEntity");
-        sessionStorage.removeItem("OrderPostion");
-        // sessionStorage.clear();
-    },
+    // clearCacheOrderListFunc() {
+    //     // console.log("clearCacheOrderListFunc");直接清除的话会影响其他页面传递的属性，属性也是通过sessionStorage保存的
+    //     sessionStorage.removeItem("OrderRequestEntity");
+    //     sessionStorage.removeItem("OrderPostion");
+    //     // sessionStorage.clear();
+    // },
 
     // //今日数据进入后的回调方法设置参数请求网络
     // todaySetParams: function (statusIndex, timeindex) {
@@ -367,8 +367,8 @@ var FragmentOrder = React.createClass({
     componentDidMount() {
         // console.log(Data,"text");
         // console.log(EventBus.hasEventListener("clearCacheOrderList"))
-        if (!EventBus.hasEventListener("clearCacheOrderList"))//没有注册就注册
-            EventBus.addEventListener("clearCacheOrderList", this.clearCacheOrderListFunc, this);
+        // if (!EventBus.hasEventListener("clearCacheOrderList"))//没有注册就注册
+        //     EventBus.addEventListener("clearCacheOrderList", this.clearCacheOrderListFunc, this);
         // var p = EventBus.getEvents();
         // console.log(p.toString());
         // EventBus.dispatch("clearCacheOrderList");//清除页面详情
@@ -382,8 +382,11 @@ var FragmentOrder = React.createClass({
             // console.log("getOrderListState");
         }
         if (sessionStorage.getItem("OrderRequestEntity")) {
+
             requestEntity = JSON.parse(sessionStorage.getItem("OrderRequestEntity"));
             this.params.orderPosition = parseInt(sessionStorage.getItem("OrderPostion"));
+            sessionStorage.removeItem("OrderRequestEntity");
+            sessionStorage.removeItem("OrderPostion");
             // orderList = JSON.parse(sessionStorage.getItem("orderList"));
             console.log("获取本地缓存");
             // if (listviewInd) {
@@ -393,7 +396,7 @@ var FragmentOrder = React.createClass({
             if (listviewInd instanceof Object) {
                 listviewInd.scrollToElement(this.params.orderPosition + 1);
             }
-            this.setState({});//恢复刷新的数据
+            // this.setState({});//恢复刷新的数据
         } else {//非返回界面，即正常人口
             // dataCount = 0;//不需要恢复状态的时候，在这里初始化变量
             requestEntity = gVar.createRequestEntity();

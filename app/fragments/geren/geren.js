@@ -74,12 +74,14 @@ var GerenItem = React.createClass({
             // company_code: localStorage.getItem("company_code"),
             // user_code: localStorage.getItem('user_code'),
         };
-        $.ajax({
-            data: params,
-            async: true,
-            url: "http://app.birdex.cn/sanfangcang.html",
-            dataType: 'json',
-            cache: true,
+        var url = "http://app.birdex.cn/sanfangcang.html";
+        $.ajax(url,{
+            // data: params,
+            // async: true,
+            // dataType: 'json',
+            dataType: 'jsonp',
+            crossDomain: true,
+            // cache: true,
             success: function (data) {
                 // this.setState({ data: data });
 
@@ -88,44 +90,44 @@ var GerenItem = React.createClass({
                 // this.dealDashBorad();
             }.bind(this),
             error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
+                console.error(err);
                 // toast(err.toString());
             }.bind(this),
             timeout: 5000,
         });
     },
 
-    handleTouchStart: function (ele) {
-        $(ele.target).addClass("item_touch_start");
-    },
-    handleTouchEnd: function (ele) {
-        $(ele.target).removeClass("item_touch_start");
-    },
-    render: function () {
-        var cname;
-        if (this.props.info.type == 0) {
-            cname = "gerenitem_top";
-        } else if (this.props.info.type == 1) {
-            cname = "gerenitem_middle";
-        } else {
-            cname = "gerenitem_bottom";
-        }
-        var item = (<div className = {cname} onClick={this.onItemClick.bind(this, this.props.info.index) }
-            onTouchStart = {
-                this.handleTouchStart.bind(this)
-            }onTouchEnd = {
-                this.handleTouchEnd.bind(this)
-            } onTouchCancel={this.handleTouchEnd.bind(this) }>
-            <img className = "img-rounded"
-                style = {{
-                    width: "30px",
-                    height: "30px"
-                }}
-                src = {this.props.info.img}/>
-            <lable className="geren_item_text">{this.props.info.name}</lable >
-        </div>);
-        return item;
+handleTouchStart: function (ele) {
+    $(ele.target).addClass("item_touch_start");
+},
+handleTouchEnd: function (ele) {
+    $(ele.target).removeClass("item_touch_start");
+},
+render: function () {
+    var cname;
+    if (this.props.info.type == 0) {
+        cname = "gerenitem_top";
+    } else if (this.props.info.type == 1) {
+        cname = "gerenitem_middle";
+    } else {
+        cname = "gerenitem_bottom";
     }
+    var item = (<div className = {cname} onClick={this.onItemClick.bind(this, this.props.info.index) }
+        onTouchStart = {
+            this.handleTouchStart.bind(this)
+        }onTouchEnd = {
+            this.handleTouchEnd.bind(this)
+        } onTouchCancel={this.handleTouchEnd.bind(this) }>
+        <img className = "img-rounded"
+            style = {{
+                width: "30px",
+                height: "30px"
+            }}
+            src = {this.props.info.img}/>
+        <lable className="geren_item_text">{this.props.info.name}</lable >
+    </div>);
+    return item;
+}
 });
 
 var GerenList = React.createClass({

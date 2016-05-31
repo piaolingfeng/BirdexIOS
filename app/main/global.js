@@ -63,9 +63,11 @@ var gVar = {
             
             var paths = global.router.props.children.props.children;
             var length = paths.length;
-            for (var i = 2; i < length; i++)
+            for (var i = 1; i < length; i++)
             {
-                if (paths[i].props.path == pathname)
+                // console.log(paths[i].props.path);
+                // console.log(pathname);
+                if (paths[i].props.path == strPathName)
                 {
                     ModalPage = paths[i].props.component;
                     break;
@@ -74,7 +76,10 @@ var gVar = {
             
             if (ModalPage != null)
             {
-                showModalPage(<ModalPage />);
+                // global.router.history.createLocation();
+                var location = global.router.history.createLocation(pathname)//手动创建路由参数并把参数传递到下一个页面
+                console.log(location);
+                showModalPage(<ModalPage location = {location}/>);
             }
             else
             {
