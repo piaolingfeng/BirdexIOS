@@ -6,6 +6,7 @@ var Search = require('../../components/search/search.js');
 var OrderList = require('./orderlist.js');
 var ListView = require('../../components/listview/listviewindex.js');
 var toast = require('../../util/Tips/tips.js');
+
 var EventBus = require('eventbusjs');
 var orderList = new Array();
 
@@ -15,6 +16,7 @@ var orderList = new Array();
 
 var statusList = new Array();
 var warehouseList = new Array();
+
 var timeUtil = require('../../util/timeUtil.js');//时间工具类
 // var timeList = ["不限时间", "今日", "近一周", "近一个月", "近三个月", "近一年"];
 // var timeStartList = ['', timeUtil.getCurrentDateFormat(),

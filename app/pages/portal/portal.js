@@ -28,6 +28,7 @@ var MainPage = React.createClass({
 		this.setState({});
 	},
 
+	
 
 	getInitialState() {
 		// currentPosition = 1;

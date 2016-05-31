@@ -13,7 +13,9 @@ var Data = null;
 var shouldUpdate = false;
 var OrderDetail = React.createClass({
     idCheck: function () {
-        alert("idCheck");
+        // alert("idCheck");
+        var params = { order_code: Data.data.order_code }
+        gVar.pushPage({ pathname: "uploadIdcard", state: params });
     },
 
     phoneCall: function () {

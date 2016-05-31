@@ -8,29 +8,32 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var upImg = require('./image/up.png');
 var downImg = require('./image/down.png');
 
+var gVar = require('../../main/global.js');
+
+
 var companyBaseData = [
     {
         name:"签约公司名称：",
-        value:"wly5555",
+        value:"",
         type:0,
         width:100 
     },
     {
         name:"公司简称：",
-        value:"gegejia",
+        value:"",
         type:0,
         width:100 
     },
     {
         name:"总部所在地：",
-        value:"河北省秦皇岛市山海关区",
+        value:"",
         type:0,
         width:100 
     }
     ,
     {
         name:"详细地址：",
-        value:"广东潮州",
+        value:"",
         type:1,
         width:100 
     }
@@ -39,13 +42,13 @@ var companyBaseData = [
 var zhuyingitemData = [
     {
         name:"主营市场：",
-        value:"美国",
+        value:"",
         type:0,
         width:120
     },
     {
         name:"订单平均客单价：",
-        value:"500.00",
+        value:"",
         type:1,
         width:120
     }
@@ -54,13 +57,13 @@ var zhuyingitemData = [
 var yewuModel = [
     {
         name:"业务模式：",
-        value:"仓储",
+        value:"",
         type:0,
         width:75
     },
     {
         name:"清关服务：",
-        value:"BC直邮",
+        value:"",
         type:1,
         width:75
     }
@@ -69,28 +72,28 @@ var yewuModel = [
 var contactsData = [
     {
         name1:"商务总负责人：",
-        name2:"喂喂鱼",
-        phone:"13546745477",
-        email:"1645216512@qq.com",
+        name2:"",
+        phone:"",
+        email:"",
         type:0
     },
     {
         name1:"财务对接人：",
-        name2:"胡小伟",
-        phone:"13546745488",
-        email:"2645216512@qq.com",
+        name2:"",
+        phone:"",
+        email:"",
         type:1
     },
     {
         name1:"IT对接人：",
-        name2:"庄晓杰",
-        phone:"13546745499",
-        email:"3645216512@qq.com",
+        name2:"",
+        phone:"",
+        email:"",
         type:1
     }
 ];
 
-
+var excpeitonEmail = "";
 
 var AmItem = React.createClass({
     render:function(){
@@ -161,7 +164,7 @@ var ContactsList = React.createClass({
                     <span style={{fontSize:13,color:"#979797",display:"inline-block",width:"45%",paddingLeft:5}}>异常件通知</span>
                     
                     <span style={{fontSize:13,color:"#979797"}}>邮箱：</span>
-                    <span style={{fontSize:13,color:"#979797"}}>46461346461@qq.com</span>
+                    <span style={{fontSize:13,color:"#979797"}}>{excpeitonEmail}</span>
                 </div>
             </div>
         );
@@ -184,6 +187,197 @@ var AM = React.createClass({
         $('#collapseFour').collapse({
             toggle: false
         })
+        
+        this.init();
+    },
+    
+    init:function name(params) {
+        var param = {
+            app_debug: 1,
+            company_code: localStorage.getItem("company_code"),
+            user_code: localStorage.getItem('user_code')
+		};
+		console.log(param)
+		$.ajax({
+            data: param,
+            url: gVar.getBASE_URL() + 'Company/get',
+            dataType: 'json',
+            cache: false,
+			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
+			// xhrFields: {
+			// 	withCredentials: true
+			// },
+            success: function (data) {
+                // this.setState({ data: data });
+				// alert("success");
+				this.initSuccess(data);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+				alert(err);
+            }.bind(this)
+        });
+
+		return;
+    },
+    
+    initSuccess:function (data) {
+        console.log(data);
+        if(0==data.error){
+            
+            var marketsName = "";
+            var marketsNameArr = data.data.markets_name;
+            console.log(marketsNameArr);
+            for(var i=0;i<marketsNameArr.length;i++){
+                var name = marketsNameArr[i].name;
+                if(i>0){
+                    marketsName += ",";
+                }
+                marketsName += name;
+            }
+            
+            var busName = "";
+            var busNameArr = data.data.business_models_name;
+            console.log(busNameArr);
+            for(var i=0;i<busNameArr.length;i++){
+                var name = busNameArr[i].name;
+                if(i>0){
+                    busName += ",";
+                }
+                busName += name;
+            }
+            
+            var qgName = "";
+            var qgNameArr = data.data.qg_models_name;
+            console.log(qgNameArr);
+            for(var i=0;i<qgNameArr.length;i++){
+                var name = qgNameArr[i].name;
+                if(i>0){
+                    qgName += ",";
+                }
+                qgName += name;
+            }
+            
+            companyBaseData = [
+                {
+                    name:"签约公司名称：",
+                    value:data.data.company_name,
+                    type:0,
+                    width:100 
+                },
+                {
+                    name:"公司简称：",
+                    value:data.data.company_short_name,
+                    type:0,
+                    width:100 
+                },
+                {
+                    name:"总部所在地：",
+                    value:data.data.province + data.data.city + data.data.area,
+                    type:0,
+                    width:100 
+                }
+                ,
+                {
+                    name:"详细地址：",
+                    value:data.data.address,
+                    type:1,
+                    width:100 
+                }
+            ];
+            
+            zhuyingitemData = [
+                {
+                    name:"主营市场：",
+                    value:marketsName,
+                    type:0,
+                    width:120
+                },
+                {
+                    name:"订单平均客单价：",
+                    value:data.data.order_avg_price,
+                    type:1,
+                    width:120
+                }
+            ];
+            
+            var contacts = data.data.contacts;
+            
+            // 商务负责人
+            var swName = "";
+            var swPhone = "";
+            var swEmail = "";
+            // 财务对接人
+            var cwName = "";
+            var cwPhone = "";
+            var cwEmail = "";
+            // IT对接人
+            var itName = "";
+            var itPhone = "";
+            var itEmail = "";
+            // 异常件通知
+            excpeitonEmail = data.data.notice_email;
+            
+            for(var i=0;i<contacts.length;i++){
+                var contact = contacts[i];
+                if(contact.contact_type == "10"){
+                    swName = contact.name;
+                    swPhone = contact.phone;
+                    swEmail = contact.email;
+                }
+                if(contact.contact_type == "30"){
+                    cwName = contact.name;
+                    cwPhone = contact.phone;
+                    cwEmail = contact.email;
+                }
+                if(contact.contact_type == "40"){
+                    itName = contact.name;
+                    itPhone = contact.phone;
+                    itEmail = contact.email;
+                }
+            }
+            
+            contactsData = [
+                {
+                    name1:"商务总负责人：",
+                    name2:swName,
+                    phone:swPhone,
+                    email:swEmail,
+                    type:0
+                },
+                {
+                    name1:"财务对接人：",
+                    name2:cwName,
+                    phone:cwPhone,
+                    email:cwEmail,
+                    type:1
+                },
+                {
+                    name1:"IT对接人：",
+                    name2:itName,
+                    phone:itPhone,
+                    email:itEmail,
+                    type:1
+                }
+            ];
+            
+            yewuModel = [
+                {
+                    name:"业务模式：",
+                    value:busName,
+                    type:0,
+                    width:75
+                },
+                {
+                    name:"清关服务：",
+                    value:qgName,
+                    type:1,
+                    width:75
+                }
+            ];
+            
+            this.setState({});
+        }
     },
     
     divclick:function(mes){

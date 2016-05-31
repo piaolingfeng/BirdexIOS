@@ -1,5 +1,8 @@
 var React = require('react');
 
+var showModalPage = require('../components/BModalpage/bmodalpage.js').showModalPage;
+var hideModalPage = require('../components/BModalpage/bmodalpage.js').hideModalPage;
+
 var gVar = {
 
     userName: "bird",
@@ -45,17 +48,50 @@ var gVar = {
     Padding_text_head: "12px",
     Padding_titlebar: "48px",
     //切换到新页面
-    pushPage: function (pathname) {
-        gVar.pageTranType = "pagepush";
-        // console.log(global.router.history);
-        global.router.history.push(pathname);
+    pushPage: function (pathname, isModal) {
+        
+        if (!isModal)
+        {
+            gVar.pageTranType = "pagepush";
+            // console.log(global.router.history);
+            global.router.history.push(pathname);
+        }
+        else
+        {
+            var ModalPage = null;
+            var strPathName = (typeof(pathname) == "string" ? pathname : pathname.pathname);
+            
+            var paths = global.router.props.children.props.children;
+            var length = paths.length;
+            for (var i = 2; i < length; i++)
+            {
+                if (paths[i].props.path == pathname)
+                {
+                    ModalPage = paths[i].props.component;
+                    break;
+                }
+            }
+            
+            if (ModalPage != null)
+            {
+                showModalPage(<ModalPage />);
+            }
+            else
+            {
+                console.log("cannot find modal page " + pathname);
+            }
+        }
     },
 
     //页面回退
     popPage: function () {
-        gVar.pageTranType = "pagepop";
-        // console.log(global.router.history);
-        global.router.history.goBack();
+        
+        if (!hideModalPage())
+        {
+            gVar.pageTranType = "pagepop";
+            // console.log(global.router.history);
+            global.router.history.goBack();
+        }
     },
 
     //当前页面切换动画类型名,程序运行时会动态更改, 以实现前进后退

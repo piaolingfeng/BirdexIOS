@@ -46,6 +46,8 @@ var Recharge=require('../pages/recharge/recharge.js');
 // var Mine=require('../pages/mine/mine.js');
 //关于页面
 var About=require('../pages/about/about.js');
+//上传身份证
+var uploadIdcard = require('../pages/uploadidcard/uploadidcard.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -79,6 +81,9 @@ var App = React.createClass({
     componentDidMount: function () {
 
         EventBus.addEventListener("changePage", this.changePage, this);
+         $("body").children().click(function () {
+            $("#oAIHFEFUH").hide();
+        });
     },
 
     render: function() {
@@ -138,7 +143,7 @@ ReactDOM.render(
             <Route path="mymessagemenu" component={MyMessageMenu}/>
             <Route path="myaccount" component={MyAccount}/>
             <Route path="accountmanager" component={AccountManager}/>
-
+            <Route path="uploadIdcard" component={uploadIdcard}/>
         </Route> 
     </Router>,
     

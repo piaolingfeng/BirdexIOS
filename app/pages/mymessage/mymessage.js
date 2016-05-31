@@ -81,8 +81,90 @@ var GerenList = React.createClass({
 });
 
 
+function getCount(count){
+        var result = "";
+        if(count > 0){
+            if(count < 100){
+                result = count;
+            }else{
+                result = "99+"
+            }
+        }
+        return result;
+};
+
 
 var MM = React.createClass({
+    
+    componentDidMount:function name(params) {
+        this.init();
+    },
+    
+    init:function name(params) {
+        var param = {
+            app_debug: 1,
+            company_code: localStorage.getItem("company_code"),
+            user_code: localStorage.getItem('user_code')
+		};
+		console.log(param)
+		$.ajax({
+            data: param,
+            url: gVar.getBASE_URL() + 'Message/stat',
+            dataType: 'json',
+            cache: false,
+			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
+			// xhrFields: {
+			// 	withCredentials: true
+			// },
+            success: function (data) {
+                // this.setState({ data: data });
+				// alert("success");
+				this.initSuccess(data);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+				alert(err);
+            }.bind(this)
+        });
+
+		return;
+    },
+    
+    initSuccess:function (data) {
+        console.log(data);
+        if(0==data.error){
+            var arr = data.data;
+            for(var i=0;i<arr.length;i++){
+                var item = arr[i];
+                if(item.msg_type == "ORDER_STOCK_EXCEPTION"){
+                    // 订单库存异常
+                    var count = getCount(item.count);
+                    $('#repertory_exception').html(count);
+                }
+                if(item.msg_type == "ORDER_VERIFY_FAIL"){
+                    // 订单审核不通过
+                    var count = getCount(item.count);
+                    $('#ORDER_VERIFY_FAIL').html(count);
+                }
+                if(item.msg_type == "ORDER_IDCARD_EXCEPTION"){
+                    // 订单身份证异常
+                    var count = getCount(item.count);
+                    $('#ORDER_IDCARD_EXCEPTION').html(count);
+                }
+                if(item.msg_type == "ACCOUNT_EXCEPTION"){
+                    // 账号异常
+                    var count = getCount(item.count);
+                    $('#ACCOUNT_EXCEPTION').html(count);
+                }
+                if(item.msg_type == "STOCK_WARNING"){
+                    // 库存告警
+                    var count = getCount(item.count);
+                    $('#STOCK_WARNING').html(count);
+                }
+            }
+        }
+    },
+    
 
     messageMenu: function () {
 
@@ -118,28 +200,28 @@ var MM = React.createClass({
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,0)}>
                         <img src={warning} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存预警消息</span>
-                        <span className="badge mymessage_badge" >50</span>
+                        <span id="STOCK_WARNING" className="badge mymessage_badge" >50</span>
                     </div>
 
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,1)} >
                         <img src={idcard} className="mymessage_img"/>
                         <span className="mymessage_item_text">身份证异常订单</span>
-                        <span className="badge mymessage_badge" >50</span>
+                        <span id="ORDER_IDCARD_EXCEPTION" className="badge mymessage_badge" >50</span>
                     </div>
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,2)} style={{ marginTop: "1px" }}>
                         <img src={repertory} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存异常订单</span>
-                        <span className="badge mymessage_badge" >50</span>
+                        <span id="repertory_exception" className="badge mymessage_badge" >50</span>
                     </div>
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,3)} style={{ marginTop: "1px" }}>
                         <img src={check} className="mymessage_img"/>
                         <span className="mymessage_item_text">审核不通过订单</span>
-                        <span className="badge mymessage_badge" >50</span>
+                        <span id="ORDER_VERIFY_FAIL" className="badge mymessage_badge" >50</span>
                     </div>
                     <div id="accoutException" className="mymessage_item" onClick={this.onItemClick.bind(this,4)} >
                         <img src={account} className="mymessage_img"/>
                         <span className="mymessage_item_text">账户异常</span>
-                        <span className="badge mymessage_badge" >50</span>
+                        <span id="ACCOUNT_EXCEPTION" className="badge mymessage_badge" >50</span>
                     </div>
                 </div>
             </div>
