@@ -69,6 +69,7 @@ var Inventory = React.createClass({
     this.privateVar.inventoryIndex = 0;
     //设置列表的显示状态:1为正常显示列表，2为暂无数据，3......
     this.privateVar.status = 1;
+    this.privateVar.params.keyword = '';
   },
   setDataSource: function (anim) {
     var component = this;
@@ -278,6 +279,14 @@ var Inventory = React.createClass({
     this.setDataSource(this.privateVar.listCore);
     // this.setState({});
   },
+  SearchFunc(value) {
+    //关键字搜索
+    this.privateVar.params.keyword=value;
+    this.privateVar.listItems = [];
+    this.privateVar.params.page_no = 1;
+    //重新加载数据
+    this.setDataSource(this.privateVar.listCore);
+  },
   render: function () {
     var content;
     if (this.privateVar.status == 1) {
@@ -289,7 +298,7 @@ var Inventory = React.createClass({
     }
     return (<div >
       <SimpleTabLayout selectTab={this.selectTab} defualtIndex={this.privateVar.inventoryIndex} tabsText={["在库商品", "待入库商品", "超预警商品"]} />
-      <Search />
+      <Search SearchFunc={this.SearchFunc} defaultText={this.privateVar.params.keyword}/>
       <LimitView sortClick={this.sortHandler} popMenuItemClick={this.popMenuItemClick}/>
       <div style={{ color: "#039FFF", paddingLeft: "10px", backgroundColor: "#f5f4f4", textAlign: "left", width: "100%" }}>共有{this.privateVar.count}条数据</div>
       <div >
