@@ -42,7 +42,6 @@ var TabLayout=React.createClass({
             var $el = $(ele.target);
             $("li").removeClass("current_tablayout");
             $el.addClass(" current_tablayout ");
-            console.log($("li").length);
             // var leftPos = $el.parent().position().left;
             // var newWidth = $el.parent().width();
             var leftPos = 0;
@@ -56,16 +55,17 @@ var TabLayout=React.createClass({
             });
         
             this.setState({defualtIndex:index});
+            //对选中的进行处理
             if(this.props.selectTab){
                this.props.selectTab(index);
              }
             //记录新的索引值
             selectIndex=index;
         }
-        //对选中的进行处理
-        if(this.props.selectTab){
-            this.props.selectTab(index,isCheck);
-        }
+        // //对选中的进行处理
+        // if(this.props.selectTab){
+        //     this.props.selectTab(index,isCheck);
+        // }
     },
     render:function() {
         //tab宽度设置
