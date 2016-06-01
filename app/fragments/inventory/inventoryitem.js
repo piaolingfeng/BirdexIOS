@@ -80,7 +80,9 @@ var InventoryItem = React.createClass({
         return {itemObj:null};
     },
     itemOnClick: function () {
-        gVar.pushPage("instockdetail");
+        
+         gVar.pushPage({ pathname: "instockdetail", state: this.props.itemObj},true);
+        // gVar.pushPage("instockdetail",true);
     },
     render: function () {
         var items = [];

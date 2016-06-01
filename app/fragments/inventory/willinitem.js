@@ -7,7 +7,8 @@ var WillinItem = React.createClass({
         itemObj: React.PropTypes.object
     },
     itemOnClick: function () {
-        gVar.pushPage("willindetail");
+        gVar.pushPage({ pathname: "willindetail", state: this.props.itemObj},true);
+        // gVar.pushPage("willindetail");
     },
     render: function () {
         var eles = [];

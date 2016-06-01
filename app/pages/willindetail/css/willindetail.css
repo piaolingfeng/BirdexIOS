@@ -15,7 +15,7 @@ tr .willin_item_left{
     color: #039FFF;
 }
 .willin_item_right1{
-    width: 25%;
+    width: 45%;
 }
 td.willin_item_left{
     padding-right: 0px;
@@ -43,4 +43,7 @@ td.willin_item_right1{
 }
 .modal-header{
     border-bottom: 1px solid #ddd;
+}
+.willin_item_right2{
+    width: 30%;
 }
