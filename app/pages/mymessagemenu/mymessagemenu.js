@@ -23,13 +23,13 @@ var MMM = React.createClass({
                     </div>
 
                     <div className="mymessagemenu_item">
-                        <label className="checkbox-inline" style={{ width: "35%" }}>
+                        <label className="checkbox-inline" style={{ width: "35%",verticalAlign:"top" }}>
                             <input onClick={this.check1} type="radio" name="optionsRadiosinline" id="optionsRadios1" value="option1" />
                             <span className="mymessagemenu_item_context">系统提示音</span>
                         </label>
-                        <label className="checkbox-inline">
+                        <label className="checkbox-inline" style={{ width: "60%" }}>
                             <input onClick={this.check2} type="radio" name="optionsRadiosinline" id="optionsRadios2" value="option2"/>
-                            <span className="mymessagemenu_item_context">不提示，只在消息中显示</span>
+                            <span className="mymessagemenu_item_context">不提示,只在消息中显示</span>
                         </label>
                     </div>
 
@@ -42,7 +42,7 @@ var MMM = React.createClass({
                             <input onClick={this.check1} type="radio" name="optionsRadiosinline1" id="optionsRadios3" value="option1" />
                             <span className="mymessagemenu_item_context">全天接收</span>
                         </label>
-                        <label className="checkbox-inline">
+                        <label className="checkbox-inline" style={{ width: "60%" }}>
                             <input onClick={this.check2} type="radio" name="optionsRadiosinline1" id="optionsRadios4" value="option2"/>
                             <span className="mymessagemenu_item_context">休息时间免接收</span>
 

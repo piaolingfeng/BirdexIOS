@@ -16,6 +16,17 @@ var ListView = React.createClass({
 
         return {}
     },
+
+    handRefresh() {//手动调用刷新,可以解决刚开始时拖不动的情况
+        if (myScroll) {
+            myScroll.refresh();
+        }
+    },
+
+    destory() {
+        myScroll = null;
+    },
+
     propTypes: {
         //回调的方法获取item
         getItems: React.PropTypes.func.isRequired,
@@ -35,6 +46,10 @@ var ListView = React.createClass({
         marginBottom: React.PropTypes.number,
         //下拉条背景颜色
         showUploadBgColor: React.PropTypes.string,
+        //滚动到指定位置
+        position: React.PropTypes.number,
+        //创建完成后回调scroll对象的引用
+        getCoreObject:React.PropTypes.func,
     },
     getDefaultProps: function () {
         //设置默认属性
@@ -149,10 +164,17 @@ var ListView = React.createClass({
             }
 
         });
-
-        setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+        if(this.props.getCoreObject){
+            this.props.getCoreObject(myScroll);
+        }
+        // setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
         //初始化绑定iScroll控件 
         // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    },
+
+    //滚动到指定位置
+    scrollToElement(position) {
+        myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(' + position + ')'));
     },
 
     render: function () {
@@ -169,7 +191,7 @@ var ListView = React.createClass({
             top: this.props.marginTop + "px", bottom: this.props.marginBottom + "px"
         }}><div id="scroller"   >
                 <div id="pullDown" style={{ visibility: this.props.showUpload ? "visible" : "hidden", margin: "0px" }}>
-                    <span className="pullDownIcon"></span><span className="pullDownLabel" style={{height:0,marginBottom:"30px",width:"70px"}}>下拉刷新...</span>
+                    <span className="pullDownIcon"></span><span className="pullDownLabel" style={{ height: 0, marginBottom: "30px", width: "70px" }}>下拉刷新...</span>
                 </div>
                 <ul id="thelist" style={{ backgroundColor: this.props.backGroud }}>
                     {

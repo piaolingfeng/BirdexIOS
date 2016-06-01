@@ -22,7 +22,7 @@ var BPopover = React.createClass({
 		//$(function () { $("[data-toggle='popover']").popover(); });
     },
     
-    menuClick: function (idx,a,b,event) {
+    menuClick: function (idx,event) {
         //console.log("menu click ");        
         //console.log(arguments);
         // e.preventDefault();
@@ -35,7 +35,7 @@ var BPopover = React.createClass({
         // console.log(idx);
         // console.log(arguments);
         ReactDOM.findDOMNode(this.refs.triggerref).click();
-        this.props.menuItemClick(idx);
+        this.props.menuItemClick(idx,event);
     },
 
       

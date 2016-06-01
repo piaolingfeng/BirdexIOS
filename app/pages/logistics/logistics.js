@@ -1,7 +1,11 @@
 var React = require('react');
 var EventBus = require('eventbusjs');
 
-require('./css/logistics.css');
+var gVar = require('../../main/global.js');
+
+var ReactList=require('react-list');
+
+require('./css/logistics.css'); 
 
 // 仓库接单
 var getorder_n = require('./image/getorder_n.png');
@@ -21,6 +25,13 @@ var transportation_y = require('./image/transportation_y.png');
 //签收
 var sign_n = require('./image/sign_n.png');
 var sign_y = require('./image/sign_y.png');
+
+
+var point = require('./image/point.png');
+
+var trackings = "";
+
+var TitleBar = require('../../components/titlebar/titlebar.js');
 
 function changeStat(stat) {
     if(stat >= 0){
@@ -95,28 +106,94 @@ function paint5() {
 var Logistics = React.createClass({
     
     componentDidMount:function() {
-        changeStat(5);
+        $('#Status_name').html(this.props.location.state.Status_name);
+        $('#receiver_mobile').html(this.props.location.state.Receiver_mobile)
+        this.init();
+    },
+    
+    init:function() {
+        var param = {
+            app_debug: 1,
+            company_code: localStorage.getItem("company_code"),
+            user_code: localStorage.getItem('user_code'),
+			order_code: this.props.location.state.order_code
+		};
+		console.log(param)
+		$.ajax({
+            data: param,
+            url: gVar.getBASE_URL() + 'Order/getTracking',
+            dataType: 'json',
+            cache: false,
+			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
+			// xhrFields: {
+			// 	withCredentials: true
+			// },
+            success: function (data) {
+                // this.setState({ data: data });
+				// alert("success");
+				this.initSuccess(data);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+				alert(err);
+            }.bind(this)
+        });
+
+		return;
+    },
+    
+    initSuccess:function (data) {
+        console.log(data);
+        if(0==data.error){
+            $('#order_oms_no').html(data.data.order_oms_no);
+            $('#order_no').html(data.data.order_no);
+            $('#receiver_name').html(data.data.receiver_name);
+            $('#tracking_length').html(data.data.tracking_length);
+            $('#checkout_time').html(data.data.checkout_time);
+            
+            changeStat(data.data.status);
+            
+            trackings = data.data.trackings;
+            
+            this.setState({});
+        }
+    },
+    
+    renderItem:function(index, key){
+        var tar = trackings[index];
+        return <div key={key} style={{width:"90%",height:"55px",margin:"0 auto"}}>
+                    <img src={point} style={{width:"8px",height:"8px",verticalAlign:"center",marginTop:"-5px"}}></img> <span style={{display:"inline-block",marginTop:"5px",width:"90%"}}>{tar.context}</span>
+                    <div></div>
+                    <span style={{width:"1px",height:"30px",display:"inline-block",background:"#D7D7D7",marginLeft:'3px'}}></span>
+                    <span style={{marginLeft:"8px",width:"80%",verticalAlign:"top"}}>{tar.time}</span>
+               </div>;
+    },
+    
+    refreshFunc(){
+        this.init();
     },
     
     render:function() {
         return (
-            <div className="logistics-maindiv">
+            <div className="logistics-maindiv titlebar_extend_head">
+                <TitleBar  save="物流跟踪" bgColor={gVar.Color_blue_head} refreshFunc={this.refreshFunc}/>
+                <div className="titlebar_head_down">
                 <div className="logistics-row">
                     <span className="logistics-span">
                         订单号：
                     </span>
-                    <span className="logistics-span">
-                        BH160513728939
+                    <span id="order_oms_no" className="logistics-span">
+                        
                     </span>
-                    <span className="logistics-span-float">下架中</span>
+                    <span id="Status_name" className="logistics-span-float"></span>
                 </div>
                 
                 <div className="logistics-row">
                     <span className="logistics-span">
                         客户单号：
                     </span>
-                    <span className="logistics-span">
-                        BH160513728939
+                    <span id="order_no" className="logistics-span">
+                        
                     </span>
                 </div>
                 
@@ -124,11 +201,11 @@ var Logistics = React.createClass({
                     <span className="logistics-span">
                         收件人：
                     </span>
-                    <span className="logistics-span">
-                        刘浩
+                    <span id="receiver_name" className="logistics-span">
+                        
                     </span>
-                    <span className="logistics-phone">
-                        13751121288
+                    <span id="receiver_mobile" className="logistics-phone">
+                        
                     </span>
                     
                     <button className="btn btn-primary btn-xs logistics-button">复制物流信息</button>
@@ -178,12 +255,15 @@ var Logistics = React.createClass({
                 </div>
                 <div className="logistics-row">
                     <span style={{fontSize:13,color:"#8E8E93"}}>已运送：</span>
-                    <span style={{fontSize:13,color:"#8E8E93",display:"inline-block",width:"25%"}}>0天4小时</span>
+                    <span id="tracking_length" style={{fontSize:13,color:"#8E8E93",display:"inline-block",width:"25%"}}></span>
                     <span style={{fontSize:13,color:"#8E8E93"}}>出库时间：</span>
-                    <span style={{fontSize:13,color:"#8E8E93"}}>2016-05-17 10:27:24</span>
+                    <span id="checkout_time" style={{fontSize:13,color:"#8E8E93"}}></span>
                 </div>
                 
-                <div style={{width:"100%",height:"1px",background:"#D7D7D7",marginTop:"15px"}}></div>
+                <div style={{width:"100%",height:"1px",background:"#D7D7D7",marginTop:"15px",marginBottom:"5px"}}></div>
+                
+                <ReactList itemRenderer={this.renderItem} length={trackings.length}/>
+                </div>
             </div>
         );
     }

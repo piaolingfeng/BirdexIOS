@@ -4,24 +4,35 @@ var add_btn = require("./images/add.png");
 var gVar = require('../../main/global.js');
 
 var Addbutton = React.createClass({
-    render:function(){
-        return (
-            <div style={{
-  							width:"30%",
-  							float:"left",
-  							margin:"auto",
-  							textAlign:"center",
-  							padding:"25px",
-                              boxSizing:"border-box"
-  						}} onClick={this.changepage}>
-	   			<img src={add_btn} style={{height:"14px"}}/>
-
-	   			
-	   		</div> 
-        );
+    
+    propTypes:{
+        position:React.PropTypes.number
     },
     
-    changepage:function () {
+    render: function () {
+        var position = this.props.position; 
+        // console.log(position)
+        var lineDisplay = "block";
+        if(position!=null){
+            var i = (position+1)%3;
+            if(i == 0){
+               lineDisplay="none"; 
+            }
+        }
+        return (
+            <div style={{
+                width: "33.3%",
+                float: "left",
+                textAlign: "center",
+                boxSizing: "border-box"
+            }} onClick={this.changepage}>
+                <div style={{ float: "right", width: "0.5px", height: "70px", background: "#CBCBCB",display:lineDisplay }}></div>
+                <img src={add_btn} style={{ height: "14px",padding: "25px",}}/>
+            </div>
+        );
+    },
+
+    changepage: function () {
         // EventBus.dispatch("changePage", null, "todayData");
         gVar.pushPage("todayData");
         return;

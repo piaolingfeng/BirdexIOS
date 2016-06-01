@@ -1,6 +1,7 @@
 var React = require("react");
 require("../../fragments/order/css/orderlist.css");
 require("./css/orderdetail.css")
+var EventBus = require('eventbusjs');
 var gVar = require("../../main/global.js");
 var phone = require("./images/phone.png");
 var right = require("./images/right.png");
@@ -9,26 +10,35 @@ var OrderDetailProduct = require("./orderdetailproduct.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var toast = require('../../util/Tips/tips.js');
 var Data = null;
-
+var shouldUpdate = false;
 var OrderDetail = React.createClass({
     idCheck: function () {
-        alert("idCheck");
+        // alert("idCheck");
+        var params = { order_code: Data.data.order_code }
+        gVar.pushPage({ pathname: "uploadIdcard", state: params });
     },
 
     phoneCall: function () {
         alert("phoneCall");
     },
     changeAddr: function () {
+        console.log(global.router);
         var params = { order_code: Data.data.order_code }
-        gVar.pushPage({ pathname: "changeaddress", state: params });
-        // alert("changeAddr");
+        gVar.pushPage({ pathname: "changeaddress", state: params },true);
+    },
+
+    setAddr(e,params){
+        $("#address").html(params);
     },
 
     componentDidMount: function () {
+        if (!EventBus.hasEventListener("changeAddr"))//没有注册就注册
+            EventBus.addEventListener("changeAddr", this.setAddr, this);
+        shouldUpdate =false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
         this.getOrderDetail();
     },
 
-    //获取订单所有状态
+    //获取订单详情
     getOrderDetail: function () {
         var params = {
             app_debug: 1,
@@ -51,10 +61,11 @@ var OrderDetail = React.createClass({
             error: function (xhr, status, err) {
                 // console.error(this.props.url, status, err.toString());
                 toast(err.toString());
-            }.bind(this)
+            }.bind(this),
+            timeout: 5000,
         });
     },
-
+    //处理详情列表
     dealOrderDetail(data) {
         console.log(data);
         if (data != null) {
@@ -71,6 +82,11 @@ var OrderDetail = React.createClass({
     getInitialState() {
         Data = null;
         return null;
+    },
+    //返回时的回调
+    backCallBack(){
+        // EventBus.dispatch("clearCacheOrderList");//清除页面详情
+        EventBus.removeEventListener("changeAddr", this.setAddr, this);
     },
 
     componentDidUpdate() {
@@ -94,7 +110,7 @@ var OrderDetail = React.createClass({
             } else {
                 $('#idNumCheck').html("待验证");
                 $('#idNumCheck').css({ color: "#13A7DF" });
-                 $('#checkImg').css({ display: "none" });
+                $('#checkImg').css({ display: "none" });
                 //  $('#idCheck').attr('onClick',this.idCheck);
                 //  $("#idCheck").click(function(){
                 //     alert("idcheck");
@@ -109,9 +125,17 @@ var OrderDetail = React.createClass({
             $('#changeAddr').click(function () {
                 func.changeAddr();
             });
-        }else{
-             toast("当前状态不能修改地址哦!");
+        } else {
+            toast("当前状态不能修改地址哦!");
         }
+    },
+
+    shouldComponentUpdate() {//出发setState之后才会调用，也就是网络请求后
+        if(shouldUpdate == false){
+            shouldUpdate =true;
+            return true;
+        }
+            return false;
     },
 
     render: function () {
@@ -127,7 +151,7 @@ var OrderDetail = React.createClass({
         }
         return (
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }} >
-                <TitleBar  save="订单详情"/>
+                <TitleBar  save="订单详情" backCallBack={this.backCallBack}/>
                 <div className="titlebar_head_down orderdetail_head" style={{ paddingTop: gVar.Padding_titlebar }}>
                     <div className="orderdetail_background_img">
                         <table style={{ width: "100%" }}>
@@ -139,7 +163,7 @@ var OrderDetail = React.createClass({
                                             <span >{detailData.order_no}</span>
                                             <span  className="orderdetail_status">{detailData.status_name}</span>
                                         </div>
-                                        <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                        <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                     </div>
                                 </td>
                             </tr>
@@ -151,7 +175,7 @@ var OrderDetail = React.createClass({
                                         <div className="orderdetail_right_div_padding">
                                             <span >{detailData.order_oms_no}</span>
                                         </div>
-                                        <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                        <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                     </div>
                                 </td>
                             </tr>
@@ -164,7 +188,7 @@ var OrderDetail = React.createClass({
                                             <span >{detailData.warehouse_name}</span>
                                             <span  className="orderdetail_status">{detailData.service_type_name}</span>
                                         </div>
-                                        <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                        <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                     </div>
                                 </td>
                             </tr>
@@ -191,7 +215,7 @@ var OrderDetail = React.createClass({
                                         <div className="orderdetail_right_div_padding">
                                             <span >{detailData.weight}KG</span>
                                         </div>
-                                        <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                        <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                     </div>
                                 </td>
                             </tr>
@@ -231,9 +255,9 @@ var OrderDetail = React.createClass({
                                 <td className="orderdetail_left"></td>
                                 <td className="orderdetail_right">
                                     <div>
-                                        <div  className="orderdetail_address">{detailData.receiver_province +
+                                        <div id = "address" className="orderdetail_address">{detailData.receiver_province +
                                             detailData.receiver_city + detailData.receiver_area + detailData.receiver_address}</div>
-                                        <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                                        <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
                                     </div>
                                 </td>
                             </tr>

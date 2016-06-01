@@ -35,7 +35,7 @@ var MsgOrderExamine = React.createClass({
                         <span >审核不通过订单</span>
                         <span className="messagedetail_right">{entity.created_date}</span>
                     </div>
-                    <hr style={{height:"1px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
+                    <hr style={{height:"0.5px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
                      <div className="messagedetail_padding">
                         <span >订单号:</span>
                         <span  className="messagedetail_margin_left">{entity.msg_content.order_oms_no}</span>

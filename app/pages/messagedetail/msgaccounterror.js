@@ -34,7 +34,7 @@ var MsgAccountError = React.createClass({
                         <span >账户异常</span>
                         <span  className="messagedetail_right">{entity.created_date}</span>
                     </div>
-                    <hr style={{height:"1px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
+                    <hr style={{height:"0.5px",width:"100%",margin:"auto", backgroundColor:gVar.Color_single_line, border:0}}></hr>
                     
                     <div className="messagedetail_padding ">
                         <span className="messagedetail_text_dark">亲爱的: {entity.msg_content.company_name},截止到目前为止,您有

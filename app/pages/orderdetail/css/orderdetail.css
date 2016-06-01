@@ -14,14 +14,15 @@
 .orderdetail_left{
     display: inline-block;
     text-align: right;
-    width: 24%;
+    vertical-align: top;
+    width: 23%;
     padding: 6px;
     padding-left: 0px;
 }
 .orderdetail_right{
     display: inline-block;
     text-align: left;
-    width: 76%;
+    width: 77%;
 }
 
 .orderdetail_status{

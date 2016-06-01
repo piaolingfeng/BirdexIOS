@@ -7,7 +7,9 @@ var OrderProduct = require('./orderproduct.js');
 var OrderList = React.createClass({
 
     propTypes: {
-        orderEntity: React.PropTypes.object.isRequired,
+        orderEntity: React.PropTypes.object.isRequired,//详情实体
+        position:React.PropTypes.number.isRequired,//位置
+        cacheOrderListFunc:React.PropTypes.func.isRequired,//回调用于缓存RequestEntity，orderList,position
     },
 
     copy: function (e) {
@@ -26,6 +28,7 @@ var OrderList = React.createClass({
 
 
     changeToDetail() {
+        this.props.cacheOrderListFunc(this.props.position);
         var param = { order_code: this.props.orderEntity.order_code }
         gVar.pushPage({ pathname: 'orderdetail', state: param });
     },
@@ -47,8 +50,13 @@ var OrderList = React.createClass({
     },
 
     logisticsTracking: function (e) {
+        var param = { 
+            order_code: this.props.orderEntity.order_code ,
+            Status_name:this.props.orderEntity.status_name,
+            Receiver_mobile:this.props.orderEntity.receiver_mobile,
+        }
         e.stopPropagation();
-        gVar.pushPage({ pathname: "logistics", state: "" });
+        gVar.pushPage({ pathname: "logistics", state: param });
     },
 
     contactCustomer: function (e) {
@@ -57,14 +65,16 @@ var OrderList = React.createClass({
     },
 
     changeAddr: function (e) {
+        var param = { order_code: this.props.orderEntity.order_code }
         // console.log(e+"ddd");
         e.stopPropagation();
-        gVar.pushPage({ pathname: "changeaddress", state: "" });
+        gVar.pushPage({ pathname: "changeaddress", state: param });
     },
 
 
 
     render: function () {
+        // console.log(this.props.orderEntity);
         var productList = [];
         var product = this.props.orderEntity.products;
         for (var i = 0; i < product.length; i++) {
@@ -81,24 +91,24 @@ var OrderList = React.createClass({
         return (
             <div style={{ backgroundColor: gVar.Color_white, marginTop: "10px" }} onClick={this.changeToDetail}>
                 <div className="orderlist_head">
-                    <div ref="copy"  onClick={this.copy} style={{ float: "left" }}>
-                        <span id="orderName" style={{ color: gVar.Color_title }}>{orderEntity.order_oms_no}</span>
+                    <div ref="copy"  onClick={this.copy} style={{ float: "left"}}>
+                        <span id="orderName" style={{ color: gVar.Color_title,fontSize:"13px"}}>{orderEntity.order_oms_no}</span>
                         <img className="orderlist_img" src={copy}></img>
                     </div>
-                    <div ref="time" style={{ float: "right", color: gVar.Color_title }}>{orderEntity.created_time}</div>
-                    <div ref="status" className="orderlist_statu">{orderEntity.status_name}</div>
+                    <div ref="time" style={{ float: "right", color: gVar.Color_title,fontSize:"13px"}}>{orderEntity.created_time}</div>
+                    <div ref="status" className="orderlist_statu" style={{fontSize:"13px"}}>{orderEntity.status_name}</div>
                 </div>
-                <hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+                <hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
 
                 {productList}
 
                 <div ref="orderError" className="orderlist_head orderlist_error" style={{display:orderErrorDisplay}}>{orderEntity.verify_fail_detail}</div>
                 <div className="flexbox-container" style={{ backgroundColor: "#FAFAFA" }}>
-                    <span ref="logisticsTracking" className="orderlist_btn" >物流跟踪</span>
+                    <span ref="logisticsTracking" className="orderlist_btn" onClick={this.logisticsTracking}>物流跟踪</span>
                     <span className="orderlist_line"></span>
-                    <span ref="contactCustomer " className="orderlist_btn" >联系客服</span>
+                    <span ref="contactCustomer " className="orderlist_btn" onClick={this.contactCustomer}>联系客服</span>
                     <span ref="changeAddr_line"className="orderlist_line"></span>
-                    <span ref="changeAddr" className="orderlist_btn" >修改地址</span>
+                    <span ref="changeAddr" className="orderlist_btn" onClick={this.changeAddr}>修改地址</span>
                     <div className="orderlist_clear"></div>
                 </div>
             </div>

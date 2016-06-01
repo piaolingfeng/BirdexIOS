@@ -28,6 +28,7 @@ var MainPage = React.createClass({
 		this.setState({});
 	},
 
+	
 
 	getInitialState() {
 		// currentPosition = 1;
@@ -41,7 +42,7 @@ var MainPage = React.createClass({
         // var titleIndex = this.state.data.titleIndex;//获取索引,setState的数据未更新过来,
         // console.log(currentPosition+"shouldComponentUpdate"+targetPosition); 
         if (currentPosition == targetPosition) {
-			console.log(false);
+			// console.log(false);
             return false;//render将不会被调用
         }
         else {
@@ -70,7 +71,7 @@ var MainPage = React.createClass({
 			<div className="titlebar_extend_head">
 				{displayPage}
 				<div  style={{ position: "fixed", bottom: 0, height: 55, width: "100%", backgroundColor: "#F0F0F0", fontSize: "16pt" }}>
-					<hr style={{ height: "1px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
+					<hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
 					<div className="flexbox-container" style={{height:55,zIndex:"1000"}}>
 						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 1) }>首页</button>
 						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 2) }>消息</button>
