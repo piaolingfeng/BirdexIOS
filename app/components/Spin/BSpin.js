@@ -53,7 +53,7 @@ function showLoading(message) {
         spinner.spin(divBack);
     }
 
-    console.log("show spin");
+    // console.log("show spin");
 }
 
 function hideLoading() {

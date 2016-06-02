@@ -8,6 +8,8 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var upImg = require('./image/up.png');
 var downImg = require('./image/down.png');
 
+var toast = require('../../util/Tips/tips.js');
+
 var gVar = require('../../main/global.js');
 
 
@@ -214,7 +216,7 @@ var AM = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
 

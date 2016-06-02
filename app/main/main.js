@@ -48,6 +48,8 @@ var Recharge=require('../pages/recharge/recharge.js');
 var About=require('../pages/about/about.js');
 //上传身份证
 var uploadIdcard = require('../pages/uploadidcard/uploadidcard.js');
+//修改头像
+var changeIcon = require('../pages/changeicon/changeicon.js');
 //新功能介绍
 var Introduce = require('../pages/introduce/introduce.js')
 //闪屏页
@@ -150,6 +152,7 @@ ReactDOM.render(
             <Route path="myaccount" component={MyAccount}/>
             <Route path="accountmanager" component={AccountManager}/>
             <Route path="uploadIdcard" component={uploadIdcard}/>
+            <Route path="changeIcon" component={changeIcon}/>
         </Route> 
     </Router>,
     

@@ -9,6 +9,9 @@ var check = require('./image/check.png');
 var account = require('./image/account.png');
 var Titlebar = require('../../components/titlebar/titlebar.js');
 var gVar = require("../../main/global.js");
+
+var toast = require('../../util/Tips/tips.js');
+
 require('./mymessage.css');
 var minePage = [{
     img: require('./image/warning.png'),
@@ -123,7 +126,7 @@ var MM = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
 
