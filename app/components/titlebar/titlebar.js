@@ -16,6 +16,7 @@ var refresh = require('./images/refresh.png');
 // menuFunc={this.menuFunc},menuFunc是menu回调,不传默认跳转mytool页面
 //backNoneDisplay 默认不传,若传false则代表不显示title的返回
 //refreshFunc reflesh回调，默认隐藏
+//saveFunc保存按钮回调方法
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
     
@@ -23,6 +24,7 @@ var Titlebar = React.createClass({
         menuFunc: React.PropTypes.func,
         backNoneDisplay:React.PropTypes.any,
         refreshFunc:React.PropTypes.func,
+        saveFunc:React.PropTypes.func,
     },
     
     componentDidMount:function(){
@@ -70,6 +72,10 @@ var Titlebar = React.createClass({
         this.props.refreshFunc();
     },
     
+    save(){
+        this.props.saveFunc();
+    },
+    
     render:function(){
         var bg_color = gVar.Color_blue_head;
         
@@ -107,7 +113,7 @@ var Titlebar = React.createClass({
             
             <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{padding:gVar.Padding_head,display:backImg_display}}/>
             <div className="titlebar_right" >
-                <span className="titlebar_save" ref="save" style={{color:gVar.Color_white,fontSize:gVar.FontSize_title_head,padding:gVar.Padding_text_head,margin:"auto",fontWeight:"bold"}}>{save}</span>
+                <span className="titlebar_save" ref="save" style={{color:gVar.Color_white,fontSize:gVar.FontSize_title_head,padding:gVar.Padding_text_head,margin:"auto",fontWeight:"bold"}} onClick={this.save}>{save}</span>
                 <img className="titlebar_menu" ref="menu" src={ic_setting} 
                 style={{padding:gVar.Padding_head,display:settingImg_display}} onClick={this.settingClick}/>
                 <img className="titlebar_menu" src={refresh} 

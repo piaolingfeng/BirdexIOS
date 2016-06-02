@@ -2,6 +2,8 @@ var React = require('react');
 
 var showModalPage = require('../components/BModalpage/bmodalpage.js').showModalPage;
 var hideModalPage = require('../components/BModalpage/bmodalpage.js').hideModalPage;
+var toast = require('../util/Tips/tips.js');
+var waitDailog = require('../components/Spin/BSpin.js');
 
 var gVar = {
 
@@ -174,6 +176,36 @@ var gVar = {
         return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
     },
 
+    sendRequest:function(params,url,successCallback){
+        waitDailog.showLoading();
+        $.ajax({
+            data: params,
+            url: url,
+            dataType: 'json',
+            cache: false,
+			beforeSend: function(request){
+				request.setRequestHeader('DEVICE-TOKEN','Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
+				request.setRequestHeader('APP-VERSION','1.0');
+			},//这里设置header
+			// xhrFields: {
+			// 	withCredentials: true
+			// },
+            success: function (data) {
+                // this.setState({ data: data });
+				// alert("success");
+				successCallback(data);
+            }.bind(this),
+            error: function (xhr, status, err) {
+                // console.error( err.toString());
+				// alert(err);
+                toast(err);
+            }.bind(this),
+            complete: function (XMLHttpRequest, textStatus) {
+                waitDailog.hideLoading();
+            }.bind(this),
+            timeout: 5000,
+        });
+    },
 };
 
 module.exports = gVar;

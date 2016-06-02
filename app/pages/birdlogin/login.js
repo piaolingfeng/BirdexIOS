@@ -20,33 +20,39 @@ var LW = React.createClass({
 			device_type: "IOS",
 			device_info: navigator.userAgent,
 		};
-		console.log(param)
-		$.ajax({
-            data: param,
-            url: gVar.getBASE_URL() + 'Public/login',
-            dataType: 'json',
-            cache: false,
-			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
-			// xhrFields: {
-			// 	withCredentials: true
-			// },
-            success: function (data) {
-                // this.setState({ data: data });
-				// alert("success");
-				this.loginSuccess(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-				alert(err);
-            }.bind(this)
-        });
+		 var url= gVar.getBASE_URL() + 'Public/login'
+		// console.log(param)
+		// $.ajax({
+        //     data: param,
+        //     url: gVar.getBASE_URL() + 'Public/login',
+        //     dataType: 'json',
+        //     cache: false,
+		// 	beforeSend: function(request){
+		// 		request.setRequestHeader('DEVICE-TOKEN','Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
+		// 		request.setRequestHeader('APP-VERSION','1.0');
+		// 	},//这里设置header
+		// 	// xhrFields: {
+		// 	// 	withCredentials: true
+		// 	// },
+        //     success: function (data) {
+        //         // this.setState({ data: data });
+		// 		// alert("success");
+		// 		this.loginSuccess(data);
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         console.error( err.toString());
+		// 		alert(err);
+        //     }.bind(this)
+        // });
+		gVar.sendRequest(param,url,this.loginSuccess);
 
 		return;
 	},
 
+
 	loginSuccess: function (data) {
 		// 存储返回的data
-		// console.log(data);
+		console.log(data);
 		if (data.data) {
 			try { 
 				localStorage.setItem("company_code", data.data.company_code);

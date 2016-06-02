@@ -7,6 +7,8 @@ var head = require('./image/head.png');
 var gVar = require("../../main/global.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
 
+var toast = require('../../util/Tips/tips.js');
+
 // 修改头像需要用到的
 var companyCode = "";
 
@@ -59,7 +61,7 @@ var MA = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
         
@@ -79,7 +81,7 @@ var MA = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
 
@@ -132,14 +134,20 @@ var MA = React.createClass({
     error:function name(params) {
         $('#logo').attr("src",head);
     },
+    
+    changeIcon:function name(params) {
+        var param = {url:logo}
+        // 跳转到修改头像页面
+        gVar.pushPage({pathname:"changeIcon", state:param});
+    },
 
     render: function () {
         return (
-            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_white }}>
+            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_white}}>
                 <TitleBar  title="我的账户" menu="true" menuFunc={this.menuFunc}/>
                 <div className="titlebar_head_down">
                     <div style={{ backgroundImage: 'url(' + headbg + ')', height: 250, width: "100%", textAlign: "center", marginBottom: 20 }}>
-                        <img id="logo" className="img-circle" src={head} style={{ height: "100px", width: "100px", marginTop: "70px" }} onError={this.error} />
+                        <img id="logo" className="img-circle" src={head} style={{ height: "100px", width: "100px", marginTop: "70px" }} onError={this.error} onClick={this.changeIcon} />
                         <div style={{ marginTop: 10 }}>
                             <span id="company_name" style={{ color: "#FFFFFF", fontSize: 17 }}>欢迎您！</span>
                         </div>

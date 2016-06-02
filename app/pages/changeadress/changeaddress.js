@@ -23,6 +23,8 @@ var headImg = require('./image/changeadresshead.png');
 
 var TitleBar = require('../../components/titlebar/titlebar.js');
 
+var toast = require('../../util/Tips/tips.js');
+
 var provinceId = "";
 var cityId = "";
 var areaId = "";
@@ -109,7 +111,7 @@ var CA = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
 
@@ -134,15 +136,15 @@ var CA = React.createClass({
     
     confirm:function name(params) {
         if($('#consignee').val() == "" || $('#consignee').val() == "undefined"){
-            alert("收货人不能为空");
+            toast("收货人不能为空");
             return;
         }
         if($('#phone').val() == "" || $('#phone').val() == "undefined"){
-            alert("联系电话不能为空");
+            toast("联系电话不能为空");
             return;
         }
         if($('#detail_adress').val() == "" || $('#detail_adress').val() == "undefined"){
-            alert("详细地址不能为空");
+            toast("详细地址不能为空");
             return;
         }
         
@@ -183,7 +185,7 @@ var CA = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
 
@@ -194,10 +196,12 @@ var CA = React.createClass({
     modOrderSuccess:function (data) {
         console.log(data);
         if(0==data.error){
-            alert("修改成功");
+            toast("修改成功");
             
             var adds = provinceName + cityName + areaName + $('#detail_adress').val();
             EventBus.dispatch("changeAddr",null, adds);
+        } else {
+            alert(data.data);
         }
     },
     
