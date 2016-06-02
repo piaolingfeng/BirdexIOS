@@ -10,6 +10,8 @@ var LunBo = require('../../components/carousel/carousel.js');
 var IMNumber = require('../../components/IMNumber/im_number.js');
 var ImageButton = require('../../components/ImageButton/ImageButton.js');
 
+var Carousel = require('../../components/CarouselMore/carouselmore.js');
+
 var showDialog = require('../../components/BDialog/bdialog.js');
 var toast = require('../../util/Tips/tips.js');
 
@@ -83,7 +85,7 @@ var FragmentIndex = React.createClass({
             cache: false,
             success: function (data) {
                 // this.setState({ data: data })
-                console.log("success");
+                // console.log("success");
                 this.dealTodayData(data);
             }.bind(this),
             error: function (xhr, status, err) {
@@ -92,7 +94,7 @@ var FragmentIndex = React.createClass({
             }.bind(this),
             complete: function (XMLHttpRequest, textStatus) {
                 //调用本次ajax请求时传递的options参数 
-                console.log("complete");
+                // console.log("complete");
                 if (myScroll != null) {
                     myScroll.refresh();
                 }
@@ -218,6 +220,7 @@ var FragmentIndex = React.createClass({
     },
 
     componentDidMount: function () {
+        // console.log(gVar.userName);
         if (!EventBus.hasEventListener("saveDisplayList"))//没有注册就注册
             EventBus.addEventListener("saveDisplayList", this.saveDisplayList, this);
         if (!EventBus.hasEventListener("indexListChange"))//没有注册就注册
@@ -342,7 +345,8 @@ var FragmentIndex = React.createClass({
     getItems() {
         console.log("getItems");
         var list = new Array();
-        list.push(<LunBo />);
+        // list.push(<LunBo />);
+        list.push(<Carousel />)
         list.push(<div style={{ width: "95%", margin: "10px auto 10px 5%", fontSize: "13pt", color: "#7F7F7F", fontWeight: 600 }}>
             数据看板
         </div>);

@@ -10,17 +10,37 @@ var BPopover = require('../../components/BPopover/bpopover.js');
 // var timeList = new Array();
 // var isGetData = false;
 var Status = React.createClass({
+    
+    counter:0,
 
     params: {//局部变量
         warehouseList: [],
         statusList: [],
         timeList: [],
+        counter:0,
     },
 
-    componentWillUnmount(){
+    componentDidMount(){
+        // gVar.userName = "111111";
+        // console.log(gVar.userName);
         // this.params.warehouseList = [];//内容是一样的
-        this.params.statusList=[];
+        // this.params.statusList=[];
+        // this.params.counter++;
+        // this.counter++;
+        // console.log(this.params,"getInitialState",this.counter);
+        // console.log();
         // this.params.timeList=[];//内容是一样的
+    },
+    
+    componentWillUnmount(){
+        this.params.statusList=[];
+    },
+    
+    getInitialState(){
+        // this.counter++;
+        // console.log(this.counter);
+        // console.log(this.params,"getInitialState",this.counter);
+        return null;
     },
 
     // componentWillReceiveProps(nextprops){

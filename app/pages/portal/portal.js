@@ -16,6 +16,7 @@ var Index = 1;
 var currentPosition = 1;
 var targetPosition = 1;
 require('./portal.css');
+var EventBus = require('eventbusjs');
 
 var MainPage = React.createClass({
 
@@ -28,13 +29,25 @@ var MainPage = React.createClass({
 		this.setState({});
 	},
 
-	
+
 
 	getInitialState() {
 		// currentPosition = 1;
         // targetPosition = 1;
 		// Index = 1;
 		return null;
+	},
+
+	componentDidMount() {
+		if (!EventBus.hasEventListener("logout"))//没有注册就注册
+            EventBus.addEventListener("logout", this.dealLogoutData, this);
+	},
+
+	dealLogoutData() {
+		// currentPosition = 1;
+		// targetPosition = 1;
+		Index = 1;
+		console.log("targetPosition",targetPosition);
 	},
 
 	//如果 shouldComponentUpdate 返回 false，则 render() 将不会执行，直到下一次 state 改变
@@ -72,7 +85,7 @@ var MainPage = React.createClass({
 				{displayPage}
 				<div  style={{ position: "fixed", bottom: 0, height: 55, width: "100%", backgroundColor: "#F0F0F0", fontSize: "16pt" }}>
 					<hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
-					<div className="flexbox-container" style={{height:55,zIndex:"1000"}}>
+					<div className="flexbox-container" style={{ height: 55, zIndex: "1000" }}>
 						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 1) }>首页</button>
 						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 2) }>消息</button>
 						<button className="portal_btn"  onClick={this.tabBarClick.bind(this, 3) }>我的</button>

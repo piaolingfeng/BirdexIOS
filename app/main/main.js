@@ -48,6 +48,10 @@ var Recharge=require('../pages/recharge/recharge.js');
 var About=require('../pages/about/about.js');
 //上传身份证
 var uploadIdcard = require('../pages/uploadidcard/uploadidcard.js');
+//新功能介绍
+var Introduce = require('../pages/introduce/introduce.js')
+//闪屏页
+var Splash = require('../pages/splash/splash.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -120,7 +124,9 @@ ReactDOM.render(
             history={browserHistory}>
              
         <Route path="/" component={App}> 
-            <IndexRoute component={LoginWindow}/> 
+            <IndexRoute component={Splash}/> 
+            <Route path="splash" component={Splash} />
+            <Route path="introduce" component={Introduce} /> 
             <Route path="login" component={LoginWindow} /> 
             <Route path="portal" component={Portal} />
             <Route path="popmenu" component={TestPopMenu} />

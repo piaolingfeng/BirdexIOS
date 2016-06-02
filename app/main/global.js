@@ -47,6 +47,8 @@ var gVar = {
     Padding_head: "14px",
     Padding_text_head: "12px",
     Padding_titlebar: "48px",
+    
+    FIRST_ENTRY_APP : "FIRST_ENTRY_APP",
     //切换到新页面
     pushPage: function (pathname, isModal) {
         
@@ -77,7 +79,7 @@ var gVar = {
             if (ModalPage != null)
             {
                 // global.router.history.createLocation();
-                var location = global.router.history.createLocation(pathname)//手动创建路由参数并把参数传递到下一个页面
+                var location = global.router.history.createLocation(pathname)
                 console.log(location);
                 showModalPage(<ModalPage location = {location}/>);
             }

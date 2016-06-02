@@ -47,6 +47,13 @@ var LW = React.createClass({
 	loginSuccess: function (data) {
 		// 存储返回的data
 		// console.log(data);
+		if($("#remember").is(':checked')){//判断是否存储账户密码
+			var name = $("#name").val();
+			var password = $("#password").val();
+			// console.log(name,password);
+			localStorage.setItem("log_password",password);
+			localStorage.setItem("log_name",name);
+		}
 		if (data.data) {
 			try { 
 				localStorage.setItem("company_code", data.data.company_code);
@@ -69,6 +76,15 @@ var LW = React.createClass({
 		// alert("success");
 	},
 
+	componentDidMount(){
+		if(localStorage.getItem("log_name")){
+			$("#name").val(localStorage.getItem("log_name"));
+		}
+		if(localStorage.getItem("log_password")){
+			$("#password").val(localStorage.getItem("log_password"));
+		}
+	},
+
 	render: function () {
 		return (
 			<div style={{ position: "absolute", top: 0, width: "100%", height: "100%" }}>
@@ -80,18 +96,18 @@ var LW = React.createClass({
 				<form role="form" style={{ width: "80%", margin: "20px auto" }} >
 					<div className="form-group">
 						<input type="text" className="form-control" id="name"
-							placeholder="输入帐号" value="wly5"/>
+							placeholder="输入帐号"/>
 
 					</div>
 
 					<div className="form-group">
 						<input type="password" className="form-control" id="password"
-							placeholder="输入密码" value="123456"/>
+							placeholder="输入密码"/>
 					</div>
 
 					<div className="checkbox">
 						<label>
-							<input type="checkbox" />记住密码
+							<input id="remember" type="checkbox" />记住密码
 						</label>
 					</div>
 					<div style={{ margin: "50px 50px 0 50px" }}>

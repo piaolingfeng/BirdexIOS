@@ -7,6 +7,7 @@ var React = require('react');
 require('./css/geren.css');
 var gVar = require('../../main/global.js');
 var toast = require('../../util/Tips/tips.js');
+var EventBus = require('eventbusjs');
 
 var minePage = [{
     img: require('./image/myaccount.png'),
@@ -63,7 +64,7 @@ var GerenItem = React.createClass({
                 break;
             case 5://检查更新
                 // gVar.pushPage("");
-                this.checkForUpdata();
+                // this.checkForUpdata();
                 break;
         }
     },
@@ -75,7 +76,7 @@ var GerenItem = React.createClass({
             // user_code: localStorage.getItem('user_code'),
         };
         var url = "http://app.birdex.cn/sanfangcang.html";
-        $.ajax(url,{
+        $.ajax(url, {
             // data: params,
             // async: true,
             // dataType: 'json',
@@ -97,37 +98,37 @@ var GerenItem = React.createClass({
         });
     },
 
-handleTouchStart: function (ele) {
-    $(ele.target).addClass("item_touch_start");
-},
-handleTouchEnd: function (ele) {
-    $(ele.target).removeClass("item_touch_start");
-},
-render: function () {
-    var cname;
-    if (this.props.info.type == 0) {
-        cname = "gerenitem_top";
-    } else if (this.props.info.type == 1) {
-        cname = "gerenitem_middle";
-    } else {
-        cname = "gerenitem_bottom";
+    handleTouchStart: function (ele) {
+        $(ele.target).addClass("item_touch_start");
+    },
+    handleTouchEnd: function (ele) {
+        $(ele.target).removeClass("item_touch_start");
+    },
+    render: function () {
+        var cname;
+        if (this.props.info.type == 0) {
+            cname = "gerenitem_top";
+        } else if (this.props.info.type == 1) {
+            cname = "gerenitem_middle";
+        } else {
+            cname = "gerenitem_bottom";
+        }
+        var item = (<div className = {cname} onClick={this.onItemClick.bind(this, this.props.info.index) }
+            onTouchStart = {
+                this.handleTouchStart.bind(this)
+            }onTouchEnd = {
+                this.handleTouchEnd.bind(this)
+            } onTouchCancel={this.handleTouchEnd.bind(this) }>
+            <img className = "img-rounded"
+                style = {{
+                    width: "30px",
+                    height: "30px"
+                }}
+                src = {this.props.info.img}/>
+            <lable className="geren_item_text">{this.props.info.name}</lable >
+        </div>);
+        return item;
     }
-    var item = (<div className = {cname} onClick={this.onItemClick.bind(this, this.props.info.index) }
-        onTouchStart = {
-            this.handleTouchStart.bind(this)
-        }onTouchEnd = {
-            this.handleTouchEnd.bind(this)
-        } onTouchCancel={this.handleTouchEnd.bind(this) }>
-        <img className = "img-rounded"
-            style = {{
-                width: "30px",
-                height: "30px"
-            }}
-            src = {this.props.info.img}/>
-        <lable className="geren_item_text">{this.props.info.name}</lable >
-    </div>);
-    return item;
-}
 });
 
 var GerenList = React.createClass({
@@ -145,6 +146,12 @@ var Geren = React.createClass({
     componentDidMount: function () { },
 
     logout: function () {
+        localStorage.removeItem("company_code");
+        localStorage.removeItem('company_name');
+        localStorage.removeItem('company_short_name');
+        localStorage.removeItem('user_code');
+        localStorage.removeItem('log_password');
+        EventBus.dispatch("logout");//发布事件到portal里面去更新里面的index位置值
         gVar.pushPage("login");
         // console.log(global.router);
     },
