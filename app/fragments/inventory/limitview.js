@@ -1,48 +1,106 @@
-var React=require('react');
-var triangle_down=require('../../main/image/triangle_down.png');
-var triangle_up=require('../../main/image/triangle_up.png');
-var laydown=require('../../main/image/laydown.png');
+var React = require('react');
+var gVar = require('../../main/global.js');
+var toast = require('../../util/Tips/tips.js');
+var triangle_down = require('../../main/image/triangle_down.png');
+var triangle_up = require('../../main/image/triangle_up.png');
+var laydown = require('../../main/image/laydown.png');
 var BPopover = require('../../components/BPopover/bpopover.js');
-var LimitView=React.createClass({
-    getInitialState:function() {
-        return {item1select:false};
+var LimitView = React.createClass({
+    privateVar: {
+        params: {
+            app_debug: 1,
+            company_code: localStorage.getItem("company_code"),
+            user_code: localStorage.getItem('user_code')
+        },
+        menuArray: ["全部"],
+        dataItem: [{ name: "全部", warehouse_code: "" }],
+        //仓库对象
+        inventoryObj: { name: "全部", warehouse_code: "" },
+        sortFlag:false
     },
-    propTypes:{
+    componentWillUnmount: function () {
+        //清除privateVAR缓存
+        // console.log('--------finish-------');
+        this.privateVar.inventoryObj={ name: "全部", warehouse_code: "" };
+    },
+    getInitialState: function () {
+        return {
+            item1select: false
+        };
+    },
+    propTypes: {
         //设置左侧点击 参数flag表示点击元素
-        limitClick:React.PropTypes.func,
-        popMenuItemClick:React.PropTypes.func
+        sortClick: React.PropTypes.func,
+        popMenuItemClick: React.PropTypes.func
     },
-    clickHandle:function(index,ele){
-        if(index==0){
-            this.setState({item1select:!this.state.item1select});
+    clickHandle: function (ele) {
+        this.privateVar.sortFlag=!this.privateVar.sortFlag;
+        if (this.props.sortClick) {
+            this.props.sortClick(this.privateVar.sortFlag);
         }
-        if(this.propTypes.limitClick){
-            this.propTypes.limitClick(index);
-        }
+        this.setState({});
+        // if (index == 0) {
+            // this.setState({ item1select: !this.state.item1select });
+        // }
+        
     },
     menuItemClick: function (index) {
-        this.props.popMenuItemClick(index);
+        //防止相同选中再次执行
+        if (this.privateVar.dataItem[index].warehouse_code != this.privateVar.inventoryObj.warehouse_code) {
+            this.privateVar.inventoryObj = this.privateVar.dataItem[index]
+            //选中的仓库对象
+            this.props.popMenuItemClick(index, this.privateVar.inventoryObj);
+        }
     },
-    render:function(){
-        var mytrigger=(<div style={{
-            float:"left"
-        }} ><span>全部仓库</span><img src={laydown}/></div>);
-        var menuArray=["美国仓","日本仓","澳洲仓","意大利仓","南非仓","英国仓"];
+    componentDidMount: function () {
+        var component = this;
+        if (this.privateVar.menuArray.length == 1) {
+            //设置数据源
+            $.ajax({
+                url: gVar.getBASE_URL() + "Warehouse/companyAll",
+                type: "POST",
+                data: component.privateVar.params,
+                async: true,
+                cache: false,
+                dataType: 'json',
+                success: function (val) {
+                    if (val.error == 0) {
+                        // Array.prototype.push(component.privateVar.menuArray,val.data);
+                        $.each(val.data, function (index, obj) {
+                            component.privateVar.menuArray.push(obj.name);
+                            component.privateVar.dataItem.push(obj);
+                        });
+                        // component.setState({ flag: !component.state.flag });
+                        component.setState({});
+                    } else {
+                        toast(val.data);
+                    }
+                }, error: function (xhr, status, err) {
+                    toast('获取仓库列表失败!');
+                }
+            });
+        }
+    },
+    render: function () {
+        var mytrigger = (<div style={{
+            float: "left"
+        }} ><span>{this.privateVar.inventoryObj.name}</span><img src={laydown}/></div>);
+        // var menuArray = ["美国仓", "日本仓", "澳洲仓", "意大利仓", "南非仓", "英国仓"];
         return (<div style={{
-            height:"35px",
-            lineHeight:"35px",
-            padding:"0px 10px",
-            borderBottom:"1px solid #ddd",
-            backgroundColor:"#f5f4f4"
+            height: "35px",
+            lineHeight: "35px",
+            padding: "0px 10px",
+            borderBottom: "1px solid #ddd",
+            backgroundColor: "#f5f4f4"
         }}>
-        <BPopover menuItem={menuArray}
-						  menuItemClick={this.menuItemClick}
-				          triggerComp={mytrigger}
-						  placement="bottom" />	
-        <div style={{
-            float:"right"
-        }} onClick={this.clickHandle.bind(this,0)}><span>可用数量</span><img src={this.state.item1select?triangle_down:triangle_up}/></div>
+            <BPopover menuItem={this.privateVar.menuArray}
+                menuItemClick={this.menuItemClick}
+                triggerComp={mytrigger}
+                placement="bottom" />
+            <div style={{
+                float: "right"
+            }} onClick={this.clickHandle.bind() }><span>可用数量</span><img src={this.privateVar.sortFlag ?  triangle_up:  triangle_down}/></div>
         </div>);
     }
 });
-module.exports=LimitView;
+module.exports = LimitView;

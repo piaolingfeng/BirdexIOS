@@ -81,7 +81,8 @@ body {
 
 #scroller li {
 	/*padding:0 10px;*/
-	/*height:40px;*/
+	/**不设置会出现上下拉动异常**/
+	min-height:10px;
 	/*line-height:40px;*/
 	/*border-bottom:1px solid #ccc;
 	border-top:1px solid #fff;
@@ -117,9 +118,6 @@ body {
     -webkit-box-orient: horizontal;
     -webkit-box-pack: center;
 }
-#pullDown{
-	visibility: hidden; 
-}
 #pullDown .pullDownIcon, #pullUp .pullUpIcon  {
 	display:block; float:left;
 	width:40px; height:40px;
@@ -143,7 +141,7 @@ body {
 	-webkit-transform:rotate(0deg) translateZ(0);
 }
 
-#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+#pullDown.list_loading .pullDownIcon, #pullUp.list_loading .pullUpIcon {
 	background-position:0 100%;
 	-webkit-transform:rotate(0deg) translateZ(0);
 	-webkit-transition-duration:0ms;
@@ -152,4 +150,8 @@ body {
 	-webkit-animation-duration:2s;
 	-webkit-animation-iteration-count:infinite;
 	-webkit-animation-timing-function:linear;
+}
+@-webkit-keyframes loading {
+	from { -webkit-transform:rotate(0deg) translateZ(0); }
+	to { -webkit-transform:rotate(360deg) translateZ(0); }
 }

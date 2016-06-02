@@ -20,31 +20,8 @@ var LW = React.createClass({
 			device_type: "IOS",
 			device_info: navigator.userAgent,
 		};
-		 var url= gVar.getBASE_URL() + 'Public/login'
-		// console.log(param)
-		// $.ajax({
-        //     data: param,
-        //     url: gVar.getBASE_URL() + 'Public/login',
-        //     dataType: 'json',
-        //     cache: false,
-		// 	beforeSend: function(request){
-		// 		request.setRequestHeader('DEVICE-TOKEN','Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
-		// 		request.setRequestHeader('APP-VERSION','1.0');
-		// 	},//这里设置header
-		// 	// xhrFields: {
-		// 	// 	withCredentials: true
-		// 	// },
-        //     success: function (data) {
-        //         // this.setState({ data: data });
-		// 		// alert("success");
-		// 		this.loginSuccess(data);
-        //     }.bind(this),
-        //     error: function (xhr, status, err) {
-        //         console.error( err.toString());
-		// 		alert(err);
-        //     }.bind(this)
-        // });
-		gVar.sendRequest(param,url,this.loginSuccess);
+		var url = gVar.getBASE_URL() + 'Public/login'
+		gVar.sendRequest(param, url, this.loginSuccess);
 
 		return;
 	},
@@ -53,17 +30,25 @@ var LW = React.createClass({
 	loginSuccess: function (data) {
 		// 存储返回的data
 		console.log(data);
+		// console.log(data);
+		if ($("#remember").is(':checked')) {//判断是否存储账户密码
+			var name = $("#name").val();
+			var password = $("#password").val();
+			// console.log(name,password);
+			localStorage.setItem("log_password", password);
+			localStorage.setItem("log_name", name);
+		}
 		if (data.data) {
-			try { 
+			try {
 				localStorage.setItem("company_code", data.data.company_code);
 				localStorage.setItem('company_name', data.data.company_name);
 				localStorage.setItem('company_short_name', data.data.company_short_name);
-				localStorage.setItem('user_code', data.data.user_code); 
+				localStorage.setItem('user_code', data.data.user_code);
 				console.log(data);
-			} catch (e) { 
+			} catch (e) {
 				// alert(e);
 				console.log(e);
-				alert("您处于无痕浏览，无法为您保存"); 
+				alert("您处于无痕浏览，无法为您保存");
 			}
 			gVar.pushPage("portal");
 		}
@@ -73,6 +58,15 @@ var LW = React.createClass({
         // editor.putString("company_short_name", user.getCompany_short_name());
         // editor.putString("user_code", user.getUser_code());
 		// alert("success");
+	},
+
+	componentDidMount() {
+		if (localStorage.getItem("log_name")) {
+			$("#name").val(localStorage.getItem("log_name"));
+		}
+		if (localStorage.getItem("log_password")) {
+			$("#password").val(localStorage.getItem("log_password"));
+		}
 	},
 
 	render: function () {
@@ -86,18 +80,18 @@ var LW = React.createClass({
 				<form role="form" style={{ width: "80%", margin: "20px auto" }} >
 					<div className="form-group">
 						<input type="text" className="form-control" id="name"
-							placeholder="输入帐号" value="wly5"/>
+							placeholder="输入帐号"/>
 
 					</div>
 
 					<div className="form-group">
 						<input type="password" className="form-control" id="password"
-							placeholder="输入密码" value="123456"/>
+							placeholder="输入密码"/>
 					</div>
 
 					<div className="checkbox">
 						<label>
-							<input type="checkbox" />记住密码
+							<input id="remember" type="checkbox" />记住密码
 						</label>
 					</div>
 					<div style={{ margin: "50px 50px 0 50px" }}>

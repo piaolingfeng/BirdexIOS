@@ -50,6 +50,10 @@ var About=require('../pages/about/about.js');
 var uploadIdcard = require('../pages/uploadidcard/uploadidcard.js');
 //修改头像
 var changeIcon = require('../pages/changeicon/changeicon.js');
+//新功能介绍
+var Introduce = require('../pages/introduce/introduce.js')
+//闪屏页
+var Splash = require('../pages/splash/splash.js');
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -121,8 +125,10 @@ ReactDOM.render(
                 }
             history={browserHistory}>
              
-        <Route path="/" component={App}> s
-            <IndexRoute component={LoginWindow}/> 
+        <Route path="/" component={App}> 
+            <IndexRoute component={Splash}/> 
+            <Route path="splash" component={Splash} />
+            <Route path="introduce" component={Introduce} /> 
             <Route path="login" component={LoginWindow} /> 
             <Route path="portal" component={Portal} />
             <Route path="popmenu" component={TestPopMenu} />

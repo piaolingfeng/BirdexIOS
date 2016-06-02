@@ -6,6 +6,9 @@ var React = require('react');
  */
 require('./css/geren.css');
 var gVar = require('../../main/global.js');
+var toast = require('../../util/Tips/tips.js');
+var EventBus = require('eventbusjs');
+
 var minePage = [{
     img: require('./image/myaccount.png'),
     name: "我的账户",
@@ -42,28 +45,59 @@ var GerenItem = React.createClass({
     onItemClick: function (index, ele) {
         switch (index) {
             case 0:
-            gVar.pushPage("myaccount");
+                gVar.pushPage("myaccount");
                 break;
             case 1:
-            var params = {
-                anotherEntry : true,
-            }
-            gVar.pushPage({pathname:"mymessage",state:params});
+                var params = {
+                    anotherEntry: true,
+                }
+                gVar.pushPage({ pathname: "mymessage", state: params });
                 break;
             case 2:
-            gVar.pushPage("accountmanager");
+                gVar.pushPage("accountmanager");
                 break;
             case 3:
-            gVar.pushPage("todayData");
+                gVar.pushPage("todayData");
                 break;
             case 4:
-            gVar.pushPage("about");
+                gVar.pushPage("about");
                 break;
             case 5://检查更新
-            // gVar.pushPage("");
+                // gVar.pushPage("");
+                // this.checkForUpdata();
                 break;
         }
     },
+
+    checkForUpdata() {
+        var params = {
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
+        };
+        var url = "http://app.birdex.cn/sanfangcang.html";
+        $.ajax(url, {
+            // data: params,
+            // async: true,
+            // dataType: 'json',
+            dataType: 'jsonp',
+            crossDomain: true,
+            // cache: true,
+            success: function (data) {
+                // this.setState({ data: data });
+
+                console.log(data);
+
+                // this.dealDashBorad();
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(err);
+                // toast(err.toString());
+            }.bind(this),
+            timeout: 5000,
+        });
+    },
+
     handleTouchStart: function (ele) {
         $(ele.target).addClass("item_touch_start");
     },
@@ -110,16 +144,22 @@ var GerenList = React.createClass({
 
 var Geren = React.createClass({
     componentDidMount: function () { },
-    
-    logout:function(){
+
+    logout: function () {
+        localStorage.removeItem("company_code");
+        localStorage.removeItem('company_name');
+        localStorage.removeItem('company_short_name');
+        localStorage.removeItem('user_code');
+        localStorage.removeItem('log_password');
+        EventBus.dispatch("logout");//发布事件到portal里面去更新里面的index位置值
         gVar.pushPage("login");
         // console.log(global.router);
     },
-    
+
     render: function () {
         return (<div style = {{
             overflow: "hidden",
-            paddingBottom:"70px"
+            paddingBottom: "70px"
         }} >
             <GerenList / >
             <input type = "button" className = "btn  btn-primary geren_exit" onClick={this.logout}

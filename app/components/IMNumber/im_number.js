@@ -6,6 +6,15 @@ var gVar = require('../../main/global.js');
 
 var IMNumber = React.createClass({
 
+	// params: {
+	// 	counter: 0,
+	// },
+
+	// componentDidMount() {
+	// 	this.params.counter++;
+	// 	console.log(this.params.counter);
+	// },
+
 	propTypes: {
         position: React.PropTypes.number
     },
@@ -34,7 +43,7 @@ var IMNumber = React.createClass({
         var lineDisplay = "block";
 		// alert(position);
         if (position != null) {
-            var i = (position  + 1 ) % 3;
+            var i = (position + 1) % 3;
             if (i == 0) {
 				lineDisplay = "none";
             }
@@ -42,7 +51,7 @@ var IMNumber = React.createClass({
 		return (
 			<div className="im_number_head" onClick={this.numberOnclick}>
 				<div style={{ float: "right", width: "0.5px", height: "70px", background: "#CBCBCB", display: lineDisplay }}></div>
-                <div  style={{paddingBottom:"10px",paddingTop:"10px"}}>
+                <div  style={{ paddingBottom: "10px", paddingTop: "10px" }}>
 
 					<div className="imnumber im_number_text" key={global.uniqueKey++} style={{
 						color: (this.props.hide ? "white" : "red"),

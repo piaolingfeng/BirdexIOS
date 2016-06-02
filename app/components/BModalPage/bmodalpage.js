@@ -12,7 +12,7 @@ function showModalPage(modalPage) {
     {
         domNode = document.createElement("div");
         domNode.setAttribute("id", "modalPage2198");
-        domNode.setAttribute("style", "z-index:99999;position:absolute;left:0;right:0;width:100%;height:100%;background-color:#FFFFFF;");
+        domNode.setAttribute("style", "z-index:120;position:absolute;left:0;right:0;width:100%;height:100%;background-color:#FFFFFF;");
         domNode.setAttribute("class", "page-fadein");
         document.body.appendChild(domNode);
     }

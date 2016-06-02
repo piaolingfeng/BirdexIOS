@@ -6,6 +6,7 @@ var gVar = require("../../main/global.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var PredictProduct = require('./predictproduct.js')
 var toast = require('../../util/Tips/tips.js');
+var EventBus = require('eventbusjs');
 var Data = null;
 // var ListView = require('../../components/listview/listview.js');
 
@@ -15,6 +16,10 @@ var PredictDetail = React.createClass({
         this.getPredictDetail();
     },
 
+    componentWillUnmount(){
+        EventBus.dispatch("clearCachePredictList");//清除页面详情
+    },
+    
     //获取预报详情
     getPredictDetail: function () {
         var params = {
@@ -38,7 +43,8 @@ var PredictDetail = React.createClass({
             error: function (xhr, status, err) {
                 // console.error(this.props.url, status, err.toString());
                 toast(err.toString());
-            }.bind(this)
+            }.bind(this),
+            timeout: 5000,
         });
     },
 

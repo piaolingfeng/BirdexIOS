@@ -49,6 +49,8 @@ var gVar = {
     Padding_head: "14px",
     Padding_text_head: "12px",
     Padding_titlebar: "48px",
+    
+    FIRST_ENTRY_APP : "FIRST_ENTRY_APP",
     //切换到新页面
     pushPage: function (pathname, isModal) {
         
@@ -65,9 +67,11 @@ var gVar = {
             
             var paths = global.router.props.children.props.children;
             var length = paths.length;
-            for (var i = 2; i < length; i++)
+            for (var i = 1; i < length; i++)
             {
-                if (paths[i].props.path == pathname)
+                // console.log(paths[i].props.path);
+                // console.log(pathname);
+                if (paths[i].props.path == strPathName)
                 {
                     ModalPage = paths[i].props.component;
                     break;
@@ -76,7 +80,10 @@ var gVar = {
             
             if (ModalPage != null)
             {
-                showModalPage(<ModalPage />);
+                // global.router.history.createLocation();
+                var location = global.router.history.createLocation(pathname)
+                console.log(location);
+                showModalPage(<ModalPage location = {location}/>);
             }
             else
             {
@@ -105,14 +112,16 @@ var gVar = {
         requestEntity.page_size = "10";//	N	20	每页显示条数
         requestEntity.keyword = "";//	N		订单单号、商品名称、外部编码、UPC的关键字
         requestEntity.warehouse_code = "";//e	N		仓库唯一编码。例如：HKG
+        requestEntity.warehouse_name = "全部仓库";
         requestEntity.start_date = "";//	N		商品创建时间，区间结束日期，格式：2015-09-24//	N		商品创建时间，区间开始日期，格式：2015-09-24
         requestEntity.end_date = "";
         requestEntity.sign_start_date = "";//更新时间
         requestEntity.sign_end_date = "";
         requestEntity.checkout_start_date = "";//出库的时间
         requestEntity.checkout_end_date = "";
+        requestEntity.time_name = "不限时间";
         requestEntity.status = "";//	N		订单状态10:'待审核'; 11: '已删除'; 2:'等待出库'; 20: '准备出库'; 21: '包裹出库中'; 30: '审核不通过'; 40: '已出库'; 5: '运输中'; 50: '包裹空运中'; 51: '待清关'; 52: '包裹清关中'; 53: '包裹已清关'; 60: '已签收';
-        requestEntity.statusName = "";
+        requestEntity.statusName = "全部状态";
         requestEntity.app_debug = 1;
         requestEntity.company_code = localStorage.getItem("company_code");
         requestEntity.user_code = localStorage.getItem('user_code');

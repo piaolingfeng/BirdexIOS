@@ -7,7 +7,9 @@ var OrderProduct = require('./orderproduct.js');
 var OrderList = React.createClass({
 
     propTypes: {
-        orderEntity: React.PropTypes.object.isRequired,
+        orderEntity: React.PropTypes.object.isRequired,//详情实体
+        position:React.PropTypes.number.isRequired,//位置
+        cacheOrderListFunc:React.PropTypes.func.isRequired,//回调用于缓存RequestEntity，orderList,position
     },
 
     copy: function (e) {
@@ -26,6 +28,7 @@ var OrderList = React.createClass({
 
 
     changeToDetail() {
+        this.props.cacheOrderListFunc(this.props.position);
         var param = { order_code: this.props.orderEntity.order_code }
         gVar.pushPage({ pathname: 'orderdetail', state: param });
     },

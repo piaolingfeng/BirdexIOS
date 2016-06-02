@@ -17,6 +17,7 @@ var refresh = require('./images/refresh.png');
 //backNoneDisplay 默认不传,若传false则代表不显示title的返回
 //refreshFunc reflesh回调，默认隐藏
 //saveFunc保存按钮回调方法
+//backCallBack 返回时可以做回调
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
     
@@ -25,6 +26,7 @@ var Titlebar = React.createClass({
         backNoneDisplay:React.PropTypes.any,
         refreshFunc:React.PropTypes.func,
         saveFunc:React.PropTypes.func,
+        backCallBack:React.PropTypes.func,
     },
     
     componentDidMount:function(){
@@ -33,6 +35,9 @@ var Titlebar = React.createClass({
     
     back:function () {
         // alert("back");
+        if(this.props.backCallBack){//返回时可以做回调
+            this.props.backCallBack();
+        }
         gVar.popPage();
         return;
     },

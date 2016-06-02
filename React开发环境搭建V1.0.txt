@@ -51,6 +51,7 @@ React开发环境搭建(Windows)
    在工程目录输入命令webpack。
 
 8. 试运行
+webpack-dev-server --host 0.0.0.0
 
    在工程目录输入 webpack-dev-server , 此命令首先编译打包，然后运行一个web server，端口由webpack.config.js指定，一般是9999, 此时用浏览器访问
 

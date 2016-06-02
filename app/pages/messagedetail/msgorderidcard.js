@@ -8,9 +8,12 @@ var MsgOrderIdCard = React.createClass({
 
     propTypes: {
         messageEntity: React.PropTypes.object.isRequired,
+        callback: React.PropTypes.func,
+        position: React.PropTypes.number,
     },
 
     onItemClick: function (order_code) {
+        this.props.callback(this.props.position);
         var param = { order_code: order_code }
         gVar.pushPage({ pathname: 'orderdetail', state: param });
     },
@@ -44,7 +47,7 @@ var MsgOrderIdCard = React.createClass({
 
                     <table >
                         <tr className="messagedetail_padding messagedetail_top_padding" style={{ display: "-webkit-inline-box", paddingBottom: "0px" }}>
-                            <td style={{ width: "21%" ,verticalAlign:"top"}}>收件地址: </td>
+                            <td style={{ width: "21%", verticalAlign: "top" }}>收件地址: </td>
                             <td >{entity.msg_content.receiver_name}, {entity.msg_content.receiver_mobile},
                                 {entity.msg_content.receiver_province}{entity.msg_content.receiver_city}
                                 {entity.msg_content.receiver_area}{entity.msg_content.receiver_address}</td>
