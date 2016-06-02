@@ -200,7 +200,7 @@ var ListView = React.createClass({
                     }
                 </ul>
                 <div id="pullUp" style={{ display: this.props.showDownload ? "" : "none" }}>
-                    <span className="pullUpIcon" ></span><span className="pullUpLabel" >上拉加载更多...</span>
+                    <span className="pullUpIcon" ></span><span className="pullUpLabel" style={{ height: 0, marginBottom: "30px", width: "70px" }}>上拉加载更多...</span>
                 </div>
             </div>
             <div style={{

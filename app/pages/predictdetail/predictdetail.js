@@ -54,12 +54,12 @@ var PredictDetail = React.createClass({
         if (data != null) {
             if (data.error == 0) {
                 Data = data;
+                console.log(data.data);
             } else {
-                // console.log(data.data);
                 toast(data.data);
             }
         }
-        this.setState({ data: "" });
+        this.setState({ });
     },
 
     //product_code 确认入库的商品，不传表示确认所有的待确认入库的商品

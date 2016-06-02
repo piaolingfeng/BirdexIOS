@@ -110,7 +110,7 @@ var Titlebar = React.createClass({
             backgroundColor:bg_color,
         }}>
             
-            <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{padding:gVar.Padding_head,display:backImg_display}}/>
+            <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{padding:gVar.Padding_head,display:backImg_display,paddingRight:"24px"}}/>
             <div className="titlebar_right" >
                 <span className="titlebar_save" ref="save" style={{color:gVar.Color_white,fontSize:gVar.FontSize_title_head,padding:gVar.Padding_text_head,margin:"auto",fontWeight:"bold"}}>{save}</span>
                 <img className="titlebar_menu" ref="menu" src={ic_setting} 

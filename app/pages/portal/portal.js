@@ -47,7 +47,7 @@ var MainPage = React.createClass({
 		// currentPosition = 1;
 		// targetPosition = 1;
 		Index = 1;
-		console.log("targetPosition",targetPosition);
+		console.log("targetPosition", targetPosition);
 	},
 
 	//如果 shouldComponentUpdate 返回 false，则 render() 将不会执行，直到下一次 state 改变
@@ -70,12 +70,28 @@ var MainPage = React.createClass({
 		switch (Index) {
 			case 1:
 				displayPage = <FragmentIndex />
+				$(document).ready(function () {
+					$("#index").css("color", gVar.Color_blue_head);
+					$("#msg").css("color", gVar.Color_title);
+					$("#mine").css("color", gVar.Color_title);
+				});
+
 				break;
 			case 2:
 				displayPage = <FragmentMyMessage />
+				$(document).ready(function () {
+					$("#index").css("color", gVar.Color_title);
+					$("#msg").css("color", gVar.Color_blue_head);
+					$("#mine").css("color", gVar.Color_title);
+				});
 				break;
 			case 3:
 				displayPage = <FragmentMine />
+				$(document).ready(function () {
+					$("#index").css("color", gVar.Color_title);
+					$("#msg").css("color", gVar.Color_title);
+					$("#mine").css("color", gVar.Color_blue_head);
+				});
 				break;
 		}
 
@@ -86,9 +102,9 @@ var MainPage = React.createClass({
 				<div  style={{ position: "fixed", bottom: 0, height: 55, width: "100%", backgroundColor: "#F0F0F0", fontSize: "16pt" }}>
 					<hr style={{ height: "0.5px", width: "100%", margin: "auto", backgroundColor: gVar.Color_single_line, border: 0 }}></hr>
 					<div className="flexbox-container" style={{ height: 55, zIndex: "1000" }}>
-						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 1) }>首页</button>
-						<button className="portal_btn" onClick={this.tabBarClick.bind(this, 2) }>消息</button>
-						<button className="portal_btn"  onClick={this.tabBarClick.bind(this, 3) }>我的</button>
+						<button id="index" className="portal_btn" onClick={this.tabBarClick.bind(this, 1) } style={{color:gVar.Color_title}}>首页</button>
+						<button id="msg" className="portal_btn" onClick={this.tabBarClick.bind(this, 2) }  style={{color:gVar.Color_title}}>消息</button>
+						<button id="mine" className="portal_btn"  onClick={this.tabBarClick.bind(this, 3) } style={{color:gVar.Color_title}}>我的</button>
 					</div>
 				</div>
 			</div>

@@ -4,8 +4,7 @@ var ReactDOM = require('react-dom');
 var spinner = null;
 
 //message暂时不实现
-function showLoading(message)
-{
+function showLoading(message) {
     var opts = {
         lines: 12 // The number of lines to draw
         , length: 6 // The length of each line
@@ -28,16 +27,16 @@ function showLoading(message)
         , hwaccel: true // Whether to use hardware acceleration
         , position: 'absolute' // Element positioning
     };
-    
+
     var divMask = document.createElement("div");
     divMask.setAttribute("id", "pagemask1289");
     divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;");
     document.body.appendChild(divMask);
-    
+
     var divBack = document.createElement("div");
     divBack.setAttribute('style', "border-radius:6px;position:absolute;left:40vw;top:45vh;width:20vw;height:10vh;");
     divMask.appendChild(divBack);
-    
+
     /*var divSpin = document.createElement("div");
     divSpin.setAttribute('style', "position:absolute;left:0;top:0;width:100%;height:50%;");
     divBack.appendChild(divSpin);
@@ -46,31 +45,27 @@ function showLoading(message)
     divMsg.setAttribute('style', "padding-top:5px;text-align:center;position:absolute;left:0;top:50%;width:100%;height:50%;");
     divMsg.innerText = "请稍候";
     divMask.appendChild(divMsg);*/
-    
+
     if (spinner == null) {
-        spinner = new Spinner(opts).spin(divBack);    
+        spinner = new Spinner(opts).spin(divBack);
     }
-    else
-    {
+    else {
         spinner.spin(divBack);
     }
-    
+
     console.log("show spin");
 }
 
-function hideLoading()
-{
-    if (spinner != null)
-    {
+function hideLoading() {
+    if (spinner != null) {
         spinner.stop();
     }
-    
+
     var div = document.getElementById("pagemask1289");
-    if (div != null)
-    {
+    if (div != null) {
         document.body.removeChild(div);
     }
 }
 
-module.exports = {showLoading, hideLoading};
+module.exports = { showLoading, hideLoading };
 

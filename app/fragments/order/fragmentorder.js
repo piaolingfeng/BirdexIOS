@@ -185,7 +185,7 @@ var FragmentOrder = React.createClass({
                 // console.error(this.props.url, status, err.toString());
             }.bind(this),
             complete: function (XMLHttpRequest, textStatus) {
-                this; //调用本次ajax请求时传递的options参数 
+                 //调用本次ajax请求时传递的options参数 
                 if (myScroll != null) {
                     myScroll.refresh();
                 }

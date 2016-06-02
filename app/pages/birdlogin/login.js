@@ -9,11 +9,14 @@ require('./css/login.css');
 
 var headimg = require('./image/head.png');
 var footerimg = require('./image/footer.png');
-
+var toast = require('../../util/Tips/tips.js');
+var showLoading = require('../../components/Spin/BSpin.js')
 var LW = React.createClass({
 
 	login: function () {
 		// alert("login");
+		// showLoading[0]();
+		console.log(showLoading)
 		var param = {
 			account: $('#name').val(),
 			password: $('#password').val(),
@@ -33,12 +36,13 @@ var LW = React.createClass({
             success: function (data) {
                 // this.setState({ data: data });
 				// alert("success");
-				this.loginSuccess(data);
+				// console.log(data);
+					this.loginSuccess(data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
 				alert(err);
-            }.bind(this)
+            }.bind(this),
         });
 
 		return;
@@ -47,40 +51,39 @@ var LW = React.createClass({
 	loginSuccess: function (data) {
 		// 存储返回的data
 		// console.log(data);
-		if($("#remember").is(':checked')){//判断是否存储账户密码
-			var name = $("#name").val();
-			var password = $("#password").val();
-			// console.log(name,password);
-			localStorage.setItem("log_password",password);
-			localStorage.setItem("log_name",name);
-		}
-		if (data.data) {
-			try { 
-				localStorage.setItem("company_code", data.data.company_code);
-				localStorage.setItem('company_name', data.data.company_name);
-				localStorage.setItem('company_short_name', data.data.company_short_name);
-				localStorage.setItem('user_code', data.data.user_code); 
-				console.log(data);
-			} catch (e) { 
-				// alert(e);
-				console.log(e);
-				alert("您处于无痕浏览，无法为您保存"); 
+		if (data.error == 0) {
+			toast("登录成功");
+			if ($("#remember").is(':checked')) {//判断是否存储账户密码
+				var name = $("#name").val();
+				var password = $("#password").val();
+				// console.log(name,password);
+				localStorage.setItem("log_password", password);
+				localStorage.setItem("log_name", name);
 			}
-			gVar.pushPage("portal");
+			if (data.data) {
+				try {
+					localStorage.setItem("company_code", data.data.company_code);
+					localStorage.setItem('company_name', data.data.company_name);
+					localStorage.setItem('company_short_name', data.data.company_short_name);
+					localStorage.setItem('user_code', data.data.user_code);
+					console.log(data);
+				} catch (e) {
+					// alert(e);
+					console.log(e);
+					alert("您处于无痕浏览，无法为您保存");
+				}
+				gVar.pushPage("portal");
+			}
+		} else {
+			toast(data.data);
 		}
-		// console.log(data.data.company_code);
-        // editor.putString("company_code", user.getCompany_code());
-        // editor.putString("company_name", user.getCompany_name());
-        // editor.putString("company_short_name", user.getCompany_short_name());
-        // editor.putString("user_code", user.getUser_code());
-		// alert("success");
 	},
 
-	componentDidMount(){
-		if(localStorage.getItem("log_name")){
+	componentDidMount() {
+		if (localStorage.getItem("log_name")) {
 			$("#name").val(localStorage.getItem("log_name"));
 		}
-		if(localStorage.getItem("log_password")){
+		if (localStorage.getItem("log_password")) {
 			$("#password").val(localStorage.getItem("log_password"));
 		}
 	},
