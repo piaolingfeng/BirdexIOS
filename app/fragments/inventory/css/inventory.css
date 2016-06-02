@@ -68,3 +68,7 @@ a {
     padding: 8px 5px;
     margin: 8px 5px;
 }
+.wrapline{
+    word-break:break-all;
+    word-wrap:break-word;
+}

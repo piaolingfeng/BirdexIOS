@@ -34,6 +34,8 @@ var  ListView  = React.createClass({
         marginBottom:React.PropTypes.number,
         //下拉条背景颜色
         showUploadBgColor:React.PropTypes.string,
+        //获取整个操作列表的对象
+        getCoreObj:React.PropTypes.func
     },
     getDefaultProps: function() {
         //设置默认属性
@@ -41,7 +43,8 @@ var  ListView  = React.createClass({
             showUpload: false,
             showDownload:true,
             marginTop:0,
-            backGroud:"#ffffff"
+            backGroud:"#ffffff",
+            getCoreObj:function(obj){}
         };
     },
     pullUpAction :function() {
@@ -76,6 +79,13 @@ var  ListView  = React.createClass({
 		// myScroll.refresh();		//数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
 	// }, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 },
+componentWillUnmount:function(){
+    //组件生命周期结束，将iscroll对象释放
+    if(myScroll){
+       myScroll.destroy(); 
+       myScroll = null; 
+    }
+},
 componentDidMount: function () {
     //对滑动的初始化
     listview(window, document); 
@@ -88,25 +98,25 @@ componentDidMount: function () {
     var flag=true;
 	myScroll = new iScroll('wrapper', {
 		scrollbarClass: 'myScrollbar', /* 重要样式 */
-		useTransition: true, /* 此属性不知用意从true改为false */
+		useTransition: false, /* 此属性不知用意从true改为false */
         
-        hScroll        : false,
-         	vScroll        : true,
+        // hScroll        : false,
+        //  	vScroll        : true,
          	hScrollbar     : false,
          	vScrollbar     : false,
-         	fixedScrollbar : true,
-         	fadeScrollbar  : false,
-         	hideScrollbar  : true,
-         	bounce         : true,
-         	momentum       : true,
-         	lockDirection  : true,
-         	checkDOMChanges: true,
+        //  	fixedScrollbar : true,
+        //  	fadeScrollbar  : false,
+        //  	hideScrollbar  : true,
+        //  	bounce         : true,
+        //  	momentum       : true,
+        //  	lockDirection  : true,
+         	// checkDOMChanges: true,
 		topOffset: pullDownOffset,
 		onRefresh: function () {
-			if (pullDownEl.className.match('loading')) {
+			if (pullDownEl.className.match('list_loading')) {
 				pullDownEl.className = '';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
-			} else if (pullUpEl.className.match('loading')) {
+			} else if (pullUpEl.className.match('list_loading')) {
 				pullUpEl.className = '';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
 			}
@@ -120,7 +130,7 @@ componentDidMount: function () {
 				pullDownEl.className = '';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
 				this.minScrollY = -pullDownOffset;
-			} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')&&this.y<-51&&lvcompotent.props.showDownload) { //修改上拉的时候同时造成刷新 -51为顶部的高度
+			} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')&&lvcompotent.props.showDownload) { //修改上拉的时候同时造成刷新 -51为顶部的高度
 				pullUpEl.className = 'flip';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始加载...';
 				this.maxScrollY = this.maxScrollY;
@@ -132,32 +142,33 @@ componentDidMount: function () {
 		},
 		onScrollEnd: function () {
 			if (pullDownEl.className.match('flip')&&lvcompotent.props.showUpload) {
-				pullDownEl.className = 'loading';
+				pullDownEl.className = 'list_loading';
 				pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';				
 				// pullDownAction();	// Execute custom function (ajax call?)
                 lvcompotent.pullDownAction();
 			} else if (pullUpEl.className.match('flip')&&lvcompotent.props.showDownload) {
-				pullUpEl.className = 'loading';
+				pullUpEl.className = 'list_loading';
 				pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';				
 				// pullUpAction();	// Execute custom function (ajax call?)
                 lvcompotent.pullUpAction();
 			}
 		}
 	});
-	
-	setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+	//快速切换(800毫秒之内)出现找不到wrapper这个元素
+	// setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
     //初始化绑定iScroll控件 
     // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    lvcompotent.props.getCoreObj(myScroll);
     },
     render:function () {
         var datasource=[];
         var ListItems=this.props.getItems();
         for(var i=0;i<ListItems.length;i++){
             // datasource.push(<li>{this.props.getItems(i)}</li>);
-            datasource.push(<li>{ListItems[i]}</li>);
+            datasource.push(<li >{ListItems[i]}</li>);
         }
         return (<div id="wrapper" style={{
-            top:this.props.marginTop+"px",bottom:this.props.marginBottom+"px"
+            marginTop:this.props.marginTop+"px"
         }}><div id="scroller"   >
         <div id="pullDown" style={{visibility:this.props.showUpload?"visible":"hidden"}}>
 			<span className="pullDownIcon"></span><span className="pullDownLabel">下拉刷新...</span>
@@ -171,13 +182,27 @@ componentDidMount: function () {
 			<span className="pullUpIcon" ></span><span className="pullUpLabel" style={{width:"100%"}}>上拉加载更多...</span>
 		</div>
         </div>
-        <div style={{
-            clear:"both"
-        }}></div>
+        <div style={{clear:"both"}}></div>
         </div>);
+        // return (<div id="wrapper" style={{
+            
+        // }}><div id="scroller"   >
+        // <div id="pullDown" >
+		// 	<span className="pullDownIcon"></span><span className="pullDownLabel">下拉刷新...</span>
+		// </div>
+        // <ul id="thelist" style={{backgroundColor:this.props.backGroud}}>
+        // {
+        //     datasource
+        // }
+        // </ul>
+        // <div id="pullUp" style={{display:this.props.showDownload?"":"none"}}>
+		// 	<span className="pullUpIcon" ></span><span className="pullUpLabel" style={{width:"100%"}}>上拉加载更多...</span>
+		// </div>
+        // </div>
+        // <div style={{clear:"both"}}></div>
+        // </div>);
     },
     handleTouchMove:function(e) {
-        // alert('12');
         // ReactDOM.findDOMNode(this.refs.listview).preventDefault();
         e.preventDefault();
     }
