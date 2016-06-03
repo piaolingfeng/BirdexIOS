@@ -365,7 +365,7 @@ var FragmentOrder = React.createClass({
     render: function () {
         // console.log(warehouseList);
         // console.log(statusList);
-        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent}
+        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={193} pullUpHandler={this.pullUpEvent}
             backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (orderList != null && orderList.length == 0) {
             list = <div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>;

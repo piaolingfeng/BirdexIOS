@@ -314,15 +314,18 @@ var FragmentPrediciton = React.createClass({
     render: function () {
         //<TitleBar title="预报管理"/>
         // console.log(statusList);
-        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={180} pullUpHandler={this.pullUpEvent}
+        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={193} pullUpHandler={this.pullUpEvent}
             backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (predictList != null && predictList.length == 0) {
             list = <div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>;
         }
-
+        var keyword = null;
+        if (requestEntity) {
+            keyword = requestEntity.keyword;
+        }
         return (
             <div style={{ backgroundColor: gVar.Color_background }}>
-                <Search SearchFunc={this.SearchFunc}/>
+                <Search SearchFunc={this.SearchFunc} defaultText={keyword}/>
                 <Status warehouseFunc={this.warehouseFunc}
                     statusFunc={this.statusFunc}
                     timeFunc={this.timeFunc}

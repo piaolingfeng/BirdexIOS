@@ -31,7 +31,7 @@ var Addbutton = React.createClass({
             id={position}
             onTouchStart = {gVar.handleTouchStart.bind(this,position)} onTouchEnd = {gVar.handleTouchEnd.bind(this,position)} 
 			onTouchCancel={gVar.handleTouchEnd.bind(this,position)} >
-                <div style={{ float: "right", width: "0.5px", height: "70px", background: "#CBCBCB",display:lineDisplay }}></div>
+                <div style={{ float: "right", width: "0.5px", height: "69.5px", background: "#CBCBCB",display:lineDisplay }}></div>
                 <img src={add_btn} style={{ height: "14px",padding: "25px",}}/>
             </div>
         );

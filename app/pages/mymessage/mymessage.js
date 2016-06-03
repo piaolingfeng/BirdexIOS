@@ -206,7 +206,7 @@ var MM = React.createClass({
                         onTouchCancel={gVar.handleTouchEnd.bind(this, 0) }>
                         <img src={warning} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存预警消息</span>
-                        <span id="STOCK_WARNING" className="badge mymessage_badge" >50</span>
+                        <span id="STOCK_WARNING" className="badge mymessage_badge" ></span>
                     </div>
 
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this, 1) }
@@ -215,7 +215,7 @@ var MM = React.createClass({
                         onTouchCancel={gVar.handleTouchEnd.bind(this, 1) }>
                         <img src={idcard} className="mymessage_img"/>
                         <span className="mymessage_item_text">身份证异常订单</span>
-                        <span id="ORDER_IDCARD_EXCEPTION" className="badge mymessage_badge" >50</span>
+                        <span id="ORDER_IDCARD_EXCEPTION" className="badge mymessage_badge" ></span>
                     </div>
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this, 2) } style={{ marginTop: "1px" }}
                         id={2}
@@ -223,7 +223,7 @@ var MM = React.createClass({
                         onTouchCancel={gVar.handleTouchEnd.bind(this, 2) }>
                         <img src={repertory} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存异常订单</span>
-                        <span id="repertory_exception" className="badge mymessage_badge" >50</span>
+                        <span id="repertory_exception" className="badge mymessage_badge" ></span>
                     </div>
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this, 3) } style={{ marginTop: "1px" }}
                         id={3}
@@ -231,7 +231,7 @@ var MM = React.createClass({
                         onTouchCancel={gVar.handleTouchEnd.bind(this, 3) }>
                         <img src={check} className="mymessage_img"/>
                         <span className="mymessage_item_text">审核不通过订单</span>
-                        <span id="ORDER_VERIFY_FAIL" className="badge mymessage_badge" >50</span>
+                        <span id="ORDER_VERIFY_FAIL" className="badge mymessage_badge" ></span>
                     </div>
                     <div id="accoutException" className="mymessage_item" onClick={this.onItemClick.bind(this, 4) }
                         id={4}
@@ -239,7 +239,7 @@ var MM = React.createClass({
                         onTouchCancel={gVar.handleTouchEnd.bind(this, 4) }>
                         <img src={account} className="mymessage_img"/>
                         <span className="mymessage_item_text">账户异常</span>
-                        <span id="ACCOUNT_EXCEPTION" className="badge mymessage_badge" >50</span>
+                        <span id="ACCOUNT_EXCEPTION" className="badge mymessage_badge" ></span>
                     </div>
                 </div>
             </div>
