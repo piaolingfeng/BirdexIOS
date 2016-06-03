@@ -7,6 +7,8 @@ var ReactList=require('react-list');
 
 require('./css/logistics.css'); 
 
+var toast = require('../../util/Tips/tips.js');
+
 // 仓库接单
 var getorder_n = require('./image/getorder_n.png');
 var getorder_y = require('./image/getorder_y.png');
@@ -135,7 +137,7 @@ var Logistics = React.createClass({
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				alert(err);
+				toast(err);
             }.bind(this)
         });
 
