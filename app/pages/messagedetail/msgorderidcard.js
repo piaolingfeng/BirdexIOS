@@ -21,7 +21,7 @@ var MsgOrderIdCard = React.createClass({
     render: function () {
 
         var entity = this.props.messageEntity;
-        console.log(entity);
+        // console.log(entity);
         //0表示未读，1表示已读
         var read = "none";
         if (entity.read_status == "1") {

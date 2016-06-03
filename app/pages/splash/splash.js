@@ -26,7 +26,7 @@ var Splash = React.createClass({
     render() {
 
         return (
-            <div style={{position:"absolute"}}>
+            <div style={{position:"absolute",width:"100%",height:"100%"}}>
                 <img src={welcome} style={{width:"100%",height:"100%"}}/>
             </div>
         );

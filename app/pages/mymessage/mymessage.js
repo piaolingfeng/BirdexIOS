@@ -84,82 +84,82 @@ var GerenList = React.createClass({
 });
 
 
-function getCount(count){
-        var result = "";
-        if(count > 0){
-            if(count < 100){
-                result = count;
-            }else{
-                result = "99+"
-            }
+function getCount(count) {
+    var result = "";
+    if (count > 0) {
+        if (count < 100) {
+            result = count;
+        } else {
+            result = "99+"
         }
-        return result;
+    }
+    return result;
 };
 
 
 var MM = React.createClass({
-    
-    componentDidMount:function name(params) {
+
+    componentDidMount: function name(params) {
         this.init();
     },
-    
-    init:function name(params) {
+
+    init: function name(params) {
         var param = {
             app_debug: 1,
             company_code: localStorage.getItem("company_code"),
             user_code: localStorage.getItem('user_code')
-		};
-		console.log(param)
-		$.ajax({
+        };
+        console.log(param)
+        $.ajax({
             data: param,
             url: gVar.getBASE_URL() + 'Message/stat',
             dataType: 'json',
             cache: false,
-			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
-			// xhrFields: {
-			// 	withCredentials: true
-			// },
+            // beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
+            // xhrFields: {
+            // 	withCredentials: true
+            // },
             success: function (data) {
                 // this.setState({ data: data });
-				// alert("success");
-				this.initSuccess(data);
+                // alert("success");
+                this.initSuccess(data);
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
-				toast(err);
+                toast(err);
             }.bind(this)
         });
 
-		return;
+        return;
     },
-    
-    initSuccess:function (data) {
+
+    initSuccess: function (data) {
         console.log(data);
-        if(0==data.error){
+        if (0 == data.error) {
             var arr = data.data;
-            for(var i=0;i<arr.length;i++){
+            for (var i = 0; i < arr.length; i++) {
                 var item = arr[i];
-                if(item.msg_type == "ORDER_STOCK_EXCEPTION"){
+                if (item.msg_type == "ORDER_STOCK_EXCEPTION") {
                     // 订单库存异常
                     var count = getCount(item.count);
                     $('#repertory_exception').html(count);
                 }
-                if(item.msg_type == "ORDER_VERIFY_FAIL"){
+                if (item.msg_type == "ORDER_VERIFY_FAIL") {
                     // 订单审核不通过
                     var count = getCount(item.count);
                     $('#ORDER_VERIFY_FAIL').html(count);
                 }
-                if(item.msg_type == "ORDER_IDCARD_EXCEPTION"){
+                if (item.msg_type == "ORDER_IDCARD_EXCEPTION") {
                     // 订单身份证异常
                     var count = getCount(item.count);
                     $('#ORDER_IDCARD_EXCEPTION').html(count);
                 }
-                if(item.msg_type == "ACCOUNT_EXCEPTION"){
+                if (item.msg_type == "ACCOUNT_EXCEPTION") {
                     // 账号异常
                     var count = getCount(item.count);
                     $('#ACCOUNT_EXCEPTION').html(count);
                 }
-                if(item.msg_type == "STOCK_WARNING"){
+                if (item.msg_type == "STOCK_WARNING") {
                     // 库存告警
                     var count = getCount(item.count);
                     $('#STOCK_WARNING').html(count);
@@ -167,7 +167,7 @@ var MM = React.createClass({
             }
         }
     },
-    
+
 
     messageMenu: function () {
 
@@ -178,10 +178,10 @@ var MM = React.createClass({
     },
 
     onItemClick: function (index) {
-        var params={
-            itemIdex : index
+        var params = {
+            itemIdex: index
         };
-        gVar.pushPage({pathname:"messagedetail",state:params});
+        gVar.pushPage({ pathname: "messagedetail", state: params });
     },
 
     render: function () {
@@ -197,31 +197,46 @@ var MM = React.createClass({
         }
         return (
 
-            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background}}>
+            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }}>
                 <Titlebar title="我的消息" backNoneDisplay={backNoneDisplay} setting="true" />
                 <div className="titlebar_head_down" >
-                    <div className="mymessage_item" onClick={this.onItemClick.bind(this,0)}>
+                    <div className="mymessage_item" onClick={this.onItemClick.bind(this, 0) }
+                        id={0}
+                        onTouchStart = {gVar.handleTouchStart.bind(this, 0) } onTouchEnd = {gVar.handleTouchEnd.bind(this, 0) }
+                        onTouchCancel={gVar.handleTouchEnd.bind(this, 0) }>
                         <img src={warning} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存预警消息</span>
                         <span id="STOCK_WARNING" className="badge mymessage_badge" >50</span>
                     </div>
 
-                    <div className="mymessage_item" onClick={this.onItemClick.bind(this,1)} >
+                    <div className="mymessage_item" onClick={this.onItemClick.bind(this, 1) }
+                        id={1}
+                        onTouchStart = {gVar.handleTouchStart.bind(this, 1) } onTouchEnd = {gVar.handleTouchEnd.bind(this, 1) }
+                        onTouchCancel={gVar.handleTouchEnd.bind(this, 1) }>
                         <img src={idcard} className="mymessage_img"/>
                         <span className="mymessage_item_text">身份证异常订单</span>
                         <span id="ORDER_IDCARD_EXCEPTION" className="badge mymessage_badge" >50</span>
                     </div>
-                    <div className="mymessage_item" onClick={this.onItemClick.bind(this,2)} style={{ marginTop: "1px" }}>
+                    <div className="mymessage_item" onClick={this.onItemClick.bind(this, 2) } style={{ marginTop: "1px" }}
+                        id={2}
+                        onTouchStart = {gVar.handleTouchStart.bind(this, 2) } onTouchEnd = {gVar.handleTouchEnd.bind(this, 2) }
+                        onTouchCancel={gVar.handleTouchEnd.bind(this, 2) }>
                         <img src={repertory} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存异常订单</span>
                         <span id="repertory_exception" className="badge mymessage_badge" >50</span>
                     </div>
-                    <div className="mymessage_item" onClick={this.onItemClick.bind(this,3)} style={{ marginTop: "1px" }}>
+                    <div className="mymessage_item" onClick={this.onItemClick.bind(this, 3) } style={{ marginTop: "1px" }}
+                        id={3}
+                        onTouchStart = {gVar.handleTouchStart.bind(this, 3) } onTouchEnd = {gVar.handleTouchEnd.bind(this, 3) }
+                        onTouchCancel={gVar.handleTouchEnd.bind(this, 3) }>
                         <img src={check} className="mymessage_img"/>
                         <span className="mymessage_item_text">审核不通过订单</span>
                         <span id="ORDER_VERIFY_FAIL" className="badge mymessage_badge" >50</span>
                     </div>
-                    <div id="accoutException" className="mymessage_item" onClick={this.onItemClick.bind(this,4)} >
+                    <div id="accoutException" className="mymessage_item" onClick={this.onItemClick.bind(this, 4) }
+                        id={4}
+                        onTouchStart = {gVar.handleTouchStart.bind(this, 4) } onTouchEnd = {gVar.handleTouchEnd.bind(this, 4) }
+                        onTouchCancel={gVar.handleTouchEnd.bind(this, 4) }>
                         <img src={account} className="mymessage_img"/>
                         <span className="mymessage_item_text">账户异常</span>
                         <span id="ACCOUNT_EXCEPTION" className="badge mymessage_badge" >50</span>

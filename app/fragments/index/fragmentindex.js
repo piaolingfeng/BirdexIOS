@@ -18,7 +18,7 @@ var toast = require('../../util/Tips/tips.js');
 var btnImage1 = require('./image/dingdan.png');
 var btnImage2 = require('./image/yubao.png');
 var btnImage3 = require('./image/kucun.png');
-var btnImage4 = require('./image/jinxiaocun.png');
+// var btnImage4 = require('./image/jinxiaocun.png');
 var btnImage5 = require('./image/zhichu.png');
 var btnImage6 = require('./image/zhanghu.png');
 var Addbutton = require('../../components/AddButton/addbutton.js');
@@ -43,8 +43,8 @@ Array.prototype.remove = function (val) {
 
 var FragmentIndex = React.createClass({
 
-    params:{
-        myScroll:null,
+    params: {
+        myScroll: null,
     },
 
     componentWillUnmount() {
@@ -72,102 +72,40 @@ var FragmentIndex = React.createClass({
     //获取订单列表：请求网络方法
     getTodayData: function (myScroll) {
         var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
             all: 1,
         };
-        request = $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'company/stat',
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                // this.setState({ data: data })
-                // console.log("success");
-                this.dealTodayData(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                toast(err.toString());
-                // console.error(this.props.url, status, err.toString());
-            }.bind(this),
-            complete: function (XMLHttpRequest, textStatus) {
-                //调用本次ajax请求时传递的options参数 
-                // console.log("complete");
-                if (myScroll != null) {
-                    myScroll.refresh();
-                }
-            }.bind(this),
-            timeout: 5000,
-        });
+        var url = gVar.getBASE_URL() + 'company/stat';
+        gVar.sendRequest(params, url, this.dealTodayData, false);
     },
 
     //处理数据,将每一个是否显示由displaylist内部的成员来控制
     dealTodayData(data) {
-        console.log(data);
-        if (data != null) {
-            if (data.error == 0) {
-                Data = data;
-                var today = gVar.todayData;
-                //第一步先获取本地displaylist,
-                if (firstEnter == true) {//第一次打开软件
-                    firstEnter = false;
-                    today.displayList = [];
-                    for (var i = 0; i < 5; i++) {
-                        today.IsDisplay[i] = true;
-                        // localStorage.setItem(today.dataTitle[i], today.IsDisplay[i]);
-                        today.displayList.push(today.dataTitle[i]);
-                    }
-                    // localStorage.setItem("displayList",today.displayList.toString());
-                    EventBus.dispatch("saveDisplayList");
-                } else {
-                    today.displayList = this.parseString(localStorage.getItem("displayList") + "");//获取并解析列表
-                    // for(var i = 0; i < today.dataTitle.length; i++){
-                    //     today.IsDisplay[i] = localStorage.getItem(today.dataTitle[i]);
-                    // }
-                }
-                //对数据进行赋值
-                for (var i = 0; i < today.dataJsonName.length; i++) {
-                    today.dataCount[i] = data.data[today.dataJsonName[i]];
-                    if (today.displayList.indexOf(today.dataTitle[i]) >= 0) {
-                        today.IsDisplay[i] = true;
-                    } else {
-                        today.IsDisplay[i] = false;
-                    }
-                    // var statu = localStorage.getItem(today.dataJsonName[i]);
-                    // if (statu == null) {
-                    //     // console.log(statu);
-                    //     today.IsDisplay[i] = false;
-                    //     localStorage.setItem(today.dataJsonName[i], false);
-                    // } else {
-                    //     today.IsDisplay[i] = statu;
-                    // }
-                }
+        Data = data;
+        var today = gVar.todayData;
+        //第一步先获取本地displaylist,
+        if (firstEnter == true) {//第一次打开软件
+            firstEnter = false;
+            today.displayList = [];
+            for (var i = 0; i < 5; i++) {
+                today.IsDisplay[i] = true;
+                // localStorage.setItem(today.dataTitle[i], today.IsDisplay[i]);
+                today.displayList.push(today.dataTitle[i]);
+            }
+            // localStorage.setItem("displayList",today.displayList.toString());
+            EventBus.dispatch("saveDisplayList");
+        } else {
+            today.displayList = this.parseString(localStorage.getItem("displayList") + "");//获取并解析列表
+
+        }
+        //对数据进行赋值
+        for (var i = 0; i < today.dataJsonName.length; i++) {
+            today.dataCount[i] = data.data[today.dataJsonName[i]];
+            if (today.displayList.indexOf(today.dataTitle[i]) >= 0) {
+                today.IsDisplay[i] = true;
             } else {
-                // console.log(data.data);
-                toast(data.data);
+                today.IsDisplay[i] = false;
             }
         }
-
-        // console.log(today.displayList.toString())//输出格式与java一致
-        // localStorage.setItem("displayList",today.displayList.toString);
-        // if (firstEnter == true) {//第一次打开软件
-        //     firstEnter = false;
-        //     today.displayList = [];
-        //     for (var i = 0; i < 5; i++) {
-        //         today.IsDisplay[i] = true;
-        //         // localStorage.setItem(today.dataTitle[i], today.IsDisplay[i]);
-        //         today.displayList.push(today.dataTitle[i]);
-        //     }
-        //     // localStorage.setItem("displayList",today.displayList.toString());
-        //     EventBus.dispatch("saveDisplayList");
-        // }else{
-        //     today.displayList = this.parseString(localStorage.getItem("displayList"));//获取并解析列表
-        //     for(var i = 0; i < today.dataTitle.length; i++){
-        //         today.IsDisplay[i] = localStorage.getItem(today.dataTitle[i]);
-        //     }
-        // }
         this.setState({});
     },
 
@@ -235,12 +173,12 @@ var FragmentIndex = React.createClass({
         // localStorage.clear();
         // console.log(this.params.myScroll);
         // if(this.params.myScroll!=null){
-            // this.params.myScroll.refresh();
+        // this.params.myScroll.refresh();
         // }
         // if (Data == null) {
-            this.getTodayData();
+        this.getTodayData();
         // }else{
-            // this.setState({});
+        // this.setState({});
         // }
         // if(this.params.myScroll!=null){
         //     this.params.myScroll.refresh();
@@ -343,7 +281,7 @@ var FragmentIndex = React.createClass({
 
     //获取listview列表
     getItems() {
-        console.log("getItems");
+        // console.log("getItems");
         var list = new Array();
         // list.push(<LunBo />);
         list.push(<Carousel />)
@@ -359,16 +297,16 @@ var FragmentIndex = React.createClass({
     },
 
     componentDidUpdate() {//手动调用刷新,可以解决刚开始时拖不动的情况
-        
+
         // listviewInd.handRefresh();
         // if(this.params.myScroll!=null){
-            // console.log(this.params.myScroll,"componentDidUpdate");
-            this.params.myScroll.refresh();
+        // console.log(this.params.myScroll,"componentDidUpdate");
+        this.params.myScroll.refresh();
         // }
         // alert("handRefresh");
     },
 
-    getCoreObject(myScroll){
+    getCoreObject(myScroll) {
         //  console.log(myScroll);
         this.params.myScroll = myScroll;
     },

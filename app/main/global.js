@@ -15,22 +15,22 @@ var gVar = {
             "今日已取消订单", "审核不通过订单", "今日已签收"
             , "库存异常订单", "今日已入库预报", "待确认预报单"
             , "审核不通过预报", "库存预警", "身份证异常订单"],
-        dataJsonName:["today_create_order_count","today_checkout_order_count", "today_wait_checkout_order_count",
-            "today_cancel_order_count","no_pass_order_count","today_sign_order_count", "stock_exception_order_count"
+        dataJsonName: ["today_create_order_count", "today_checkout_order_count", "today_wait_checkout_order_count",
+            "today_cancel_order_count", "no_pass_order_count", "today_sign_order_count", "stock_exception_order_count"
             , "today_confirm_storage_count", "wait_confirm_storage_count", "no_pass_storage_count",
             "warning_stock_count", "id_card_exception_order_count"],
         dataCount: ["?", "?", "?"
             , "?", "?", "?"
             , "?", "?", "?"
             , "?", "?", "?"], //保存每个类别的数值
-        dataOrder: [0, 1, 2, 3,4,5,6,7,8,9,10,11], //控制显示的顺序, -1表示对应的项不
-        
-        IsDisplay:[false,false,false,
-                    false,false,false,
-                    false,false,false,
-                    false,false,false],
-        
-        displayList:[],
+        dataOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], //控制显示的顺序, -1表示对应的项不
+
+        IsDisplay: [false, false, false,
+            false, false, false,
+            false, false, false,
+            false, false, false],
+
+        displayList: [],
     },
     mytool: ["订单管理", "预报管理", "库存管理", "我的支出", "账户充值"],
     //公共颜色
@@ -38,10 +38,11 @@ var gVar = {
     Color_gray_head: "#666666",
     Color_white: "#ffffff",
     Color_background: "#f5f4f4",
-    Color_touch: "#FAFAFA",
+    // Color_touch: "#FAFAFA",
     Color_single_line: "#D7D7D7",
     Color_text: "#9b9b9b",
     Color_title: "#666666",
+    Color_touch: '#e4e4e4',
     //公共字体
     FontSize_title_head: "17px",
     FontSize_order_text: "16px",
@@ -49,44 +50,38 @@ var gVar = {
     Padding_head: "14px",
     Padding_text_head: "12px",
     Padding_titlebar: "48px",
-    
-    FIRST_ENTRY_APP : "FIRST_ENTRY_APP",
+
+    FIRST_ENTRY_APP: "FIRST_ENTRY_APP",
     //切换到新页面
     pushPage: function (pathname, isModal) {
-        
-        if (!isModal)
-        {
+
+        if (!isModal) {
             gVar.pageTranType = "pagepush";
             // console.log(global.router.history);
             global.router.history.push(pathname);
         }
-        else
-        {
+        else {
             var ModalPage = null;
-            var strPathName = (typeof(pathname) == "string" ? pathname : pathname.pathname);
-            
+            var strPathName = (typeof (pathname) == "string" ? pathname : pathname.pathname);
+
             var paths = global.router.props.children.props.children;
             var length = paths.length;
-            for (var i = 1; i < length; i++)
-            {
+            for (var i = 1; i < length; i++) {
                 // console.log(paths[i].props.path);
                 // console.log(pathname);
-                if (paths[i].props.path == strPathName)
-                {
+                if (paths[i].props.path == strPathName) {
                     ModalPage = paths[i].props.component;
                     break;
                 }
             }
-            
-            if (ModalPage != null)
-            {
+
+            if (ModalPage != null) {
                 // global.router.history.createLocation();
                 var location = global.router.history.createLocation(pathname)
                 console.log(location);
                 showModalPage(<ModalPage location = {location}/>);
             }
-            else
-            {
+            else {
                 console.log("cannot find modal page " + pathname);
             }
         }
@@ -94,9 +89,8 @@ var gVar = {
 
     //页面回退
     popPage: function () {
-        
-        if (!hideModalPage())
-        {
+
+        if (!hideModalPage()) {
             gVar.pageTranType = "pagepop";
             // console.log(global.router.history);
             global.router.history.goBack();
@@ -185,35 +179,55 @@ var gVar = {
         return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
     },
 
-    sendRequest:function(params,url,successCallback){
-        waitDailog.showLoading();
+    sendRequest: function (params, url, successCallback, showLoad) {
+        if (showLoad == null || showLoad)//默认弹出等待框
+            waitDailog.showLoading();
         $.ajax({
             data: params,
             url: url,
             dataType: 'json',
             cache: false,
-			beforeSend: function(request){
-				request.setRequestHeader('DEVICE-TOKEN','Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
-				request.setRequestHeader('APP-VERSION','1.0');
-			},//这里设置header
-			// xhrFields: {
-			// 	withCredentials: true
-			// },
+            beforeSend: function (request) {
+                request.setRequestHeader('DEVICE-TOKEN', 'Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
+                request.setRequestHeader('APP-VERSION', '1.0');
+                request.setRequestHeader('USER-TOKEN', localStorage.getItem("USER-TOKEN"));
+            },//这里设置header
+            // xhrFields: {
+            // 	withCredentials: true
+            // },
             success: function (data) {
                 // this.setState({ data: data });
-				// alert("success");
-				successCallback(data);
+                // alert("success");
+                if (data.error == 0)
+                    successCallback(data);
+                else {
+                    toast(data.data);
+                    // console.log( data);
+                }
             }.bind(this),
             error: function (xhr, status, err) {
                 // console.error( err.toString());
-				// alert(err);
-                toast(err);
+                // alert(err);
+                console.log(err);
+                toast("请求失败" + err);
             }.bind(this),
             complete: function (XMLHttpRequest, textStatus) {
-                waitDailog.hideLoading();
+                if (showLoad == null || showLoad)//
+                    waitDailog.hideLoading();
             }.bind(this),
             timeout: 5000,
         });
+    },
+    //id是模块名字,模块点击后显示颜色
+    handleTouchStart: function (id) {
+        // console.log(arguments)
+        // var name = (id) ? id : "";
+        $("#" + id).css("background-color", gVar.Color_touch);
+    },
+    //id是模块名字
+    handleTouchEnd: function (id) {
+        // var name = (id) ? id : "";
+        $("#" + id).css("background-color", "#ffffff");
     },
 };
 

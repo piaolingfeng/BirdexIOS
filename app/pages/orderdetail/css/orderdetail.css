@@ -9,10 +9,11 @@
 }
 .orderdetail_head{
     padding: 5px;
+    padding-top: 0px;
     padding-bottom: 0px;
 }
 .orderdetail_left{
-    display: inline-block;
+    /*display: ;*/
     text-align: right;
     vertical-align: top;
     width: 23%;
@@ -20,7 +21,7 @@
     padding-left: 0px;
 }
 .orderdetail_right{
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: left;
     width: 77%;
 }

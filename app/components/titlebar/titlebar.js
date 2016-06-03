@@ -18,6 +18,7 @@ var refresh = require('./images/refresh.png');
 //refreshFunc reflesh回调，默认隐藏
 //saveFunc保存按钮回调方法
 //backCallBack 返回时可以做回调
+//titleCallBack 点击头部触发回调方法
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
     
@@ -27,14 +28,16 @@ var Titlebar = React.createClass({
         refreshFunc:React.PropTypes.func,
         saveFunc:React.PropTypes.func,
         backCallBack:React.PropTypes.func,
+        titleCallBack:React.PropTypes.func,
     },
     
     componentDidMount:function(){
 
     },
     
-    back:function () {
+    back:function (e) {
         // alert("back");
+        e.stopPropagation();
         if(this.props.backCallBack){//返回时可以做回调
             this.props.backCallBack();
         }
@@ -68,17 +71,24 @@ var Titlebar = React.createClass({
         // return;
 	},
     
-    settingClick(){
+    settingClick(e){
         // alert("set");
+        e.stopPropagation();
         gVar.pushPage("mymessagemenu");
     },
     
-    refreshClick(){
+    refreshClick(e){
+        e.stopPropagation();
         this.props.refreshFunc();
     },
     
-    save(){
+    save(e){
+        e.stopPropagation();
         this.props.saveFunc();
+    },
+    
+    TitlebarClick(){
+        this.props.titleCallBack();
     },
     
     render:function(){
@@ -114,7 +124,7 @@ var Titlebar = React.createClass({
         return (
         <div className="titlebar_head" style={{
             backgroundColor:bg_color,
-        }}>
+        }} onClick={this.TitlebarClick} >
             
             <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{padding:gVar.Padding_head,display:backImg_display,paddingRight:"24px"}}/>
             <div className="titlebar_right" >

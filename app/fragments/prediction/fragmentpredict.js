@@ -28,10 +28,10 @@ var requestEntity = null;//请求网络实体
 var listviewInd = null;//listview的索引
 
 var FragmentPrediciton = React.createClass({
+    myScroll: "",
+    dataCount: 0,
+    predictPosition: 0,//用来做orderlist的位置缓
     params: {
-        myScroll: "",
-        dataCount: 0,
-        predictPosition: 0,//用来做orderlist的位置缓
         // requestEntity:Object,//请求网络实体
         timeList: ["不限时间", "今日", "近一周", "近一个月", "近三个月", "近一年"],
         timeStartList: ['', timeUtil.getCurrentDateFormat(),
@@ -78,7 +78,9 @@ var FragmentPrediciton = React.createClass({
     },
 
     //简化预报状态
-    dealPredictStatus() {
+    dealPredictStatus(data) {
+        statusList = data.data;
+        statusList.splice(0, 0, { status: '', status_name: '全部状态' });
         var dealStatus = ["全部状态", "待审核", "待入库", "待确认", "已入库", "审核不通过"];
         // console.log(statusList);
         var reStatusList = new Array();
@@ -92,100 +94,58 @@ var FragmentPrediciton = React.createClass({
             }
         }
         statusList = reStatusList;
+        this.dealDashBorad();
         // console.log(statusList);
     },
 
     //处理预报列表的逻辑
     dealPredictList(data) {
-        if (data != null) {
-            if (data.error == 0) {
-                this.params.dataCount = data.data.count;//赋值
-                // console.log(dataCount);
-                if (requestEntity.page_no > 1) {
-                    if (data.data.storages.length == 0 && requestEntity.page_no > 1) {
-                        // T.showShort(MyApplication.getInstans(), "已经是最后一页");
-                        toast("已经是最后一页");
-                    } else {
-                        // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
-                        // orderListEntities.getData().setOrders(OrderAdapter.getList());
-                        for (var i = 0; i < data.data.storages.length; i++) {
-                            predictList.push(<PredictionList predictEntity={data.data.storages[i]}
-                                cachePredictListFunc={this.cachePredictListFunc} position = {predictList.length + i}/>);
-                        }
-                    }
-                }
-                else {
-                    var list = [];
-                    // console.log(gVar.createOrderEntity());
-                    // orderList = data.data.orders;
-                    for (var i = 0; i < data.data.storages.length; i++) {
-                        list.push(<PredictionList predictEntity={data.data.storages[i]}
-                            cachePredictListFunc={this.cachePredictListFunc} position = {predictList.length + i}/>);
-                    }
-                    predictList = list;//将数据给orderlist
-                }
+        this.dataCount = data.data.count;//赋值
+        // console.log(dataCount);
+        if (requestEntity.page_no > 1) {
+            if (data.data.storages.length == 0 && requestEntity.page_no > 1) {
+                // T.showShort(MyApplication.getInstans(), "已经是最后一页");
+                toast("已经是最后一页");
             } else {
-                // console.log();
-                toast(data.data);
+                // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
+                // orderListEntities.getData().setOrders(OrderAdapter.getList());
+                for (var i = 0; i < data.data.storages.length; i++) {
+                    predictList.push(<PredictionList predictEntity={data.data.storages[i]}
+                        cachePredictListFunc={this.cachePredictListFunc} position = {predictList.length}/>);
+                }
             }
+        }
+        else {
+            var list = [];
+            // console.log(gVar.createOrderEntity());
+            // orderList = data.data.orders;
+            for (var i = 0; i < data.data.storages.length; i++) {
+                list.push(<PredictionList predictEntity={data.data.storages[i]}
+                    cachePredictListFunc={this.cachePredictListFunc} position = {predictList.length + i}/>);
+            }
+            predictList = list;//将数据给orderlist
         }
         this.setState({});
     },
 
     //获取预报列表：请求网络方法
     getPredicitionList: function (myScroll) {
-        console.log(requestEntity);
-        $.ajax({
-            async: true,
-            url: gVar.getBASE_URL() + 'Storage/all',
-            data: requestEntity,
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                // console.log(data);
-                this.dealPredictList(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            complete: function (XMLHttpRequest, textStatus) {
-                this; //调用本次ajax请求时传递的options参数 
-                if (myScroll != null) {
-                    myScroll.refresh();
-                }
-            }.bind(this),
-            timeout: 5000,
-        });
+        // console.log(requestEntity);
+        var url = gVar.getBASE_URL() + 'Storage/all';
+        gVar.sendRequest(requestEntity, url, this.dealPredictList);
     },
 
     //获取所有仓库
     getAllWarehouse: function () {
-        var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
-        };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'Warehouse/companyAll',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });
-                warehouseList = data.data;
-                warehouseList.splice(0, 0, { name: '全部仓库', warehouse_code: '' });
-                // console.log(warehouseList);
-                this.setState({});
-                //  this.dealDashBorad();
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            timeout: 5000,
-        });
+        var params = {};
+        var url = gVar.getBASE_URL() + 'Warehouse/companyAll';
+        gVar.sendRequest(params, url, this.dealWarehouse);
+    },
+
+    dealWarehouse(data) {
+        warehouseList = data.data;
+        warehouseList.splice(0, 0, { name: '全部仓库', warehouse_code: '' });
+        this.setState({});
     },
 
     //处理数据看板进入时
@@ -215,31 +175,9 @@ var FragmentPrediciton = React.createClass({
 
     //获取预报所有状态
     getPredicitionStatus: function () {
-        var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
-        };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'storage/getStorageStatusList',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                statusList = data.data;
-                statusList.splice(0, 0, { status: '', status_name: '全部状态' });
-                this.dealPredictStatus();
-                // console.log(statusList);
-                // this.setState({ data: "data" });
-                this.dealDashBorad();
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            timeout: 5000,
-        });
+        var params = {};
+        var url = gVar.getBASE_URL() + 'storage/getStorageStatusList';
+        gVar.sendRequest(params, url, this.dealPredictStatus);
     },
 
     // 缓存RequestEntity，orderList,position
@@ -285,7 +223,7 @@ var FragmentPrediciton = React.createClass({
     },
 
     getCoreObject(myScroll) {
-        this.params.myScroll = myScroll;
+        this.myScroll = myScroll;
     },
 
     getInitialState() {
@@ -301,15 +239,21 @@ var FragmentPrediciton = React.createClass({
         return null;
     },
 
+    // 滚动到顶部
+    scrollToTop() {
+        if (this.myScroll)
+            this.myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(1)'), 500);
+    },
+
     getItem: function (index) {
         return predictList;
     },
     //渲染完毕后再去调用refresh,隐藏动画,重新计算scroll item高度
     componentDidUpdate() {
-        if (this.params.myScroll instanceof Object) {
-            // console.log(this.params.myScroll, "scroll");
-            // this.params.myScroll.refresh();
-            this.params.myScroll.refresh();
+        if (this.myScroll instanceof Object) {
+            // console.log(this.myScroll, "scroll");
+            // this.myScroll.refresh();
+            this.myScroll.refresh();
         }
         // console.log(this.privateParams.listviewInd,"ddd");
         // this.privateParams.listviewInd.scrollToElement(predictPosition);
@@ -323,6 +267,8 @@ var FragmentPrediciton = React.createClass({
         console.log('fragmentpredict componentDidMount');
         // if (!EventBus.hasEventListener("clearCachePredictList"))//没有注册就注册
         //     EventBus.addEventListener("clearCachePredictList", this.clearCachePredictListFunc, this);
+        if (!EventBus.hasEventListener("scrollToTop"))//没有注册就注册
+            EventBus.addEventListener("scrollToTop", this.scrollToTop, this);
 
         if (warehouseList == null || warehouseList.length == 0) {
             this.getAllWarehouse();
@@ -334,17 +280,17 @@ var FragmentPrediciton = React.createClass({
         }
         if (sessionStorage.getItem("PredictRequestEntity")) {
             requestEntity = JSON.parse(sessionStorage.getItem("PredictRequestEntity"));
-            this.params.predictPosition = parseInt(sessionStorage.getItem("PredictPostion"));
+            this.predictPosition = parseInt(sessionStorage.getItem("PredictPostion"));
             // orderList = JSON.parse(sessionStorage.getItem("orderList"));
             sessionStorage.removeItem("PredictRequestEntity");
             sessionStorage.removeItem("PredictPostion");
             console.log("获取本地缓存");
-            // if (this.params.myScroll) {
-            //     // console.log(listviewInd, "ddd", (this.params.predictPosition + 1));
-            //     this.params.myScroll.scrollToElement(this.params.predictPosition + 1);
+            // if (this.myScroll) {
+            //     // console.log(listviewInd, "ddd", (this.predictPosition + 1));
+            //     this.myScroll.scrollToElement(this.predictPosition + 1);
             // }
             if (listviewInd instanceof Object) {
-                listviewInd.scrollToElement(this.params.predictPosition + 1);
+                listviewInd.scrollToElement(this.predictPosition + 1);
             }
             // this.setState({});//恢复刷新的数据
         } else {//非返回界面，即正常人口
@@ -357,6 +303,12 @@ var FragmentPrediciton = React.createClass({
             // var dataName = this.props.todayDataName;
             this.dealDashBorad();
         }
+    },
+
+    //卸载头部监听器跟listview的索引
+    componentWillUnmount() {
+        listviewInd = null;
+        EventBus.removeEventListener("scrollToTop", this.scrollToTop, this);
     },
 
     render: function () {
@@ -377,7 +329,7 @@ var FragmentPrediciton = React.createClass({
                     warehouseList={warehouseList}
                     statusList={statusList}
                     timeList={this.params.timeList}
-                    dataCount={this.params.dataCount}
+                    dataCount={this.dataCount}
                     requestEntity={requestEntity}/>
                 <div >
                     {list}

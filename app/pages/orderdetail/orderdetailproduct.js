@@ -12,7 +12,7 @@ var OrderDetailProduct = React.createClass({
     render: function () {
         var product = this.props.product;
         return (
-            <div>
+            <div className="orderdetail_head">
                 <div className="orderdetail_background_img">
                     <table style={{ width: "100%" }}>
                         <tr>

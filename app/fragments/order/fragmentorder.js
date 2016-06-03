@@ -34,10 +34,11 @@ var requestEntity = null;//请求网络实体
 // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18   
 var listviewInd = null;
 var FragmentOrder = React.createClass({
+    myScroll: "",
+    dataCount: 0,
+    orderPosition: 0,
+
     params: {
-        myScroll: "",
-        dataCount: 0,
-        orderPosition: 0,
         timeList: ["不限时间", "今日", "近一周", "近一个月", "近三个月", "近一年"],
         timeStartList: ['', timeUtil.getCurrentDateFormat(),
             timeUtil.getNearWeek(), timeUtil.getNearMouth(),
@@ -106,7 +107,9 @@ var FragmentOrder = React.createClass({
         this.getOrderList();
     },
     //简化订单状态
-    dealOrderStatus() {
+    dealOrderStatus(data) {
+        statusList = data.data;
+        statusList.splice(0, 0, { status: '', status_name: '全部状态' });
         var dealStatus = ['全部状态', "待审核", "等待出库", "出库中", "已出库", "运输中",
             "已签收", "身份证异常", "库存异常", "审核不通过", "已取消"];
         var reStatusList = new Array();
@@ -120,46 +123,38 @@ var FragmentOrder = React.createClass({
             }
         }
         statusList = reStatusList;
+        this.dealDashBorad();
         // console.log(statusList);
     },
 
     //处理订单列表的逻辑
     dealOrderList(data) {
-        // Data = data;
-        if (data != null) {
-            if (data.error == 0) {
-                this.params.dataCount = data.data.count;//赋值
-                // console.log(data.data);
-                if (requestEntity.page_no > 1) {
-                    if (data.data.orders.length == 0 && requestEntity.page_no > 1) {
-                        // T.showShort(MyApplication.getInstans(), "已经是最后一页");
-                        toast("已经是最后一页");
-                        // return ;
-                    } else {
-                        // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
-                        // orderListEntities.getData().setOrders(OrderAdapter.getList());
-                        for (var i = 0; i < data.data.orders.length; i++) {
-                            orderList.push(<OrderList orderEntity={data.data.orders[i]}
-                                cacheOrderListFunc={this.cacheOrderListFunc} position = {orderList.length + i}/>);
-                        }
-                    }
-                }
-                else {
-                    var list = [];
-                    // console.log(gVar.createOrderEntity());
-                    // orderList = data.data.orders;
-                    for (var i = 0; i < data.data.orders.length; i++) {
-                        // console.log(data.data.orders[i]);
-                        list.push(<OrderList orderEntity={data.data.orders[i]}
-                            cacheOrderListFunc={this.cacheOrderListFunc} position = {orderList.length + i}/>);
-                    }
-                    orderList = list;//将数据给orderlist
-                    // console.log(orderList);
-                }
+        this.dataCount = data.data.count;//赋值
+        // console.log(data.data);
+        if (requestEntity.page_no > 1) {
+            if (data.data.orders.length == 0 && requestEntity.page_no > 1) {
+                // T.showShort(MyApplication.getInstans(), "已经是最后一页");
+                toast("已经是最后一页");
+                // return ;
             } else {
-                // console.log(data.data);
-                toast(data.data);
+                // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
+                // orderListEntities.getData().setOrders(OrderAdapter.getList());
+                for (var i = 0; i < data.data.orders.length; i++) {
+                    orderList.push(<OrderList orderEntity={data.data.orders[i]}
+                        cacheOrderListFunc={this.cacheOrderListFunc} position = {orderList.length}/>);
+                }
             }
+        }
+        else {
+            var list = [];
+            // console.log(gVar.createOrderEntity());
+            // orderList = data.data.orders;
+            for (var i = 0; i < data.data.orders.length; i++) {
+                // console.log(data.data.orders[i]);
+                list.push(<OrderList orderEntity={data.data.orders[i]}
+                    cacheOrderListFunc={this.cacheOrderListFunc} position = {orderList.length + i}/>);
+            }
+            orderList = list;//将数据给orderlist
         }
         // console.log(orderList);
         this.setState({});
@@ -169,58 +164,21 @@ var FragmentOrder = React.createClass({
     getOrderList: function (myScroll) {
         // var param =requestEntity;
         console.log(requestEntity);
-        $.ajax({
-            data: requestEntity,
-            async: true,
-            url: gVar.getBASE_URL() + 'order/all',
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                // this.setState({ data: data })
-                this.dealOrderList(data);
-                // console.log(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                toast(err.toString());
-                // console.error(this.props.url, status, err.toString());
-            }.bind(this),
-            complete: function (XMLHttpRequest, textStatus) {
-                 //调用本次ajax请求时传递的options参数 
-                if (myScroll != null) {
-                    myScroll.refresh();
-                }
-            }.bind(this),
-            timeout: 5000,
-        });
+        var url = gVar.getBASE_URL() + 'order/all';
+        gVar.sendRequest(requestEntity, url, this.dealOrderList);
     },
 
     //获取所有仓库
     getAllWarehouse: function () {
-        var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
-        };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'Warehouse/companyAll',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });
-                warehouseList = data.data;
-                warehouseList.splice(0, 0, { name: '全部仓库', warehouse_code: '' });
-                // console.log(warehouseList);
-                this.setState({});
-                // this.dealDashBorad();
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            timeout: 5000,
-        });
+        var params = {};
+        var url = gVar.getBASE_URL() + 'Warehouse/companyAll';
+        gVar.sendRequest(params, url, this.dealWarehouse);
+    },
+
+    dealWarehouse(data) {
+        warehouseList = data.data;
+        warehouseList.splice(0, 0, { name: '全部仓库', warehouse_code: '' });
+        this.setState({});
     },
 
     //处理数据看板进入时
@@ -250,32 +208,10 @@ var FragmentOrder = React.createClass({
 
     //获取订单所有状态
     getOrderListState: function () {
-        var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
-        };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'order/getOrderStatusList',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });
-                statusList = data.data;
-                statusList.splice(0, 0, { status: '', status_name: '全部状态' });
-                this.dealOrderStatus();
-                // console.log(statusList);
-                // this.setState({});
-                this.dealDashBorad();
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            timeout: 5000,
-        });
+        var params = {};
+        var url = gVar.getBASE_URL() + 'order/getOrderStatusList';
+        gVar.sendRequest(params, url, this.dealOrderStatus);
+
     },
 
     // 缓存RequestEntity，orderList,position
@@ -286,7 +222,7 @@ var FragmentOrder = React.createClass({
         // requestEntity =  JSON.parse(sessionStorage.getItem("OrderRequestEntity"));
         // var de = sessionStorage.getItem("OrderPostion");
         // orderList = JSON.parse(sessionStorage.getItem("orderList"));
-        // console.log(requestEntity);
+        console.log(position);
         // console.log(de);
         // console.log(orderList);
     },
@@ -321,7 +257,8 @@ var FragmentOrder = React.createClass({
     },
 
     getCoreObject(myScroll) {
-        this.params.myScroll = myScroll;
+        console.log('myscroll get')
+        this.myScroll = myScroll;
     },
 
     //初始化
@@ -351,12 +288,26 @@ var FragmentOrder = React.createClass({
     getItem: function (index) {
         return orderList;
     },
+    // 滚动到顶部
+    scrollToTop() {
+        // if (listviewInd) {
+        //     listviewInd.scrollToElement(1, 500);//500ms
+        // }
+        if(this.myScroll)
+        this.myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(' + 1 + ')'),500);
+    },
+
+    componentWillUnmount() {
+        listviewInd = null;
+        EventBus.removeEventListener("scrollToTop", this.scrollToTop, this);
+    },
+
     //渲染完毕后再去调用refresh,隐藏动画,重新计算scroll item高度
     componentDidUpdate() {
-        if (this.params.myScroll instanceof Object) {
-            // console.log(this.params.myScroll, "scroll");
-            // this.params.myScroll.refresh();
-            this.params.myScroll.refresh();
+        if (this.myScroll instanceof Object) {
+            // console.log(this.myScroll, "scroll");
+            // this.myScroll.refresh();
+            this.myScroll.refresh();
         }
         // listviewInd.handRefresh();
         // console.log(this.privateParams.listviewInd,"ddd");
@@ -367,8 +318,8 @@ var FragmentOrder = React.createClass({
     componentDidMount() {
         // console.log(Data,"text");
         // console.log(EventBus.hasEventListener("clearCacheOrderList"))
-        // if (!EventBus.hasEventListener("clearCacheOrderList"))//没有注册就注册
-        //     EventBus.addEventListener("clearCacheOrderList", this.clearCacheOrderListFunc, this);
+        if (!EventBus.hasEventListener("scrollToTop"))//没有注册就注册
+            EventBus.addEventListener("scrollToTop", this.scrollToTop, this);
         // var p = EventBus.getEvents();
         // console.log(p.toString());
         // EventBus.dispatch("clearCacheOrderList");//清除页面详情
@@ -384,17 +335,17 @@ var FragmentOrder = React.createClass({
         if (sessionStorage.getItem("OrderRequestEntity")) {
 
             requestEntity = JSON.parse(sessionStorage.getItem("OrderRequestEntity"));
-            this.params.orderPosition = parseInt(sessionStorage.getItem("OrderPostion"));
+            this.orderPosition = parseInt(sessionStorage.getItem("OrderPostion"));
             sessionStorage.removeItem("OrderRequestEntity");
             sessionStorage.removeItem("OrderPostion");
             // orderList = JSON.parse(sessionStorage.getItem("orderList"));
-            console.log("获取本地缓存");
+            console.log("获取本地缓存", this.orderPosition);
             // if (listviewInd) {
-            //     // console.log(listviewInd, "ddd", (this.params.orderPosition + 1));
-            //     listviewInd.scrollToElement(this.params.orderPosition + 1);
+            //     // console.log(listviewInd, "ddd", (this.orderPosition + 1));
+            //     listviewInd.scrollToElement(this.orderPosition + 1);
             // }
-            if (listviewInd instanceof Object) {
-                listviewInd.scrollToElement(this.params.orderPosition + 1);
+            if (listviewInd != null) {
+                listviewInd.scrollToElement(this.orderPosition + 1);
             }
             // this.setState({});//恢复刷新的数据
         } else {//非返回界面，即正常人口
@@ -432,7 +383,7 @@ var FragmentOrder = React.createClass({
                     warehouseList={warehouseList}
                     statusList={statusList}
                     timeList={this.params.timeList}
-                    dataCount={this.params.dataCount}
+                    dataCount={this.dataCount}
                     requestEntity={requestEntity}/>
                 <div >
                     {list}
