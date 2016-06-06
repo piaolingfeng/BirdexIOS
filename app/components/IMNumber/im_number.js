@@ -38,6 +38,8 @@ var IMNumber = React.createClass({
 		gVar.pushPage({ pathname: "mytool", state: param });
 	},
 
+	
+
 	render: function () {
 		var position = this.props.position;
         var lineDisplay = "block";
@@ -48,9 +50,12 @@ var IMNumber = React.createClass({
 				lineDisplay = "none";
             }
         }
+		// var dataId = position+""
 		return (
-			<div className="im_number_head" onClick={this.numberOnclick}>
-				<div style={{ float: "right", width: "0.5px", height: "70px", background: "#CBCBCB", display: lineDisplay }}></div>
+			<div className="im_number_head" id={position} onClick={this.numberOnclick}
+			onTouchStart = {gVar.handleTouchStart.bind(this,position)} onTouchEnd = {gVar.handleTouchEnd.bind(this,position)} 
+			onTouchCancel={gVar.handleTouchEnd.bind(this,position)} >
+				<div style={{ float: "right", width: "0.5px", height: "69.5px", background: "#CBCBCB", display: lineDisplay }}></div>
                 <div  style={{ paddingBottom: "10px", paddingTop: "10px" }}>
 
 					<div className="imnumber im_number_text" key={global.uniqueKey++} style={{

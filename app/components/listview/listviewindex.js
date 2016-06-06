@@ -173,9 +173,12 @@ var ListView = React.createClass({
     },
 
     //滚动到指定位置
-    scrollToElement(position) {
+    scrollToElement(position,time) {
+        var T = time?time:100;
+        // console.log(myScroll,"myscroll")
         // console.log(document.querySelector('#scroller li:nth-child(' + position + ')'),"myScroll",position);
-        myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(' + position + ')'),100);
+        if(myScroll)
+        myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(' + position + ')'),T);
     },
 
     render: function () {

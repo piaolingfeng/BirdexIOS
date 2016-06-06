@@ -154,8 +154,8 @@ var PredictProduct = React.createClass({
         }
         // console.log(product);
         return (
-            <div style={{ marginTop: "5px" }}>
-                <div className="orderdetail_background_img">
+            <div style={{ padding:"6px" }}>
+                <div className="orderdetail_background_img" style={{marginTop:"0px"}}>
                     <table style={{ width: "100%" }}>
                         <tr>
                             <td className="orderdetail_left">商品编码: </td>
@@ -228,7 +228,7 @@ var PredictProduct = React.createClass({
                             <td className="orderdetail_right">
                                 <div>
                                     <div style={{ display: "inline-block", width: "100%" }} className="orderdetail_right_div_padding">
-                                        <span ref="status"  style={{ float: "left", paddingTop: "5px" }}>{product.status_name}</span>
+                                        <span ref="status"  style={{ float: "left" }}>{product.status_name}</span>
                                         <button style={{ display: confirmDisplay }} onClick={this.setConfirmStorage.bind(this, product.product_code) } type="button" className="predictdetail_btn">确 认</button>
                                         <button style={{ display: reConfirmDisplay }} onClick={this.setReviewStorage.bind(this, product.product_code) } type="button" className="predictdetail_btn" >复 核</button>
                                     </div>

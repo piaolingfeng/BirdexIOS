@@ -48,6 +48,7 @@ var LW = React.createClass({
 					localStorage.setItem('company_name', data.data.company_name);
 					localStorage.setItem('company_short_name', data.data.company_short_name);
 					localStorage.setItem('user_code', data.data.user_code);
+					localStorage.setItem('USER-TOKEN',data.data.user_token);
 					console.log(data);
 				} catch (e) {
 					// alert(e);

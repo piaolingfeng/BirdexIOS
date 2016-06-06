@@ -15,7 +15,7 @@ require("../orderdetail/css/orderdetail.css");
 var toast = require('../../util/Tips/tips.js');
 
 
-var MsgListData = null;
+var MsgListData = new Array();
 
 var Data = null;
 var listviewInd = null;
@@ -30,100 +30,54 @@ var MessageDetail = React.createClass({
     // ontop:0,
 
     componentDidMount() {
+
         if (sessionStorage.getItem("msg_page_no")) {
             this.page_no = sessionStorage.getItem("msg_page_no");
             this.position = parseInt(sessionStorage.getItem("msg_position"));
             // this.ontop = (sessionStorage.getItem("msg_oTop"));
             sessionStorage.removeItem("msg_page_no");
             sessionStorage.removeItem("msg_position");
-            console.log("获取本地缓存",this.ontop);
+            console.log("获取本地缓存");
             // this.setState({});
             if (listviewInd instanceof Object) {
                 listviewInd.scrollToElement(this.position + 1);
             }
             // $("#scroller").css("transform","translate(0px,"+this.ontop+")" );
         } else {
+            console.log("dddd");
             MsgListData = new Array();
             this.getMsgList();
         }
     },
 
-    //获取订单所有状态
+    //获取消息列表
     getMsgList: function (myScroll) {
         var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
             start_date: timeUtil.getNearMouth(),
             end_date: timeUtil.getCurrentDateFormat(),
             msg_type: this.msg_type,
             page_no: this.page_no,
         };
         // console.log(params);
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'Message/all',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });: '', status_name: '全部状态' });
-                // this.dealOrderStatus();
-                // console.log(data);
-                this.dealMsgData(data);
-                // this.setState({ data: "data" });
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            complete: function (XMLHttpRequest, textStatus) {
-                //调用本次ajax请求时传递的options参数 
-                if (myScroll != null) {
-                    myScroll.refresh();
-                }
-            }.bind(this),
-            timeout: 5000,
-        });
+        var url = gVar.getBASE_URL() + 'Message/all';
+        gVar.sendRequest(params, url, this.dealMsgData);
     },
 
     dealMsgData(data) {
-        // console.log(data.data);
-        if (data != null) {
-            Data = data;
-            if (data.error == 0) {
-                // dataCount = data.data.count;//赋值
-                // console.log(dataCount);
-                if (this.page_no > 1) {
-                    // console.log(data.data);
-                    if (data.data.messages.length == 0 && this.page_no > 1) {
-                        // T.showShort(MyApplication.getInstans(), "已经是最后一页");
-                        toast("已经是最后一页");
-                    } else {
-                        // OrderAdapter.getList().addAll(orderListEntities.getData().getOrders());
-                        // orderListEntities.getData().setOrders(OrderAdapter.getList());
-                        // for (var i = 0; i < data.data.messages.length; i++) {
-                        //     MsgListData.push(<OrderList orderEntity={data.data.orders[i]}/>);
-                        // }
-                        MsgListData.push(this.addMsgToList(data.data.messages));
-                    }
-                }
-                else {
-                    // var list = [];
-                    // console.log(gVar.createOrderEntity());
-                    // orderList = data.data.orders;
-                    // for (var i = 0; i < data.data.orders.length; i++) {
-                    //     list.push(<OrderList orderEntity={data.data.orders[i]}/>);
-                    // }
-
-                    MsgListData = this.addMsgToList(data.data.messages);//将数据给orderlist
-                }
+        Data = data;
+        if (this.page_no > 1) {
+            // console.log(data.data);
+            if (data.data.messages.length == 0 && this.page_no > 1) {
+                // T.showShort(MyApplication.getInstans(), "已经是最后一页");
+                toast("已经是最后一页");
             } else {
-                // console.log(data.data);
-                toast(data.data);
+                MsgListData.push(this.addMsgToList(data.data.messages));
             }
         }
-        this.setState({ data: "" });
+        else {
+            MsgListData = this.addMsgToList(data.data.messages);//将数据给orderlist
+        }
+        this.setState({});
     },
 
     addMsgToList(messages) {
@@ -170,6 +124,7 @@ var MessageDetail = React.createClass({
     },
 
     getInitialState() {
+        // console.log(this.title,this.msg_type,this.page_no,this.itemIdex,this.position,this.myScroll);
         this.itemIdex = this.props.location.state.itemIdex;
         switch (this.itemIdex) {
             case 0:
@@ -201,13 +156,13 @@ var MessageDetail = React.createClass({
         return MsgListData;
     },
 
-   componentDidUpdate() {
+    componentDidUpdate() {
         if (this.myScroll instanceof Object) {
             // console.log(this.params.myScroll, "scroll");
             // this.params.myScroll.refresh();
             this.myScroll.refresh();
         }
-   },
+    },
     //上拉加载
     pullUpEvent(myScroll) {
         this.page_no++;
@@ -219,10 +174,10 @@ var MessageDetail = React.createClass({
     },
 
     render: function () {
-        if (Data == null)
-            return null;
-        var Count = Data.data.count;
-
+        var Count = 0;
+        if (Data != null){
+            Count = Data.data.count;
+        }
         var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem}
             marginTop={78} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (MsgListData != null && MsgListData.length == 0) {

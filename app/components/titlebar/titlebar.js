@@ -18,124 +18,140 @@ var refresh = require('./images/refresh.png');
 //refreshFunc reflesh回调，默认隐藏
 //saveFunc保存按钮回调方法
 //backCallBack 返回时可以做回调
+//titleCallBack 点击头部触发回调方法
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
-    
-    propTypes:{
+
+    propTypes: {
         menuFunc: React.PropTypes.func,
-        backNoneDisplay:React.PropTypes.any,
-        refreshFunc:React.PropTypes.func,
-        saveFunc:React.PropTypes.func,
-        backCallBack:React.PropTypes.func,
+        backNoneDisplay: React.PropTypes.any,
+        refreshFunc: React.PropTypes.func,
+        saveFunc: React.PropTypes.func,
+        backCallBack: React.PropTypes.func,
+        titleCallBack: React.PropTypes.func,
     },
-    
-    componentDidMount:function(){
+
+    componentDidMount: function () {
 
     },
-    
-    back:function () {
+
+    back: function (e) {
         // alert("back");
-        if(this.props.backCallBack){//返回时可以做回调
+        e.stopPropagation();
+        if (this.props.backCallBack) {//返回时可以做回调
             this.props.backCallBack();
         }
         gVar.popPage();
         return;
     },
-    
+
     // menu:function(){
-        // this.ref.menu.src = ic_setting;
-        // this.refs.save.style.visibility="visible";
-        // this.refs.menu.content="dfdfsafdfdsfd";
-        // $("#menu").content.text =  "dfadfdsafd";
-        // this.setState();
-        // alert("menu");
-        
+    // this.ref.menu.src = ic_setting;
+    // this.refs.save.style.visibility="visible";
+    // this.refs.menu.content="dfdfsafdfdsfd";
+    // $("#menu").content.text =  "dfadfdsafd";
+    // this.setState();
+    // alert("menu");
+
     //     return; 
     // },
-    
 
-    menuItemClick: function (index) {
+
+    menuItemClick: function (index,e) {
         console.log(arguments);
-        var e = arguments[1];
         e.stopPropagation();
-        if(!this.props.menuFunc){
-            var param = {titleIndex:index};
-			gVar.pushPage({pathname:"mytool", state:param});
+        var e = arguments[1];
+        if (!this.props.menuFunc) {
+            var param = { titleIndex: index };
+            gVar.pushPage({ pathname: "mytool", state: param });
             // global.router.histroy.push({ pathname: "mytool", state: { title:"ddddd" } }); 
         }
         else
             this.props.menuFunc(index);
         // return;
-	},
-    
-    settingClick(){
+    },
+
+    settingClick(e) {
         // alert("set");
+        e.stopPropagation();
         gVar.pushPage("mymessagemenu");
     },
-    
-    refreshClick(){
+
+    refreshClick(e) {
+        e.stopPropagation();
         this.props.refreshFunc();
     },
-    
-    save(){
+
+    save(e) {
+        e.stopPropagation();
         this.props.saveFunc();
     },
-    
-    render:function(){
+
+    TitlebarClick() {
+        this.props.titleCallBack();
+    },
+
+    render: function () {
         var bg_color = gVar.Color_blue_head;
-        
+
         var title = this.props.title;
         var save = this.props.save;
-        if(save!=null&&this.props.bgColor==null){//默认不传头部颜色的情况下
+        if (save != null && this.props.bgColor == null) {//默认不传头部颜色的情况下
             bg_color = gVar.Color_gray_head;
         }
-        if(this.props.bgColor!=null){
+        if (this.props.bgColor != null) {
             bg_color = this.props.bgColor;
         }
         var menuImg_display = "none";
         var settingImg_display = "none";
-        var backImg_display="block";//默认显示
-        if(this.props.menu){
+        var backImg_display = "block";//默认显示
+        if (this.props.menu) {
             menuImg_display = "block";
         }
-        if(this.props.setting){
+        if (this.props.setting) {
             settingImg_display = "block";
         }
-        if(this.props.backNoneDisplay){
+        if (this.props.backNoneDisplay) {
             backImg_display = "none";
         };
-        var mytrigger = <img className="titlebar_menu" ref="menu" src={menu} 
-                style={{padding:gVar.Padding_head,display:menuImg_display}}/>;
+        var mytrigger = <img className="titlebar_menu" ref="menu" src={menu}
+            style={{ padding: gVar.Padding_head, display: menuImg_display }} onClick={function name(e) {
+                // console.log("onclick"+arguments)
+                e.stopPropagation();//避免冒泡
+            }}/>;
         // var mytrigger = <div style={{textAlign:"center"}}><img src={birdpic} /></div>;
         var refreshDisplay = "none";
-        if(this.props.refreshFunc){
+        if (this.props.refreshFunc) {
             refreshDisplay = 'block'
         }
         return (
-        <div className="titlebar_head" style={{
-            backgroundColor:bg_color,
-        }}>
-            
-            <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{padding:gVar.Padding_head,display:backImg_display,paddingRight:"24px"}}/>
-            <div className="titlebar_right" >
-                <span className="titlebar_save" ref="save" style={{color:gVar.Color_white,fontSize:gVar.FontSize_title_head,padding:gVar.Padding_text_head,margin:"auto",fontWeight:"bold"}} onClick={this.save}>{save}</span>
-                <img className="titlebar_menu" ref="menu" src={ic_setting} 
-                style={{padding:gVar.Padding_head,display:settingImg_display}} onClick={this.settingClick}/>
-                <img className="titlebar_menu" src={refresh} 
-                style={{padding:gVar.Padding_head,display:refreshDisplay}} onClick={this.refreshClick}/>
-                <BPopover menuItem={gVar.mytool}
-						  menuItemClick={this.menuItemClick}
-				          triggerComp={mytrigger}
-						  placement="bottom" />	
+            <div className="titlebar_head" style={{backgroundColor: bg_color}}>
+                <div onClick={this.TitlebarClick} style={{backgroundColor: bg_color,marginTop:"13px"}}>
+
+                    <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{ padding: gVar.Padding_head, display: backImg_display, paddingRight: "24px" }}/>
+                    <div className="titlebar_right" >
+                        <span className="titlebar_save" ref="save" style={{ color: gVar.Color_white, fontSize: gVar.FontSize_title_head, padding: gVar.Padding_text_head, margin: "auto", fontWeight: "bold" }} onClick={this.save}>{save}</span>
+                        <img className="titlebar_menu" ref="menu" src={ic_setting}
+                            style={{ padding: gVar.Padding_head, display: settingImg_display }} onClick={this.settingClick}/>
+                        <img className="titlebar_menu" src={refresh}
+                            style={{ padding: gVar.Padding_head, display: refreshDisplay }} onClick={this.refreshClick}/>
+                        <BPopover menuItem={gVar.mytool}
+                            menuItemClick={this.menuItemClick}
+                            triggerComp={mytrigger}
+                            placement="bottom" />
+                    </div>
+
+                    <div ref="title" style={{
+                        width: "50%", padding: gVar.Padding_text_head, margin: "auto",
+                        color: gVar.Color_white, fontSize: gVar.FontSize_title_head, fontWeight: "bold"
+                    }}>{title}</div>
+
+                </div>
             </div>
-            
-            <div ref="title" style={{width:"50%",left:'0',top:"0",padding:gVar.Padding_text_head,margin:"auto",
-            color:gVar.Color_white,fontSize:gVar.FontSize_title_head,fontWeight:"bold"}}>{title}</div>
-            
-        </div>);
-        
+        );
+
     },
-    
+
 });
 
 module.exports = Titlebar;

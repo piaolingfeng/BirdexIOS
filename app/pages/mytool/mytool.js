@@ -9,7 +9,11 @@ var FragmentMyOutlay = require('../../fragments/myoutlay/myoutlay.js');
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var currentPosition = 0;//当前页面位置
 var targetPosition = 0;
+var EventBus = require('eventbusjs');
+
 var MyTool = React.createClass({
+
+    needToScroll: false,
 
     menuFunc: function (id) {
         // alert(id);
@@ -22,8 +26,9 @@ var MyTool = React.createClass({
         return;
     },
 
-    componentDidMount() {
-
+    titleCallBack() {
+        if (this.needToScroll)
+            EventBus.dispatch("scrollToTop");
     },
 
     getInitialState() {
@@ -59,24 +64,29 @@ var MyTool = React.createClass({
         var displayPage = null;//声明张开页面变量
         switch (titleIndex) {
             case 0:
+                this.needToScroll = true;
                 displayPage = <FragmentOrder todayDataName = {this.state.data.todayDataName}/>;
                 break;
             case 1:
+                this.needToScroll = true;
                 displayPage = <FragmentPredict todayDataName = {this.state.data.todayDataName}/>;
                 break;
             case 2:
+                this.needToScroll = false;
                 displayPage = <FragmentInventory todayDataName = {this.state.data.todayDataName}/>;
                 break;
             case 3:
+                this.needToScroll = false;
                 displayPage = <FragmentMyOutlay />;
                 break;
             case 4:
+                this.needToScroll = false;
                 displayPage = <FragmentRecharge />;
                 break;
         }
         return (
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }}>
-                <TitleBar  title={gVar.mytool[titleIndex]} menu="true" menuFunc={this.menuFunc}/>
+                <TitleBar  title={gVar.mytool[titleIndex]} menu="true" menuFunc={this.menuFunc} titleCallBack={this.titleCallBack}/>
                 <div className="titlebar_head_down">
                     {displayPage}
                 </div>

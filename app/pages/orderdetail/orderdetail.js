@@ -9,9 +9,14 @@ var error = require("./images/error.png");
 var OrderDetailProduct = require("./orderdetailproduct.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var toast = require('../../util/Tips/tips.js');
-var Data = null;
+// var Data = null;
+var ListView = require('../../components/listview/listviewindex.js');
+
+
 var shouldUpdate = false;
 var OrderDetail = React.createClass({
+    myScroll: null,
+    Data: null,
     idCheck: function () {
         // alert("idCheck");
         var params = { order_code: Data.data.order_code }
@@ -24,75 +29,45 @@ var OrderDetail = React.createClass({
     changeAddr: function () {
         console.log(global.router);
         var params = { order_code: Data.data.order_code }
-        gVar.pushPage({ pathname: "changeaddress", state: params },true);
+        gVar.pushPage({ pathname: "changeaddress", state: params }, true);
     },
 
-    setAddr(e,params){
+    setAddr(e, params) {
         $("#address").html(params);
     },
 
     componentDidMount: function () {
         if (!EventBus.hasEventListener("changeAddr"))//没有注册就注册
             EventBus.addEventListener("changeAddr", this.setAddr, this);
-        shouldUpdate =false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
+        shouldUpdate = false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
         this.getOrderDetail();
     },
 
     //获取订单详情
     getOrderDetail: function () {
         var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
             order_code: this.props.location.state.order_code,
         };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'Order/get',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });
-                // console.log(data);
-                // this.setState({ data: "data" });
-                this.dealOrderDetail(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this),
-            timeout: 5000,
-        });
+        var url = gVar.getBASE_URL() + 'Order/get';
+        gVar.sendRequest(params, url, this.dealOrderDetail);
+
     },
     //处理详情列表
     dealOrderDetail(data) {
-        console.log(data);
-        if (data != null) {
-            if (data.error == 0) {
-                Data = data;
-            } else {
-                // console.log(data.data);
-                toast(data.data);
-            }
-        }
-        this.setState({ data: "" });
+        this.Data = data;
+        this.setState({});
     },
 
-    getInitialState() {
-        Data = null;
-        return null;
-    },
     //返回时的回调
-    backCallBack(){
+    backCallBack() {
         // EventBus.dispatch("clearCacheOrderList");//清除页面详情
         EventBus.removeEventListener("changeAddr", this.setAddr, this);
     },
 
     componentDidUpdate() {
-        if (!Data || !Data.data)
+        if (!this.Data || !this.Data.data)
             return null;
-        var detailData = Data.data;
+        var detailData = this.Data.data;
         var func = this;
         if (detailData.verify_id_card_result == '30') {//30表示验证不通过
             $('#checkImg').attr("src", error);
@@ -103,7 +78,7 @@ var OrderDetail = React.createClass({
             });
         } else {
             if (detailData.verify_id_card_result == '20') {//20表示身份证验证
-                console.log(detailData.verify_id_card_result);
+                // console.log(detailData.verify_id_card_result);
                 $('#idNumCheck').css({ color: "#13A7DF" });
                 //    $('#idCheck').attr('onClick',this.idCheck);
                 $('#checkImg').attr("src", right);
@@ -128,30 +103,24 @@ var OrderDetail = React.createClass({
         } else {
             toast("当前状态不能修改地址哦!");
         }
+        if (this.myScroll != null)
+            this.myScroll.refresh();
     },
 
     shouldComponentUpdate() {//出发setState之后才会调用，也就是网络请求后
-        if(shouldUpdate == false){
-            shouldUpdate =true;
+        if (shouldUpdate == false) {
+            shouldUpdate = true;
             return true;
         }
-            return false;
+        return false;
     },
 
-    render: function () {
+    getItem() {
+        var list = [];
+        if (this.Data != null && this.Data.data != null) {
 
-        if (!Data || !Data.data)
-            return null;
-        var detailData = Data.data;
-        var products = new Array();
-        if (detailData.products != null) {
-            for (var i = 0; i < detailData.products.length; i++) {
-                products.push(<OrderDetailProduct product = {detailData.products[i]}/>);
-            };
-        }
-        return (
-            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }} >
-                <TitleBar  save="订单详情" backCallBack={this.backCallBack}/>
+            var detailData = this.Data.data;
+            var detailHead =
                 <div className="titlebar_head_down orderdetail_head" style={{ paddingTop: gVar.Padding_titlebar }}>
                     <div className="orderdetail_background_img">
                         <table style={{ width: "100%" }}>
@@ -232,9 +201,16 @@ var OrderDetail = React.createClass({
                             </tr>
                         </table>
                     </div>
+                </div>;
 
-                    {products}
-
+            list.push(detailHead);
+            if (detailData.products != null) {
+                for (var i = 0; i < detailData.products.length; i++) {
+                    list.push(<OrderDetailProduct product = {detailData.products[i]}/>);
+                };
+            }
+            var detailLast =
+                <div className="orderdetail_head">
                     <div className="orderdetail_background_img">
                         <table style={{ width: "100%" }}>
                             <tr>
@@ -279,6 +255,26 @@ var OrderDetail = React.createClass({
                         </table>
                     </div>
                 </div>
+            list.push(detailLast);
+        }
+        return list;
+    },
+
+    getCoreObject(myScroll) {
+        //  console.log(myScroll);
+        this.myScroll = myScroll;
+    },
+
+    render: function () {
+
+        return (
+            <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }} >
+                <TitleBar  save="订单详情" backCallBack={this.backCallBack}/>
+
+                <ListView  getItems={this.getItem} marginTop={0} pullUpHandler={this.pullUpEvent}
+                    showUpload={false} showDownload={false}
+                    backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>
+
             </div>
         );
     }

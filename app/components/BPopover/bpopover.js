@@ -23,7 +23,8 @@ var BPopover = React.createClass({
     },
     
     menuClick: function (idx,event) {
-        //console.log("menu click ");        
+        // console.log("menu click "+ arguments);        
+        // event.stopPropagation();
         //console.log(arguments);
         // e.preventDefault();
         //  console.log(event);
@@ -44,12 +45,22 @@ var BPopover = React.createClass({
         var count = this.props.menuItem.length;
         var el = new Array();
         for (var i = 0; i < count; i++) {
-            el[i] = 
-            <div>
-              <div id="item_click" className="popitem" onClick={this.menuClick.bind(this, i)} >{this.props.menuItem[i]}</div>
-               <hr style={{width:"100%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"1px"}}></hr>
-            </div>   
-    }
+            if (i != count - 1)
+            {
+                el[i] = 
+                <div>
+                <div id="item_click" className="popitem" onClick={this.menuClick.bind(this, i)} >{this.props.menuItem[i]}</div>
+                <hr style={{width:"100%",margin:"auto", backgroundColor:"#CBCBCB", border:0, height:"0.5px"}}></hr>
+                </div>;
+            }
+            else
+            {
+                el[i] = 
+                <div>
+                <div id="item_click" className="popitem" onClick={this.menuClick.bind(this, i)} >{this.props.menuItem[i]}</div>
+                </div>;
+            }   
+        }
         
         var pop = <Popover id="oAIHFEFUH" >{el}</Popover>;
         //return <img src={menupic} id="aabbcc"alt="aaaaa" />;

@@ -750,6 +750,7 @@
          * @private
          */
         self.pluginConfig = (function () {
+            // console.log("here sdd"); 
             var config = {};
             if (isArray(opts.plugins)) {
                 opts.plugins.forEach(function pluginConfigEach(plugin) {
@@ -760,6 +761,7 @@
                     }
                 });
             }
+            
             return config;
         })();
     };
@@ -771,6 +773,7 @@
     iSliderPrototype._initPlugins = function () {
         var config = this.pluginConfig;
         var plugins = this._plugins;
+        // console.log(config,plugins,"dsdd")
         for (var i in config) {
             if (config.hasOwnProperty(i) && plugins.hasOwnProperty(i)) {
                 this.log('[INIT PLUGIN]:', i, plugins[i]);
@@ -1999,5 +2002,100 @@
     /* Global */
     else
         global['iSlider'] = global['iSlider'] || iSlider;
+
+
+    iSlider && iSlider.regPlugin('dot', function (opts) {
+
+
+        var HANDLE = this;
+        var data = HANDLE.data;
+        var dots = [];
+        var evtHandle = [];
+        var endEvt = HANDLE.deviceEvents.endEvt;
+
+        var dotWrap = document.createElement('ul');
+        dotWrap.className = 'islider-dot-wrap';
+
+        renderDots();
+
+        locate(opts && opts.locate != null ? opts.locate : false)
+            .appendChild(dotWrap);
+
+        HANDLE.on('slideChange', function () {
+            for (var i = 0; i < data.length; i++) {
+                dots[i].className = 'islider-dot';
+                if (i === this.slideIndex) {
+                    dots[i].className += ' active';
+                }
+            }
+        });
+
+        HANDLE.on('loadData', function () {
+            data = this.data;
+            renderDots();
+        }, 1);
+
+        function renderDots() {
+            var fragment = document.createDocumentFragment();
+            dots.forEach(function (el, i) {
+                el.removeEventListener(endEvt, evtHandle[i], false);
+            });
+            dots = [], evtHandle = [];
+            dotWrap.innerHTML = '';
+            for (var i = 0; i < data.length; i++) {
+                dots[i] = document.createElement('li');
+                dots[i].className = 'islider-dot';
+                dots[i].setAttribute('index', i);
+                if (i === HANDLE.slideIndex) {
+                    dots[i].className += ' active';
+                }
+                evtHandle[i] = function () {
+                    HANDLE.slideTo(parseInt(this.getAttribute('index'), 10));
+                };
+                dots[i].addEventListener(endEvt, evtHandle[i], false);
+                fragment.appendChild(dots[i]);
+            }
+            dotWrap.appendChild(fragment);
+        }
+
+        function locate(locate) {
+            if (locate === 'relative') {
+                return HANDLE.wrap;
+            } else if (Boolean(locate.nodeName) && Boolean(locate.nodeType)) {
+                return locate;
+            }
+            return HANDLE.wrap.parentNode;
+        }
+    });
+
+    iSlider && iSlider.regPlugin('button', function () {
+        var HANDLE = this;
+        var btnOuter = [];
+        var btnInner = [];
+        for (var i = 0; i < 2; i++) {
+            btnOuter[i] = document.createElement('div');
+            btnOuter[i].className = 'islider-btn-outer';
+            btnInner[i] = document.createElement('div');
+            btnInner[i].className = 'islider-btn-inner';
+
+            if (i === 0) {
+                btnOuter[i].className += ' left';
+                btnOuter[i].dir = -1;
+            }
+            else {
+                btnOuter[i].className += ' right';
+                btnOuter[i].dir = 1;
+            }
+
+            btnOuter[i].addEventListener('click', function () {
+                var dir = parseInt(this.getAttribute('dir'), 10);
+                HANDLE.slideTo(HANDLE.slideIndex + dir);
+            });
+
+            btnOuter[i].appendChild(btnInner[i]);
+            HANDLE.wrap.appendChild(btnOuter[i], HANDLE.wrap.nextSibling);
+        }
+    });
+
 
 })(window || this);

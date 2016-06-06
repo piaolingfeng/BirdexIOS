@@ -64,49 +64,20 @@ var GerenItem = React.createClass({
                 break;
             case 5://检查更新
                 // gVar.pushPage("");
-                // this.checkForUpdata();
+                // this.checkForUpdate();
                 break;
         }
     },
 
-    checkForUpdata() {
-        var params = {
-            // app_debug: 1,
-            // company_code: localStorage.getItem("company_code"),
-            // user_code: localStorage.getItem('user_code'),
-        };
+    checkForUpdate() {
         var url = "http://app.birdex.cn/sanfangcang.html";
-        $.ajax({
-            data: params,
-            url: url,
-            // async: true,
-            // dataType: 'json',
-            dataType: 'json',
-            crossDomain: true,
-            cache: false,
-            success: function (data) {
-                // this.setState({ data: data });
-
-                console.log(data);
-                alert(1111);
-
-                // this.dealDashBorad();
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(err);
-                toast(err.toString());
-                alert(2222);
-            }.bind(this),
-            timeout: 5000,
-        });
+        gVar.sendRequest("",url,this.dealUpdate);
     },
 
-    handleTouchStart: function (ele) {
-        $(ele.target).addClass("item_touch_start");
+    dealUpdate(data){
+        console.log(data);
     },
-    handleTouchEnd: function (ele) {
-        $(ele.target).removeClass("item_touch_start");
-    },
+
     render: function () {
         var cname;
         if (this.props.info.type == 0) {
@@ -116,12 +87,11 @@ var GerenItem = React.createClass({
         } else {
             cname = "gerenitem_bottom";
         }
-        var item = (<div className = {cname} onClick={this.onItemClick.bind(this, this.props.info.index) }
-            onTouchStart = {
-                this.handleTouchStart.bind(this)
-            }onTouchEnd = {
-                this.handleTouchEnd.bind(this)
-            } onTouchCancel={this.handleTouchEnd.bind(this) }>
+        var position = this.props.info.index;
+        var item = (<div className = {cname} onClick={this.onItemClick.bind(this, position) }
+           id={position}
+            onTouchStart = {gVar.handleTouchStart.bind(this,position)} onTouchEnd = {gVar.handleTouchEnd.bind(this,position)} 
+			onTouchCancel={gVar.handleTouchEnd.bind(this,position)} >
             <img className = "img-rounded"
                 style = {{
                     width: "30px",
