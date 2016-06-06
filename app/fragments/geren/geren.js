@@ -76,23 +76,26 @@ var GerenItem = React.createClass({
             // user_code: localStorage.getItem('user_code'),
         };
         var url = "http://app.birdex.cn/sanfangcang.html";
-        $.ajax(url, {
-            // data: params,
+        $.ajax({
+            data: params,
+            url: url,
             // async: true,
             // dataType: 'json',
-            dataType: 'jsonp',
+            dataType: 'json',
             crossDomain: true,
-            // cache: true,
+            cache: false,
             success: function (data) {
                 // this.setState({ data: data });
 
                 console.log(data);
+                alert(1111);
 
                 // this.dealDashBorad();
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(err);
-                // toast(err.toString());
+                toast(err.toString());
+                alert(2222);
             }.bind(this),
             timeout: 5000,
         });

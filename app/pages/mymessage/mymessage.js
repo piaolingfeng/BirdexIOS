@@ -109,26 +109,9 @@ var MM = React.createClass({
             company_code: localStorage.getItem("company_code"),
             user_code: localStorage.getItem('user_code')
 		};
-		console.log(param)
-		$.ajax({
-            data: param,
-            url: gVar.getBASE_URL() + 'Message/stat',
-            dataType: 'json',
-            cache: false,
-			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
-			// xhrFields: {
-			// 	withCredentials: true
-			// },
-            success: function (data) {
-                // this.setState({ data: data });
-				// alert("success");
-				this.initSuccess(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-				toast(err);
-            }.bind(this)
-        });
+		console.log(param);
+        var url = gVar.getBASE_URL() + 'Message/stat';
+		gVar.sendRequest(param, url, this.initSuccess);
 
 		return;
     },
@@ -203,28 +186,28 @@ var MM = React.createClass({
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,0)}>
                         <img src={warning} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存预警消息</span>
-                        <span id="STOCK_WARNING" className="badge mymessage_badge" >50</span>
+                        <span id="STOCK_WARNING" className="badge mymessage_badge" ></span>
                     </div>
 
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,1)} >
                         <img src={idcard} className="mymessage_img"/>
                         <span className="mymessage_item_text">身份证异常订单</span>
-                        <span id="ORDER_IDCARD_EXCEPTION" className="badge mymessage_badge" >50</span>
+                        <span id="ORDER_IDCARD_EXCEPTION" className="badge mymessage_badge" ></span>
                     </div>
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,2)} style={{ marginTop: "1px" }}>
                         <img src={repertory} className="mymessage_img"/>
                         <span className="mymessage_item_text">库存异常订单</span>
-                        <span id="repertory_exception" className="badge mymessage_badge" >50</span>
+                        <span id="repertory_exception" className="badge mymessage_badge" ></span>
                     </div>
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this,3)} style={{ marginTop: "1px" }}>
                         <img src={check} className="mymessage_img"/>
                         <span className="mymessage_item_text">审核不通过订单</span>
-                        <span id="ORDER_VERIFY_FAIL" className="badge mymessage_badge" >50</span>
+                        <span id="ORDER_VERIFY_FAIL" className="badge mymessage_badge" ></span>
                     </div>
                     <div id="accoutException" className="mymessage_item" onClick={this.onItemClick.bind(this,4)} >
                         <img src={account} className="mymessage_img"/>
                         <span className="mymessage_item_text">账户异常</span>
-                        <span id="ACCOUNT_EXCEPTION" className="badge mymessage_badge" >50</span>
+                        <span id="ACCOUNT_EXCEPTION" className="badge mymessage_badge" ></span>
                     </div>
                 </div>
             </div>
