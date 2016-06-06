@@ -152,7 +152,7 @@ var FragmentOrder = React.createClass({
             for (var i = 0; i < data.data.orders.length; i++) {
                 // console.log(data.data.orders[i]);
                 list.push(<OrderList orderEntity={data.data.orders[i]}
-                    cacheOrderListFunc={this.cacheOrderListFunc} position = {orderList.length + i}/>);
+                    cacheOrderListFunc={this.cacheOrderListFunc} position = {i}/>);
             }
             orderList = list;//将数据给orderlist
         }
@@ -293,8 +293,8 @@ var FragmentOrder = React.createClass({
         // if (listviewInd) {
         //     listviewInd.scrollToElement(1, 500);//500ms
         // }
-        if(this.myScroll)
-        this.myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(' + 1 + ')'),500);
+        if (this.myScroll)
+            this.myScroll.scrollToElement(document.querySelector('#scroller li:nth-child(' + 1 + ')'), 500);
     },
 
     componentWillUnmount() {
@@ -345,7 +345,7 @@ var FragmentOrder = React.createClass({
             //     listviewInd.scrollToElement(this.orderPosition + 1);
             // }
             if (listviewInd != null) {
-                listviewInd.scrollToElement(this.orderPosition + 1);
+                listviewInd.scrollToElement((orderList.length > this.orderPosition ? this.orderPosition : orderList.length) + 1);
             }
             // this.setState({});//恢复刷新的数据
         } else {//非返回界面，即正常人口

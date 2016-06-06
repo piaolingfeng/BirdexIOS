@@ -121,7 +121,7 @@ var FragmentPrediciton = React.createClass({
             // orderList = data.data.orders;
             for (var i = 0; i < data.data.storages.length; i++) {
                 list.push(<PredictionList predictEntity={data.data.storages[i]}
-                    cachePredictListFunc={this.cachePredictListFunc} position = {predictList.length + i}/>);
+                    cachePredictListFunc={this.cachePredictListFunc} position = {i}/>);
             }
             predictList = list;//将数据给orderlist
         }
