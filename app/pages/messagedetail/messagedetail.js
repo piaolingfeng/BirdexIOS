@@ -44,7 +44,7 @@ var MessageDetail = React.createClass({
             }
             // $("#scroller").css("transform","translate(0px,"+this.ontop+")" );
         } else {
-            console.log("dddd");
+            // console.log("dddd");
             MsgListData = new Array();
             this.getMsgList();
         }
@@ -53,7 +53,7 @@ var MessageDetail = React.createClass({
     //获取消息列表
     getMsgList: function (myScroll) {
         var params = {
-            start_date: timeUtil.getNearMouth(),
+            start_date: timeUtil.getNearThreeMouth(),
             end_date: timeUtil.getCurrentDateFormat(),
             msg_type: this.msg_type,
             page_no: this.page_no,
@@ -179,7 +179,7 @@ var MessageDetail = React.createClass({
             Count = Data.data.count;
         }
         var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem}
-            marginTop={78} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
+            marginTop={91} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (MsgListData != null && MsgListData.length == 0) {
             list = <div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>;
         }

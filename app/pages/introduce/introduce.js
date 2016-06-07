@@ -33,7 +33,7 @@ var Introduce = React.createClass({
             dom: document.getElementById('iSlider-wrapper'),
             data: list,
             isLooping: false,
-            isDebug:true,
+            // isDebug:true,
             isOverspread: 1,
             animateTime: 800, // ms
             plugins: ['dot'],
@@ -54,7 +54,7 @@ var Introduce = React.createClass({
     
     //滑动回调
     onslidechangedCallback(){
-        console.log(arguments);
+        // console.log(arguments);
         if(arguments[0]==2){
             gVar.pushPage('login');
         }

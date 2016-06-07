@@ -105,7 +105,8 @@ body {
  *
  */
 #pullDown, #pullUp {
-	background:#fff;
+	/*background:#fff;透明度*/
+	background: rgba(255, 255, 255, 0);
 	height:40px;
 	line-height:40px;
 	padding:5px 10px;

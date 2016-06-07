@@ -125,8 +125,8 @@ var Titlebar = React.createClass({
             refreshDisplay = 'block'
         }
         return (
-            <div className="titlebar_head" style={{backgroundColor: bg_color}}>
-                <div onClick={this.TitlebarClick} style={{backgroundColor: bg_color,marginTop:"13px"}}>
+            <div className="titlebar_head" style={{backgroundColor: bg_color}} onClick={this.TitlebarClick}>
+                <div  style={{backgroundColor: bg_color,marginTop:"13px"}}>
 
                     <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{ padding: gVar.Padding_head, display: backImg_display, paddingRight: "24px" }}/>
                     <div className="titlebar_right" >

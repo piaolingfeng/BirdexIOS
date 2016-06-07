@@ -46,7 +46,9 @@ var MsgAccountError = React.createClass({
                             , 可能造成部分订单无法正常扣取费用, 为避免影响订单配送时效, 请尽快充值!</span>
                     </div>
                     <div style={{ display: "inline-block", width: "100%" }}>
-                        <button onClick={this.recharge} type="button" className="accounterror_btn" >马上充值</button>
+                        <button id={"account"+this.props.position} onClick={this.recharge} type="button" className="accounterror_btn"
+                            onTouchStart = {gVar.btnhandleTouchStart.bind(this, "account"+this.props.position) } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "account"+this.props.position) }
+                            onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "account"+this.props.position) }>马上充值</button>
                     </div>
 
                 </div>

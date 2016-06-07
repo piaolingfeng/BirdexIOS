@@ -14,7 +14,7 @@ var MsgOrderInventoryProduct = React.createClass({
         var product = this.props.product;
         if(product==null)
             return null;
-        console.log(product);
+        // console.log(product);
         return(
             <div >
                 <div className="messagedetail_top_padding">

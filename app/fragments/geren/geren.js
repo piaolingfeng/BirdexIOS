@@ -71,10 +71,10 @@ var GerenItem = React.createClass({
 
     checkForUpdate() {
         var url = "http://app.birdex.cn/sanfangcang.html";
-        gVar.sendRequest("",url,this.dealUpdate);
+        gVar.sendRequest("", url, this.dealUpdate);
     },
 
-    dealUpdate(data){
+    dealUpdate(data) {
         console.log(data);
     },
 
@@ -89,9 +89,9 @@ var GerenItem = React.createClass({
         }
         var position = this.props.info.index;
         var item = (<div className = {cname} onClick={this.onItemClick.bind(this, position) }
-           id={position}
-            onTouchStart = {gVar.handleTouchStart.bind(this,position)} onTouchEnd = {gVar.handleTouchEnd.bind(this,position)} 
-			onTouchCancel={gVar.handleTouchEnd.bind(this,position)} >
+            id={position}
+            onTouchStart = {gVar.handleTouchStart.bind(this, position) } onTouchEnd = {gVar.handleTouchEnd.bind(this, position) }
+            onTouchCancel={gVar.handleTouchEnd.bind(this, position) } >
             <img className = "img-rounded"
                 style = {{
                     width: "30px",
@@ -135,9 +135,15 @@ var Geren = React.createClass({
             paddingBottom: "70px"
         }} >
             <GerenList / >
-            <input type = "button" className = "btn  btn-primary geren_exit" onClick={this.logout}
-                style = {{ width: "70%", marginTop: "15px", padding: "10px" }} value = "退出账号" / >
-        </div>);
+            
+            <div style={{ margin: "20px 50px 0" }}>
+                <button id="logout" onClick={this.logout} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", borderColor: gVar.Color_blue_head }}
+							onTouchStart = {gVar.btnhandleTouchStart.bind(this, "logout") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "logout") }
+							onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "logout") }>
+							退出账号
+						</button>
+					</div>
+         </div>);
     }
 });
 module.exports = Geren;

@@ -97,7 +97,6 @@ var TodayDataList = React.createClass({
 
     render: function () {
 
-
         return (
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_white }}>
                 <Titlebar  title="数据看板"/>
