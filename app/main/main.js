@@ -6,7 +6,7 @@ require('react-fastclick');
 var EventBus = require('eventbusjs');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
+import { hashHistory, browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
 
 require('./css/main.css');
 
@@ -54,6 +54,23 @@ var changeIcon = require('../pages/changeicon/changeicon.js');
 var Introduce = require('../pages/introduce/introduce.js')
 //闪屏页
 var Splash = require('../pages/splash/splash.js');
+
+/* 如果str没有以/开头, 则加上/ */
+function formatPathName(str)
+{
+    var temp = str.substr(0, 1);
+    if (temp != '/')
+    {
+        temp = '/' + str;
+    }
+    else
+    {
+        temp = str;
+    }
+
+    return temp;
+}
+
 /*代表整个应用的组件*/    
 var App = React.createClass({
 
@@ -94,10 +111,10 @@ var App = React.createClass({
 
     render: function() {
     
-        var child = React.cloneElement(this.props.children, {key:this.props.location.pathname});
+        var child = React.cloneElement(this.props.children, {key:formatPathName(this.props.location.pathname)});
 
         return (
-                <ReactCSSTransitionGroup transitionName={gVar.pageTranType} transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+                <ReactCSSTransitionGroup transitionName={gVar.pageTranType} transitionEnterTimeout={300} transitionLeaveTimeout={300}>
                     {child}
                 </ReactCSSTransitionGroup>);
     }
@@ -113,17 +130,9 @@ ReactDOM.render(
     <Router ref={   
                     function(r) {
                         global.router = r;
-                        global.router.history.listenBefore(location => {
-                            if (location.action == "PUSH")
-                                gVar.pageTranType = "pagepush";
-                            else if (location.action == "POP")
-                                gVar.pageTranType = "pagepop";
-                            else
-                                gVar.pageTranType = "PUSH";
-                        });
                     }
                 }
-            history={browserHistory}>
+            history={hashHistory}>
              
         <Route path="/" component={App}> 
             <IndexRoute component={Splash}/> 
