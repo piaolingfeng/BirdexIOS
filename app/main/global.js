@@ -116,9 +116,9 @@ var gVar = {
         requestEntity.time_name = "不限时间";
         requestEntity.status = "";//	N		订单状态10:'待审核'; 11: '已删除'; 2:'等待出库'; 20: '准备出库'; 21: '包裹出库中'; 30: '审核不通过'; 40: '已出库'; 5: '运输中'; 50: '包裹空运中'; 51: '待清关'; 52: '包裹清关中'; 53: '包裹已清关'; 60: '已签收';
         requestEntity.statusName = "全部状态";
-        requestEntity.app_debug = 1;
-        requestEntity.company_code = localStorage.getItem("company_code");
-        requestEntity.user_code = localStorage.getItem('user_code');
+        // requestEntity.app_debug = 1;
+        // requestEntity.company_code = localStorage.getItem("company_code");
+        // requestEntity.user_code = localStorage.getItem('user_code');
         return requestEntity;
     },
 

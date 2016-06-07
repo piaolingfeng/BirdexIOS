@@ -23,7 +23,8 @@ var BPopover = React.createClass({
     },
     
     menuClick: function (idx,event) {
-        //console.log("menu click ");        
+        // console.log("menu click "+ arguments);        
+        // event.stopPropagation();
         //console.log(arguments);
         // e.preventDefault();
         //  console.log(event);

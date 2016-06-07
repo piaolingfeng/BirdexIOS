@@ -57,10 +57,10 @@ var Titlebar = React.createClass({
     // },
 
 
-    menuItemClick: function (index) {
+    menuItemClick: function (index,e) {
         console.log(arguments);
-        var e = arguments[1];
         e.stopPropagation();
+        var e = arguments[1];
         if (!this.props.menuFunc) {
             var param = { titleIndex: index };
             gVar.pushPage({ pathname: "mytool", state: param });
@@ -115,7 +115,10 @@ var Titlebar = React.createClass({
             backImg_display = "none";
         };
         var mytrigger = <img className="titlebar_menu" ref="menu" src={menu}
-            style={{ padding: gVar.Padding_head, display: menuImg_display }}/>;
+            style={{ padding: gVar.Padding_head, display: menuImg_display }} onClick={function name(e) {
+                // console.log("onclick"+arguments)
+                e.stopPropagation();//避免冒泡
+            }}/>;
         // var mytrigger = <div style={{textAlign:"center"}}><img src={birdpic} /></div>;
         var refreshDisplay = "none";
         if (this.props.refreshFunc) {
@@ -139,7 +142,7 @@ var Titlebar = React.createClass({
                     </div>
 
                     <div ref="title" style={{
-                        width: "50%", left: '0', top: "0", padding: gVar.Padding_text_head, margin: "auto",
+                        width: "50%", padding: gVar.Padding_text_head, margin: "auto",
                         color: gVar.Color_white, fontSize: gVar.FontSize_title_head, fontWeight: "bold"
                     }}>{title}</div>
 

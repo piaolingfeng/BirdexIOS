@@ -139,12 +139,14 @@ var Contacts = React.createClass({
                     <span style={{fontSize:13,color:"#979797"}}>{this.props.info.name2}</span>
                 </div>
                 <div style={{paddingBottom:7}}>
-                    <div style={{display:"inline-block",width:"45%"}}>
+                    <div style={{display:"inline-block",width:"50%"}}>
                         <span style={{fontSize:13,color:"#979797",marginLeft:5}}>手机号：</span>
                         <span style={{fontSize:13,color:"#979797"}}>{this.props.info.phone}</span>
                     </div>
-                    <span style={{fontSize:13,color:"#979797"}}>邮箱：</span>
-                    <span style={{fontSize:13,color:"#979797"}}>{this.props.info.email}</span>
+                    <div style={{display:"inline-block",width:"50%"}}>
+                        <span style={{fontSize:13,color:"#979797"}}>邮箱：</span>
+                        <span style={{fontSize:13,color:"#979797"}}>{this.props.info.email}</span>
+                    </div>
                 </div>
             </div>
         );
@@ -163,10 +165,11 @@ var ContactsList = React.createClass({
                 {items}
                 <div style={{paddingTop:10}}>
                     
-                    <span style={{fontSize:13,color:"#979797",display:"inline-block",width:"45%",paddingLeft:5}}>异常件通知</span>
-                    
-                    <span style={{fontSize:13,color:"#979797"}}>邮箱：</span>
-                    <span style={{fontSize:13,color:"#979797"}}>{excpeitonEmail}</span>
+                    <span style={{fontSize:13,color:"#979797",display:"inline-block",width:"50%",paddingLeft:5}}>异常件通知</span>
+                    <div style={{display:"inline-block",width:"50%"}}>
+                        <span style={{fontSize:13,color:"#979797"}}>邮箱：</span>
+                        <span style={{fontSize:13,color:"#979797"}}>{excpeitonEmail}</span>
+                    </div>
                 </div>
             </div>
         );
