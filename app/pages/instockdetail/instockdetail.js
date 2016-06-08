@@ -5,6 +5,7 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var gVar = require("../../main/global.js");
 var toast = require('../../util/Tips/tips.js');
 var LoadingView = require('../../components/loadingview/loadingview.js');
+//胡伟
 var InStockDetail = React.createClass({
     privateVar: {
         params: {
@@ -31,30 +32,45 @@ var InStockDetail = React.createClass({
         this.privateVar.productEntity = this.props.location.state.data;
         this.privateVar.params.product_code = this.privateVar.productEntity.product_code;
         // console.log('----'+this.privateVar.params.product_code);
-        $.ajax({
-            data: this.privateVar.params,
-            url: gVar.getBASE_URL() + 'Product/get',
-            dataType: 'json',
-            cache: false,
-            success: function (val) {
-                console.log(val);
-                if (val.error == 0) {
-                    this.privateVar.productDetailEntity = val.data;
-                    this.privateVar.status = 2;
-                    this.setState({});
-                } else {
-                    this.privateVar.status = 3;
-                    toast('数据加载失败！');
-                    this.setState({});
-                }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                this.privateVar.status = 3;
-                toast('数据加载失败！');
-                this.setState({});
-            }.bind(this)
-        });
+        var url = gVar.getBASE_URL() + "Product/get";
+        gVar.sendRequest(this.privateVar.params, url, this.dealDataSource, true, this.errorCallback);
+
+        // $.ajax({
+        //     data: this.privateVar.params,
+        //     url: gVar.getBASE_URL() + 'Product/get',
+        //     dataType: 'json',
+        //     cache: false,
+        //     success: function (val) {
+        //         console.log(val);
+        //         if (val.error == 0) {
+        //             this.privateVar.productDetailEntity = val.data;
+        //             this.privateVar.status = 2;
+        //             this.setState({});
+        //         } else {
+        //             this.privateVar.status = 3;
+        //             toast('数据加载失败！');
+        //             this.setState({});
+        //         }
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         this.privateVar.status = 3;
+        //         toast('数据加载失败！');
+        //         this.setState({});
+        //     }.bind(this)
+        // });
     },
+
+    dealDataSource(val) {
+        this.privateVar.productDetailEntity = val.data;
+        this.privateVar.status = 2;
+        this.setState({});
+    },
+
+    errorCallback(){
+        this.privateVar.status = 3;
+        this.setState({});
+    },
+
     getItem: function (index) {
         if (index == 0) {
             var avail = 0;
@@ -83,7 +99,7 @@ var InStockDetail = React.createClass({
                 <div className="instock_item_info"><div className="instock_item_title">可用库存总数：</div><div className="instock_item_txt">{avail}</div></div>
             </div>);
         } else {
-            if (index <=1) {
+            if (index <= 1) {
                 return (<div></div>);
             }
             var itemObj = this.privateVar.productEntity.stock[index - 1];
@@ -203,7 +219,7 @@ var InStockDetail = React.createClass({
             innerView = (<div style={{ textAlign: "center", marginTop: "25px", fontSize: "16px" }}>数据加载失败!</div>);
         }
         return (<div className="titlebar_extend_head" >
-            <TitleBar  save="订单详情"/>
+            <TitleBar  save="在库商品详情"/>
             <div className="titlebar_head_down orderdetail_head" style={{ paddingTop: gVar.Padding_titlebar }}>
                 {innerView}
             </div>

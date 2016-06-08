@@ -48,7 +48,7 @@ var LW = React.createClass({
 					localStorage.setItem('company_name', data.data.company_name);
 					localStorage.setItem('company_short_name', data.data.company_short_name);
 					localStorage.setItem('user_code', data.data.user_code);
-					localStorage.setItem('USER-TOKEN',data.data.user_token);
+					localStorage.setItem('USER-TOKEN', data.data.user_token);
 					console.log(data);
 				} catch (e) {
 					// alert(e);
@@ -97,7 +97,9 @@ var LW = React.createClass({
 						</label>
 					</div>
 					<div style={{ margin: "50px 50px 0 50px" }}>
-						<button onClick={this.login} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF" }}>
+						<button id="login" onClick={this.login} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF",borderColor:gVar.Color_blue_head }}
+							onTouchStart = {gVar.btnhandleTouchStart.bind(this, "login") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "login") }
+							onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "login") }>
 							登录
 						</button>
 					</div>

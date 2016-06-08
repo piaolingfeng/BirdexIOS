@@ -33,7 +33,7 @@ var ListView = React.createClass({
         //下拉加载的方法
         pullDownHandler: React.PropTypes.func.isRequired,
         //上拉加载的方法
-        pullUpHandler: React.PropTypes.func.isRequired,
+        pullUpHandler: React.PropTypes.func,
         //是否含有上拉
         showUpload: React.PropTypes.bool,
         //是否含有下拉

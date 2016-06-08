@@ -6,13 +6,14 @@ var paySelected = require('./image/selectreveal.png');
 var radio = require('./image/radio.png');
 var gVar = require('../../main/global.js');
 var LoadingView = require('../../components/loadingview/loadingview.js');
+//胡伟，支付
 var ZhiFu = React.createClass({
     privateVar: {
         selectIndex: -1,
         params: {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code')
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code')
         },
         //0为动画，1wei显示正常,2暂不能获取可充值账户
         status: 0,
@@ -41,41 +42,25 @@ var ZhiFu = React.createClass({
         var component = this;
         this.privateVar.account = [];
         //获取账号的信息
-        $.ajax({
-            url: gVar.getBASE_URL() + "Wallet/get",
-            type: "POST",
-            data: component.privateVar.params,
-            async: true,
-            cache: false,
-            dataType: 'json',
-            success: function (val) {
-                console.log(val);
-                if (val.error == 0) {
-                    if (val.data.wallets != null && val.data.wallets != undefined && val.data.wallets.length > 0) {
-                        $.each(val.data.wallets, function (index, obj) {
-                            component.privateVar.account.push({ name: obj.name, type: obj.type });
-                        });
-                        console.log(component.privateVar.account);
-                        component.privateVar.status = 1;
-                        component.setState({});
-                    } else {
-                        component.privateVar.status = 2;
-                        toast('暂不能获取可充值账户！');
-                        component.setState({});
-                    }
+        var url = gVar.getBASE_URL() + "Wallet/get";
+        gVar.sendRequest(this.privateVar.params, url, this.dealDataSource, true, this.errorCallback);
+        // $.ajax({
+        //     url: gVar.getBASE_URL() + "Wallet/get",
+        //     type: "POST",
+        //     data: component.privateVar.params,
+        //     async: true,
+        //     cache: false,
+        //     dataType: 'json',
+        //     success: function (val) {
+        //         console.log(val);
 
-                } else {
-                    component.privateVar.status = 2;
-                    toast('暂不能获取可充值账户！');
-                    component.setState({});
-                }
-            },
-            error: function (xhr, status, err) {
-                component.privateVar.status = 2;
-                toast('暂不能获取可充值账户！');
-                component.setState({});
-            }
-        });
+        //     },
+        //     error: function (xhr, status, err) {
+        //         component.privateVar.status = 2;
+        //         toast('暂不能获取可充值账户！');
+        //         component.setState({});
+        //     }
+        // });
         //充值金额限制非法输入和粘贴
         $(".input_money").bind("keydown", function (event) {
             var key = event.keyCode;   //48-57是大键盘的数字键，96-105是小键盘的数字键，8是退格符←
@@ -113,6 +98,35 @@ var ZhiFu = React.createClass({
                 return false;
             }
         });
+    },
+    //处理数据
+    dealDataSource(val) {
+        var component = this;
+        if (val.error == 0) {
+            if (val.data.wallets != null && val.data.wallets != undefined && val.data.wallets.length > 0) {
+                $.each(val.data.wallets, function (index, obj) {
+                    component.privateVar.account.push({ name: obj.name, type: obj.type });
+                });
+                console.log(component.privateVar.account);
+                component.privateVar.status = 1;
+                component.setState({});
+            } else {
+                component.privateVar.status = 2;
+                toast('暂不能获取可充值账户！');
+                component.setState({});
+            }
+
+        } else {
+            component.privateVar.status = 2;
+            toast('暂不能获取可充值账户！');
+            component.setState({});
+        }
+    },
+    //错误回调
+    errorCallback() {
+        this.privateVar.status = 2;
+        toast('暂不能获取可充值账户！');
+        this.setState({});
     },
     payRecharge: function () {
         if (this.privateVar.selectIndex == -1) {

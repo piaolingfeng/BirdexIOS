@@ -1,12 +1,12 @@
 .titlebar_img{
     float: left;
     box-sizing: content-box;
-    height: 20px;
+    height: 16px;
 }
 .titlebar_menu{
     float: right;
     box-sizing: content-box;
-    height: 20px;
+    height: 16px;
 }
 .titlebar_save{
     display: inline-block;

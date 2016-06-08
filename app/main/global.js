@@ -47,7 +47,7 @@ var gVar = {
     FontSize_title_head: "17px",
     FontSize_order_text: "16px",
     //padding
-    Padding_head: "14px",
+    Padding_head: "16px",
     Padding_text_head: "12px",
     Padding_titlebar: "61px",
 
@@ -179,7 +179,7 @@ var gVar = {
         return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
     },
 
-    sendRequest: function (params, url, successCallback, showLoad) {
+    sendRequest: function (params, url, successCallback, showLoad, errorCallback) {
         if (showLoad == null || showLoad)//默认弹出等待框
             waitDailog.showLoading();
         $.ajax({
@@ -198,10 +198,15 @@ var gVar = {
             success: function (data) {
                 // this.setState({ data: data });
                 // alert("success");
-                if (data.error == 0)
-                    successCallback(data);
+                if (data.error == 0) {
+                    if (successCallback)
+                        successCallback(data);
+                }
                 else {
-                    toast(data.data);
+                    if (errorCallback)
+                        errorCallback(data.data);//如果有错误回调就触发错误回调
+                    else
+                        toast(data.data);
                     // console.log( data);
                 }
             }.bind(this),
@@ -210,6 +215,8 @@ var gVar = {
                 // alert(err);
                 console.log(err);
                 toast("请求失败" + err);
+                if (errorCallback)
+                    errorCallback();
             }.bind(this),
             complete: function (XMLHttpRequest, textStatus) {
                 if (showLoad == null || showLoad)//
@@ -228,6 +235,17 @@ var gVar = {
     handleTouchEnd: function (id) {
         // var name = (id) ? id : "";
         $("#" + id).css("background-color", "#ffffff");
+    },
+
+    //按钮
+    btnhandleTouchStart(id) {
+        $("#" + id).css("background-color", gVar.Color_blue_head);
+        $("#" + id).css("color", gVar.Color_white);
+    },
+
+    btnhandleTouchEnd(id) {
+        $("#" + id).css("background-color", gVar.Color_white);
+        $("#" + id).css("color", gVar.Color_blue_head);
     },
 };
 

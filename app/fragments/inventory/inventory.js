@@ -15,6 +15,7 @@ var LimitView = require('./limitview.js');
 var Search = require('../../components/search/search.js');
 // var listitem=[];
 // var inventoryIndex=0;
+//胡伟，仓库管理内容3项
 var Inventory = React.createClass({
   privateVar: {
     params: {
@@ -28,9 +29,9 @@ var Inventory = React.createClass({
       keyword: '',
       //available_stock_asc(在库，超预警)升序，available_stock_desc(在库，超预警)降序
       order_by: '',
-      app_debug: 1,
-      company_code: localStorage.getItem("company_code"),
-      user_code: localStorage.getItem('user_code'),
+      // app_debug: 1,
+      // company_code: localStorage.getItem("company_code"),
+      // user_code: localStorage.getItem('user_code'),
     },
     //数据源的集合(在切换数据源的时候，防止先清空后添加，造成两次的setState)
     dataItems: [],
@@ -95,80 +96,94 @@ var Inventory = React.createClass({
       }
     } else { }
     // console.log(this.privateVar.params);
-    $.ajax({
-      url: gVar.getBASE_URL() + "stock/all",
-      type: "POST",
-      data: component.privateVar.params,
-      async: true,
-      cache: false,
-      dataType: 'json',
-      success: function (val) {
-        if (component == null || component == undefined) {
-          return;
-        }
-        //停止加载动画
-        if (!anim && typeof (anim) != "undefined" && anim != null) {
-          anim.refresh();
-        }
-        if (val.error == 0) {
-          if (component.privateVar.params.page_no == 1) {
-            //设置列表的显示状态:1为正常显示列表，2为暂无数据，3......
-            // 判断数量
-            if (val.data.count == 0) {
-              this.privateVar.status = 2;
-            } else {
-              this.privateVar.status = 1;
-              //重新加载的首页，清除数据
-              component.privateVar.dataItems = [];
-              // Array.prototype.push.apply(component.privateVar.dataItems,val.data.records);
-              //对map进行遍历
-              $.each(val.data.products, function (key, value) {
-                component.privateVar.dataItems.push(value);
-              })
-            }
-            //记录总的页数
-            component.privateVar.count = val.data.count;
-            //当前页数恢复第一页
-            component.privateVar.pageIndex = 1;
-            //修改state，达到改变list
-            component.setState({});
+    var url = gVar.getBASE_URL() + "stock/all";
+    gVar.sendRequest(this.privateVar.params,url, this.dealSetDataSource);
 
-            // Array.prototype.push.apply(component.privateVar.dataSource,val.data.records);
-          } else {
-            if (val.data.products.length > 0) {
-              //下一页数据
-              $.each(val.data.products, function (key, value) {
-                component.privateVar.dataItems.push(value);
-              })
-              //当前页数增加一页
-              component.privateVar.pageIndex++;
-              //修改state，达到改变list
-              component.setState({});
-            } else {
-              if (this.privateVar.listCore != null && this.privateVar.listCore != undefined) {
-                this.privateVar.listCore.refresh();
-              }
-              toast('已经到达最后一页!');
-            }
-            // component.privateVar.dataSource.push(val.data.records);
-            // this.addItemData(val.data.records);
-          }
-        } else {
-          //数据加载失败
-          // component.setState({status:3});
-          toast(val.data);
-        }
-      }.bind(this),
-      error: function (xhr, status, err) {
-        //停止加载动画
-        if (!anim && typeof (anim) != "undefined" && anim != null) {
-          anim.refresh();
-        }
-        // component.setState({status:3});
-        toast('获取数据失败!');
-      }
-    });
+    // $.ajax({
+      // url: gVar.getBASE_URL() + "stock/all",
+      // type: "POST",
+      // data: component.privateVar.params,
+      // async: true,
+      // cache: false,
+      // dataType: 'json',
+    //   success: function (val) {
+    //     if (component == null || component == undefined) {
+    //       return;
+    //     }
+    //     //停止加载动画
+    //     if (!anim && typeof (anim) != "undefined" && anim != null) {
+    //       anim.refresh();
+    //     }
+    //     if (val.error == 0) {
+
+    //     } else {
+    //       //数据加载失败
+    //       // component.setState({status:3});
+    //       toast(val.data);
+    //     }
+    //   }.bind(this),
+    //   error: function (xhr, status, err) {
+    //     //停止加载动画
+    //     if (!anim && typeof (anim) != "undefined" && anim != null) {
+    //       anim.refresh();
+    //     }
+    //     // component.setState({status:3});
+    //     toast('获取数据失败!');
+    //   }
+    // });
   },
+
+  //chuming.dealsetDataSource
+  dealSetDataSource(val) {
+    //停止加载动画
+    var fun = this;
+    if (!this.privateVar.listCore && typeof (this.privateVar.listCore) != "undefined" && anim != null) {
+      this.privateVar.listCore.refresh();
+    }
+    if (this.privateVar.params.page_no == 1) {
+      //设置列表的显示状态:1为正常显示列表，2为暂无数据，3......
+      // 判断数量
+      if (val.data.count == 0) {
+        this.privateVar.status = 2;
+      } else {
+        this.privateVar.status = 1;
+        //重新加载的首页，清除数据
+        this.privateVar.dataItems = [];
+        // Array.prototype.push.apply(this.privateVar.dataItems,val.data.records);
+        //对map进行遍历
+        $.each(val.data.products, function (key, value) {
+          fun.privateVar.dataItems.push(value);
+        })
+      }
+      //记录总的页数
+      this.privateVar.count = val.data.count;
+      //当前页数恢复第一页
+      this.privateVar.pageIndex = 1;
+      //修改state，达到改变list
+      this.setState({});
+
+      // Array.prototype.push.apply(component.privateVar.dataSource,val.data.records);
+    } else {
+      if (val.data.products.length > 0) {
+        //下一页数据
+        $.each(val.data.products, function (key, value) {
+          fun.privateVar.dataItems.push(value);
+        })
+        //当前页数增加一页
+        this.privateVar.pageIndex++;
+        //修改state，达到改变list
+        this.setState({});
+      } else {
+        if (this.privateVar.listCore != null && this.privateVar.listCore != undefined) {
+          this.privateVar.listCore.refresh();
+        }
+        toast('已经是最后一页!');
+      }
+      // component.privateVar.dataSource.push(val.data.records);
+      // this.addItemData(val.data.records);
+    }
+  },
+  //返回listview的iscroll对象
   getListCore: function (obj) {
     //获取构造list的核心对象
     this.privateVar.listCore = obj;
@@ -281,7 +296,7 @@ var Inventory = React.createClass({
   },
   SearchFunc(value) {
     //关键字搜索
-    this.privateVar.params.keyword=value;
+    this.privateVar.params.keyword = value;
     this.privateVar.listItems = [];
     this.privateVar.params.page_no = 1;
     //重新加载数据
@@ -290,11 +305,11 @@ var Inventory = React.createClass({
   render: function () {
     var content;
     if (this.privateVar.status == 1) {
-      content = (<ListView getCoreObj={this.getListCore} marginTop={199} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />);
+      content = (<ListView getCoreObj={this.getListCore} marginTop={205} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />);
     } else if (this.privateVar.status == 2) {
-      content = (<div style={{ textAlign: "center", marginTop: "30px", fontSize: "16px" }}>暂无数据!</div>);
+      content = (<div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>);
     } else {
-      content = (<ListView getCoreObj={this.getListCore} marginTop={199} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />);
+      content = (<ListView getCoreObj={this.getListCore} marginTop={205} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />);
     }
     return (<div >
       <SimpleTabLayout selectTab={this.selectTab} defualtIndex={this.privateVar.inventoryIndex} tabsText={["在库商品", "待入库商品", "超预警商品"]} />

@@ -33,6 +33,11 @@ var requestEntity = null;//请求网络实体
 // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423   
 // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18   
 var listviewInd = null;
+
+function Callback_Paste() {
+    alert("ddd");
+};
+
 var FragmentOrder = React.createClass({
     myScroll: "",
     dataCount: 0,

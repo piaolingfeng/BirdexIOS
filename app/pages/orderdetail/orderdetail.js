@@ -11,9 +11,9 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var toast = require('../../util/Tips/tips.js');
 // var Data = null;
 var ListView = require('../../components/listview/listviewindex.js');
+var phoneCall = require('../../util/PhoneCall.js');
 
-
-var shouldUpdate = false;
+// var shouldUpdate = false;
 var OrderDetail = React.createClass({
     myScroll: null,
     Data: null,
@@ -24,8 +24,11 @@ var OrderDetail = React.createClass({
     },
 
     phoneCall: function () {
-        alert("phoneCall");
+        // alert("phoneCall");
+        //调用原生界面拨打电话
+        phoneCall(this.Data.data.receiver_mobile);
     },
+    
     changeAddr: function () {
         console.log(global.router);
         var params = { order_code: Data.data.order_code }
@@ -39,9 +42,11 @@ var OrderDetail = React.createClass({
     componentDidMount: function () {
         if (!EventBus.hasEventListener("changeAddr"))//没有注册就注册
             EventBus.addEventListener("changeAddr", this.setAddr, this);
-        shouldUpdate = false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
+        // shouldUpdate = false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
         this.getOrderDetail();
     },
+    
+    
 
     //获取订单详情
     getOrderDetail: function () {
@@ -107,13 +112,13 @@ var OrderDetail = React.createClass({
             this.myScroll.refresh();
     },
 
-    shouldComponentUpdate() {//出发setState之后才会调用，也就是网络请求后
-        if (shouldUpdate == false) {
-            shouldUpdate = true;
-            return true;
-        }
-        return false;
-    },
+    // shouldComponentUpdate() {//出发setState之后才会调用，也就是网络请求后
+    //     if (shouldUpdate == false) {
+    //         shouldUpdate = true;
+    //         return true;
+    //     }
+    //     return false;
+    // },
 
     getItem() {
         var list = [];

@@ -2,6 +2,7 @@ var React=require('react');
 var gVar = require('../../main/global.js');
 var InventoryFragment=require('../../fragments/inventory/inventory.js');
 var TitleBar = require('../../components/titlebar/titlebar.js');
+//胡伟
 var MyInventory=React.createClass({
     render:function(){
         var title = this.props.title+"";

@@ -2,6 +2,7 @@ var React = require('react');
 var company_img = require('./image/company_img.png');
 var gVar = require('../../main/global.js');
 var Titlebar = require("../../components/titlebar/titlebar.js"); 
+//胡伟
 var About = React.createClass({
     render: function() {
             return ( 

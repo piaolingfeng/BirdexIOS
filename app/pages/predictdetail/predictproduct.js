@@ -49,9 +49,9 @@ var PredictProduct = React.createClass({
         // var dlgBody = <ul><li>aaaaaaaaaaaaaa</li><li>bbbbbbbbbbbbb</li></ul>;
         var func = this;
         showDialog("请输入复核原因", "input", function (value) {
-            console.log(value,product_code);
+            console.log(value, product_code);
             func.ReviewStorageRequestNet(product_code, value);
-        },"");
+        }, "");
         // this.ReviewStorageRequestNet(product_code, "22222222");
     },
 
@@ -128,6 +128,7 @@ var PredictProduct = React.createClass({
         return null;
     },
 
+   
     render: function () {
         var statuName = product.status_name;
         var confirmDisplay = 'block';
@@ -153,9 +154,10 @@ var PredictProduct = React.createClass({
             // $('#reConfirm').css({ display: "none" });
         }
         // console.log(product);
+
         return (
-            <div style={{ padding:"6px" }}>
-                <div className="orderdetail_background_img" style={{marginTop:"0px"}}>
+            <div style={{ padding: "6px" }}>
+                <div className="orderdetail_background_img" style={{ marginTop: "0px" }}>
                     <table style={{ width: "100%" }}>
                         <tr>
                             <td className="orderdetail_left">商品编码: </td>
@@ -229,8 +231,12 @@ var PredictProduct = React.createClass({
                                 <div>
                                     <div style={{ display: "inline-block", width: "100%" }} className="orderdetail_right_div_padding">
                                         <span ref="status"  style={{ float: "left" }}>{product.status_name}</span>
-                                        <button style={{ display: confirmDisplay }} onClick={this.setConfirmStorage.bind(this, product.product_code) } type="button" className="predictdetail_btn">确 认</button>
-                                        <button style={{ display: reConfirmDisplay }} onClick={this.setReviewStorage.bind(this, product.product_code) } type="button" className="predictdetail_btn" >复 核</button>
+                                        <button id="confirm" style={{ display: confirmDisplay }} onClick={this.setConfirmStorage.bind(this, product.product_code) } type="button" className="predictdetail_btn"
+                                            onTouchStart = {gVar.btnhandleTouchStart.bind(this, "confirm") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "confirm") }
+                                            onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "confirm") }>确 认</button>
+                                        <button id= "reconfirm"style={{ display: reConfirmDisplay }} onClick={this.setReviewStorage.bind(this, product.product_code) } type="button" className="predictdetail_btn"
+                                            onTouchStart = {gVar.btnhandleTouchStart.bind(this, "reconfirm") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "reconfirm") }
+                                            onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "reconfirm") }>复 核</button>
                                     </div>
                                 </div>
                             </td>

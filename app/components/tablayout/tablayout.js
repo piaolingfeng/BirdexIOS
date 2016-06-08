@@ -3,6 +3,7 @@ require('./css/tablayout.css');
 var $magicLine ;
 //设置选中的tab索引
 var selectIndex=0;
+//胡伟，用在支出，iscroll做的
 var TabLayout=React.createClass({
     propTypes:{
         //回调的方法获取item

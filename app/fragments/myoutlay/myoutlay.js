@@ -23,15 +23,15 @@ var LoadingView = require('../../components/loadingview/loadingview.js');
 
 //tablayout
 var TabLayout = require('../../components/tablayout/tablayout.js');
-
+//胡伟，支出
 var PickDate = React.createClass({
     privateVar: {
         startStr: "开始日期",
         endStr: "结束日期"
     },
-    componentWillUnmount:function(){
-        this.privateVar.startStr="开始日期";
-        this.privateVar.endStr="结束日期";
+    componentWillUnmount: function () {
+        this.privateVar.startStr = "开始日期";
+        this.privateVar.endStr = "结束日期";
     },
     propTypes: {
         getTimeSpan: React.PropTypes.func,
@@ -134,9 +134,9 @@ var MyOutlay = React.createClass({
             end_date: '',
             //全部-0，运费支出-1，仓租-2，关税-3，在线充值-4，其它-5
             transaction_type: 0,
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code')
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code')
         },
         dataSource: [],
         //列表核心对象
@@ -198,70 +198,88 @@ var MyOutlay = React.createClass({
         //         }
         //     return;
         // }
-        $.ajax({
-            url: gVar.getBASE_URL() + "Wallet/getRecord",
-            type: "POST",
-            data: component.privateVar.params,
-            async: true,
-            cache: false,
-            dataType: 'json',
-            success: function (val) {
-                // console.log(val);
-                //停止加载动画
-                if (!anim && typeof (anim) != "undefined" && anim != null) {
-                    anim.refresh();
+        var url = gVar.getBASE_URL() + "Wallet/getRecord";
+        gVar.sendRequest(this.privateVar.params, url, this.dealSetDataSource, true, this.errorCallback)
+        // $.ajax({
+        //     url: gVar.getBASE_URL() + "Wallet/getRecord",
+        //     type: "POST",
+        //     data: component.privateVar.params,
+        //     async: true,
+        //     cache: false,
+        //     dataType: 'json',
+        //     success: function (val) {
+
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         //停止加载动画
+        //         if (!anim && typeof (anim) != "undefined" && anim != null) {
+        //             anim.refresh();
+        //         }
+        //         if (component.privateVar.pageIndex == 1) {
+        //             component.privateVar.status = 2;
+        //             component.setState({});
+        //         }
+        //         toast('获取数据失败!');
+        //     }
+        // });
+    },
+    //处理数据
+    dealSetDataSource(val) {
+        // console.log(val);
+        //停止加载动画
+        if (!this.privateVar.listCore && typeof (this.privateVar.listCore) != "undefined" && this.privateVar.listCore != null) {
+            this.privateVar.listCore.refresh();
+        }
+        if (val.error == 0) {
+            if (this.privateVar.params.page_no == 1) {
+                this.privateVar.pageIndex = 1;
+                //重新加载的首页，清除数据
+                this.privateVar.dataSource = [];
+                this.privateVar.count = val.data.count;
+                this.privateVar.page_num = val.data.page_num;
+                // Array.prototype.push.apply(component.privateVar.dataSource, val.data.records);
+                if (this.privateVar.count == 0) {
+                    this.privateVar.status = 2;
+                    this.setState({});
+                } else {
+                    this.privateVar.status = 1;
+                    Array.prototype.push.apply(this.privateVar.dataSource, val.data.records);
+                    this.setState({});
+                    // this.addItemData(val.data.records);
                 }
-                if (val.error == 0) {
-                    if (component.privateVar.params.page_no == 1) {
-                        component.privateVar.pageIndex = 1;
-                        //重新加载的首页，清除数据
-                        component.privateVar.dataSource = [];
-                        component.privateVar.count = val.data.count;
-                        component.privateVar.page_num = val.data.page_num;
-                        // Array.prototype.push.apply(component.privateVar.dataSource, val.data.records);
-                        if (component.privateVar.count == 0) {
-                            component.privateVar.status = 2;
-                            component.setState({});
-                        } else {
-                            component.privateVar.status = 1;
-                            Array.prototype.push.apply(component.privateVar.dataSource, val.data.records);
-                            component.setState({});
-                            // this.addItemData(val.data.records);
-                        }
-                    } else {
-                        if (val.data.records.length == 0) {
-                            //下一页数据
-                            toast('已经到达最后一页!');
-                            if (component.privateVar.listCore != null && component.privateVar.listCore != undefined) {
-                                component.privateVar.listCore.refresh();
-                            }
-                        } else {
-                            //页数加1
-                            component.privateVar.pageIndex++;
-                            //下一页数据
-                            Array.prototype.push.apply(component.privateVar.dataSource, val.data.records);
-                            component.setState({});
-                        }
+            } else {
+                if (val.data.records.length == 0) {
+                    //下一页数据
+                    toast('已经到达最后一页!');
+                    if (this.privateVar.listCore != null && this.privateVar.listCore != undefined) {
+                        this.privateVar.listCore.refresh();
                     }
                 } else {
-                    component.privateVar.status = 2;
-                    //数据加载失败
-                    component.setState({});
-                    toast(val.data);
+                    //页数加1
+                    this.privateVar.pageIndex++;
+                    //下一页数据
+                    Array.prototype.push.apply(this.privateVar.dataSource, val.data.records);
+                    this.setState({});
                 }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                //停止加载动画
-                if (!anim && typeof (anim) != "undefined" && anim != null) {
-                    anim.refresh();
-                }
-                if (component.privateVar.pageIndex == 1) {
-                    component.privateVar.status = 2;
-                    component.setState({});
-                }
-                toast('获取数据失败!');
             }
-        });
+        } else {
+            this.privateVar.status = 2;
+            //数据加载失败
+            this.setState({});
+            toast(val.data);
+        }
+    },
+
+    //错误回调
+    errorCallback() {
+        if (!this.privateVar.listCore && typeof (this.privateVar.listCore) != "undefined" && this.privateVar.listCore != null) {
+            this.privateVar.listCore.refresh();
+        }
+        if (this.privateVar.pageIndex == 1) {
+            this.privateVar.status = 2;
+            this.setState({});
+        }
+        toast('获取数据失败!');
     },
     componentDidMount: function () {
         console.log('0---------------');
@@ -347,9 +365,9 @@ var MyOutlay = React.createClass({
         if (this.privateVar.status == 0) {
             innerView = (<LoadingView />);
         } else if (this.privateVar.status == 1) {
-            innerView = (<ListView getCoreObj={this.getListCore} marginTop={180} backGroud="#f5f4f4" pullDownHandler={this.pullDownHandler} pullUpHandler={this.pullUpHandler}  getItems={this.showItems} showUpload={false} showDownload={true} />);
+            innerView = (<ListView getCoreObj={this.getListCore} marginTop={193} backGroud="#f5f4f4" pullDownHandler={this.pullDownHandler} pullUpHandler={this.pullUpHandler}  getItems={this.showItems} showUpload={false} showDownload={true} />);
         } else if (this.privateVar.status == 2) {
-            innerView = (<div style={{ textAlign: "center", marginTop: "25px" ,fontSize:"16px"}}>暂无数据!</div>);
+            innerView = (<div style={{ textAlign: "center", marginTop: "25px", fontSize: "16px" }}>暂无数据!</div>);
         }
         return (<div style={{ backgroundColor: "#f5f4f4" }}>
             <TabLayout selectTab={this.selectTab} tabsText={["所有", "运费支出", "仓租", "关税", "充值记录", "其他"]} tabsWidth={[60, 80, 60, 60, 80, 60]}/>

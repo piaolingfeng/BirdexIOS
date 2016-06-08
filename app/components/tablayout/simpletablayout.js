@@ -3,6 +3,8 @@ require('./css/simpletablayout.css');
 var $magicLine ;
 //设置选中的tab索引
 // var selectIndex=0;
+//胡伟，库存头部三个滑动
+//胡伟
 var SimpleTabLayout=React.createClass({
     // privateProps:{
     //     selectIndex:0

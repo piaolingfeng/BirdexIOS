@@ -6,7 +6,7 @@ var Splash = React.createClass({
     componentDidMount() {
         setTimeout(function () {
             if (!localStorage.getItem(gVar.FIRST_ENTRY_APP)) {
-                // localStorage.setItem(gVar.FIRST_ENTRY_APP,true)
+                localStorage.setItem(gVar.FIRST_ENTRY_APP,true)
                 gVar.pushPage("introduce");
             } else {
                 if (localStorage.getItem("company_code") &&
