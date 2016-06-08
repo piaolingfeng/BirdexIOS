@@ -21,12 +21,12 @@ var WillInDetail = React.createClass({
             // user_code: localStorage.getItem('user_code'),
             storage_code: ""
         },
-        sameOrderEntity:null
+        sameOrderEntity: null
     },
     componentWillUnmount: function () {
         this.privateVar.status = 1;
         this.privateVar.productEntity = null;
-        this.privateVar.params1.storage_code="";
+        this.privateVar.params1.storage_code = "";
         this.privateVar.sameOrderEntity = null;
     },
     componentDidMount: function () {
@@ -48,49 +48,61 @@ var WillInDetail = React.createClass({
                     <span>{this.privateVar.sameOrderEntity.track_no}[{this.privateVar.sameOrderEntity.track_type_name}]</span></div>
             </div>);
         } else {
-            if(index<=1){
+            if (index <= 1) {
                 return (<div></div>);
             }
-            var itemobj=this.privateVar.sameOrderEntity.products[index-1];
+            var itemobj = this.privateVar.sameOrderEntity.products[index - 1];
             return (<div className="willindetail_dialog_item" style={{ backgroundColor: "#ffffff", marginTop: "8px", padding: "5px 5px" }}>
                 <div style={{
                     wordBreak: "break-all", wordWrap: "break-word", whiteSpace: "pre-wrap", color: "#4A4A4A"
-                }}>{itemobj.name==""?"商品名缺失":itemobj.name}</div>
+                }}>{itemobj.name == "" ? "商品名缺失" : itemobj.name}</div>
                 <div><span>商品编码：{itemobj.external_no}</span><span style={{ float: "right", color: "#039FFF" }}>数量：{itemobj.nums}</span></div>
             </div>);
         }
     },
-    showSameOrder: function (code,ele) {
-        var component=this;
+    showSameOrder: function (code, ele) {
+        var component = this;
         //查看同单号商品
-        this.privateVar.params1.storage_code=code;
+        this.privateVar.params1.storage_code = code;
         // console.log("val-----");
         // console.log(this.privateVar.params1);
-        $.ajax({
-            data: this.privateVar.params1,
-            url: gVar.getBASE_URL() + 'Storage/get',
-            dataType: 'json',
-            cache: false,
-            success: function (val) {
-                console.log(val);
-                if (val.error == 0) {
-                    component.privateVar.sameOrderEntity=val.data;
-                    var count=0;
-                    if(component.privateVar.sameOrderEntity.products!=null&&component.privateVar.sameOrderEntity.products!=undefined){
-                        count=component.privateVar.sameOrderEntity.products.length;
-                    }
-                   showDialog("同单号其它商品", <ReactList itemRenderer={this.getDialogItem} length={count+1} />, null, null);
-                } else {
-                    toast('加载数据失败！');
-                }
-            }.bind(this),
-            error: function (xhr, status, err) {
-                toast('加载数据失败！');
-            }
-        });
+        var url = gVar.getBASE_URL() + 'Storage/get';
+        gVar.sendRequest(this.privateVar.params1, url, this.dealshowSameOrder)
+        // $.ajax({
+        //     data: this.privateVar.params1,
+        //     url: gVar.getBASE_URL() + 'Storage/get',
+        //     dataType: 'json',
+        //     cache: false,
+        //     success: function (val) {
+        //         console.log(val);
+        //         if (val.error == 0) {
+        //             component.privateVar.sameOrderEntity=val.data;
+        //             var count=0;
+        //             if(component.privateVar.sameOrderEntity.products!=null&&component.privateVar.sameOrderEntity.products!=undefined){
+        //                 count=component.privateVar.sameOrderEntity.products.length;
+        //             }
+        //            showDialog("同单号其它商品", <ReactList itemRenderer={this.getDialogItem} length={count+1} />, null, null);
+        //         } else {
+        //             toast('加载数据失败！');
+        //         }
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         toast('加载数据失败！');
+        //     }
+        // });
     },
+
+    dealshowSameOrder(data) {
+        component.privateVar.sameOrderEntity = val.data;
+        var count = 0;
+        if (component.privateVar.sameOrderEntity.products != null && component.privateVar.sameOrderEntity.products != undefined) {
+            count = component.privateVar.sameOrderEntity.products.length;
+        }
+        showDialog("同单号其它商品", <ReactList itemRenderer={this.getDialogItem} length={count + 1} />, null, null);
+    },
+
     getItem: function (index) {
-        var component=this;
+        var component = this;
         if (index == 0) {
             var name = this.privateVar.productEntity.name;
             if (this.privateVar.productEntity.name == null || this.privateVar.productEntity.name == undefined || this.privateVar.productEntity.name == '') {
@@ -106,7 +118,7 @@ var WillInDetail = React.createClass({
             }
             var itemObj = this.privateVar.productEntity.stock[index - 1];
             var items = new Array();
-            var count=0;
+            var count = 0;
             if (itemObj.detail != null && itemObj.detail != undefined) {
                 $.each(itemObj.detail, function (index, obj) {
                     if (obj.storages != null && obj.storages != undefined) {
@@ -121,11 +133,11 @@ var WillInDetail = React.createClass({
                                 <div className="willin_item"><div className="willin_item_left">物流单号：</div><div className="willin_item_right">{value.track_no}</div></div>
                                 <div className="willin_item"><div className="willin_item_left">物流方式：</div><div className="willin_item_right">{value.track_type_name}</div></div>
                                 <div className="willin_item"><div className="willin_item_left">数量：</div><div className="willin_item_right">{value.nums}</div></div>
-                                <div className="willin_item other_commodity" onClick={component.showSameOrder.bind(this,value.storage_code) }>同单其它商品</div>
+                                <div className="willin_item other_commodity" onClick={component.showSameOrder.bind(this, value.storage_code) }>同单其它商品</div>
                             </td></tr>);
                         });
                     }
-                    count+=parseInt(obj.stock);
+                    count += parseInt(obj.stock);
                 });
             }
 

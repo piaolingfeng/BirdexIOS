@@ -6,12 +6,13 @@ var gVar = require("../../main/global.js");
 var toast = require('../../util/Tips/tips.js');
 var LoadingView = require('../../components/loadingview/loadingview.js');
 //胡伟
+//由于使用dialog方式弹出页面，导致reactlist不能在PC浏览器上不能正常滑动，但在移动端是可以正常滑动
 var InStockDetail = React.createClass({
     privateVar: {
         params: {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
             product_code: ""
         },
         //1正在加载，2加载数据完毕，3加载失败
