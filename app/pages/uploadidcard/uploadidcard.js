@@ -12,6 +12,8 @@ var toast = require('../../util/Tips/tips.js');
 
 var showDialog = require('../../components/BDialog/bdialog.js');
 
+var CallIOS = require('../../util/CallIOS.js');
+
 var UploadIdcard = React.createClass({
     
     
@@ -53,12 +55,12 @@ var UploadIdcard = React.createClass({
     },
 
     photo(){
-        alert("phote");  
+        CallIOS.openCamera();
         showDialog("", "",null,null,false);
     },
     
     album(){
-        alert("album");  
+        CallIOS.openPhoto(); 
         showDialog("", "",null,null,false);
     },
     

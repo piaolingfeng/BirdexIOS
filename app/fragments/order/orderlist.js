@@ -4,8 +4,8 @@ var copy = require("./images/copy.png");
 var gVar = require("../../main/global.js");
 var OrderProduct = require('./orderproduct.js');
 var toast = require('../../util/Tips/tips.js');
-var copytext = require('../../util/copytext.js');
-
+// var copytext = require('../../util/copytext.js');
+var CallIOS = require('../../util/CallIOS.js');
 var OrderList = React.createClass({
 
     propTypes: {
@@ -19,7 +19,7 @@ var OrderList = React.createClass({
         e.stopPropagation();
         // var text = $('#orderName').html();
         var text = this.props.orderEntity.order_oms_no
-        copytext(text);
+        CallIOS.copytext(text);
         // var clipboardswfdata=new ZeroClipboard.Client();
         // clipboardswfdata.setHandCursor(true);
 

@@ -11,8 +11,8 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var toast = require('../../util/Tips/tips.js');
 // var Data = null;
 var ListView = require('../../components/listview/listviewindex.js');
-var phoneCall = require('../../util/PhoneCall.js');
-
+// var phoneCall = require('../../util/PhoneCall.js');
+var CallIOS = require('../../util/CallIOS.js');
 // var shouldUpdate = false;
 var OrderDetail = React.createClass({
     myScroll: null,
@@ -26,7 +26,7 @@ var OrderDetail = React.createClass({
     phoneCall: function () {
         // alert("phoneCall");
         //调用原生界面拨打电话
-        phoneCall(this.Data.data.receiver_mobile);
+        CallIOS.phoneCall(this.Data.data.receiver_mobile);
     },
     
     changeAddr: function () {

@@ -3,6 +3,7 @@ var scan_code = require("./images/scan_code.png");
 var ic_search = require('./images/ic_search.png');
 var gVar = require("../../main/global.js");
 // var EventBus = require('eventbusjs');
+var CallIOS = require('../../util/CallIOS.js');
 require("./css/search.css");
 var Search = React.createClass({
 
@@ -23,7 +24,7 @@ var Search = React.createClass({
 
     openScan: function () {
         // alert("open camera!");
-        this.open_scann();
+        CallIOS.open_scann();
         return;
     },
 
@@ -44,21 +45,7 @@ var Search = React.createClass({
         }
     },
 
-    //扫描二维码
-    open_scann() {
-        var iFrame;
-        iFrame = document.createElement("iframe");
-        iFrame.setAttribute("src", "ios://scann?url=http://www.wed114.cn/jiehun/uploads/allimg/160426/39_160426110638_1.jpg");
-        //发送请求，原生截获请求
-        iFrame.setAttribute("style", "display:none;");
-        iFrame.setAttribute("height", "0px");
-        iFrame.setAttribute("width", "0px");
-        iFrame.setAttribute("frameborder", "0");
-        document.body.appendChild(iFrame);
-        // 发起请求后这个iFrame就没用了，所以把它从dom上移除掉  
-        iFrame.parentNode.removeChild(iFrame);
-        iFrame = null;
-    },
+   
 
     render: function () {
         var funThis = this;
