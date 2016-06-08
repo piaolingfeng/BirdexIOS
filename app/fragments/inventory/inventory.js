@@ -15,6 +15,7 @@ var LimitView = require('./limitview.js');
 var Search = require('../../components/search/search.js');
 // var listitem=[];
 // var inventoryIndex=0;
+//胡伟，仓库管理内容3项
 var Inventory = React.createClass({
   privateVar: {
     params: {

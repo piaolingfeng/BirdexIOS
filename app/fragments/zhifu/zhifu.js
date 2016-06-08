@@ -6,6 +6,7 @@ var paySelected = require('./image/selectreveal.png');
 var radio = require('./image/radio.png');
 var gVar = require('../../main/global.js');
 var LoadingView = require('../../components/loadingview/loadingview.js');
+//胡伟，支付
 var ZhiFu = React.createClass({
     privateVar: {
         selectIndex: -1,

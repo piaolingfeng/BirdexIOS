@@ -5,6 +5,7 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var gVar = require("../../main/global.js");
 var toast = require('../../util/Tips/tips.js');
 var LoadingView = require('../../components/loadingview/loadingview.js');
+//胡伟
 var InStockDetail = React.createClass({
     privateVar: {
         params: {
@@ -218,7 +219,7 @@ var InStockDetail = React.createClass({
             innerView = (<div style={{ textAlign: "center", marginTop: "25px", fontSize: "16px" }}>数据加载失败!</div>);
         }
         return (<div className="titlebar_extend_head" >
-            <TitleBar  save="订单详情"/>
+            <TitleBar  save="在库商品详情"/>
             <div className="titlebar_head_down orderdetail_head" style={{ paddingTop: gVar.Padding_titlebar }}>
                 {innerView}
             </div>

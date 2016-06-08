@@ -57,8 +57,8 @@ var Titlebar = React.createClass({
     // },
 
 
-    menuItemClick: function (index,e) {
-        console.log(arguments);
+    menuItemClick: function (index, e) {
+        // console.log(arguments);
         e.stopPropagation();
         var e = arguments[1];
         if (!this.props.menuFunc) {
@@ -88,7 +88,8 @@ var Titlebar = React.createClass({
     },
 
     TitlebarClick() {
-        this.props.titleCallBack();
+        if (titleCallBack)
+            this.props.titleCallBack();
     },
 
     render: function () {
@@ -118,17 +119,17 @@ var Titlebar = React.createClass({
             style={{ padding: gVar.Padding_head, display: menuImg_display }} onClick={function name(e) {
                 // console.log("onclick"+arguments)
                 e.stopPropagation();//避免冒泡
-            }}/>;
+            } }/>;
         // var mytrigger = <div style={{textAlign:"center"}}><img src={birdpic} /></div>;
         var refreshDisplay = "none";
         if (this.props.refreshFunc) {
             refreshDisplay = 'block'
         }
         return (
-            <div className="titlebar_head" style={{backgroundColor: bg_color}} onClick={this.TitlebarClick}>
-                <div  style={{backgroundColor: bg_color,marginTop:"13px"}}>
+            <div className="titlebar_head" style={{ backgroundColor: bg_color }} onClick={this.TitlebarClick}>
+                <div  style={{ backgroundColor: bg_color, marginTop: "13px" }}>
 
-                    <img className="titlebar_img" src={back_chevron}  onClick={this.back} style={{ padding: gVar.Padding_head, display: backImg_display, paddingRight: "24px" }}/>
+                    <img className="titlebar_img" src={back_chevron}  onClick={this.back.bind(this) } style={{ padding: gVar.Padding_head, display: backImg_display, paddingRight: "24px" }}/>
                     <div className="titlebar_right" >
                         <span className="titlebar_save" ref="save" style={{ color: gVar.Color_white, fontSize: gVar.FontSize_title_head, padding: gVar.Padding_text_head, margin: "auto", fontWeight: "bold" }} onClick={this.save}>{save}</span>
                         <img className="titlebar_menu" ref="menu" src={ic_setting}

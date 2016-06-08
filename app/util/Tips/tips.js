@@ -6,9 +6,12 @@ require('./tips.css');
 //positionTop: "top"   "bottom"  默认居中显示,此参数不传 则垂直居中显示  
 //var toast = {
 function showTips(tipText, showTime, positionTop) {
-
-    //添加Dom元素，提示框
-    $("html body").append("<p class='tipBox'></p>");
+    if($(".tipBox").length<1){
+        //添加Dom元素，提示框
+        $("html body").append("<p class='tipBox'></p>"); 
+    }else{
+        return;
+    }
 
     var w = $(window).width();
     var h = $(window).height();

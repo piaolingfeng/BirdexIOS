@@ -1,5 +1,6 @@
 var React=require('react');
 require('./css/loadingview.css');
+//胡伟
 var LoadingView=React.createClass({
     render:function(){
         return (<div className="loadingview_spinner">

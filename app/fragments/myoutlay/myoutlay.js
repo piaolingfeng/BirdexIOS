@@ -23,7 +23,7 @@ var LoadingView = require('../../components/loadingview/loadingview.js');
 
 //tablayout
 var TabLayout = require('../../components/tablayout/tablayout.js');
-
+//胡伟，支出
 var PickDate = React.createClass({
     privateVar: {
         startStr: "开始日期",

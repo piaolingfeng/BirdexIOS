@@ -9,7 +9,9 @@ var FragmentMyOutlay = require('../../fragments/myoutlay/myoutlay.js');
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var currentPosition = 0;//当前页面位置
 var targetPosition = 0;
-var EventBus = require('eventbusjs');
+var toast = require('../../util/Tips/tips.js');
+
+// var EventBus = require('eventbusjs');使用全局加载的eventbus
 
 var MyTool = React.createClass({
 
@@ -26,6 +28,21 @@ var MyTool = React.createClass({
         return;
     },
 
+    //复制成功
+    Callback_Paste() {
+        toast('复制成功!');
+    },
+
+    componentDidMount() {
+        if (!EventBus.hasEventListener("Callback_Paste"))//没有注册就注册
+            EventBus.addEventListener("Callback_Paste", this.Callback_Paste);
+    },
+
+    componentWillUnmount(){
+        EventBus.removeEventListener("Callback_Paste", this.Callback_Paste)
+    },
+
+    //点击头部时滚动到顶部
     titleCallBack() {
         if (this.needToScroll)
             EventBus.dispatch("scrollToTop");

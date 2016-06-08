@@ -2,7 +2,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 require('./css/scrollbar.css'); 
 require('./css/scrolllist.css');
-
+//胡伟
 var myScroll; var pullDownEl; var pullDownOffset; var pullUpEl; var pullUpOffset; var generatedCount = 0;
 var  ListView  = React.createClass({
     statics:{

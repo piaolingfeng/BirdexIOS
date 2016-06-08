@@ -4,6 +4,8 @@ var copy = require("./images/copy.png");
 var gVar = require("../../main/global.js");
 var OrderProduct = require('./orderproduct.js');
 var toast = require('../../util/Tips/tips.js');
+var copytext = require('../../util/copytext.js');
+
 var OrderList = React.createClass({
 
     propTypes: {
@@ -13,9 +15,11 @@ var OrderList = React.createClass({
     },
 
     copy: function (e) {
-        // alert();
+        // alert("dddd");
         e.stopPropagation();
-        var text = $('#orderName').html();
+        // var text = $('#orderName').html();
+        var text = this.props.orderEntity.order_oms_no
+        copytext(text);
         // var clipboardswfdata=new ZeroClipboard.Client();
         // clipboardswfdata.setHandCursor(true);
 
@@ -25,6 +29,7 @@ var OrderList = React.createClass({
         // clip.setText(text);
         //alert(clipboardswfdata);
     },
+
 
 
     changeToDetail() {
@@ -111,15 +116,15 @@ var OrderList = React.createClass({
 
                 <div className="orderlist_head orderlist_error" style={{ display: orderErrorDisplay }}>{orderEntity.verify_fail_detail}</div>
                 <div className="flexbox-container" style={{ backgroundColor: "#FAFAFA" }}>
-                    <span id={"logisticsTracking"+this.props.position} className="orderlist_btn" onClick={this.logisticsTracking}
+                    <span id={"logisticsTracking" + this.props.position} className="orderlist_btn" onClick={this.logisticsTracking}
                         onTouchStart = {this.btnhandleTouchStart.bind(this, "logisticsTracking") } onTouchEnd = {this.btnhandleTouchEnd.bind(this, "logisticsTracking") }
                         onTouchCancel={this.btnhandleTouchEnd.bind(this, "logisticsTracking") }>物流跟踪</span>
                     <span className="orderlist_line"></span>
-                    <span id={"contactCustomer"+this.props.position} className="orderlist_btn" onClick={this.contactCustomer}
+                    <span id={"contactCustomer" + this.props.position} className="orderlist_btn" onClick={this.contactCustomer}
                         onTouchStart = {this.btnhandleTouchStart.bind(this, "contactCustomer") } onTouchEnd = {this.btnhandleTouchEnd.bind(this, "contactCustomer") }
                         onTouchCancel={this.btnhandleTouchEnd.bind(this, "contactCustomer") }>联系客服</span>
                     <span ref="changeAddr_line"className="orderlist_line"></span>
-                    <span id = {"changeAddr"+this.props.position} ref="changeAddr" className="orderlist_btn" onClick={this.changeAddr}
+                    <span id = {"changeAddr" + this.props.position} ref="changeAddr" className="orderlist_btn" onClick={this.changeAddr}
                         onTouchStart = {this.btnhandleTouchStart.bind(this, "changeAddr") } onTouchEnd = {this.btnhandleTouchEnd.bind(this, "changeAddr") }
                         onTouchCancel={this.btnhandleTouchEnd.bind(this, "changeAddr") }>修改地址</span>
                     <div className="orderlist_clear"></div>
