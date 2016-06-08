@@ -9,6 +9,8 @@ require('./css/logistics.css');
 
 var toast = require('../../util/Tips/tips.js');
 
+var CallIOS = require('../../util/CallIOS.js');
+
 // 仓库接单
 var getorder_n = require('./image/getorder_n.png');
 var getorder_y = require('./image/getorder_y.png');
@@ -115,9 +117,6 @@ var Logistics = React.createClass({
     
     init:function() {
         var param = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
 			order_code: this.props.location.state.order_code
 		};
 		console.log(param);
@@ -157,6 +156,25 @@ var Logistics = React.createClass({
     refreshFunc(){
         this.init();
     },
+
+    copy(){
+        var text = "";
+        for(var i=0;i<trackings.length;i++){
+            var track = trackings[i];
+            text += track.time + "\n" + track.context + "\n";
+        }
+        // 复制物流信息
+        CallIOS.copyUtil(text);
+    },
+
+    callPhone(){
+        var num = $('#receiver_mobile').html();
+        if(num){
+            CallIOS.callPhone(num);
+        }
+    },
+    
+
     
     render:function() {
         return (
@@ -189,11 +207,11 @@ var Logistics = React.createClass({
                     <span id="receiver_name" className="logistics-span">
                         
                     </span>
-                    <span id="receiver_mobile" className="logistics-phone">
+                    <span id="receiver_mobile" className="logistics-phone" onClick={this.callPhone}>
                         
                     </span>
                     
-                    <button className="btn btn-primary btn-xs logistics-button">复制物流信息</button>
+                    <button className="btn btn-primary btn-xs logistics-button" onClick={this.copy}>复制物流信息</button>
                 </div>
                 
                 <div className="logistics-trackdiv">
