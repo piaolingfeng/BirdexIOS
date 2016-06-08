@@ -17,8 +17,11 @@ var CallIOS = require('../../util/CallIOS.js');
 var OrderDetail = React.createClass({
     myScroll: null,
     Data: null,
+    shouldUpdate:true,
     idCheck: function () {
         // alert("idCheck");
+        this.shouldUpdate = false;//不给刷新界面
+        this.cacheOrderListFunc();//缓存
         var params = { order_code: this.Data.data.order_code }
         gVar.pushPage({ pathname: "uploadIdcard", state: params });
     },
@@ -28,11 +31,13 @@ var OrderDetail = React.createClass({
         //调用原生界面拨打电话
         CallIOS.phoneCall(this.Data.data.receiver_mobile);
     },
-    
+
     changeAddr: function () {
-        console.log(global.router);
+        // console.log(global.router);
+        this.shouldUpdate = false;//不给刷新界面
+        this.cacheOrderListFunc();//缓存
         var params = { order_code: Data.data.order_code }
-        gVar.pushPage({ pathname: "changeaddress", state: params }, true);
+        gVar.pushPage({ pathname: "changeaddress", state: params });
     },
 
     setAddr(e, params) {
@@ -43,10 +48,21 @@ var OrderDetail = React.createClass({
         if (!EventBus.hasEventListener("changeAddr"))//没有注册就注册
             EventBus.addEventListener("changeAddr", this.setAddr, this);
         // shouldUpdate = false;//初始化为false,取完网络数据后在shouldupdata方法里面设置为true
-        this.getOrderDetail();
+        if (sessionStorage.getItem("OrderDetailData")) {
+            this.Data = JSON.parse(sessionStorage.getItem("OrderDetailData"));
+            sessionStorage.removeItem("OrderDetailData");
+            // console.log("1111");
+            this.setState({});
+        } else {
+            this.getOrderDetail();
+        }
     },
-    
-    
+
+    // 缓存RequestEntity，orderList,position
+    cacheOrderListFunc() {
+        sessionStorage.setItem("OrderDetailData", JSON.stringify(this.Data));
+        // sessionStorage.setItem("OrderPostion", position);
+    },
 
     //获取订单详情
     getOrderDetail: function () {
@@ -67,6 +83,7 @@ var OrderDetail = React.createClass({
     backCallBack() {
         // EventBus.dispatch("clearCacheOrderList");//清除页面详情
         EventBus.removeEventListener("changeAddr", this.setAddr, this);
+        this.shouldUpdate = false;
     },
 
     componentDidUpdate() {
@@ -112,13 +129,14 @@ var OrderDetail = React.createClass({
             this.myScroll.refresh();
     },
 
-    // shouldComponentUpdate() {//出发setState之后才会调用，也就是网络请求后
-    //     if (shouldUpdate == false) {
-    //         shouldUpdate = true;
-    //         return true;
-    //     }
-    //     return false;
-    // },
+    shouldComponentUpdate() {//出发setState之后才会调用，也就是网络请求后
+        // if (shouldUpdate == false) {
+        //     // shouldUpdate = true;
+        //     return true;
+        // }
+        // return false;
+        return this.shouldUpdate;
+    },
 
     getItem() {
         var list = [];
