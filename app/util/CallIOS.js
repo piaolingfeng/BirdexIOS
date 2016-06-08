@@ -1,10 +1,10 @@
 
 var CallIOS = {
     //调用系统相机
-    openCamera() {
+    openCamera(id) {
         var iFrame;
         iFrame = document.createElement("iframe");
-        iFrame.setAttribute("src", "ios://camera");
+        iFrame.setAttribute("src", "ios://camera?text="+id);
         //发送请求，原生截获请求
         iFrame.setAttribute("style", "display:none;");
         iFrame.setAttribute("height", "0px");
@@ -17,10 +17,10 @@ var CallIOS = {
     },
 
     //调用系统相册
-    openPhoto() {
+    openPhoto(id) {
         var iFrame;
         iFrame = document.createElement("iframe");
-        iFrame.setAttribute("src", "ios://photo");
+        iFrame.setAttribute("src", "ios://photo?text="+id);
         //发送请求，原生截获请求
         iFrame.setAttribute("style", "display:none;");
         iFrame.setAttribute("height", "0px");
@@ -68,7 +68,7 @@ var CallIOS = {
     open_scann() {
         var iFrame;
         iFrame = document.createElement("iframe");
-        iFrame.setAttribute("src", "ios://scann?url=http://www.wed114.cn/jiehun/uploads/allimg/160426/39_160426110638_1.jpg");
+        iFrame.setAttribute("src", "ios://scann");
         //发送请求，原生截获请求
         iFrame.setAttribute("style", "display:none;");
         iFrame.setAttribute("height", "0px");

@@ -198,30 +198,32 @@ var AM = React.createClass({
     
     init:function name(params) {
         var param = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code')
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code')
 		};
-		console.log(param)
-		$.ajax({
-            data: param,
-            url: gVar.getBASE_URL() + 'Company/get',
-            dataType: 'json',
-            cache: false,
-			// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
-			// xhrFields: {
-			// 	withCredentials: true
-			// },
-            success: function (data) {
-                // this.setState({ data: data });
-				// alert("success");
-				this.initSuccess(data);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                console.error(this.props.url, status, err.toString());
-				toast(err);
-            }.bind(this)
-        });
+		// console.log(param)
+        var url = gVar.getBASE_URL() + 'Company/get'
+        gVar.sendRequest(param,url,this.initSuccess);
+		// $.ajax({
+        //     data: param,
+        //     url: gVar.getBASE_URL() + 'Company/get',
+        //     dataType: 'json',
+        //     cache: false,
+		// 	// beforeSend: function(xhr){xhr.setRequestHeader('DEVICE-TOKEN','DEVICE-TOKEN');},//这里设置header
+		// 	// xhrFields: {
+		// 	// 	withCredentials: true
+		// 	// },
+        //     success: function (data) {
+        //         // this.setState({ data: data });
+		// 		// alert("success");
+		// 		this.initSuccess(data);
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         console.error(this.props.url, status, err.toString());
+		// 		toast(err);
+        //     }.bind(this)
+        // });
 
 		return;
     },

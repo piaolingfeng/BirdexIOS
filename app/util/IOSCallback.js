@@ -19,11 +19,11 @@ function Callback_Scann(data) {
     }
 };
 //身份证验证
-function Callback_Identify(data) {
+function Callback_Identify(id,data) {
     // alert("ddd");
     if (EventBus) {
         // console.log(data);
-        EventBus.dispatch("Callback_Identify",null,data);
+        EventBus.dispatch("Callback_Identify",null,data,id);
     }
 };
 
