@@ -10,18 +10,16 @@ var gVar = require('../../main/global.js');
 
 var toast = require('../../util/Tips/tips.js');
 
+var showDialog = require('../../components/BDialog/bdialog.js');
+
 var UploadIdcard = React.createClass({
     
-    componentDidMount:function() {
-        // 初始化数据
-        this.init();
-    },
     
     init:function name(params) {
         var param = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
             order_code: this.props.location.state.order_code
 		};
         console.log(param);
@@ -29,12 +27,44 @@ var UploadIdcard = React.createClass({
         gVar.sendRequest(param, url, this.initSuccess);
 		
     },
+
+    componentDidMount() {
+        // 初始化数据
+        this.init();
+        if (!EventBus.hasEventListener("Callback_Identify"))//没有注册就注册
+            EventBus.addEventListener("Callback_Identify", this.Callback_Identify, this);
+    },
+
+    componentWillUnmount() {
+        EventBus.removeEventListener("Callback_Identify", this.Callback_Identify, this)
+    },
+
+
+    Callback_Identify(){
+
+    },
+
     
     initSuccess:function (data) {
         console.log(data);
         if(0==data.error){
             $('#idcard').val(data.data.receiver_id_card);
         }
+    },
+
+    photo(){
+        alert("phote");  
+        showDialog("", "",null,null,false);
+    },
+    
+    album(){
+        alert("album");  
+        showDialog("", "",null,null,false);
+    },
+    
+    changeIcon(){
+        var dlgBody = <div><div style={{fontSize:16,marginBottom:"10px"}} onClick={this.photo}>拍照</div><div style={{fontSize:16,marginBottom:"10px"}} onClick={this.album}>从手机相册获取</div></div>;
+        showDialog("", dlgBody);
     },
     
     render:function name(params) {
@@ -45,10 +75,10 @@ var UploadIdcard = React.createClass({
             
                     <input id="idcard" type="text" className="uploadidcard-input" placeholder="输入身份证号："></input>
                     
-                    <div className="uploadidcard-imgdiv" style={{}}>
+                    <div className="uploadidcard-imgdiv" style={{}}  onClick={this.changeIcon}>
                         <img className="img-rounded uploadidcard-img"></img>
                     </div>
-                    <div className="uploadidcard-imgdiv"  style={{marginLeft:"7%"}}>
+                    <div className="uploadidcard-imgdiv"  style={{marginLeft:"7%"}}  onClick={this.changeIcon}>
                         <img className="img-rounded uploadidcard-img"></img>
                     </div>
                     <div className="uploadidcard-textdiv" style={{}}>

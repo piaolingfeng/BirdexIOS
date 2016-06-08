@@ -19,7 +19,7 @@ var OrderDetail = React.createClass({
     Data: null,
     idCheck: function () {
         // alert("idCheck");
-        var params = { order_code: Data.data.order_code }
+        var params = { order_code: this.Data.data.order_code }
         gVar.pushPage({ pathname: "uploadIdcard", state: params });
     },
 
