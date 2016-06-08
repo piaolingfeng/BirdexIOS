@@ -14,6 +14,7 @@ var showDialog = require('../../components/BDialog/bdialog.js');
 
 var CallIOS = require('../../util/CallIOS.js');
 
+
 var UploadIdcard = React.createClass({
 
 
