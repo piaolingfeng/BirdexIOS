@@ -43,7 +43,7 @@ var TodayDataItem = React.createClass({
         return (
             <div className="todaydata-item_head" onClick={this.select.bind(this, id) } >
                 <span ref="name" className="todaydata_text">{name}</span>
-                <div className="checkbox checkbox-slider--b" style={{ float: "right", marginTop: "15px" }}>
+                <div className="checkbox checkbox-slider--b" style={{ float: "right", marginTop: "12px" }}>
                     <label>
                         <input  ref="check" id={idcheck} type="checkbox" checked={checked}/><span></span>
                     </label>
