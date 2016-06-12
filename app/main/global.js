@@ -191,7 +191,8 @@ var gVar = {
                 request.setRequestHeader('DEVICE-TOKEN', 'Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
                 request.setRequestHeader('APP-VERSION', '1.0');
                 request.setRequestHeader('USER-TOKEN', localStorage.getItem("USER-TOKEN"));
-            },//这里设置header
+                console.log(request,"requestheader");
+         },//这里设置header
             // xhrFields: {
             // 	withCredentials: true
             // },
