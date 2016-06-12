@@ -204,6 +204,7 @@ var gVar = {
                         successCallback(data);
                 }
                 else {
+                    console.log(data.data);
                     if (errorCallback)
                         errorCallback(data.data);//如果有错误回调就触发错误回调
                     else
@@ -215,13 +216,15 @@ var gVar = {
                 // console.error( err.toString());
                 // alert(err);
                 console.log(err);
-                toast("请求失败" + err);
                 if (errorCallback)
                     errorCallback();
+                else
+                    toast("请求失败" + err);
             }.bind(this),
             complete: function (XMLHttpRequest, textStatus) {
                 if (showLoad == null || showLoad)//
                     waitDailog.hideLoading();
+                    // ;
             }.bind(this),
             timeout: 5000,
         });
