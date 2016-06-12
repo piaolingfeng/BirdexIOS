@@ -81,8 +81,7 @@ var LW = React.createClass({
 
 				<form role="form" style={{ width: "80%", margin: "20px auto" }} >
 					<div className="form-group">
-						<input type="text" className="form-control" id="name"
-							placeholder="输入帐号"/>
+						<input type="text" className="form-control" id="name" placeholder="输入帐号"/>
 
 					</div>
 
@@ -105,7 +104,7 @@ var LW = React.createClass({
 					</div>
 				</form>
 
-				<div style={{ position: "absolute", bottom: 10, width: "80%", left: "10%", height: "40" }}>
+				<div style={{ position: "absolute", bottom: 10, width: "80%", left: "10%", height: "40px" }}>
 					<img src={footerimg} style={{ width: "100%" }}/>
 					<button style={{ position: "absolute", bottom: 0, left: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" }}>用户注册</button>
 					<button style={{ position: "absolute", bottom: 0, right: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" }}>忘记密码</button>

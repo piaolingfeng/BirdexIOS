@@ -110,6 +110,8 @@ function paint5() {
 var Logistics = React.createClass({
     
     componentDidMount:function() {
+        if (!EventBus.hasEventListener("Callback_Paste"))//没有注册就注册
+            EventBus.addEventListener("Callback_Paste", this.Callback_Paste);
         $('#Status_name').html(this.props.location.state.Status_name);
         $('#receiver_mobile').html(this.props.location.state.Receiver_mobile)
         this.init();
@@ -124,6 +126,16 @@ var Logistics = React.createClass({
         var url = gVar.getBASE_URL() + 'Order/getTracking';
         gVar.sendRequest(param, url, this.initSuccess);
 		return;
+    },
+
+    //复制成功
+    Callback_Paste() {
+        toast('复制成功!');
+    },
+
+
+    componentWillUnmount(){
+        EventBus.removeEventListener("Callback_Paste", this.Callback_Paste)
     },
     
     initSuccess:function (data) {
@@ -175,7 +187,7 @@ var Logistics = React.createClass({
     },
     
 
-    
+
     render:function() {
         return (
             <div className="logistics-maindiv titlebar_extend_head">

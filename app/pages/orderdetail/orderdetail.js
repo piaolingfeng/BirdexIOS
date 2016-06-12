@@ -36,7 +36,7 @@ var OrderDetail = React.createClass({
         // console.log(global.router);
         this.shouldUpdate = false;//不给刷新界面
         this.cacheOrderListFunc();//缓存
-        var params = { order_code: Data.data.order_code }
+        var params = { order_code: this.Data.data.order_code }
         gVar.pushPage({ pathname: "changeaddress", state: params });
     },
 

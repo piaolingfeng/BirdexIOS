@@ -33,7 +33,7 @@ function showTips(tipText, showTime, positionTop) {
     $(".tipBox").fadeIn(1000);
 
     //关闭tip时间
-    setTimeout(a, showTime || 2500);
+    setTimeout(a, showTime || 1500);
 
     function a() {
         $(".tipBox").fadeOut(1000, function () {

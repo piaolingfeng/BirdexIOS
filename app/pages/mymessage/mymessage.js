@@ -105,13 +105,13 @@ var MM = React.createClass({
 
     init: function name(params) {
         var param = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code')
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code')
 		};
 		console.log(param);
         var url = gVar.getBASE_URL() + 'Message/stat';
-		gVar.sendRequest(param, url, this.initSuccess);
+		gVar.sendRequest(param, url, this.initSuccess,false);
         return;
     },
 

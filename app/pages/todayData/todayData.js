@@ -10,22 +10,9 @@ var ListView = require('../../components/listview/listviewindex.js');
 var TodayDataItem = React.createClass({
 
     select: function (a, e) {
-        // console.log(arguments);
-        // alert(e);
-        //         (function(e)
-        //    {
-        //     var e = window.event || e;
-        //     if (e.stopPropagation) e.stopPropagation();
-        //     else e.cancelBubble = true; 
-        //    })(event)
-        // select.caller.arguments[0];
-        // e.cancelBubble = true;
-        // event.stopPropagation();
+        console.log(arguments);
+        e.stopPropagation();
         e.preventDefault();//该方法将通知 Web 浏览器不要执行与事件关联的默认动作（如果存在这样的动作）。
-        //  var e = window.event || e;
-        // if (e.stopPropagation) 
-        //     e.stopPropagation();
-        // else e.cancelBubble = true;
 
         if ($("#check" + a).is(':checked')) {
             $("#check" + a).prop("checked", false);
@@ -41,16 +28,6 @@ var TodayDataItem = React.createClass({
             // console.log(true);
             EventBus.dispatch("indexListChange", null, params);
         };
-        //    if(this.refs.check.checked = true){
-        //        this.refs.check.checked = false;
-        //    }else{
-        //        this.refs.check.checked = true;
-        //    }
-        // var e = window.event || e;
-        // if (e.stopPropagation) e.stopPropagation();
-        // else e.cancelBubble = true;
-        // this.refs.check.toggle(this.checked);
-        // alert(this.checked);
     },
 
     shouldComponentUpdate() {
@@ -66,7 +43,7 @@ var TodayDataItem = React.createClass({
         return (
             <div className="todaydata-item_head" onClick={this.select.bind(this, id) } >
                 <span ref="name" className="todaydata_text">{name}</span>
-                <div className="checkbox checkbox-slider--c" style={{ float: "right", marginTop: "15px" }}>
+                <div className="checkbox checkbox-slider--b" style={{ float: "right", marginTop: "15px" }}>
                     <label>
                         <input  ref="check" id={idcheck} type="checkbox" checked={checked}/><span></span>
                     </label>
@@ -82,10 +59,6 @@ var TodayDataList = React.createClass({
     componentDidMount: function () {
         var dataList = gVar.todayData;
     },
-    on: function () {
-        $('#create-switch').wrap('<div class="switch" />').parent().bootstrapSwitch();
-    },
-
     //获取listview列表
     getItems() {
         var arraylist = new Array();

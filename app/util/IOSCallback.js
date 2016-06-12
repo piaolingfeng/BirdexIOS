@@ -26,8 +26,17 @@ function Callback_Identify(id,data) {
         EventBus.dispatch("Callback_Identify",null,data,id);
     }
 };
-
-// //身份证验证
-// function Callback_PhoneCall(data) {
-//     alert("ddd");
-// };
+//身份证上传结束回调
+function Callback_uploadDown(data1,data2,error) {
+    // alert("ddd");
+    // alert(error);
+    if (EventBus) {
+        // console.log(data);
+        EventBus.dispatch("Callback_uploadDown",null,data1,data2,error);
+    }
+};
+//通讯录回调
+function Callback_Contact(data) {
+    // alert("ddd");
+    
+};

@@ -14,3 +14,6 @@
      -webkit-box-align: center;
      align-items: center;
  }
+#name{
+    -webkit-user-modify: read-write-plaintext-only;
+}
