@@ -179,8 +179,22 @@ var gVar = {
         return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
     },
 
+    randomString(len) {
+        len = len || 32;
+        var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+        var maxPos = $chars.length;
+        var pwd = '';
+        for (var i = 0; i < len; i++) {
+            pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+        　　}
+        　　return pwd;
+    },
+
     sendRequest: function (params, url, successCallback, showLoad, errorCallback) {
-        if (showLoad == null || showLoad)//默认弹出等待框
+        // console.log(params);
+        // console.log(url);
+        var fuc = this;
+        if (showLoad == null || showLoad)//默认弹出等待框 那就让他套着吧。还不知道能不能起来呢
             waitDailog.showLoading();
         $.ajax({
             data: params,
@@ -188,9 +202,16 @@ var gVar = {
             dataType: 'json',
             cache: false,
             beforeSend: function (request) {
-                request.setRequestHeader('DEVICE-TOKEN', 'Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA');
+                if(!localStorage.getItem('DEVICE-TOKEN')){//SK8yeP8jsxDnADwHrHxT3rHfQHFAH2sX
+                    var device = fuc.randomString(32);
+                    localStorage.setItem('DEVICE-TOKEN',device)
+                }
+                console.log(localStorage.getItem('DEVICE-TOKEN'));
+                //'Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA'
+                request.setRequestHeader('DEVICE-TOKEN', localStorage.getItem('DEVICE-TOKEN'));
                 request.setRequestHeader('APP-VERSION', '1.0');
                 request.setRequestHeader('USER-TOKEN', localStorage.getItem("USER-TOKEN"));
+                console.log("requestheader", request);
             },//这里设置header
             // xhrFields: {
             // 	withCredentials: true
@@ -223,7 +244,7 @@ var gVar = {
             complete: function (XMLHttpRequest, textStatus) {
                 if (showLoad == null || showLoad)//
                     waitDailog.hideLoading();
-                    // ;
+                // ;
             }.bind(this),
             timeout: 5000,
         });

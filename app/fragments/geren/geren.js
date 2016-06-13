@@ -119,13 +119,16 @@ var Geren = React.createClass({
     componentDidMount: function () { },
 
     logout: function () {
-        localStorage.removeItem("company_code");
-        localStorage.removeItem('company_name');
-        localStorage.removeItem('company_short_name');
-        localStorage.removeItem('user_code');
-        localStorage.removeItem('log_password');
-        EventBus.dispatch("logout");//发布事件到portal里面去更新里面的index位置值
-        gVar.pushPage("login");
+        var url = gVar.getBASE_URL() + "Public/logout";
+        gVar.sendRequest('', url, function name(params) {
+            localStorage.removeItem("company_code");
+            localStorage.removeItem('company_name');
+            localStorage.removeItem('company_short_name');
+            localStorage.removeItem('user_code');
+            // localStorage.removeItem('log_password');
+            EventBus.dispatch("logout");//发布事件到portal里面去更新里面的index位置值
+            gVar.pushPage("login");
+        })
         // console.log(global.router);
     },
 
@@ -135,15 +138,15 @@ var Geren = React.createClass({
             paddingBottom: "70px"
         }} >
             <GerenList / >
-            
+
             <div style={{ margin: "20px 50px 0" }}>
                 <button id="logout" onClick={this.logout} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", borderColor: gVar.Color_blue_head }}
-							onTouchStart = {gVar.btnhandleTouchStart.bind(this, "logout") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "logout") }
-							onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "logout") }>
-							退出账号
-						</button>
-					</div>
-         </div>);
+                    onTouchStart = {gVar.btnhandleTouchStart.bind(this, "logout") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "logout") }
+                    onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "logout") }>
+                    退出账号
+                </button>
+            </div>
+        </div>);
     }
 });
 module.exports = Geren;
