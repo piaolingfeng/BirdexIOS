@@ -122,53 +122,6 @@ var gVar = {
         return requestEntity;
     },
 
-    createStatusEntity: function () {
-        var statusEntity = new Object();
-        statusEntity.status = '';
-        statusEntity.status_name = '';
-        return statusEntity;
-    },
-
-    createWarehouseEntity: function () {
-        var warehouseEntity = new Object();
-        warehouseEntity.name = '';
-        warehouseEntity.warehouse_code = '';
-        return warehouseEntity;
-    },
-
-    createOrderEntity: function () {
-        var orderEntity = new Object();
-        orderEntity.order_code = "";//: "订单唯一编码",
-        orderEntity.warehouse_code = "";//: "仓库编码",
-        orderEntity.created_time = "";//: "订单创建时间",
-        orderEntity.order_oms_no = "";//: "订单号",
-        orderEntity.service_type = "";//: "服务方式编码",
-        orderEntity.verify_fail_detail = '';//": "",
-        orderEntity.verify_id_card_result = '';//": "20"
-        orderEntity.service_type_name = "";//: "服务方式名称",
-        orderEntity.warehouse_name = "";//: "仓库名称",
-        orderEntity.receiver_name = "";//: "收件人 ",
-        orderEntity.receiver_mobile = "";//: "手机号码",
-        orderEntity.receiver_phone;//":
-        orderEntity.status = "";//: "状态",
-        orderEntity.status_name = "";//: "状态名称",
-        orderEntity.weight = "";//: "重量",
-        orderEntity.price = "";//: "费用",
-        orderEntity.products = new Array(this.createOrderProductEntity());
-        return orderEntity;
-    },
-
-    createOrderProductEntity: function () {
-        var OrderProductEntity = new Object();
-        OrderProductEntity.product_code = "";//: "商品唯一编码",
-        OrderProductEntity.external_no = "";//: "商品编码",
-        OrderProductEntity.name = "";//: "商品名称",
-        OrderProductEntity.upc = "";//: "UPC码",
-        OrderProductEntity.pic = "";//: "商品图片",
-        OrderProductEntity.nums = "";//: "数量"
-        OrderProductEntity.error = "";
-        return OrderProductEntity;
-    },
     SERVER_ADDRESS: "192.168.1.207",
     //   SERVER_ADDRESS = "api.b.birdex.cn",
     PORT: "8089",//8002
@@ -186,8 +139,8 @@ var gVar = {
         var pwd = '';
         for (var i = 0; i < len; i++) {
             pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-        　　}
-        　　return pwd;
+        }
+        return pwd;
     },
 
     sendRequest: function (params, url, successCallback, showLoad, errorCallback) {
@@ -202,16 +155,16 @@ var gVar = {
             dataType: 'json',
             cache: false,
             beforeSend: function (request) {
-                if(!localStorage.getItem('DEVICE-TOKEN')){//SK8yeP8jsxDnADwHrHxT3rHfQHFAH2sX
+                if (!localStorage.getItem('DEVICE-TOKEN')) {//SK8yeP8jsxDnADwHrHxT3rHfQHFAH2sX
                     var device = fuc.randomString(32);
-                    localStorage.setItem('DEVICE-TOKEN',device)
+                    localStorage.setItem('DEVICE-TOKEN', device)
                 }
                 console.log(localStorage.getItem('DEVICE-TOKEN'));
                 //'Av8Kyg6puzKavIfXWCY1swtTgolSl9pMWcCA2SVLGFfA'
                 request.setRequestHeader('DEVICE-TOKEN', localStorage.getItem('DEVICE-TOKEN'));
                 request.setRequestHeader('APP-VERSION', '1.0');
                 request.setRequestHeader('USER-TOKEN', localStorage.getItem("USER-TOKEN"));
-                console.log("requestheader", request);
+
             },//这里设置header
             // xhrFields: {
             // 	withCredentials: true
