@@ -48,7 +48,7 @@ var FragmentPrediciton = React.createClass({
         requestEntity.warehouse_code = warehouseList[index].warehouse_code;
         requestEntity.warehouse_name = warehouseList[index].name;
         // console.log(requestEntity);
-        this.getOrderList();
+        this.getPredicitionList();
     },
     //状态筛选回调
     statusFunc(index) {
