@@ -6,6 +6,23 @@ var paySelected = require('./image/selectreveal.png');
 var radio = require('./image/radio.png');
 var gVar = require('../../main/global.js');
 var LoadingView = require('../../components/loadingview/loadingview.js');
+var CallIOS = require('../../util/CallIOS.js');
+
+var waitDailog = require('../../components/Spin/BSpin.js');
+
+
+global.Callback_rechargeFinish = function (status) {
+
+    if (status == 'true')
+    {
+        toast('充值成功');
+    }
+    else
+    {
+        toast('充值失败');
+    }
+};
+
 //胡伟，支付
 var ZhiFu = React.createClass({
     privateVar: {
@@ -134,6 +151,23 @@ var ZhiFu = React.createClass({
             return false;
         }
         //开始充值业务
+
+        var money = parseFloat(this.refs.textMoney.value);
+        if (isNaN(money) || money <= 0)
+        {
+            toast('请输入有效的金额');
+            return;
+        }
+
+        var walletType = this.privateVar.account[this.privateVar.selectIndex].type;
+
+        var bindUserId = localStorage.getItem('bind_user_id');
+
+        console.log(bindUserId + " " + walletType + " " + money);
+
+        CallIOS.recharge(bindUserId, walletType, money);
+
+        
     },
     render: function () {
         var innerView;
@@ -164,9 +198,9 @@ var ZhiFu = React.createClass({
             {innerView}
             <div className="input_recharge_num"><span style={{
                 color: "#666666", fontSize: "16px"
-            }}>充值金额：</span><input className="input_money" style={{
+            }}>充值金额：</span><input ref="textMoney" className="input_money" style={{
                 color: "#666666", fontSize: "16px", border: "none", width: "70%"
-            }} type="text"  placeholder="输入金额"  />
+            }} type="number"  placeholder="输入金额"  />
             </div>
             <div className="pay_type zhifubao" style={{
                 verticalAlign: "center", color: "#666666", fontSize: "16px", lineHeight: "25px"
