@@ -111,8 +111,12 @@ var MM = React.createClass({
 		};
 		console.log(param);
         var url = gVar.getBASE_URL() + 'Message/stat';
-		gVar.sendRequest(param, url, this.initSuccess,false);
+		gVar.sendRequest(param, url, this.initSuccess,false,this.errorCallback);
         return;
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
 
     initSuccess: function (data) {
