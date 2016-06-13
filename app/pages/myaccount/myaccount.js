@@ -46,11 +46,15 @@ var MA = React.createClass({
 		};
 		console.log(param);
         var url1 = gVar.getBASE_URL() + 'Company/get';
-        gVar.sendRequest(param, url1, this.initSuccess);
+        gVar.sendRequest(param, url1, this.initSuccess,true,this.errorCallback);
         
         var url2 = gVar.getBASE_URL() + 'Wallet/get';
-        gVar.sendRequest(param, url2, this.initData);
+        gVar.sendRequest(param, url2, this.initData,true,this.errorCallback);
 		return;
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
     
     initSuccess:function (data) {

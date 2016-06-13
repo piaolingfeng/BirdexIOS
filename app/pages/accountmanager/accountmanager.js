@@ -204,7 +204,7 @@ var AM = React.createClass({
 		};
 		// console.log(param)
         var url = gVar.getBASE_URL() + 'Company/get'
-        gVar.sendRequest(param,url,this.initSuccess);
+        gVar.sendRequest(param,url,this.initSuccess,true,this.errorCallback);
 		// $.ajax({
         //     data: param,
         //     url: gVar.getBASE_URL() + 'Company/get',
@@ -226,6 +226,10 @@ var AM = React.createClass({
         // });
 
 		return;
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
     
     initSuccess:function (data) {

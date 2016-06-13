@@ -33,10 +33,14 @@ var CI = React.createClass({
                 company_code:localStorage.getItem("company_code"),
                 logo:data1,
             }
-            gVar.sendRequest(par, url, this.uploadSuc);
+            gVar.sendRequest(par, url, this.uploadSuc,true,this.errorCallback);
         } else {
             toast("上传失败");
         }
+    },
+
+    errorCallback(){
+        toast("保存头像失败!");
     },
 
     uploadSuc() {
