@@ -15,17 +15,26 @@ var LW = React.createClass({
 	login: function () {
 		// alert("login");
 		// showLoading[0]();
-		// console.log(showLoading)
-		var param = {
-			account: $('#name').val(),
-			password: $('#password').val(),
-			device_type: "IOS",
-			device_info: navigator.userAgent,
-		};
+		console.log("showLoading")
+		if ($('#name').val() == null || $('#name').val().length == 0) {
+			toast("用户名不能为空");
+			
+		} else {
+			if ($('#password').val() == null || $('#password').val().length == 0) {
+				toast("密码不能为空")
+			} else {
+				var param = {
+					account: $('#name').val(),
+					password: $('#password').val(),
+					device_type: "IOS",
+					device_info: navigator.userAgent,
+				};
 
-		var url = gVar.getBASE_URL() + 'Public/login'
-		gVar.sendRequest(param, url, this.loginSuccess);
-		return;
+				var url = gVar.getBASE_URL() + 'Public/login'
+				gVar.sendRequest(param, url, this.loginSuccess);
+				return;
+			}
+		}
 	},
 
 
@@ -98,7 +107,7 @@ var LW = React.createClass({
 						</label>
 					</div>
 					<div style={{ margin: "50px 50px 0 50px" }}>
-						<button id="login" onClick={this.login} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF",borderColor:gVar.Color_blue_head }}
+						<button id="login" onClick={this.login} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", borderColor: gVar.Color_blue_head }}
 							onTouchStart = {gVar.btnhandleTouchStart.bind(this, "login") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "login") }
 							onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "login") }>
 							登录

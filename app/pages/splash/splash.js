@@ -9,12 +9,14 @@ var Splash = React.createClass({
                 localStorage.setItem(gVar.FIRST_ENTRY_APP,true)
                 gVar.pushPage("introduce");
             } else {
+        console.log("login")
                 if (localStorage.getItem("company_code") &&
                     localStorage.getItem('company_name') &&
                     localStorage.getItem('company_short_name') &&
                     localStorage.getItem('user_code')&&
                     localStorage.getItem("log_name")&&
-                    localStorage.getItem("log_password")) {
+                    localStorage.getItem("log_password")&&
+                    localStorage.getItem("USER-TOKEN")) {
                     gVar.pushPage("portal"); 
                 } else {
                     gVar.pushPage("login");

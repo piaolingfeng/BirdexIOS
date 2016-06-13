@@ -43,7 +43,7 @@ var PredictDetail = React.createClass({
     //product_code 确认入库的商品，不传表示确认所有的待确认入库的商品
     setConfirmStorage: function () {
         var params = {
-            storage_code: Data.data.storage_code,
+            storage_code: this.Data.data.storage_code,
         };
         var url = gVar.getBASE_URL() + 'storage/confirm';
         gVar.sendRequest(params, url, this.dealConfirmStorage);

@@ -124,8 +124,12 @@ var Logistics = React.createClass({
 		console.log(param);
         
         var url = gVar.getBASE_URL() + 'Order/getTracking';
-        gVar.sendRequest(param, url, this.initSuccess);
+        gVar.sendRequest(param, url, this.initSuccess,true,this.errorCallback);
 		return;
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
 
     //复制成功

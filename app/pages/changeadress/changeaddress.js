@@ -13,7 +13,7 @@ require('./js/i18n/mobiscroll.i18n.zh.js');
 
 
 var React = require('react');
-var EventBus = require('eventbusjs');
+var EventBus_1 = require('eventbusjs');//手动引入eventbus
 
 var gVar = require('../../main/global.js');
 
@@ -24,6 +24,8 @@ var headImg = require('./image/changeadresshead.png');
 var TitleBar = require('../../components/titlebar/titlebar.js');
 
 var toast = require('../../util/Tips/tips.js');
+
+var CallIOS = require('../../util/CallIOS.js');
 
 var provinceId = "";
 var cityId = "";
@@ -77,8 +79,10 @@ var CA = React.createClass({
     },
 
     componentDidMount: function () {
+        if (!EventBus.hasEventListener("Callback_Contact"))//没有注册就注册
+            EventBus.addEventListener("Callback_Contact", this.Callback_Contact);
 
-        EventBus.addEventListener("changeAddress", this.changeAddress, this);
+        EventBus_1.addEventListener("changeAddress", this.changeAddress, this);
 
         var valo = $("#area").attr("data-areaid");
         // 默认值  ,valueo:"10064 10043 10375"   出现定位bug 暂时无法解决
@@ -86,22 +90,40 @@ var CA = React.createClass({
 
         this.init();
     },
+    
+    
+    componentWillUnmount(){
+        EventBus_1.removeEventListener("changeAddress", this.changeAddress, this);
+
+        EventBus.removeEventListener("Callback_Contact", this.Callback_Contact);
+    },
+    
+    Callback_Contact(e,name,phoneNumber){
+        // alert(name);
+        // alert(phoneNumber);
+        $('#consignee').val(name);
+        $('#phone').val(phoneNumber);
+    },
 
     init: function () {
         var param = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
             order_code: this.props.location.state.order_code
         };
-        console.log(param)
+        // console.log(param)
 
         var url = gVar.getBASE_URL() + 'Order/get';
-        gVar.sendRequest(param, url, this.initSuccess);
+        gVar.sendRequest(param, url, this.initSuccess,true,this.errorCallback);
 
 
 
         return;
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
 
     initSuccess: function (data) {
@@ -140,9 +162,9 @@ var CA = React.createClass({
 
     modOrder: function name(params) {
         var param = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
             order_code: this.props.location.state.order_code,
             receiver_name: $('#consignee').val(),
             receiver_mobile: $('#phone').val(),
@@ -157,10 +179,14 @@ var CA = React.createClass({
         console.log(param)
 
         var url = gVar.getBASE_URL() + 'Order/edit';
-        gVar.sendRequest(param, url, this.modOrderSuccess);
+        gVar.sendRequest(param, url, this.modOrderSuccess,true,this.errorMod);
 
 
         return;
+    },
+
+    errorMod(){
+        toast("修改失败!");
     },
 
 
@@ -170,10 +196,14 @@ var CA = React.createClass({
             toast("修改成功");
 
             var adds = provinceName + cityName + areaName + $('#detail_adress').val();
-            EventBus.dispatch("changeAddr", null, adds);
+            EventBus_1.dispatch("changeAddr", null, adds);
         } else {
             alert(data.data);
         }
+    },
+    
+    imgClick(){
+        CallIOS.open_Contact("");
     },
 
 
@@ -189,7 +219,7 @@ var CA = React.createClass({
                                 <input id="consignee" type="text" className="changeaddress-input"></input>
                             </td>
                             <td className="changeaddress-td3" rowSpan="2">
-                                <img src={headImg} className="changeaddress-img"></img>
+                                <img onClick={this.imgClick} src={headImg} className="changeaddress-img"></img>
                             </td>
                         </tr>
                         <tr className="changeaddress-tr">

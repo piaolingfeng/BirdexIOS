@@ -28,8 +28,12 @@ var UploadIdcard = React.createClass({
         };
         // console.log(param);
         var url = gVar.getBASE_URL() + 'Order/get';
-        gVar.sendRequest(param, url, this.initSuccess);
+        gVar.sendRequest(param, url, this.initSuccess,true,this.errorCallback);
 
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
 
     componentDidMount() {

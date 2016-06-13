@@ -204,7 +204,7 @@ var AM = React.createClass({
 		};
 		// console.log(param)
         var url = gVar.getBASE_URL() + 'Company/get'
-        gVar.sendRequest(param,url,this.initSuccess);
+        gVar.sendRequest(param,url,this.initSuccess,true,this.errorCallback);
 		// $.ajax({
         //     data: param,
         //     url: gVar.getBASE_URL() + 'Company/get',
@@ -226,6 +226,10 @@ var AM = React.createClass({
         // });
 
 		return;
+    },
+
+    errorCallback(){
+        toast("获取数据失败!");
     },
     
     initSuccess:function (data) {
@@ -314,6 +318,10 @@ var AM = React.createClass({
             var swName = "";
             var swPhone = "";
             var swEmail = "";
+            // 出入库负责人
+            var oiName = "";
+            var oiPhone = "";
+            var oiEmail = "";
             // 财务对接人
             var cwName = "";
             var cwPhone = "";
@@ -331,6 +339,11 @@ var AM = React.createClass({
                     swName = contact.name;
                     swPhone = contact.phone;
                     swEmail = contact.email;
+                }
+                if(contact.contact_type == "20"){
+                    oiName = contact.name;
+                    oiPhone = contact.phone;
+                    oiEmail = contact.email;
                 }
                 if(contact.contact_type == "30"){
                     cwName = contact.name;
@@ -351,6 +364,13 @@ var AM = React.createClass({
                     phone:swPhone,
                     email:swEmail,
                     type:0
+                },
+                {
+                    name1:"出入库负责人：",
+                    name2:oiName,
+                    phone:oiPhone,
+                    email:oiEmail,
+                    type:1
                 },
                 {
                     name1:"财务对接人：",

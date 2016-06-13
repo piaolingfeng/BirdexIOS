@@ -17,30 +17,32 @@ var PredictProduct = React.createClass({
     // 产品内部只有单个预报入库的功能，全部确认入库在详情页
     setConfirmStorage: function (product_code) {
         var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
             storage_code: this.props.product.storage_code,
             product_code: product_code,
         };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'storage/confirm',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });
-                // console.log(data);
-                // this.setState({ data: "data" });
-                this.dealConfirmStorage(data);
+        var url = gVar.getBASE_URL() + 'storage/confirm';
+        gVar.sendRequest(params,url,this.dealConfirmStorage);
+        // $.ajax({
+        //     data: params,
+        //     async: true,
+        //     url: gVar.getBASE_URL() + 'storage/confirm',
+        //     dataType: 'json',
+        //     cache: true,
+        //     success: function (data) {
+        //         // this.setState({ data: data });
+        //         // console.log(data);
+        //         // this.setState({ data: "data" });
+        //         this.dealConfirmStorage(data);
 
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this)
-        });
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         // console.error(this.props.url, status, err.toString());
+        //         toast(err.toString());
+        //     }.bind(this)
+        // });
     },
 
     //复核弹出框
@@ -51,7 +53,7 @@ var PredictProduct = React.createClass({
         showDialog("请输入复核原因", "input", function (value) {
             console.log(value, product_code);
             func.ReviewStorageRequestNet(product_code, value);
-        }, "");
+        },'');
         // this.ReviewStorageRequestNet(product_code, "22222222");
     },
 
@@ -59,30 +61,35 @@ var PredictProduct = React.createClass({
     ReviewStorageRequestNet(product_code, remark) {
         // console.log(remark);
         var params = {
-            app_debug: 1,
-            company_code: localStorage.getItem("company_code"),
-            user_code: localStorage.getItem('user_code'),
+            // app_debug: 1,
+            // company_code: localStorage.getItem("company_code"),
+            // user_code: localStorage.getItem('user_code'),
             storage_code: this.props.product.storage_code,
             product_code: product_code,
             remark: remark,
         };
-        $.ajax({
-            data: params,
-            async: true,
-            url: gVar.getBASE_URL() + 'storage/review',
-            dataType: 'json',
-            cache: true,
-            success: function (data) {
-                // this.setState({ data: data });
-                // this.dealConfirmStorage(data);
-                // console.log(remark);
-                this.dealReviewStorage(data, remark);
-            }.bind(this),
-            error: function (xhr, status, err) {
-                // console.error(this.props.url, status, err.toString());
-                toast(err.toString());
-            }.bind(this)
-        });
+        var func = this;
+        var url = gVar.getBASE_URL() + 'storage/review';
+        gVar.sendRequest(params,url,function (data) {
+            func.dealReviewStorage(data, remark);
+        })
+        // $.ajax({
+        //     data: params,
+        //     async: true,
+        //     url: gVar.getBASE_URL() + 'storage/review',
+        //     dataType: 'json',
+        //     cache: true,
+        //     success: function (data) {
+        //         // this.setState({ data: data });
+        //         // this.dealConfirmStorage(data);
+        //         // console.log(remark);
+        //         this.dealReviewStorage(data, remark);
+        //     }.bind(this),
+        //     error: function (xhr, status, err) {
+        //         // console.error(this.props.url, status, err.toString());
+        //         toast(err.toString());
+        //     }.bind(this)
+        // });
     },
 
     //确认复核后的处理

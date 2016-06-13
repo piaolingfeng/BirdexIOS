@@ -36,7 +36,10 @@ function Callback_uploadDown(data1,data2,error) {
     }
 };
 //通讯录回调
-function Callback_Contact(data) {
+function Callback_Contact(name,phoneNumber) {
     // alert("ddd");
-    
+    if (EventBus) {
+        // console.log(data);
+        EventBus.dispatch("Callback_Contact",null,name,phoneNumber);
+    }
 };
