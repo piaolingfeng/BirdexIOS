@@ -19,10 +19,11 @@ var CI = React.createClass({
     save() {
         waitDailog.showLoading();//等待框
         CallIOS.uploadHead();//上传头像
+        global.Callback_uploadDown = this.Callback_uploadDown;
     },
 
     //上传完头像后的回调。
-    Callback_uploadDown(e, data1, data2, error) {
+    Callback_uploadDown(data1, data2, error) {
         //结束等待动画
         waitDailog.hideLoading();
         console.log(data1, data2, error);
@@ -30,16 +31,16 @@ var CI = React.createClass({
             var url = gVar.getBASE_URL() + 'Company/edit';
             var par = {
                 // order_code: this.props.location.state.order_code,
-                company_code:localStorage.getItem("company_code"),
-                logo:data1,
+                company_code: localStorage.getItem("company_code"),
+                logo: data1,
             }
-            gVar.sendRequest(par, url, this.uploadSuc,true,this.errorCallback);
+            gVar.sendRequest(par, url, this.uploadSuc, true, this.errorCallback);
         } else {
             toast("上传失败");
         }
     },
 
-    errorCallback(){
+    errorCallback() {
         toast("保存头像失败!");
     },
 
@@ -49,20 +50,20 @@ var CI = React.createClass({
     },
 
     componentDidMount() {
-        if (!EventBus.hasEventListener("Callback_Identify"))//没有注册就注册
-            EventBus.addEventListener("Callback_Identify", this.Callback_Identify, this);
-        if (!EventBus.hasEventListener("Callback_uploadDown"))//没有注册就注册
-            EventBus.addEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
+        // if (!EventBus.hasEventListener("Callback_Identify"))//没有注册就注册
+        //     EventBus.addEventListener("Callback_Identify", this.Callback_Identify, this);
+        // if (!EventBus.hasEventListener("Callback_uploadDown"))//没有注册就注册
+        //     EventBus.addEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
         $('#logo').attr("src", this.props.location.state.url);
     },
 
-    componentWillUnmount() {
-        EventBus.removeEventListener("Callback_Identify", this.Callback_Identify, this);
-        EventBus.removeEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
-    },
+    // componentWillUnmount() {
+    //     EventBus.removeEventListener("Callback_Identify", this.Callback_Identify, this);
+    //     EventBus.removeEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
+    // },
 
     //获取照片后回调显示在页面上
-    Callback_Identify(e, data, id) {
+    Callback_Identify(id,data) {
         // console.log("recive  data");
         $("#logo").attr("src", data);
     },
@@ -74,11 +75,13 @@ var CI = React.createClass({
     photo() {
         CallIOS.openCamera("logo");
         showDialog("", "", null, null, false);
+        global.Callback_Identify = this.Callback_Identify;
     },
 
     album() {
         CallIOS.openPhoto("logo");
         showDialog("", "", null, null, false);
+        global.Callback_Identify = this.Callback_Identify;
     },
 
     changeIcon() {

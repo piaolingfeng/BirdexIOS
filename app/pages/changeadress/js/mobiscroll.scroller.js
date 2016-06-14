@@ -1,6 +1,6 @@
 /*jslint eqeq: true, plusplus: true, undef: true, sloppy: true, vars: true, forin: true, nomen: true */
 (function ($) {
-    var EventBus = require('eventbusjs');
+    // var EventBus = require('eventbusjs');
     $.mobiscroll.classes.Scroller = function (elem, settings) {
         console.log(arguments);
         var m,

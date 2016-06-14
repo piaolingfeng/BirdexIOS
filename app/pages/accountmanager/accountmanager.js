@@ -1,5 +1,5 @@
 var React = require('react');
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 
 require('./css/accountmanager.css');
 

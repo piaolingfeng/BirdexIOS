@@ -1,11 +1,11 @@
 var React = require('react');
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 
 var gVar = require('../../main/global.js');
 
-var ReactList=require('react-list');
+var ReactList = require('react-list');
 
-require('./css/logistics.css'); 
+require('./css/logistics.css');
 
 var toast = require('../../util/Tips/tips.js');
 
@@ -38,22 +38,22 @@ var trackings = "";
 var TitleBar = require('../../components/titlebar/titlebar.js');
 
 function changeStat(stat) {
-    if(stat >= 0){
+    if (stat >= 0) {
         paint0();
     }
-    if(stat >= 1){
+    if (stat >= 1) {
         paint1();
     }
-    if(stat >= 2){
+    if (stat >= 2) {
         paint2();
     }
-    if(stat >= 3){
+    if (stat >= 3) {
         paint3();
     }
-    if(stat >= 4){
+    if (stat >= 4) {
         paint4();
     }
-    if(stat >= 5){
+    if (stat >= 5) {
         paint5();
     }
 };
@@ -108,180 +108,174 @@ function paint5() {
 }
 
 var Logistics = React.createClass({
-    
-    componentDidMount:function() {
-        if (!EventBus.hasEventListener("Callback_Paste"))//没有注册就注册
-            EventBus.addEventListener("Callback_Paste", this.Callback_Paste);
+
+    componentDidMount: function () {
         $('#Status_name').html(this.props.location.state.Status_name);
         $('#receiver_mobile').html(this.props.location.state.Receiver_mobile)
         this.init();
     },
-    
-    init:function() {
+
+    init: function () {
         var param = {
-			order_code: this.props.location.state.order_code
-		};
-		console.log(param);
-        
+            order_code: this.props.location.state.order_code
+        };
+        console.log(param);
+
         var url = gVar.getBASE_URL() + 'Order/getTracking';
-        gVar.sendRequest(param, url, this.initSuccess,true,this.errorCallback);
-		return;
+        gVar.sendRequest(param, url, this.initSuccess, true, this.errorCallback);
+        return;
     },
 
-    errorCallback(){
+    errorCallback() {
         toast("获取数据失败!");
     },
 
-    //复制成功
-    Callback_Paste() {
-        toast('复制成功!');
-    },
-
-
-    componentWillUnmount(){
-        EventBus.removeEventListener("Callback_Paste", this.Callback_Paste)
-    },
-    
-    initSuccess:function (data) {
+    initSuccess: function (data) {
         console.log(data);
-        if(0==data.error){
+        if (0 == data.error) {
             $('#order_oms_no').html(data.data.order_oms_no);
             $('#order_no').html(data.data.order_no);
             $('#receiver_name').html(data.data.receiver_name);
             $('#tracking_length').html(data.data.tracking_length);
             $('#checkout_time').html(data.data.checkout_time);
-            
+
             changeStat(data.data.status);
-            
+
             trackings = data.data.trackings;
-            
+
             this.setState({});
         }
     },
-    
-    renderItem:function(index, key){
+
+    renderItem: function (index, key) {
         var tar = trackings[index];
-        return <div key={key} style={{width:"90%",height:"55px",margin:"0 auto"}}>
-                    <img src={point} style={{width:"8px",height:"8px",verticalAlign:"center",marginTop:"-5px"}}></img> <span style={{display:"inline-block",marginTop:"5px",width:"90%"}}>{tar.context}</span>
-                    <div></div>
-                    <span style={{width:"1px",height:"30px",display:"inline-block",background:"#D7D7D7",marginLeft:'3px'}}></span>
-                    <span style={{marginLeft:"8px",width:"80%",verticalAlign:"top"}}>{tar.time}</span>
-               </div>;
+        return <div key={key} style={{ width: "90%", height: "55px", margin: "0 auto" }}>
+            <img src={point} style={{ width: "8px", height: "8px", verticalAlign: "center", marginTop: "-5px" }}></img> <span style={{ display: "inline-block", marginTop: "5px", width: "90%" }}>{tar.context}</span>
+            <div></div>
+            <span style={{ width: "1px", height: "30px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' }}></span>
+            <span style={{ marginLeft: "8px", width: "80%", verticalAlign: "top" }}>{tar.time}</span>
+        </div>;
     },
-    
-    refreshFunc(){
+
+    refreshFunc() {
         this.init();
     },
 
-    copy(){
+    copy() {
         var text = "";
-        for(var i=0;i<trackings.length;i++){
+        for (var i = 0; i < trackings.length; i++) {
             var track = trackings[i];
             text += track.time + "\n" + track.context + "\n";
         }
         // 复制物流信息
+        // console.log(text)
         CallIOS.copyUtil(text);
+        global.Callback_Paste = function (data) {
+            toast('复制成功!');
+        };
     },
 
-    callPhone(){
+    callPhone() {
         var num = $('#receiver_mobile').html();
-        if(num){
+        if (num) {
             CallIOS.callPhone(num);
         }
     },
-    
 
 
-    render:function() {
+
+    render: function () {
         return (
             <div className="logistics-maindiv titlebar_extend_head">
                 <TitleBar  save="物流跟踪" bgColor={gVar.Color_blue_head} refreshFunc={this.refreshFunc}/>
                 <div className="titlebar_head_down">
-                <div className="logistics-row">
-                    <span className="logistics-span">
-                        订单号：
-                    </span>
-                    <span id="order_oms_no" className="logistics-span">
-                        
-                    </span>
-                    <span id="Status_name" className="logistics-span-float"></span>
-                </div>
-                
-                <div className="logistics-row">
-                    <span className="logistics-span">
-                        客户单号：
-                    </span>
-                    <span id="order_no" className="logistics-span">
-                        
-                    </span>
-                </div>
-                
-                <div className="logistics-row">
-                    <span className="logistics-span">
-                        收件人：
-                    </span>
-                    <span id="receiver_name" className="logistics-span">
-                        
-                    </span>
-                    <span id="receiver_mobile" className="logistics-phone" onClick={this.callPhone}>
-                        
-                    </span>
-                    
-                    <button className="btn btn-primary btn-xs logistics-button" onClick={this.copy}>复制物流信息</button>
-                </div>
-                
-                <div className="logistics-trackdiv">
-                    <span>
-                        <div id="div0" className="logistics-trackdiv-child">
-                            <img id="img0" src={getorder_n} style={{height:"30px",marginTop:"-20"}}></img>
-                            <div id="text0" style={{fontSize:12,color:"#9B9B9B"}}>仓库接单</div>
-                        </div>
-                    </span>
-                    <span>
-                        <div id="div1" className="logistics-trackdiv-child">
-                            <img id="img1" src={orderout_n} style={{height:"30px",marginTop:"-20"}}></img>
-                            <div id="text1" style={{fontSize:12,color:"#9B9B9B"}}>订单出库</div>
-                        </div>
-                    </span>
-                    <span>
-                        <div id="div2" className="logistics-trackdiv-child">
-                            <img id="img2" src={fly_n} style={{height:"30px",marginTop:"-20"}}></img>
-                            <div id="text2" style={{fontSize:12,color:"#9B9B9B"}}>航空运输</div>
-                        </div>
-                    </span>
-                    <span>
-                        <div id="div3" className="logistics-trackdiv-child">
-                            <img id="img3" src={clear_n} style={{height:"30px",marginTop:"-20"}}></img>
-                            <div id="text3" style={{fontSize:12,color:"#9B9B9B"}}>清关</div>
-                        </div>
-                    </span>
-                    <span>
-                        <div id="div4" className="logistics-trackdiv-child">
-                            <img id="img4" src={transportation_n} style={{height:"30px",marginTop:"-20"}}></img>
-                            <div id="text4" style={{fontSize:12,color:"#9B9B9B"}}>国内运输</div>
-                        </div>
-                    </span>
-                    <span>
-                        <div id="div5" className="logistics-trackdiv-child">
-                            <img id="img5" src={sign_n} style={{height:"30px",marginTop:"-20"}}></img>
-                            <div id="text5" style={{fontSize:12,color:"#9B9B9B"}}>签收</div>
-                        </div>
-                    </span>
-                </div>
-                
-                <div className="logistics-row" style={{marginTop:"100",fontSize:16,color:"#666666"}}>
-                    当前轨迹
-                </div>
-                <div className="logistics-row">
-                    <span style={{fontSize:13,color:"#8E8E93"}}>已运送：</span>
-                    <span id="tracking_length" style={{fontSize:13,color:"#8E8E93",display:"inline-block",width:"25%"}}></span>
-                    <span style={{fontSize:13,color:"#8E8E93"}}>出库时间：</span>
-                    <span id="checkout_time" style={{fontSize:13,color:"#8E8E93"}}></span>
-                </div>
-                
-                <div style={{width:"100%",height:"1px",background:"#D7D7D7",marginTop:"15px",marginBottom:"5px"}}></div>
-                
-                <ReactList itemRenderer={this.renderItem} length={trackings.length}/>
+                    <div className="logistics-row">
+                        <span className="logistics-span">
+                            订单号：
+                        </span>
+                        <span id="order_oms_no" className="logistics-span">
+
+                        </span>
+                        <span id="Status_name" className="logistics-span-float"></span>
+                    </div>
+
+                    <div className="logistics-row">
+                        <span className="logistics-span">
+                            客户单号：
+                        </span>
+                        <span id="order_no" className="logistics-span">
+
+                        </span>
+                    </div>
+
+                    <div className="logistics-row" style={{ display: "table" }}>
+                        <span className="logistics-span">
+                            收件人：
+                        </span>
+                        <span id="receiver_name" className="logistics-span">
+
+                        </span>
+                        <span id="receiver_mobile" className="logistics-phone" onClick={this.callPhone}>
+
+                        </span>
+
+                        <button id="copy" className="logistics_btn" onClick={this.copy}
+                            onTouchStart = {gVar.btnhandleTouchStart.bind(this, "copy") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "copy") }
+                            onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "copy") }>复制物流信息</button>
+                    </div>
+
+                    <div className="logistics-trackdiv">
+                        <span>
+                            <div id="div0" className="logistics-trackdiv-child">
+                                <img id="img0" src={getorder_n} style={{ height: "30px", marginTop: "-20" }}></img>
+                                <div id="text0" style={{ fontSize: 12, color: "#9B9B9B" }}>仓库接单</div>
+                            </div>
+                        </span>
+                        <span>
+                            <div id="div1" className="logistics-trackdiv-child">
+                                <img id="img1" src={orderout_n} style={{ height: "30px", marginTop: "-20" }}></img>
+                                <div id="text1" style={{ fontSize: 12, color: "#9B9B9B" }}>订单出库</div>
+                            </div>
+                        </span>
+                        <span>
+                            <div id="div2" className="logistics-trackdiv-child">
+                                <img id="img2" src={fly_n} style={{ height: "30px", marginTop: "-20" }}></img>
+                                <div id="text2" style={{ fontSize: 12, color: "#9B9B9B" }}>航空运输</div>
+                            </div>
+                        </span>
+                        <span>
+                            <div id="div3" className="logistics-trackdiv-child">
+                                <img id="img3" src={clear_n} style={{ height: "30px", marginTop: "-20" }}></img>
+                                <div id="text3" style={{ fontSize: 12, color: "#9B9B9B" }}>清关</div>
+                            </div>
+                        </span>
+                        <span>
+                            <div id="div4" className="logistics-trackdiv-child">
+                                <img id="img4" src={transportation_n} style={{ height: "30px", marginTop: "-20" }}></img>
+                                <div id="text4" style={{ fontSize: 12, color: "#9B9B9B" }}>国内运输</div>
+                            </div>
+                        </span>
+                        <span>
+                            <div id="div5" className="logistics-trackdiv-child">
+                                <img id="img5" src={sign_n} style={{ height: "30px", marginTop: "-20" }}></img>
+                                <div id="text5" style={{ fontSize: 12, color: "#9B9B9B" }}>签收</div>
+                            </div>
+                        </span>
+                    </div>
+
+                    <div className="logistics-row" style={{ marginTop: "100", fontSize: 16, color: "#666666" }}>
+                        当前轨迹
+                    </div>
+                    <div className="logistics-row">
+                        <span style={{ fontSize: 13, color: "#8E8E93" }}>已运送：</span>
+                        <span id="tracking_length" style={{ fontSize: 13, color: "#8E8E93", display: "inline-block", width: "25%" }}></span>
+                        <span style={{ fontSize: 13, color: "#8E8E93" }}>出库时间：</span>
+                        <span id="checkout_time" style={{ fontSize: 13, color: "#8E8E93" }}></span>
+                    </div>
+
+                    <div style={{ width: "100%", height: "1px", background: "#D7D7D7", marginTop: "15px", marginBottom: "5px" }}></div>
+
+                    <ReactList itemRenderer={this.renderItem} length={trackings.length}/>
                 </div>
             </div>
         );

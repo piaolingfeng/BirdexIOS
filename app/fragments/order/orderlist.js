@@ -6,6 +6,9 @@ var OrderProduct = require('./orderproduct.js');
 var toast = require('../../util/Tips/tips.js');
 // var copytext = require('../../util/copytext.js');
 var CallIOS = require('../../util/CallIOS.js');
+
+
+
 var OrderList = React.createClass({
 
     propTypes: {
@@ -19,7 +22,10 @@ var OrderList = React.createClass({
         e.stopPropagation();
         // var text = $('#orderName').html();
         var text = this.props.orderEntity.order_oms_no
-        CallIOS.copytext(text);
+        CallIOS.copyUtil(text);
+        global.Callback_Paste = function (status) {
+            toast('复制成功!');
+        };
         // var clipboardswfdata=new ZeroClipboard.Client();
         // clipboardswfdata.setHandCursor(true);
 
@@ -41,6 +47,8 @@ var OrderList = React.createClass({
     componentDidMount() {
         var name = this.props.orderEntity.status_name;
         // console.log(name);
+        // if (!EventBus.hasEventListener("Callback_Paste"))//没有注册就注册
+        //     EventBus.addEventListener("Callback_Paste", this.Callback_Paste);
         if (name == "等待出库" || name == "准备出库" || name == "待下架"
             || name == "下架中" || name == "审核不通过"
             || name == "身份证异常") {
@@ -53,6 +61,10 @@ var OrderList = React.createClass({
             this.refs.changeAddr.style.display = "none";
         }
     },
+
+    // componentWillUnmount() {
+    //     EventBus.removeEventListener("Callback_Paste", this.Callback_Paste)
+    // },
 
     logisticsTracking: function (e) {
         var param = {

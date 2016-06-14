@@ -1,5 +1,4 @@
 var React = require('react');
-var EventBus = require('eventbusjs');
 
 var headbg = require('./image/headbg.png');
 var head = require('./image/head.png');

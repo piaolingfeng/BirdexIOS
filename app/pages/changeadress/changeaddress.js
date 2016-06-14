@@ -13,7 +13,7 @@ require('./js/i18n/mobiscroll.i18n.zh.js');
 
 
 var React = require('react');
-var EventBus_1 = require('eventbusjs');//手动引入eventbus
+// var EventBus = require('eventbusjs');//手动引入eventbus
 
 var gVar = require('../../main/global.js');
 
@@ -79,10 +79,8 @@ var CA = React.createClass({
     },
 
     componentDidMount: function () {
-        if (!EventBus.hasEventListener("Callback_Contact"))//没有注册就注册
-            EventBus.addEventListener("Callback_Contact", this.Callback_Contact);
-
-        EventBus_1.addEventListener("changeAddress", this.changeAddress, this);
+        if (!EventBus.hasEventListener("changeAddress"))
+            EventBus.addEventListener("changeAddress", this.changeAddress, this);
 
         var valo = $("#area").attr("data-areaid");
         // 默认值  ,valueo:"10064 10043 10375"   出现定位bug 暂时无法解决
@@ -90,15 +88,13 @@ var CA = React.createClass({
 
         this.init();
     },
-    
-    
-    componentWillUnmount(){
-        EventBus_1.removeEventListener("changeAddress", this.changeAddress, this);
 
-        EventBus.removeEventListener("Callback_Contact", this.Callback_Contact);
+
+    componentWillUnmount() {
+        EventBus.removeEventListener("changeAddress", this.changeAddress, this);
     },
-    
-    Callback_Contact(e,name,phoneNumber){
+
+    Callback_Contact(name, phoneNumber) {
         // alert(name);
         // alert(phoneNumber);
         $('#consignee').val(name);
@@ -115,14 +111,14 @@ var CA = React.createClass({
         // console.log(param)
 
         var url = gVar.getBASE_URL() + 'Order/get';
-        gVar.sendRequest(param, url, this.initSuccess,true,this.errorCallback);
+        gVar.sendRequest(param, url, this.initSuccess, true, this.errorCallback);
 
 
 
         return;
     },
 
-    errorCallback(){
+    errorCallback() {
         toast("获取数据失败!");
     },
 
@@ -179,13 +175,13 @@ var CA = React.createClass({
         console.log(param)
 
         var url = gVar.getBASE_URL() + 'Order/edit';
-        gVar.sendRequest(param, url, this.modOrderSuccess,true,this.errorMod);
+        gVar.sendRequest(param, url, this.modOrderSuccess, true, this.errorMod);
 
 
         return;
     },
 
-    errorMod(){
+    errorMod() {
         toast("修改失败!");
     },
 
@@ -196,14 +192,15 @@ var CA = React.createClass({
             toast("修改成功");
 
             var adds = provinceName + cityName + areaName + $('#detail_adress').val();
-            EventBus_1.dispatch("changeAddr", null, adds);
+            EventBus.dispatch("changeAddr", null, adds);
         } else {
             alert(data.data);
         }
     },
-    
-    imgClick(){
+
+    imgClick() {
         CallIOS.open_Contact("");
+        global.Callback_Contact = this.Callback_Contact;
     },
 
 
@@ -242,7 +239,7 @@ var CA = React.createClass({
                         </tr>
                     </table>
 
-                    <button id="confirm" onClick={this.confirm} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", width: "50%", margin: "0 auto", marginTop: 80,borderColor:gVar.Color_blue_head }}
+                    <button id="confirm" onClick={this.confirm} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", width: "50%", margin: "0 auto", marginTop: 80, borderColor: gVar.Color_blue_head }}
                         onTouchStart = {gVar.btnhandleTouchStart.bind(this, "confirm") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "confirm") }
                         onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "confirm") }>
                         确定

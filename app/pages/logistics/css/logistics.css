@@ -56,3 +56,16 @@
     display: inline;
     float: left
 }
+
+.logistics_btn{
+    float: right;
+    
+   padding-left: 5px;
+   padding-right: 5px;
+    margin-left: 8px;
+    background-color: white;
+    color: #13A7DF;
+    border: 1px #13A7DF #13A7DF;
+    border-color: #13A7DF;
+    border-radius:4px;
+}

@@ -2,7 +2,6 @@ var React = require('react');
 var scan_code = require("./images/scan_code.png");
 var ic_search = require('./images/ic_search.png');
 var gVar = require("../../main/global.js");
-// var EventBus = require('eventbusjs');
 var CallIOS = require('../../util/CallIOS.js');
 require("./css/search.css");
 var Search = React.createClass({
@@ -25,27 +24,14 @@ var Search = React.createClass({
     openScan: function () {
         // alert("open camera!");
         CallIOS.open_scann();
+        global.Callback_Scann = function (data) {
+            $("#search").val(data);//通过html引入eventbus后参数获取方式与require模块的形式有不同之处
+            if (this.props.SearchFunc) {
+                this.props.SearchFunc(data);
+            }
+        };
         return;
     },
-
-    componentDidMount() {
-        if (!EventBus.hasEventListener("Callback_Scann"))//没有注册就注册
-            EventBus.addEventListener("Callback_Scann", this.Callback_Scann, this);
-    },
-
-    componentWillUnmount() {
-        EventBus.removeEventListener("Callback_Scann", this.Callback_Scann, this)
-    },
-
-    Callback_Scann(event, data) {
-        // console.log(data, "Search");
-       $("#search").val(data);//通过html引入eventbus后参数获取方式与require模块的形式有不同之处
-        if (this.props.SearchFunc) {
-           this.props.SearchFunc(data);
-        }
-    },
-
-   
 
     render: function () {
         var funThis = this;

@@ -1,7 +1,6 @@
 
 var React = require('react');
-var EventBus = require('eventbusjs');
-import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
+// var EventBus = require('eventbusjs');
 
 var gVar = require('../../main/global.js');
 
@@ -80,6 +79,9 @@ var LW = React.createClass({
 		if (localStorage.getItem("log_password")) {
 			$("#password").val(localStorage.getItem("log_password"));
 		}
+		$("#name").click(function() {
+			$(this).focus();
+		})
 	},
 
 	render: function () {
