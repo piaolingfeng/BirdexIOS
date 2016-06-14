@@ -57,6 +57,8 @@ var LW = React.createClass({
 					localStorage.setItem('company_short_name', data.data.company_short_name);
 					localStorage.setItem('user_code', data.data.user_code);
 					localStorage.setItem('USER-TOKEN', data.data.user_token);
+					//支付时要用到bind_user_id
+					localStorage.setItem('bind_user_id', data.data.bind_user_id);
 					console.log(data);
 				} catch (e) {
 					// alert(e);
