@@ -1,7 +1,6 @@
 
 var React = require('react');
 var gVar = require("../../main/global.js");
-var EventBus = require('eventbusjs');
 import ReactPullToRefresh from 'react-pull-to-refresh';
 require('../../main/css/pullrefresh.css');
 require('../../main/css/genericons/genericons.css');

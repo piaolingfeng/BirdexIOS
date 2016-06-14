@@ -16,7 +16,7 @@ var Index = 1;
 var currentPosition = 1;
 var targetPosition = 1;
 require('./portal.css');
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 
 var MainPage = React.createClass({
 

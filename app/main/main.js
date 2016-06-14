@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 require('react-fastclick');
 
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 import { hashHistory, browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
@@ -20,6 +20,9 @@ var Predictdetail = require('../pages/predictdetail/predictdetail.js');
 var MyTool = require('../pages/mytool/mytool.js');
 
 var LoginWindow = require('../pages/birdlogin/login.js');
+
+var Log = require('../pages/birdlogin/log.js');
+
 var Portal = require('../pages/portal/portal.js');
 var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
 //库存s
@@ -161,6 +164,7 @@ ReactDOM.render(
             <Route path="accountmanager" component={AccountManager}/>
             <Route path="uploadIdcard" component={uploadIdcard}/>
             <Route path="changeIcon" component={changeIcon}/>
+            <Route path="log" component={Log}/>
         </Route> 
     </Router>,
     

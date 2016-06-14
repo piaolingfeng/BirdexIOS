@@ -6,7 +6,7 @@ var gVar = require("../../main/global.js");
 var TitleBar = require('../../components/titlebar/titlebar.js');
 var PredictProduct = require('./predictproduct.js')
 var toast = require('../../util/Tips/tips.js');
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 var ListView = require('../../components/listview/listviewindex.js');
 
 

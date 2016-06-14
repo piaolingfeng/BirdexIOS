@@ -7,7 +7,6 @@ var OrderList = require('./orderlist.js');
 var ListView = require('../../components/listview/listviewindex.js');
 var toast = require('../../util/Tips/tips.js');
 
-var EventBus = require('eventbusjs');
 var orderList = new Array();
 
 // var statusNameList = null;

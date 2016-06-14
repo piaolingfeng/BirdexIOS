@@ -1,5 +1,4 @@
 var React = require('react');
-var EventBus = require('eventbusjs');
 var add_btn = require("./images/add.png");
 var gVar = require('../../main/global.js');
 
@@ -38,7 +37,6 @@ var Addbutton = React.createClass({
     },
 
     changepage: function () {
-        // EventBus.dispatch("changePage", null, "todayData");
         gVar.pushPage("todayData");
         return;
     }

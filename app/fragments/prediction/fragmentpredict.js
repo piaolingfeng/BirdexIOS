@@ -8,7 +8,7 @@ var TitleBar = require('../../components/titlebar/titlebar.js');
 var Search = require('../../components/search/search.js');
 var ListView = require('../../components/listview/listviewindex.js');
 var toast = require('../../util/Tips/tips.js');
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 var predictList = new Array();
 
 // var timeNameList = null;

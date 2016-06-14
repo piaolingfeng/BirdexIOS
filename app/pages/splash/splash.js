@@ -9,7 +9,6 @@ var Splash = React.createClass({
                 localStorage.setItem(gVar.FIRST_ENTRY_APP,true)
                 gVar.pushPage("introduce");
             } else {
-        console.log("login")
                 if (localStorage.getItem("company_code") &&
                     localStorage.getItem('company_name') &&
                     localStorage.getItem('company_short_name') &&

@@ -3,7 +3,7 @@ var gVar = require('../../main/global.js');
 var Titlebar = require("../../components/titlebar/titlebar.js");
 require("../../../bower_components/titatoggle/dist/titatoggle-dist.css");
 
-var EventBus = require('eventbusjs');
+// var EventBus = require('eventbusjs');
 require("./css/todaydata.css");
 var ListView = require('../../components/listview/listviewindex.js');
 

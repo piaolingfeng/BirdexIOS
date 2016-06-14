@@ -1,5 +1,4 @@
 var React = require('react');
-var EventBus = require('eventbusjs');
 var Titlebar = require('../../components/titlebar/titlebar.js');
 var gVar = require('../../main/global.js');
 require('./mymessagemenu.css');

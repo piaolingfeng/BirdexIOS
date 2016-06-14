@@ -28,39 +28,39 @@ var UploadIdcard = React.createClass({
         };
         // console.log(param);
         var url = gVar.getBASE_URL() + 'Order/get';
-        gVar.sendRequest(param, url, this.initSuccess,true,this.errorCallback);
+        gVar.sendRequest(param, url, this.initSuccess, true, this.errorCallback);
 
     },
 
-    errorCallback(){
+    errorCallback() {
         toast("获取数据失败!");
     },
 
     componentDidMount() {
         // 初始化数据
         this.init();
-        if (!EventBus.hasEventListener("Callback_Identify"))//没有注册就注册
-            EventBus.addEventListener("Callback_Identify", this.Callback_Identify, this);
-        if (!EventBus.hasEventListener("Callback_uploadDown"))//没有注册就注册
-            EventBus.addEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
+        // if (!EventBus.hasEventListener("Callback_Identify"))//没有注册就注册
+        //     EventBus.addEventListener("Callback_Identify", this.Callback_Identify, this);
+        // if (!EventBus.hasEventListener("Callback_uploadDown"))//没有注册就注册
+        //     EventBus.addEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
     },
 
     componentWillUnmount() {
-        EventBus.removeEventListener("Callback_Identify", this.Callback_Identify, this);
-        EventBus.removeEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
+        // EventBus.removeEventListener("Callback_Identify", this.Callback_Identify, this);
+        // EventBus.removeEventListener("Callback_uploadDown", this.Callback_uploadDown, this);
     },
 
     //获取照片后回调显示在页面上
-    Callback_Identify(e, data, id) {
+    Callback_Identify(id,data) {
         // console.log("recive  data");
         $("#" + id).attr("src", data);
     },
     //上传完身份证后的回调。
-    Callback_uploadDown(e, data1, data2, error) {
+    Callback_uploadDown(data1, data2, error) {
         //结束等待动画
         waitDailog.hideLoading();
-        console.log(data1, data2,error);
-        
+        console.log(data1, data2, error);
+
         if (Boolean(error)) {
             var url = gVar.getBASE_URL() + 'Order/edit';
             var par = {
@@ -90,11 +90,13 @@ var UploadIdcard = React.createClass({
     photo(id) {
         CallIOS.openCamera(id);
         showDialog("", "", null, null, false);
+        global.Callback_Identify = this.Callback_Identify;
     },
 
     album(id) {
         CallIOS.openPhoto(id);
         showDialog("", "", null, null, false);
+        global.Callback_Identify = this.Callback_Identify;
     },
 
     changeIcon(id) {
@@ -107,28 +109,10 @@ var UploadIdcard = React.createClass({
 
     // 点击确定，执行上传
     submit() {
-        // if (document.getElementById('Id1').src && document.getElementById('Id2').src) {
-        //     var url = "http://192.168.1.207:8090/upload/IDCard";
-        //     $.ajax({
-        //         url: url,
-        //         dataType: 'json',
-        //         data: document.getElementById('Id1').src,
-        //         type: 'POST',
-        //         success: function (data) {
-        //             console.log(data);
-        //             alert("success");
-        //         },
-        //         error: function (data) {
-        //             console.log(data);
-        //             alert("error");
-        //         }
-        //     });
-        // } else {
-        //     toast("请将资料补充完整");
-        // }
         if (document.getElementById('Id1').src && document.getElementById('Id2').src && $('#idcard').val() != null) {
             waitDailog.showLoading();//等待框
             CallIOS.uploadId();
+            global.Callback_uploadDown = this.Callback_uploadDown;
         } else {
             toast("请将资料补充完整");
         }

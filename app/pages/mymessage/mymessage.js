@@ -1,5 +1,4 @@
 var React = require('react');
-var EventBus = require('eventbusjs');
 
 var warning = require('./image/warning.png');
 var arrow = require('./image/arrow.png');
@@ -156,10 +155,6 @@ var MM = React.createClass({
 
 
     messageMenu: function () {
-
-        // EventBus.dispatch("changePage", null, "mymessagemenu");
-
-        // return;
         gVar.pushPage("mymessagemenu");
     },
 

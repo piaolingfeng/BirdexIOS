@@ -7,7 +7,6 @@ var React = require('react');
 require('./css/geren.css');
 var gVar = require('../../main/global.js');
 var toast = require('../../util/Tips/tips.js');
-var EventBus = require('eventbusjs');
 
 var minePage = [{
     img: require('./image/myaccount.png'),
@@ -34,11 +33,6 @@ var minePage = [{
         name: "关于",
         type: 0,
         index: 4
-    }, {
-        img: require("./image/check.png"),
-        name: "检查更新",
-        type: 2,
-        index: 5
     }];
 
 var GerenItem = React.createClass({
