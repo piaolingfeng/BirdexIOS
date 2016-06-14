@@ -56,7 +56,13 @@ var PickDate = React.createClass({
                 dateFormat: 'yyyy-mm-dd',
                 lang: 'zh',
                 showNow: true,
-                nowText: "今天",
+                nowText: "清空",
+                button3:function () {
+                    $(".pickdate_start").val("开始日期");
+                    $(".pickdate_end").val("结束日期");
+                    EventBus.dispatch("qingkong",null, null);
+                    EventBus.dispatch("qingkong1",null, null);
+                },
                 startYear: currYear - 10, //开始年份
                 endYear: currYear + 10 //结束年份
             };
@@ -121,7 +127,7 @@ var PickDate = React.createClass({
         return (<div className="pickdate content">
             <input value={this.privateVar.startStr} className="pickdate_start" readonly="readonly"  type="button" />
             <input value={this.privateVar.endStr} className="pickdate_end" readonly="readonly"  type="button" />
-            <div className="pickdate_sure" onClick={this.searchByTime}>交易时间</div>
+            <div className="pickdate_sure" onClick={this.searchByTime}>搜索</div>
         </div>);
     }
 });
