@@ -1,6 +1,9 @@
 var React = require('react');
 var welcome = require('./welcome.jpg');
 var gVar = require('../../main/global.js');
+
+var CallIOS = require('../../util/CallIOS.js');
+
 var Splash = React.createClass({
 
     componentDidMount() {
@@ -21,14 +24,17 @@ var Splash = React.createClass({
                     gVar.pushPage("login");
                 }
             }
-        }, 3000);//2秒后
+        }, 10);//2秒后
+        setTimeout(function (params) {
+            CallIOS.loadfinish();
+        },1000);
     },
 
     render() {
-
+// <img src={welcome} style={{width:"100%",height:"100%"}}/>
         return (
-            <div style={{position:"absolute",width:"100%",height:"100%"}}>
-                <img src={welcome} style={{width:"100%",height:"100%"}}/>
+            <div style={{position:"absolute",width:"100%",height:"100%",backgroundColor:"#ffffff",fontSize:"30px"}}>
+                
             </div>
         );
     },

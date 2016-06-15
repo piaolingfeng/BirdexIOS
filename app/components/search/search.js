@@ -24,10 +24,11 @@ var Search = React.createClass({
     openScan: function () {
         // alert("open camera!");
         CallIOS.open_scann();
+        var func = this;
         global.Callback_Scann = function (data) {
             $("#search").val(data);//通过html引入eventbus后参数获取方式与require模块的形式有不同之处
-            if (this.props.SearchFunc) {
-                this.props.SearchFunc(data);
+            if (func.props.SearchFunc) {
+                func.props.SearchFunc(data);
             }
         };
         return;

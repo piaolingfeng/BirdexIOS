@@ -170,7 +170,7 @@ var Logistics = React.createClass({
         // 复制物流信息
         // console.log(text)
         CallIOS.copyUtil(text);
-        global.Callback_Paste = function (data) {
+        global.Callback_Paste = function () {
             toast('复制成功!');
         };
     },

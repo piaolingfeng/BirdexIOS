@@ -93,7 +93,8 @@ var WillInDetail = React.createClass({
     },
 
     dealshowSameOrder(data) {
-        component.privateVar.sameOrderEntity = val.data;
+        var component = this;
+        component.privateVar.sameOrderEntity = data.data;
         var count = 0;
         if (component.privateVar.sameOrderEntity.products != null && component.privateVar.sameOrderEntity.products != undefined) {
             count = component.privateVar.sameOrderEntity.products.length;

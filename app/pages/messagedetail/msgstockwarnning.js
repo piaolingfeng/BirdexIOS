@@ -5,7 +5,7 @@ var gVar = require("../../main/global.js");
 var copy = require("../../fragments/order/images/copy.png");
 var read_Status = require("./images/read_status.png");
 var toast = require('../../util/Tips/tips.js');
-
+var CallIOS = require('../../util/CallIOS.js');
 
 var MsgStockWarnning = React.createClass({
 
@@ -16,7 +16,12 @@ var MsgStockWarnning = React.createClass({
     copy:function(external_no){
         // alert("dd");
         // console.log(toast);
-        toast("已复制");
+        // toast("已复制");
+        // e.stopPropagation();
+        CallIOS.copyUtil(external_no);
+        global.Callback_Paste = function (status) {
+            toast('复制成功!');
+        };
     },
 
     render: function () {

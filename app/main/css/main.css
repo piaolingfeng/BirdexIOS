@@ -5,7 +5,7 @@
 }
 
 .pagepush-enter.pagepush-enter-active {
-  transition: -webkit-transform  300ms linear;
+  transition: -webkit-transform  350ms linear;
   -webkit-transform: translate3d(0, 0, 0);
 }
 
@@ -14,7 +14,7 @@
 }
 
 .pagepush-leave.pagepush-leave-active {
-   transition: -webkit-transform  300ms linear;
+   transition: -webkit-transform  350ms linear;
   -webkit-transform: translate3d(-375px, 0, 0);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .pagepop-enter.pagepop-enter-active {
-  transition: -webkit-transform  300ms linear;
+  transition: -webkit-transform  350ms linear;
   -webkit-transform: translate3d(0, 0, 0);
 }
 
@@ -34,7 +34,7 @@
 }
 
 .pagepop-leave.pagepop-leave-active {
-  transition: -webkit-transform  300ms linear;
+  transition: -webkit-transform  350ms linear;
   -webkit-transform: translate3d(375px, 0, 0);
 }
 

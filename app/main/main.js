@@ -116,7 +116,7 @@ var App = React.createClass({
         var child = React.cloneElement(this.props.children, {key:formatPathName(this.props.location.pathname)});
 
         return (
-                <ReactCSSTransitionGroup transitionName={gVar.pageTranType} transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+                <ReactCSSTransitionGroup transitionName={gVar.pageTranType} transitionEnterTimeout={350} transitionLeaveTimeout={350}>
                     {child}
                 </ReactCSSTransitionGroup>);
     }

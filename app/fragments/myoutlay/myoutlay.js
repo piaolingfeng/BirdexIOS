@@ -3,7 +3,7 @@ var React = require('react');
 //
 var gVar = require('../../main/global.js');
 var ListView = require('../../components/listview/listview.js');
-
+// require('react-fastclick');
 require('./css/pickdate.css');
 require('./css/myoutlay.css');
 //日历选择器 http://www.lrxin.com/archives-792.html
@@ -72,6 +72,7 @@ var PickDate = React.createClass({
         });
     },
     searchByTime: function () {
+        console.log('dddd');
         var start = $(".pickdate_start").val();
         var end = $(".pickdate_end").val();
         var theDate = new Date();

@@ -45,7 +45,7 @@ function showDialog(dlgTitle, dlgBody, okCallback, cancelCallback, showIt) {
     var bodyComp = null;
 
     if (dlgBody == "input") {
-        bodyComp = <FormControl ref={function (theInput) { inputComp = theInput } } componentClass="textarea" placeholder="textarea" />;
+        bodyComp = <FormControl ref={function (theInput) { inputComp = theInput } } componentClass="textarea" placeholder="" />;
     }
     else {
         bodyComp = dlgBody;

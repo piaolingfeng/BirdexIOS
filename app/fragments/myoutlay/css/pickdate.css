@@ -34,6 +34,7 @@
     padding-left: 8px;
     border-right: none;
     background-color: #ffffff;
+    border-radius: inherit;
 }
 .pickdate_sure{
     width: 30%;
