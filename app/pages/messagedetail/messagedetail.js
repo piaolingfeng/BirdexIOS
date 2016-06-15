@@ -199,7 +199,7 @@ var MessageDetail = React.createClass({
         }
         //<span className="messagedetail_count">共{Count}个数据</span>
         var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem}
-            marginTop={91} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
+            marginTop={105} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (MsgListData != null && MsgListData.length == 0) {
             list = <div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>;
         }
