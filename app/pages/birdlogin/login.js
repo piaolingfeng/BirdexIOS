@@ -3,7 +3,7 @@ var React = require('react');
 // var EventBus = require('eventbusjs');
 
 var gVar = require('../../main/global.js');
-
+// require('react-fastclick');
 require('./css/login.css');
 
 var headimg = require('./image/head.png');
@@ -14,10 +14,10 @@ var LW = React.createClass({
 	login: function () {
 		// alert("login");
 		// showLoading[0]();
-		console.log("showLoading")
+		// console.log("showLoading")
 		if ($('#name').val() == null || $('#name').val().length == 0) {
 			toast("用户名不能为空");
-			
+
 		} else {
 			if ($('#password').val() == null || $('#password').val().length == 0) {
 				toast("密码不能为空")
@@ -43,12 +43,14 @@ var LW = React.createClass({
 		// console.log(data);
 		if (data.error == 0) {
 			toast("登录成功");
+			var name = $("#name").val();
+			var password = $("#password").val();
+			localStorage.setItem("log_name", name);
 			if ($("#remember").is(':checked')) {//判断是否存储账户密码
-				var name = $("#name").val();
-				var password = $("#password").val();
 				// console.log(name,password);
 				localStorage.setItem("log_password", password);
-				localStorage.setItem("log_name", name);
+			} else {
+				localStorage.removeItem("log_password");
 			}
 			if (data.data) {
 				try {
@@ -79,9 +81,9 @@ var LW = React.createClass({
 		if (localStorage.getItem("log_password")) {
 			$("#password").val(localStorage.getItem("log_password"));
 		}
-		$("#name").click(function() {
-			$(this).focus();
-		})
+		// $("#name").click(function () {
+		// 	$(this).focus();
+		// })
 	},
 
 	render: function () {

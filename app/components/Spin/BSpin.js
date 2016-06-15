@@ -30,7 +30,7 @@ function showLoading(message) {
 
     var divMask = document.createElement("div");
     divMask.setAttribute("id", "pagemask1289");
-    divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;background-color:rgba(4, 4, 4, 0.34);z-index:100");
+    divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;background-color:rgba(4, 4, 4, 0);z-index:100");
     document.body.appendChild(divMask);
 
     var divBack = document.createElement("div");

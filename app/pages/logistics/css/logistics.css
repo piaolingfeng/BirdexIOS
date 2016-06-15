@@ -7,7 +7,7 @@
 }
 
 .logistics-row {
-    width: 90%;
+    width: 95%;
     text-align: left;
     margin: 0 auto;
     padding-top: 5px;
@@ -27,7 +27,7 @@
 .logistics-phone {
     color: #13A7DF;
     font-size: 16px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .logistics-button {

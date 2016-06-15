@@ -16,6 +16,7 @@ global.Callback_rechargeFinish = function (status) {
     if (status == 'true')
     {
         toast('充值成功');
+        gVar.pushPage('myaccount');
     }
     else
     {
@@ -56,6 +57,11 @@ var ZhiFu = React.createClass({
         $('.pay_style_radio:eq(' + index + ')').css("background-position", " -60px -30px ");
     },
     componentDidMount: function () {
+        var oHeight = $('body').height();
+        $(window).resize(function() {
+            $('#app').height(oHeight);
+        });
+        
         var component = this;
         this.privateVar.account = [];
         //获取账号的信息
@@ -192,8 +198,8 @@ var ZhiFu = React.createClass({
         }
         return (<div style={{
             backgroundColor: gVar.Color_background,
-            height: '100%',
-            overflow: "hidden"
+            height: '300px',
+            overflow: "hidden",
         }}>
             {innerView}
             <div className="input_recharge_num"><span style={{

@@ -53,7 +53,7 @@ var MessageDetail = React.createClass({
     //获取消息列表
     getMsgList: function (myScroll) {
         var params = {
-            start_date: timeUtil.getNearThreeMouth(),
+            start_date: timeUtil.getNearWeek(),
             end_date: timeUtil.getCurrentDateFormat(),
             msg_type: this.msg_type,
             page_no: this.page_no,
@@ -173,11 +173,31 @@ var MessageDetail = React.createClass({
         this.myScroll = myScroll;
     },
 
+    //clear清空消息
+    clear(){
+        var params = {
+            msg_type: this.msg_type,
+        };
+        var url = gVar.getBASE_URL() + 'Message/clear';
+        gVar.sendRequest(params, url, this.dealClearMsg,true,this.errorCallBack);
+    },
+
+    //清空消息处理
+    dealClearMsg(data){
+        MsgListData = []
+        this.setState({});
+    },
+    
+    errorCallBack(data){
+        toast('清空消息失败，请稍后重试!');
+    },
+    
     render: function () {
         var Count = 0;
         if (Data != null){
             Count = Data.data.count;
         }
+        //<span className="messagedetail_count">共{Count}个数据</span>
         var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem}
             marginTop={91} pullUpHandler={this.pullUpEvent} backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (MsgListData != null && MsgListData.length == 0) {
@@ -187,10 +207,12 @@ var MessageDetail = React.createClass({
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }}>
                 <Titlebar save={this.title}/>
                 <div className="titlebar_head_down">
-                    <div style={{ display: "inline-block", width: "100%", padding: "8px", paddingBottom: "0px" }}>
-                        <span style={{ float: "left", fontSize: "16px", verticalAlign: "middle" }}>显示30天内的消息记录</span>
-                        <span className="messagedetail_count">共{Count}个数据</span>
-                    </div>
+                    <div style={{ display: "inline-block", width: "100%", padding: "8px"}}>
+                        <span style={{ float: "left", fontSize: "16px", verticalAlign: "middle",lineHeight:"28px" }}>显示7天内的消息记录</span>
+                         <button id="clear" onClick={this.clear} type="button" className="accounterror_btn"
+                            onTouchStart = {gVar.btnhandleTouchStart.bind(this, "clear") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "clear") }
+                            onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "clear") }>清空消息</button>
+                            </div>
                     {list}
                 </div>
             </div>
