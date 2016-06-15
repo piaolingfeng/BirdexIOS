@@ -1,6 +1,8 @@
 
 var path = require('path');
 
+var webpack = require('webpack');
+
 module.exports = {
   // entry file
   entry: './app/main/main.js',
@@ -47,10 +49,15 @@ module.exports = {
     ]
   },
 
-  /*plugins: [
-    new webpack.optimize.CommonsChunkPlugin('shared.js'),
+  plugins: [
+    /*new webpack.DefinePlugin({
+      "process.env": {
+        'NODE_ENV': JSON.stringify("production")
+      }
+    })*/
+    /*new webpack.optimize.CommonsChunkPlugin('shared.js'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    })
-  ]*/
+    })*/
+  ]
 }
