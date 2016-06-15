@@ -96,12 +96,12 @@ var LW = React.createClass({
 
 				<form role="form" style={{ width: "80%", margin: "20px auto" }} >
 					<div className="form-group">
-						<input type="text" className="form-control" id="name" placeholder="输入帐号"/>
+						<input isInputText="yes" type="text" className="form-control" id="name" placeholder="输入帐号"/>
 
 					</div>
 
 					<div className="form-group">
-						<input type="password" className="form-control" id="password"
+						<input isInputText="yes" type="password" className="form-control" id="password"
 							placeholder="输入密码"/>
 					</div>
 
