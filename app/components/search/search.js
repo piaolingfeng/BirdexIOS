@@ -19,6 +19,7 @@ var Search = React.createClass({
     propTypes: {
         SearchFunc: React.PropTypes.func.isRequired,
         defaultText: React.PropTypes.string,
+        placehold: React.PropTypes.string,
     },
 
     openScan: function () {
@@ -39,12 +40,17 @@ var Search = React.createClass({
         $(document).ready(function () {
             $("#search").val(funThis.props.defaultText);
         });
+        var placehold = '';
+        if (this.props.placehold)
+            placehold = this.props.placehold;
+            else
+            placehold = '请输入关键字...'
         return (
             <div  style={{ backgroundColor: gVar.Color_background, padding: "10px" }}>
-                <div className="input-group">
+                <div className="input-group" style={{height:"45px"}}>
                     <div className="input-group-addon search_div" ></div>
-                    <input id="search" type="text" className="form-control search_input" ref="exampleInputAmount" placeholder="请输入关键字..."
-                        onKeyDown={this.keyDown} />
+                    <input id="search" type="text" className="form-control search_input" ref="exampleInputAmount" placeholder={placehold}
+                        onKeyDown={this.keyDown}  style={{height:"45px"}}/>
                     <div className="input-group-addon search_scan" onClick={this.openScan}></div>
                 </div>
             </div>

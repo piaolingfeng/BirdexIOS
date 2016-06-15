@@ -110,9 +110,9 @@ var InventoryItem = React.createClass({
                 <thead>
                     <tr >
                         <td > <span > 所在仓库 </span></td >
-                        <td > <span > 可用 </span></td >
-                        <td > <span > 占用 </span> </td >
-                        <td > <span > 实际 </span> </td>
+                        <td > <span style = {{color: "#4A4A4A" }}> 可用 </span></td >
+                        <td > <span style = {{color: "#4A4A4A" }}> 占用 </span> </td >
+                        <td > <span style = {{color: "#4A4A4A" }}> 实际 </span> </td>
                     </tr>
                 </thead >
                 <tbody > {items} </tbody>

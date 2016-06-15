@@ -32,7 +32,7 @@ var gVar = {
 
         displayList: [],
     },
-    mytool: ["订单管理", "预报管理", "库存管理", "我的支出", "账户充值"],
+    mytool: ["订单管理", "预报管理", "库存动态", "我的支出", "账户充值"],
     //公共颜色
     Color_blue_head: "#13A7DF",
     Color_gray_head: "#666666",
