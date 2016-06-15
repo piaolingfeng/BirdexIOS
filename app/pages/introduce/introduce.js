@@ -1,6 +1,6 @@
 var React = require('react');
 require('./carousel.css');
-var iSlider = require('../../components/CarouselMore/js/islider.js');
+var iSlider = require('../../components/CarouselMore/js/iSlider.js');
 
 var introduce1 = require('./images/introduce01.jpg');
 var introduce2 = require('./images/introduce02.jpg');

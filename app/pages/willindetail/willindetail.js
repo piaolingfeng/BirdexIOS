@@ -99,7 +99,7 @@ var WillInDetail = React.createClass({
         if (component.privateVar.sameOrderEntity.products != null && component.privateVar.sameOrderEntity.products != undefined) {
             count = component.privateVar.sameOrderEntity.products.length;
         }
-        showDialog("同单号其它商品", <ReactList itemRenderer={this.getDialogItem} length={count + 1} />, null, null);
+        showDialog("同单号其它商品", <div style={{height:"40vh",overflow:"scroll"}}><ReactList itemRenderer={this.getDialogItem} length={count + 1} /></div>, null, null);
     },
 
     getItem: function (index) {
