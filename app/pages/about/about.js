@@ -38,7 +38,7 @@ var About = React.createClass({
             color: "#9b9b9b",
             fontSize: "10px"
         }} > <div > 手机访问： www.birdex.cn </div> <div > 当前版本：B1.0.1
-    for Android </div></div> </div > 
+    for IOS </div></div> </div > 
     </div>
             </div>);
 }});
