@@ -2,18 +2,22 @@
 
 .popitem {
     min-width: 75px;
+    max-width:120px;
+    text-overflow:ellipsis;
+    overflow:hidden;
     color: #9b9b9b;
     white-space: nowrap;
     cursor:default;
     background-color: #ffffff;
-    text-align: center;
+    text-align: left;
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;    
 }
 
 .popitem:hover {
-  color:#13A7DF
+  color:#13A7DF;
+  background-color:#f5f4f4;
 }
 .bpopover_pop{
   padding: 0px;

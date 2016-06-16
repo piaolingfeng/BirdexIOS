@@ -101,7 +101,7 @@ var FragmentPrediciton = React.createClass({
     //处理预报列表的逻辑
     dealPredictList(data) {
         this.dataCount = data.data.count;//赋值
-        // console.log(dataCount);
+        console.log(data.data);
         if (requestEntity.page_no > 1) {
             if (data.data.storages.length == 0 && requestEntity.page_no > 1) {
                 // T.showShort(MyApplication.getInstans(), "已经是最后一页");

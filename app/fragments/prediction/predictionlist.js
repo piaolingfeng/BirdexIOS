@@ -22,7 +22,7 @@ var PredictionList = React.createClass({
         return (
             <div onClick={this.changePageToDetail}>
                 <div className="predicitonlist_head"> 
-                    <span ref="predictNum" className="predictionlist_predict">{this.props.predictEntity.storage_no}</span>
+                    <span ref="predictNum" className="predictionlist_predict">{this.props.predictEntity.track_no}</span>
                     <span ref="predictTarge" className="predictionlist_place">{this.props.predictEntity.warehouse_name}</span>
                     <div ref="predictStatus" className="predictionlist_status">{this.props.predictEntity.status_name}</div>
                     <div className="orderlist_clear"></div>

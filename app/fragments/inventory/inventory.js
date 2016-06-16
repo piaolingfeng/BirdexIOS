@@ -313,7 +313,7 @@ var Inventory = React.createClass({
     }
     return (<div >
       <SimpleTabLayout selectTab={this.selectTab} defualtIndex={this.privateVar.inventoryIndex} tabsText={["在库商品", "待入库商品", "超预警商品"]} />
-      <Search SearchFunc={this.SearchFunc} defaultText={this.privateVar.params.keyword}/>
+      <Search SearchFunc={this.SearchFunc} defaultText={this.privateVar.params.keyword} placehold="输入商品编码或UPC或商品名"/>
       <LimitView sortClick={this.sortHandler} popMenuItemClick={this.popMenuItemClick}/>
       <div style={{ color: "#039FFF", paddingLeft: "10px", backgroundColor: "#f5f4f4", textAlign: "left", width: "100%" }}>共有{this.privateVar.count}条数据</div>
       <div >

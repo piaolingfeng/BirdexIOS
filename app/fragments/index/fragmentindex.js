@@ -266,7 +266,7 @@ var FragmentIndex = React.createClass({
 
                 <ImageButton src={btnImage2} title="预报管理" index={1}/>
 
-                <ImageButton src={btnImage3} title="库存管理" index={2}/>
+                <ImageButton src={btnImage3} title="库存动态" index={2}/>
             </div>
             <div className="flexbox-container">
                 <ImageButton src={btnImage5} title="我的支出" index={3}/>
