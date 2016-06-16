@@ -17,6 +17,7 @@ var PredictDetail = React.createClass({
 
     Data: null,
     myScroll: null,
+    allConfirm: false,
     componentDidMount: function () {
         this.getPredictDetail();
     },
@@ -37,19 +38,31 @@ var PredictDetail = React.createClass({
     //处理预报详情
     dealPredicitDetail(data) {
         this.Data = data;
+        var products = this.Data.data.products;
+        console.log('ddddddddd');
+        for (var i = 0; i < products.length; i++) {
+            if (this.Data.data.products[i].status_name != '已入库') {
+                this.allConfirm = true;
+                break;
+            } else {
+                this.allConfirm = false;
+            }
+        }
         this.setState({});
     },
 
     //product_code 确认入库的商品，不传表示确认所有的待确认入库的商品
     setConfirmStorage: function () {
-        var params = {
-            storage_code: this.Data.data.storage_code,
-        };
-        var url = gVar.getBASE_URL() + 'storage/confirm';
-        gVar.sendRequest(params, url, this.dealConfirmStorage);
+        if (this.allConfirm) {
+            var params = {
+                storage_code: this.Data.data.storage_code,
+            };
+            var url = gVar.getBASE_URL() + 'storage/confirm';
+            gVar.sendRequest(params, url, this.dealConfirmStorage);
+        }
     },
 
-    //确认预报后的入库处理
+    //批量确认预报后的入库处理
     dealConfirmStorage: function (data) {
         if (data.error == 0) {
             // alert(data.data);
@@ -61,6 +74,7 @@ var PredictDetail = React.createClass({
                 this.Data.data.products[i].status_name = "已入库";
                 // console.log(Data.data.products[i].status_name,i);
             }
+            this.allConfirm = false;
             // product.status_name="已入库"
         }
         this.setState({});
@@ -76,6 +90,15 @@ var PredictDetail = React.createClass({
         if (this.Data != null && this.Data.data != null) {
 
             var detailData = this.Data.data;
+            var color = "#13A7DF"//是否使能批量预报
+            if (this.allConfirm)
+                color = "#13A7DF"
+            else
+                color = "#9b9b9b"
+            var errorDisplay = "block";
+            if (detailData.verify_fail_detail == null || detailData.verify_fail_detail == "") {
+                errorDisplay = 'none';
+            }
             // var products = new Array();
             var detailHead = <div className="orderdetail_head titlebar_head_down" style={{ paddingTop: gVar.Padding_titlebar }}>
                 <div className="orderdetail_background_img">
@@ -83,11 +106,9 @@ var PredictDetail = React.createClass({
                         <tr>
                             <td className="orderdetail_left">当前状态: </td>
                             <td className="orderdetail_right">
-                                <div>
-                                    <div className="orderdetail_right_div_padding">
-                                        <span ref="predictStatus">{detailData.status_name}</span>
-                                        <span onClick={this.setConfirmStorage} className="orderdetail_status orderdetail_right_blue_color">批量确认预报</span>
-                                    </div>
+                                <div className="orderdetail_right_div_padding">
+                                    <span ref="predictStatus">{detailData.status_name}</span>
+                                    <span id="allConfirm" onClick={this.setConfirmStorage} className="orderdetail_status" style={{ color: color }}>批量确认预报</span>
                                 </div>
                             </td>
                         </tr>
@@ -95,10 +116,8 @@ var PredictDetail = React.createClass({
                         <tr>
                             <td className="orderdetail_left">目的仓库: </td>
                             <td className="orderdetail_right">
-                                <div>
-                                    <div className="orderdetail_right_div_padding">
-                                        <span ref="targetWarehouse">{detailData.warehouse_name}</span>
-                                    </div>
+                                <div className="orderdetail_right_div_padding">
+                                    <span ref="targetWarehouse">{detailData.warehouse_name}</span>
                                 </div>
                             </td>
                         </tr>
@@ -124,10 +143,8 @@ var PredictDetail = React.createClass({
                         <tr>
                             <td className="orderdetail_left">备 注: </td>
                             <td className="orderdetail_right">
-                                <div>
-                                    <div className="orderdetail_right_div_padding">
-                                        <span ref="remarks">{detailData.remark}</span>
-                                    </div>
+                                <div className="orderdetail_right_div_padding">
+                                    <span ref="remarks">{detailData.remark}</span>
                                 </div>
                             </td>
                         </tr>
@@ -135,10 +152,8 @@ var PredictDetail = React.createClass({
                         <tr>
                             <td className="orderdetail_left">更新时间: </td>
                             <td className="orderdetail_right">
-                                <div>
-                                    <div className="orderdetail_right_div_padding">
-                                        <span ref="updateTime">{detailData.updated_time}</span>
-                                    </div>
+                                <div className="orderdetail_right_div_padding">
+                                    <span ref="updateTime">{detailData.updated_time}</span>
                                 </div>
                             </td>
                         </tr>
@@ -146,18 +161,15 @@ var PredictDetail = React.createClass({
                         <tr>
                             <td className="orderdetail_left">创建时间: </td>
                             <td className="orderdetail_right">
-                                <div>
-                                    <div className="orderdetail_right_div_padding">
-                                        <span ref="creatTime">{detailData.created_time}</span>
-                                    </div>
+                                <div className="orderdetail_right_div_padding">
+                                    <span ref="creatTime">{detailData.created_time}</span>
                                 </div>
                             </td>
                         </tr>
 
-                        <tr>
-                            <div style={{ display: errorDisplay, padding: "6px", color: "red" }}>{detailData.verify_fail_detail}</div>
-                        </tr>
                     </table>
+                    <div style={{ display: errorDisplay, padding: "6px", color: "red" }}>{detailData.verify_fail_detail}</div>
+
                 </div>
 
             </div>
@@ -169,10 +181,7 @@ var PredictDetail = React.createClass({
                 };
             }
             // console.log(detailData);
-            var errorDisplay = "block";
-            if (detailData.verify_fail_detail == null || detailData.verify_fail_detail == "") {
-                errorDisplay = 'none';
-            }
+
         }
         return list;
     },
