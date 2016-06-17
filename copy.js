@@ -25,17 +25,17 @@ child = exec('rm -rf ' + destPath + '/*', function(err,out) {
     console.log(out); err && console.log(err); 
 });
 
-//获得app目录
-var appPath = path.join(path.dirname(__filename), 'app');
+//获得当前目录
+var curPath = path.dirname(__filename);
 
 //拷贝新内容
-child = exec('cp -a ' + appPath + '/index.html' + ' ' + destPath, function(err,out) { 
+child = exec('cp -a ' + curPath + '/index.html' + ' ' + destPath, function(err,out) { 
     console.log(out); err && console.log(err); 
 });
-child = exec('cp -a ' + appPath + '/lib' + ' ' + destPath, function(err,out) { 
+child = exec('cp -a ' + curPath + '/lib' + ' ' + destPath, function(err,out) { 
     console.log(out); err && console.log(err); 
 });
-child = exec('cp -a ' + appPath + '/build' + ' ' + destPath, function(err,out) { 
+child = exec('cp -a ' + curPath + '/build' + ' ' + destPath, function(err,out) { 
     console.log(out); err && console.log(err); 
 });
 
