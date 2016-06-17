@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-// require('react-fastclick');
+require('react-fastclick');
 
 // var EventBus = require('eventbusjs');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
