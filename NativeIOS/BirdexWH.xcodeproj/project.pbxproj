@@ -1,0 +1,744 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB1C2D291D07E37400D50F95 /* ImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1C2D281D07E37400D50F95 /* ImageUtils.m */; };
+		AB3143091D0800CC00F2F2B7 /* HttpApiUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3143081D0800CC00F2F2B7 /* HttpApiUtils.m */; };
+		AB31430F1D080CBE00F2F2B7 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AB31430E1D080CBE00F2F2B7 /* StringUtils.m */; };
+		AB6339AC1D052915003B5850 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6339AB1D052915003B5850 /* CoreMotion.framework */; };
+		AB6339AE1D05294A003B5850 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6339AD1D05294A003B5850 /* CoreTelephony.framework */; };
+		AB6339B01D052954003B5850 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6339AF1D052954003B5850 /* SystemConfiguration.framework */; };
+		AB6339B21D05295E003B5850 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6339B11D05295E003B5850 /* libz.tbd */; };
+		AB6339B41D05296B003B5850 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6339B31D05296B003B5850 /* libc++.tbd */; };
+		AB7065C61D027AE900188E70 /* ScannViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7065C51D027AE900188E70 /* ScannViewController.m */; };
+		AB7065C91D027C2300188E70 /* IconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7065C81D027C2300188E70 /* IconViewController.m */; };
+		AB7065FF1D02C4BC00188E70 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7065FE1D02C4BC00188E70 /* libZXingObjC.a */; };
+		AB7066011D02C4C000188E70 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7066001D02C4C000188E70 /* libAFNetworking.a */; };
+		AB7C1EBC1D015A3E004E3073 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1EBB1D015A3E004E3073 /* main.m */; };
+		AB7C1EBF1D015A3E004E3073 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1EBE1D015A3E004E3073 /* AppDelegate.m */; };
+		AB7C1EC21D015A3E004E3073 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1EC11D015A3E004E3073 /* ViewController.m */; };
+		AB7C1EC51D015A3E004E3073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB7C1EC31D015A3E004E3073 /* Main.storyboard */; };
+		AB7C1EC71D015A3E004E3073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7C1EC61D015A3E004E3073 /* Assets.xcassets */; };
+		AB7C1ED51D015A3E004E3073 /* BirdexWHTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1ED41D015A3E004E3073 /* BirdexWHTests.m */; };
+		AB7C1EE01D015A3E004E3073 /* BirdexWHUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1EDF1D015A3E004E3073 /* BirdexWHUITests.m */; };
+		AB7C1EEF1D015BB5004E3073 /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1EEE1D015BB5004E3073 /* IndexViewController.m */; };
+		AB7C1EF21D017513004E3073 /* Source in Resources */ = {isa = PBXBuildFile; fileRef = AB7C1EF11D017513004E3073 /* Source */; };
+		AB7C1EF41D0177A7004E3073 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7C1EF31D0177A7004E3073 /* JavaScriptCore.framework */; };
+		ABB435EF1D0E654F00DDA3C4 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435EE1D0E654F00DDA3C4 /* AlipaySDK.framework */; };
+		ABB435F21D0E97C800DDA3C4 /* openssl in Resources */ = {isa = PBXBuildFile; fileRef = ABB435F01D0E97C800DDA3C4 /* openssl */; };
+		ABB435F31D0E97C800DDA3C4 /* Util in Resources */ = {isa = PBXBuildFile; fileRef = ABB435F11D0E97C800DDA3C4 /* Util */; };
+		ABB435F61D0E97E100DDA3C4 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435F41D0E97E100DDA3C4 /* libcrypto.a */; };
+		ABB435F71D0E97E100DDA3C4 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435F51D0E97E100DDA3C4 /* libssl.a */; };
+		ABF5C8E11D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */; };
+		CCF27F871D139A5700E2DD08 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCF27F861D139A5700E2DD08 /* AlipaySDK.bundle */; };
+		EB5557F703D3E86629B7E13C /* libPods-BirdexWH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAC8DA4EC2B55DD05D0B784 /* libPods-BirdexWH.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AB7C1ED11D015A3E004E3073 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB7C1EAF1D015A3E004E3073 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB7C1EB61D015A3E004E3073;
+			remoteInfo = BirdexWH;
+		};
+		AB7C1EDC1D015A3E004E3073 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB7C1EAF1D015A3E004E3073 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB7C1EB61D015A3E004E3073;
+			remoteInfo = BirdexWH;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A7855B36953ED57CC9DE459C /* Pods-BirdexWH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdexWH.release.xcconfig"; path = "Pods/Target Support Files/Pods-BirdexWH/Pods-BirdexWH.release.xcconfig"; sourceTree = "<group>"; };
+		AB1C2D271D07E37400D50F95 /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
+		AB1C2D281D07E37400D50F95 /* ImageUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtils.m; sourceTree = "<group>"; };
+		AB3143071D0800CC00F2F2B7 /* HttpApiUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpApiUtils.h; sourceTree = "<group>"; };
+		AB3143081D0800CC00F2F2B7 /* HttpApiUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpApiUtils.m; sourceTree = "<group>"; };
+		AB31430D1D080CBE00F2F2B7 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
+		AB31430E1D080CBE00F2F2B7 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
+		AB6339AB1D052915003B5850 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		AB6339AD1D05294A003B5850 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AB6339AF1D052954003B5850 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AB6339B11D05295E003B5850 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AB6339B31D05296B003B5850 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		AB7065C41D027AE900188E70 /* ScannViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannViewController.h; sourceTree = "<group>"; };
+		AB7065C51D027AE900188E70 /* ScannViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannViewController.m; sourceTree = "<group>"; };
+		AB7065C71D027C2300188E70 /* IconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconViewController.h; sourceTree = "<group>"; };
+		AB7065C81D027C2300188E70 /* IconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconViewController.m; sourceTree = "<group>"; };
+		AB7065FE1D02C4BC00188E70 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/ZXingObjC/libZXingObjC.a"; sourceTree = "<group>"; };
+		AB7066001D02C4C000188E70 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
+		AB7C1EB71D015A3E004E3073 /* BirdexWH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirdexWH.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB7C1EBB1D015A3E004E3073 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AB7C1EBD1D015A3E004E3073 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AB7C1EBE1D015A3E004E3073 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AB7C1EC01D015A3E004E3073 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AB7C1EC11D015A3E004E3073 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AB7C1EC41D015A3E004E3073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AB7C1EC61D015A3E004E3073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AB7C1ECB1D015A3E004E3073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB7C1ED01D015A3E004E3073 /* BirdexWHTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BirdexWHTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB7C1ED41D015A3E004E3073 /* BirdexWHTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BirdexWHTests.m; sourceTree = "<group>"; };
+		AB7C1ED61D015A3E004E3073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB7C1EDB1D015A3E004E3073 /* BirdexWHUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BirdexWHUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB7C1EDF1D015A3E004E3073 /* BirdexWHUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BirdexWHUITests.m; sourceTree = "<group>"; };
+		AB7C1EE11D015A3E004E3073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB7C1EED1D015BB5004E3073 /* IndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexViewController.h; sourceTree = "<group>"; };
+		AB7C1EEE1D015BB5004E3073 /* IndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexViewController.m; sourceTree = "<group>"; };
+		AB7C1EF01D016CF4004E3073 /* MyConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyConfig.h; sourceTree = "<group>"; };
+		AB7C1EF11D017513004E3073 /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
+		AB7C1EF31D0177A7004E3073 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ABB435EE1D0E654F00DDA3C4 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		ABB435F01D0E97C800DDA3C4 /* openssl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = openssl; sourceTree = "<group>"; };
+		ABB435F11D0E97C800DDA3C4 /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
+		ABB435F41D0E97E100DDA3C4 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		ABB435F51D0E97E100DDA3C4 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.3.0.a; path = UMessage_Sdk_1.3.0/libUMessage_Sdk_1.3.0.a; sourceTree = "<group>"; };
+		ABF5C8E01D0EB72A001D45BA /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage_Sdk_1.3.0/UMessage.h; sourceTree = "<group>"; };
+		BFABA78FB3D2531D176317C0 /* Pods-BirdexWH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdexWH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BirdexWH/Pods-BirdexWH.debug.xcconfig"; sourceTree = "<group>"; };
+		CCF27F861D139A5700E2DD08 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		FDAC8DA4EC2B55DD05D0B784 /* libPods-BirdexWH.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BirdexWH.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB7C1EB41D015A3E004E3073 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABB435F61D0E97E100DDA3C4 /* libcrypto.a in Frameworks */,
+				ABB435F71D0E97E100DDA3C4 /* libssl.a in Frameworks */,
+				ABB435EF1D0E654F00DDA3C4 /* AlipaySDK.framework in Frameworks */,
+				AB6339B41D05296B003B5850 /* libc++.tbd in Frameworks */,
+				AB6339B21D05295E003B5850 /* libz.tbd in Frameworks */,
+				AB6339B01D052954003B5850 /* SystemConfiguration.framework in Frameworks */,
+				AB6339AE1D05294A003B5850 /* CoreTelephony.framework in Frameworks */,
+				AB6339AC1D052915003B5850 /* CoreMotion.framework in Frameworks */,
+				AB7066011D02C4C000188E70 /* libAFNetworking.a in Frameworks */,
+				AB7065FF1D02C4BC00188E70 /* libZXingObjC.a in Frameworks */,
+				ABF5C8E11D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a in Frameworks */,
+				AB7C1EF41D0177A7004E3073 /* JavaScriptCore.framework in Frameworks */,
+				EB5557F703D3E86629B7E13C /* libPods-BirdexWH.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB7C1ECD1D015A3E004E3073 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB7C1ED81D015A3E004E3073 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		475995B7F95DCA154DE4BD9F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BFABA78FB3D2531D176317C0 /* Pods-BirdexWH.debug.xcconfig */,
+				A7855B36953ED57CC9DE459C /* Pods-BirdexWH.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AB7C1EAE1D015A3E004E3073 = {
+			isa = PBXGroup;
+			children = (
+				CCF27F861D139A5700E2DD08 /* AlipaySDK.bundle */,
+				AB7C1EF31D0177A7004E3073 /* JavaScriptCore.framework */,
+				AB7C1EB91D015A3E004E3073 /* BirdexWH */,
+				AB7C1ED31D015A3E004E3073 /* BirdexWHTests */,
+				AB7C1EDE1D015A3E004E3073 /* BirdexWHUITests */,
+				AB7C1EB81D015A3E004E3073 /* Products */,
+				CABADD7DD5F4B1F120DD01E6 /* Frameworks */,
+				475995B7F95DCA154DE4BD9F /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		AB7C1EB81D015A3E004E3073 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB7C1EB71D015A3E004E3073 /* BirdexWH.app */,
+				AB7C1ED01D015A3E004E3073 /* BirdexWHTests.xctest */,
+				AB7C1EDB1D015A3E004E3073 /* BirdexWHUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB7C1EB91D015A3E004E3073 /* BirdexWH */ = {
+			isa = PBXGroup;
+			children = (
+				ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */,
+				ABF5C8E01D0EB72A001D45BA /* UMessage.h */,
+				ABB435F01D0E97C800DDA3C4 /* openssl */,
+				ABB435F11D0E97C800DDA3C4 /* Util */,
+				AB31430D1D080CBE00F2F2B7 /* StringUtils.h */,
+				AB31430E1D080CBE00F2F2B7 /* StringUtils.m */,
+				AB3143071D0800CC00F2F2B7 /* HttpApiUtils.h */,
+				AB3143081D0800CC00F2F2B7 /* HttpApiUtils.m */,
+				AB1C2D271D07E37400D50F95 /* ImageUtils.h */,
+				AB1C2D281D07E37400D50F95 /* ImageUtils.m */,
+				AB7C1EF11D017513004E3073 /* Source */,
+				AB7C1EBD1D015A3E004E3073 /* AppDelegate.h */,
+				AB7C1EBE1D015A3E004E3073 /* AppDelegate.m */,
+				AB7C1EC01D015A3E004E3073 /* ViewController.h */,
+				AB7C1EC11D015A3E004E3073 /* ViewController.m */,
+				AB7C1EC31D015A3E004E3073 /* Main.storyboard */,
+				AB7C1EC61D015A3E004E3073 /* Assets.xcassets */,
+				AB7C1ECB1D015A3E004E3073 /* Info.plist */,
+				AB7C1EBA1D015A3E004E3073 /* Supporting Files */,
+				AB7C1EED1D015BB5004E3073 /* IndexViewController.h */,
+				AB7C1EEE1D015BB5004E3073 /* IndexViewController.m */,
+				AB7C1EF01D016CF4004E3073 /* MyConfig.h */,
+				AB7065C41D027AE900188E70 /* ScannViewController.h */,
+				AB7065C51D027AE900188E70 /* ScannViewController.m */,
+				AB7065C71D027C2300188E70 /* IconViewController.h */,
+				AB7065C81D027C2300188E70 /* IconViewController.m */,
+			);
+			path = BirdexWH;
+			sourceTree = "<group>";
+		};
+		AB7C1EBA1D015A3E004E3073 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB7C1EBB1D015A3E004E3073 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB7C1ED31D015A3E004E3073 /* BirdexWHTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB7C1ED41D015A3E004E3073 /* BirdexWHTests.m */,
+				AB7C1ED61D015A3E004E3073 /* Info.plist */,
+			);
+			path = BirdexWHTests;
+			sourceTree = "<group>";
+		};
+		AB7C1EDE1D015A3E004E3073 /* BirdexWHUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AB7C1EDF1D015A3E004E3073 /* BirdexWHUITests.m */,
+				AB7C1EE11D015A3E004E3073 /* Info.plist */,
+			);
+			path = BirdexWHUITests;
+			sourceTree = "<group>";
+		};
+		CABADD7DD5F4B1F120DD01E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABB435F41D0E97E100DDA3C4 /* libcrypto.a */,
+				ABB435F51D0E97E100DDA3C4 /* libssl.a */,
+				ABB435EE1D0E654F00DDA3C4 /* AlipaySDK.framework */,
+				AB6339B31D05296B003B5850 /* libc++.tbd */,
+				AB6339B11D05295E003B5850 /* libz.tbd */,
+				AB6339AF1D052954003B5850 /* SystemConfiguration.framework */,
+				AB6339AD1D05294A003B5850 /* CoreTelephony.framework */,
+				AB6339AB1D052915003B5850 /* CoreMotion.framework */,
+				AB7066001D02C4C000188E70 /* libAFNetworking.a */,
+				AB7065FE1D02C4BC00188E70 /* libZXingObjC.a */,
+				FDAC8DA4EC2B55DD05D0B784 /* libPods-BirdexWH.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB7C1EB61D015A3E004E3073 /* BirdexWH */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB7C1EE41D015A3E004E3073 /* Build configuration list for PBXNativeTarget "BirdexWH" */;
+			buildPhases = (
+				7F84D70502F02D754A879D67 /* [CP] Check Pods Manifest.lock */,
+				AB7C1EB31D015A3E004E3073 /* Sources */,
+				AB7C1EB41D015A3E004E3073 /* Frameworks */,
+				AB7C1EB51D015A3E004E3073 /* Resources */,
+				D6866577B50CF08C39CE986A /* [CP] Embed Pods Frameworks */,
+				84D942272B3814F647CA90CF /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BirdexWH;
+			productName = BirdexWH;
+			productReference = AB7C1EB71D015A3E004E3073 /* BirdexWH.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AB7C1ECF1D015A3E004E3073 /* BirdexWHTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB7C1EE71D015A3E004E3073 /* Build configuration list for PBXNativeTarget "BirdexWHTests" */;
+			buildPhases = (
+				AB7C1ECC1D015A3E004E3073 /* Sources */,
+				AB7C1ECD1D015A3E004E3073 /* Frameworks */,
+				AB7C1ECE1D015A3E004E3073 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB7C1ED21D015A3E004E3073 /* PBXTargetDependency */,
+			);
+			name = BirdexWHTests;
+			productName = BirdexWHTests;
+			productReference = AB7C1ED01D015A3E004E3073 /* BirdexWHTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AB7C1EDA1D015A3E004E3073 /* BirdexWHUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB7C1EEA1D015A3E004E3073 /* Build configuration list for PBXNativeTarget "BirdexWHUITests" */;
+			buildPhases = (
+				AB7C1ED71D015A3E004E3073 /* Sources */,
+				AB7C1ED81D015A3E004E3073 /* Frameworks */,
+				AB7C1ED91D015A3E004E3073 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB7C1EDD1D015A3E004E3073 /* PBXTargetDependency */,
+			);
+			name = BirdexWHUITests;
+			productName = BirdexWHUITests;
+			productReference = AB7C1EDB1D015A3E004E3073 /* BirdexWHUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB7C1EAF1D015A3E004E3073 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = birdex;
+				TargetAttributes = {
+					AB7C1EB61D015A3E004E3073 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 2S45Q93552;
+					};
+					AB7C1ECF1D015A3E004E3073 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = AB7C1EB61D015A3E004E3073;
+					};
+					AB7C1EDA1D015A3E004E3073 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = AB7C1EB61D015A3E004E3073;
+					};
+				};
+			};
+			buildConfigurationList = AB7C1EB21D015A3E004E3073 /* Build configuration list for PBXProject "BirdexWH" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AB7C1EAE1D015A3E004E3073;
+			productRefGroup = AB7C1EB81D015A3E004E3073 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB7C1EB61D015A3E004E3073 /* BirdexWH */,
+				AB7C1ECF1D015A3E004E3073 /* BirdexWHTests */,
+				AB7C1EDA1D015A3E004E3073 /* BirdexWHUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB7C1EB51D015A3E004E3073 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CCF27F871D139A5700E2DD08 /* AlipaySDK.bundle in Resources */,
+				ABB435F31D0E97C800DDA3C4 /* Util in Resources */,
+				AB7C1EC71D015A3E004E3073 /* Assets.xcassets in Resources */,
+				ABB435F21D0E97C800DDA3C4 /* openssl in Resources */,
+				AB7C1EC51D015A3E004E3073 /* Main.storyboard in Resources */,
+				AB7C1EF21D017513004E3073 /* Source in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB7C1ECE1D015A3E004E3073 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB7C1ED91D015A3E004E3073 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F84D70502F02D754A879D67 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		84D942272B3814F647CA90CF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BirdexWH/Pods-BirdexWH-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6866577B50CF08C39CE986A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BirdexWH/Pods-BirdexWH-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB7C1EB31D015A3E004E3073 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB7C1EC21D015A3E004E3073 /* ViewController.m in Sources */,
+				AB31430F1D080CBE00F2F2B7 /* StringUtils.m in Sources */,
+				AB7C1EBF1D015A3E004E3073 /* AppDelegate.m in Sources */,
+				AB7C1EBC1D015A3E004E3073 /* main.m in Sources */,
+				AB7065C91D027C2300188E70 /* IconViewController.m in Sources */,
+				AB3143091D0800CC00F2F2B7 /* HttpApiUtils.m in Sources */,
+				AB7C1EEF1D015BB5004E3073 /* IndexViewController.m in Sources */,
+				AB7065C61D027AE900188E70 /* ScannViewController.m in Sources */,
+				AB1C2D291D07E37400D50F95 /* ImageUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB7C1ECC1D015A3E004E3073 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB7C1ED51D015A3E004E3073 /* BirdexWHTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB7C1ED71D015A3E004E3073 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB7C1EE01D015A3E004E3073 /* BirdexWHUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AB7C1ED21D015A3E004E3073 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB7C1EB61D015A3E004E3073 /* BirdexWH */;
+			targetProxy = AB7C1ED11D015A3E004E3073 /* PBXContainerItemProxy */;
+		};
+		AB7C1EDD1D015A3E004E3073 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB7C1EB61D015A3E004E3073 /* BirdexWH */;
+			targetProxy = AB7C1EDC1D015A3E004E3073 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AB7C1EC31D015A3E004E3073 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB7C1EC41D015A3E004E3073 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB7C1EE21D015A3E004E3073 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AB7C1EE31D015A3E004E3073 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB7C1EE51D015A3E004E3073 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFABA78FB3D2531D176317C0 /* Pods-BirdexWH.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/AFNetworking",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ZXingObjC",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = BirdexWH/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos/AFNetworking",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
+					"$(PROJECT_DIR)/build/Release-iphoneos/ZXingObjC",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/AFNetworking",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ZXingObjC",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BirdexWH/UMessage_Sdk_1.3.0",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.birdex.sanfangcang;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		AB7C1EE61D015A3E004E3073 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7855B36953ED57CC9DE459C /* Pods-BirdexWH.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/AFNetworking",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ZXingObjC",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = BirdexWH/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos/AFNetworking",
+					"$(PROJECT_DIR)/build/Release-iphoneos",
+					"$(PROJECT_DIR)/build/Release-iphoneos/ZXingObjC",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/AFNetworking",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ZXingObjC",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/BirdexWH/UMessage_Sdk_1.3.0",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.birdex.sanfangcang;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+		AB7C1EE81D015A3E004E3073 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BirdexWHTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.birdex.BirdexWHTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BirdexWH.app/BirdexWH";
+			};
+			name = Debug;
+		};
+		AB7C1EE91D015A3E004E3073 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = BirdexWHTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.birdex.BirdexWHTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BirdexWH.app/BirdexWH";
+			};
+			name = Release;
+		};
+		AB7C1EEB1D015A3E004E3073 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BirdexWHUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.birdex.BirdexWHUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BirdexWH;
+			};
+			name = Debug;
+		};
+		AB7C1EEC1D015A3E004E3073 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = BirdexWHUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.birdex.BirdexWHUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = BirdexWH;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB7C1EB21D015A3E004E3073 /* Build configuration list for PBXProject "BirdexWH" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB7C1EE21D015A3E004E3073 /* Debug */,
+				AB7C1EE31D015A3E004E3073 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB7C1EE41D015A3E004E3073 /* Build configuration list for PBXNativeTarget "BirdexWH" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB7C1EE51D015A3E004E3073 /* Debug */,
+				AB7C1EE61D015A3E004E3073 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB7C1EE71D015A3E004E3073 /* Build configuration list for PBXNativeTarget "BirdexWHTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB7C1EE81D015A3E004E3073 /* Debug */,
+				AB7C1EE91D015A3E004E3073 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB7C1EEA1D015A3E004E3073 /* Build configuration list for PBXNativeTarget "BirdexWHUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB7C1EEB1D015A3E004E3073 /* Debug */,
+				AB7C1EEC1D015A3E004E3073 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB7C1EAF1D015A3E004E3073 /* Project object */;
+}
