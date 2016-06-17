@@ -49,8 +49,10 @@ var LW = React.createClass({
 			if ($("#remember").is(':checked')) {//判断是否存储账户密码
 				// console.log(name,password);
 				localStorage.setItem("log_password", password);
+				localStorage.setItem('remember',$("#remember").is(':checked'));
 			} else {
 				localStorage.removeItem("log_password");
+				localStorage.removeItem("remember");
 			}
 			if (data.data) {
 				try {
@@ -80,6 +82,9 @@ var LW = React.createClass({
 		}
 		if (localStorage.getItem("log_password")) {
 			$("#password").val(localStorage.getItem("log_password"));
+		}
+		if (localStorage.getItem("remember")) {
+			$("#remember").prop("checked", localStorage.getItem("remember"));
 		}
 		// $("#name").click(function () {
 		// 	$(this).focus();
