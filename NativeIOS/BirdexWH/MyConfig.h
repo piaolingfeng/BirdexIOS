@@ -21,9 +21,9 @@
 #define RGBA(r, g, b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
 
 //#define ENTRY_HTML  @"http://192.168.1.177:8080/BirdexIOS/index.html"
-#define ENTRY_HTML  @"http://192.168.1.171:9999"
+//#define ENTRY_HTML  @"http://192.168.1.171:9999"
 //#define ENTRY_HTML  @"http://192.168.1.174:9999"
-//#define ENTRY_HTML  @"LOCAL"
+#define ENTRY_HTML  @"LOCAL"
 
 #define GOBANK_URL  @"http://192.168.1.201:7001/gotobank.aspx"
 //#define GOBANK_URL  @"http://pay.birdex.cn/gotobank.aspx"

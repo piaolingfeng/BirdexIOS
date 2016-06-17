@@ -29,13 +29,13 @@
 		AB7C1EEF1D015BB5004E3073 /* IndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7C1EEE1D015BB5004E3073 /* IndexViewController.m */; };
 		AB7C1EF21D017513004E3073 /* Source in Resources */ = {isa = PBXBuildFile; fileRef = AB7C1EF11D017513004E3073 /* Source */; };
 		AB7C1EF41D0177A7004E3073 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7C1EF31D0177A7004E3073 /* JavaScriptCore.framework */; };
-		ABB435EC1D0E649900DDA3C4 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ABB435EA1D0E649900DDA3C4 /* AlipaySDK.bundle */; };
 		ABB435EF1D0E654F00DDA3C4 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435EE1D0E654F00DDA3C4 /* AlipaySDK.framework */; };
 		ABB435F21D0E97C800DDA3C4 /* openssl in Resources */ = {isa = PBXBuildFile; fileRef = ABB435F01D0E97C800DDA3C4 /* openssl */; };
 		ABB435F31D0E97C800DDA3C4 /* Util in Resources */ = {isa = PBXBuildFile; fileRef = ABB435F11D0E97C800DDA3C4 /* Util */; };
 		ABB435F61D0E97E100DDA3C4 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435F41D0E97E100DDA3C4 /* libcrypto.a */; };
 		ABB435F71D0E97E100DDA3C4 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435F51D0E97E100DDA3C4 /* libssl.a */; };
 		ABF5C8E11D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */; };
+		CCF27F871D139A5700E2DD08 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CCF27F861D139A5700E2DD08 /* AlipaySDK.bundle */; };
 		EB5557F703D3E86629B7E13C /* libPods-BirdexWH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAC8DA4EC2B55DD05D0B784 /* libPods-BirdexWH.a */; };
 /* End PBXBuildFile section */
 
@@ -95,7 +95,6 @@
 		AB7C1EF01D016CF4004E3073 /* MyConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyConfig.h; sourceTree = "<group>"; };
 		AB7C1EF11D017513004E3073 /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
 		AB7C1EF31D0177A7004E3073 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ABB435EA1D0E649900DDA3C4 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AlipaySDK.bundle; path = "../../../Downloads/支付宝钱包支付接口开发包2-2.0标准版(20160516)/DEMO/客户端demo/支付宝钱包支付接口开发包2.0标准版(iOS 15.1.3)/AlipaySDK.bundle"; sourceTree = "<group>"; };
 		ABB435EE1D0E654F00DDA3C4 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		ABB435F01D0E97C800DDA3C4 /* openssl */ = {isa = PBXFileReference; lastKnownFileType = folder; path = openssl; sourceTree = "<group>"; };
 		ABB435F11D0E97C800DDA3C4 /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.3.0.a; path = UMessage_Sdk_1.3.0/libUMessage_Sdk_1.3.0.a; sourceTree = "<group>"; };
 		ABF5C8E01D0EB72A001D45BA /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage_Sdk_1.3.0/UMessage.h; sourceTree = "<group>"; };
 		BFABA78FB3D2531D176317C0 /* Pods-BirdexWH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdexWH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BirdexWH/Pods-BirdexWH.debug.xcconfig"; sourceTree = "<group>"; };
+		CCF27F861D139A5700E2DD08 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		FDAC8DA4EC2B55DD05D0B784 /* libPods-BirdexWH.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BirdexWH.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -157,7 +157,7 @@
 		AB7C1EAE1D015A3E004E3073 = {
 			isa = PBXGroup;
 			children = (
-				ABB435EA1D0E649900DDA3C4 /* AlipaySDK.bundle */,
+				CCF27F861D139A5700E2DD08 /* AlipaySDK.bundle */,
 				AB7C1EF31D0177A7004E3073 /* JavaScriptCore.framework */,
 				AB7C1EB91D015A3E004E3073 /* BirdexWH */,
 				AB7C1ED31D015A3E004E3073 /* BirdexWHTests */,
@@ -362,7 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB435EC1D0E649900DDA3C4 /* AlipaySDK.bundle in Resources */,
+				CCF27F871D139A5700E2DD08 /* AlipaySDK.bundle in Resources */,
 				ABB435F31D0E97C800DDA3C4 /* Util in Resources */,
 				AB7C1EC71D015A3E004E3073 /* Assets.xcassets in Resources */,
 				ABB435F21D0E97C800DDA3C4 /* openssl in Resources */,
