@@ -59379,12 +59379,17 @@
 	            listviewInd.destory();
 	        }
 	    },
+
+
+	    internalScroll: null,
+
 	    pullDownHandler: function pullDownHandler(myScroll) {
 	        // myScroll.refresh();
 	        // console.log("aaaaa");
 	        // var func = this;
 	        // setTimeout(function () {
 	        //  myScroll.refresh();
+	        this.internalScroll = myScroll;
 	        this.getTodayData(myScroll);
 	        // }, 1000);
 	    },
@@ -59427,7 +59432,10 @@
 	                today.IsDisplay[i] = false;
 	            }
 	        }
-	        this.setState({});
+
+	        setTimeout(function () {
+	            this.setState({});
+	        }.bind(this), 1000);
 	    },
 
 
