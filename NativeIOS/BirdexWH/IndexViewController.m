@@ -10,6 +10,7 @@
 #import "ImageUtils.h"
 #import "HttpApiUtils.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "AppDelegate.h"
 
 //保存UIWebView的全局变量
 UIWebView * g_webView = nil;
@@ -97,17 +98,11 @@ static NSString * idImageUrlBack = nil;
     
 //    _input_charset="utf-8"&body="钱包充值"&notify_url="http://birdex.f3322.net:8021/pay/appalipay/notify"&out_trade_no="BDX20160426162345516126"&partner="2088311639604764"&payment_type="1"&seller_id="zhifubao@birdex.cn"&service="mobile.securitypay.pay"&subject="钱包充值"&total_fee="1.00"
     
-    NSURL * url = nil;
+    //获取加载位置
+    AppDelegate * delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
+    NSURL * url = [delegate getWebIndexHtmlUrl];
     
-    if ([ENTRY_HTML isEqualToString:@"LOCAL"])
-    {
-        NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Source/index" ofType:@"html"];
-        url = [NSURL fileURLWithPath:filePath];
-    }
-    else
-    {
-        url = [NSURL URLWithString:ENTRY_HTML];
-    }
+    NSLog(@"---- web load from %@", [url absoluteString]);
     
     //开始加载网页
     NSURLRequest *localRequest=[NSURLRequest requestWithURL:url];

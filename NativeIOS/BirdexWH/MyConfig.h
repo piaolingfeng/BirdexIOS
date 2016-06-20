@@ -12,6 +12,8 @@
 //设备系统版本号
 #define IOS_VERSION_7_OR_ABOVE (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)? (YES):(NO))
 
+#define WEB_UPGRADE_INFO_URL @"http://192.168.1.171/for_upgrade/version.txt"
+#define WEB_UPGRADE_ZIP_URL @"http://192.168.1.171/for_upgrade/iosweb.zip"
 
 //#define ScrWidth           [UIScreen mainScreen].bounds.size.width
 //#define ScrHeight          [UIScreen mainScreen].bounds.size.height
@@ -23,11 +25,19 @@
 //#define ENTRY_HTML  @"http://192.168.1.177:8080/BirdexIOS/index.html"
 //#define ENTRY_HTML  @"http://192.168.1.171:9999"
 //#define ENTRY_HTML  @"http://192.168.1.174:9999"
-#define ENTRY_HTML  @"LOCAL"
+//#define ENTRY_HTML  @"LOCAL"
 
 #define GOBANK_URL  @"http://192.168.1.201:7001/gotobank.aspx"
 //#define GOBANK_URL  @"http://pay.birdex.cn/gotobank.aspx"
 
 #define LOCAL_SIGN  1
+
+
+#define kEntryHtmlPosition  @"entryHtmlPos" //存放web程序的启动位置
+#define ENTRY_HTML_LOCAL    0   //从bundle启动
+#define ENTRY_HTML_A        1   //从A区启动
+#define ENTRY_HTML_B        2   //从B区启动
+
+#define kWebVer             @"webver" //当前Web版本, float类型
 
 #endif /* MyConfig_h */
