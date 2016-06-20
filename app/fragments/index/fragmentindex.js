@@ -58,12 +58,15 @@ var FragmentIndex = React.createClass({
         }
     },
 
+    internalScroll: null,
+
     pullDownHandler(myScroll) {
         // myScroll.refresh();
         // console.log("aaaaa");
         // var func = this;
         // setTimeout(function () {
         //  myScroll.refresh();
+        this.internalScroll = myScroll;
         this.getTodayData(myScroll);
         // }, 1000);
     },
@@ -105,7 +108,10 @@ var FragmentIndex = React.createClass({
                 today.IsDisplay[i] = false;
             }
         }
-        this.setState({});
+
+        setTimeout((function (){
+            this.setState({});
+        }).bind(this), 1000);
     },
 
     /**
