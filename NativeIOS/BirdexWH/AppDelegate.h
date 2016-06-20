@@ -13,10 +13,17 @@ extern UIWebView * g_webView;
 @class IndexViewController;
 extern IndexViewController * g_indexVC;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, NSURLSessionDelegate> {
+    float _newVer;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic) NSURLSession *session;
+@property (nonatomic) NSURLSessionDownloadTask *downloadTask;
+
+
+- (NSURL *)getWebIndexHtmlUrl;
 
 @end
 
