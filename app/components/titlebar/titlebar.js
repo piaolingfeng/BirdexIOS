@@ -22,6 +22,8 @@ var refresh = require('./images/refresh.png');
 var birdpic = require('../../pages/testpopmenu/bird.png');
 var Titlebar = React.createClass({
 
+    backClick: true,
+
     propTypes: {
         menuFunc: React.PropTypes.func,
         backNoneDisplay: React.PropTypes.any,
@@ -32,16 +34,19 @@ var Titlebar = React.createClass({
     },
 
     componentDidMount: function () {
-
+        this.backClick = true;
     },
 
     back: function (e) {
         // alert("back");
-        e.stopPropagation();
-        if (this.props.backCallBack) {//返回时可以做回调
-            this.props.backCallBack();
+        if (this.backClick) {
+            this.backClick = false;
+            e.stopPropagation();
+            if (this.props.backCallBack) {//返回时可以做回调
+                this.props.backCallBack();
+            }
+            gVar.popPage();
         }
-        gVar.popPage();
         return;
     },
 
@@ -88,7 +93,7 @@ var Titlebar = React.createClass({
     },
 
     TitlebarClick() {
-        if (titleCallBack)
+        if (this.props.titleCallBack)
             this.props.titleCallBack();
     },
 

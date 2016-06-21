@@ -192,6 +192,7 @@ var Inventory = React.createClass({
     if (this.props.todayDataName) {
       // inventoryIndex=2;
       this.privateVar.inventoryIndex = 2;
+      this.privateVar.params.stock_status = "20";
       this.setState({});
     }
     this.setDataSource(this.privateVar.listCore);
