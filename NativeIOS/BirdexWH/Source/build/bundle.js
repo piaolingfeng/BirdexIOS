@@ -62928,7 +62928,7 @@
 	                        React.createElement(
 	                            'td',
 	                            { className: 'changeaddress-td2' },
-	                            React.createElement('input', { id: 'consignee', type: 'text', className: 'changeaddress-input' })
+	                            React.createElement('input', { isInputText: 'yes', id: 'consignee', type: 'text', className: 'changeaddress-input' })
 	                        ),
 	                        React.createElement(
 	                            'td',
@@ -62947,7 +62947,7 @@
 	                        React.createElement(
 	                            'td',
 	                            { className: 'changeaddress-td2' },
-	                            React.createElement('input', { id: 'phone', type: 'text', className: 'changeaddress-input' })
+	                            React.createElement('input', { isInputText: 'yes', id: 'phone', type: 'text', className: 'changeaddress-input' })
 	                        )
 	                    ),
 	                    React.createElement(
@@ -62961,7 +62961,7 @@
 	                        React.createElement(
 	                            'td',
 	                            { className: 'changeaddress-td2-1', colSpan: '2' },
-	                            React.createElement('input', { id: 'area', placeholder: '请选择所在地区', 'data-areaid': '10064 10043 10375', readonly: '', className: 'changeaddress-input', style: { width: "100%" } })
+	                            React.createElement('input', { isInputText: 'yes', id: 'area', placeholder: '请选择所在地区', 'data-areaid': '10064 10043 10375', readonly: '', className: 'changeaddress-input', style: { width: "100%" } })
 	                        )
 	                    ),
 	                    React.createElement(
@@ -62975,7 +62975,7 @@
 	                        React.createElement(
 	                            'td',
 	                            { className: 'changeaddress-td2-1', colSpan: '2' },
-	                            React.createElement('input', { id: 'detail_adress', type: 'text', className: 'changeaddress-input', style: { width: "100%" } })
+	                            React.createElement('input', { isInputText: 'yes', id: 'detail_adress', type: 'text', className: 'changeaddress-input', style: { width: "100%" } })
 	                        )
 	                    )
 	                ),
