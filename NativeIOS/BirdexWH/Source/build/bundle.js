@@ -59433,9 +59433,7 @@
 	            }
 	        }
 
-	        setTimeout(function () {
-	            this.setState({});
-	        }.bind(this), 1000);
+	        this.setState({});
 	    },
 
 
