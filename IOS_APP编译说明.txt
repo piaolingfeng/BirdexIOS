@@ -1,0 +1,11 @@
+
+1. 用webpack命令编译app的web部分
+
+2. 将 index.html, lib, build 拷贝到 NativeIOS\BirdexWH\Source\ 目录
+
+3. 提交并push
+
+4. 转到 MAC 电脑, git pull
+
+5. 用XCode打开 NativeIOS/Birdex.xworkspace 工程文件, clean后编译
+
