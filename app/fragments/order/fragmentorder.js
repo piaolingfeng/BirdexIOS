@@ -112,6 +112,7 @@ var FragmentOrder = React.createClass({
     },
     //简化订单状态
     dealOrderStatus(data) {
+        console.log(data.data,"ddddd");
         statusList = data.data;
         statusList.splice(0, 0, { status: '', status_name: '全部状态' });
         var dealStatus = ['全部状态', "待审核", "等待出库", "出库中", "已出库", "运输中",

@@ -64,8 +64,8 @@ var FragmentPrediciton = React.createClass({
         if (index != 0) {
             end_date = timeUtil.getCurrentDateFormat();
         }
-        requestEntity.start_date = this.params.timeStartList[index];
-        requestEntity.end_date = end_date;
+        requestEntity.updated_start_date = this.params.timeStartList[index];
+        requestEntity.updated_end_date = end_date;
         requestEntity.time_name = this.params.timeList[index];
         this.getPredicitionList();
     },
@@ -154,8 +154,8 @@ var FragmentPrediciton = React.createClass({
             if (this.props.todayDataName) {
                 if (this.props.todayDataName.indexOf("今日") >= 0) {//今日时间
                     requestEntity.time_name = this.params.timeList[1];
-                    requestEntity.start_date = this.params.timeStartList[1];
-                    requestEntity.end_date = timeUtil.getCurrentDateFormat();;
+                    requestEntity.updated_start_date = this.params.timeStartList[1];
+                    requestEntity.updated_end_date = timeUtil.getCurrentDateFormat();;
                 }
                 // console.log("timePosition"+timePosition);
                 //状态设置

@@ -26039,7 +26039,7 @@
 	      (props && typeof props.onClick === 'function') || handleType[type]
 	    )) {
 	      // Add our own events to props
-	      console.log(props);
+	      //console.log(props);
 	      if ((props == null) || (typeof props.isInputText) === 'undefined')
 	      {
 	        args[1] = propsWithFastclickEvents(type, props || {});
@@ -27291,6 +27291,8 @@
 	        requestEntity.sign_end_date = "";
 	        requestEntity.checkout_start_date = ""; //出库的时间
 	        requestEntity.checkout_end_date = "";
+	        requestEntity.updated_start_date = "";
+	        requestEntity.updated_end_date = "";
 	        requestEntity.time_name = "不限时间";
 	        requestEntity.status = ""; //	N		订单状态10:'待审核'; 11: '已删除'; 2:'等待出库'; 20: '准备出库'; 21: '包裹出库中'; 30: '审核不通过'; 40: '已出库'; 5: '运输中'; 50: '包裹空运中'; 51: '待清关'; 52: '包裹清关中'; 53: '包裹已清关'; 60: '已签收';
 	        requestEntity.statusName = "全部状态";
@@ -27300,14 +27302,15 @@
 	        return requestEntity;
 	    },
 
-	    SERVER_ADDRESS: "192.168.1.207",
-	    //   SERVER_ADDRESS = "api.b.birdex.cn",
-	    PORT: "8089", //8002
+	    // SERVER_ADDRESS: "192.168.1.207",
+	    SERVER_ADDRESS: "api.b.birdex.cn",
+	    // PORT: "8089",//8002
 
 	    getBASE_URL: function getBASE_URL() {
 	        // var SERVER_ADDRESS = "192.168.1.207";
 	        // var PORT = "8089";//
-	        return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/"; //
+	        // return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
+	        return "http://" + this.SERVER_ADDRESS + "/";
 	    },
 
 	    randomString: function randomString(len) {
@@ -27371,7 +27374,7 @@
 	                    waitDailog.hideLoading();
 	                // ;
 	            }.bind(this),
-	            timeout: 5000
+	            timeout: 30000
 	        });
 	    },
 	    //id是模块名字,模块点击后显示颜色
@@ -50864,6 +50867,7 @@
 
 	    //简化订单状态
 	    dealOrderStatus: function dealOrderStatus(data) {
+	        console.log(data.data, "ddddd");
 	        statusList = data.data;
 	        statusList.splice(0, 0, { status: '', status_name: '全部状态' });
 	        var dealStatus = ['全部状态', "待审核", "等待出库", "出库中", "已出库", "运输中", "已签收", "身份证异常", "库存异常", "审核不通过", "已取消"];
@@ -51848,8 +51852,8 @@
 	        if (index != 0) {
 	            end_date = timeUtil.getCurrentDateFormat();
 	        }
-	        requestEntity.start_date = this.params.timeStartList[index];
-	        requestEntity.end_date = end_date;
+	        requestEntity.updated_start_date = this.params.timeStartList[index];
+	        requestEntity.updated_end_date = end_date;
 	        requestEntity.time_name = this.params.timeList[index];
 	        this.getPredicitionList();
 	    },
@@ -51943,8 +51947,8 @@
 	                if (this.props.todayDataName.indexOf("今日") >= 0) {
 	                    //今日时间
 	                    requestEntity.time_name = this.params.timeList[1];
-	                    requestEntity.start_date = this.params.timeStartList[1];
-	                    requestEntity.end_date = timeUtil.getCurrentDateFormat();;
+	                    requestEntity.updated_start_date = this.params.timeStartList[1];
+	                    requestEntity.updated_end_date = timeUtil.getCurrentDateFormat();;
 	                }
 	                // console.log("timePosition"+timePosition);
 	                //状态设置
