@@ -122,10 +122,10 @@ var ListView = React.createClass({
             topOffset: pullDownOffset,
             onRefresh: function () {
 
-                if (pullDownEl.className.match('loading')) {
+                if (pullDownEl.className.match('list_loading')) {
                     pullDownEl.className = '';
                     pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
-                } else if (pullUpEl.className.match('loading')) {
+                } else if (pullUpEl.className.match('list_loading')) {
                     pullUpEl.className = '';
                     pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
                 }
@@ -151,12 +151,12 @@ var ListView = React.createClass({
             },
             onScrollEnd: function () {
                 if (pullDownEl.className.match('flip') && lvcompotent.props.showUpload) {
-                    pullDownEl.className = 'loading';
+                    pullDownEl.className = 'list_loading';
                     pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
                     // pullDownAction();	// Execute custom function (ajax call?)
                     lvcompotent.pullDownAction();
                 } else if (pullUpEl.className.match('flip') && lvcompotent.props.showDownload) {
-                    pullUpEl.className = 'loading';
+                    pullUpEl.className = 'list_loading';
                     pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
                     // pullUpAction();	// Execute custom function (ajax call?)
                     lvcompotent.pullUpAction();
