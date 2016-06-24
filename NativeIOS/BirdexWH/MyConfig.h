@@ -22,8 +22,13 @@
 //设备系统版本号
 #define IOS_VERSION_7_OR_ABOVE (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)? (YES):(NO))
 
-#define WEB_UPGRADE_INFO_URL @"http://192.168.1.171/for_upgrade/version.txt"
-#define WEB_UPGRADE_ZIP_URL @"http://192.168.1.171/for_upgrade/iosweb.zip"
+//#define WEB_UPGRADE_INFO_URL @"http://192.168.1.171/for_upgrade/version.txt"
+//#define WEB_UPGRADE_ZIP_URL @"http://192.168.1.171/for_upgrade/iosweb.zip"
+#define WEB_UPGRADE_INFO_URL @"http://app.birdex.cn/version.txt"
+#define WEB_UPGRADE_ZIP_URL @"http://app.birdex.cn/iosweb.zip"
+
+
+
 
 //#define ScrWidth           [UIScreen mainScreen].bounds.size.width
 //#define ScrHeight          [UIScreen mainScreen].bounds.size.height
