@@ -47559,10 +47559,10 @@
 	            topOffset: pullDownOffset,
 	            onRefresh: function onRefresh() {
 
-	                if (pullDownEl.className.match('loading')) {
+	                if (pullDownEl.className.match('list_loading')) {
 	                    pullDownEl.className = '';
 	                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
-	                } else if (pullUpEl.className.match('loading')) {
+	                } else if (pullUpEl.className.match('list_loading')) {
 	                    pullUpEl.className = '';
 	                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
 	                }
@@ -47589,12 +47589,12 @@
 	            },
 	            onScrollEnd: function onScrollEnd() {
 	                if (pullDownEl.className.match('flip') && lvcompotent.props.showUpload) {
-	                    pullDownEl.className = 'loading';
+	                    pullDownEl.className = 'list_loading';
 	                    pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
 	                    // pullDownAction();	// Execute custom function (ajax call?)
 	                    lvcompotent.pullDownAction();
 	                } else if (pullUpEl.className.match('flip') && lvcompotent.props.showDownload) {
-	                    pullUpEl.className = 'loading';
+	                    pullUpEl.className = 'list_loading';
 	                    pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
 	                    // pullUpAction();	// Execute custom function (ajax call?)
 	                    lvcompotent.pullUpAction();
@@ -50938,8 +50938,32 @@
 	                if (this.props.todayDataName.indexOf("今日") >= 0) {
 	                    //今日时间
 	                    requestEntity.time_name = this.params.timeList[1];
-	                    requestEntity.start_date = this.params.timeStartList[1];
-	                    requestEntity.end_date = timeUtil.getCurrentDateFormat();;
+	                    // requestEntity.start_date = this.params.timeStartList[1];
+	                    // requestEntity.end_date = timeUtil.getCurrentDateFormat();
+	                    if (this.props.todayDataName.indexOf("已出库") >= 0) {
+	                        requestEntity.checkout_start_date = this.params.timeStartList[index];
+	                        requestEntity.checkout_end_date = end_date;
+	                        requestEntity.sign_start_date = "";
+	                        requestEntity.sign_end_date = "";
+	                        requestEntity.start_date = "";
+	                        requestEntity.end_date = "";
+	                    } else {
+	                        if (this.props.todayDataName.indexOf("已签收") >= 0) {
+	                            requestEntity.sign_start_date = this.params.timeStartList[index];
+	                            requestEntity.sign_end_date = end_date;
+	                            requestEntity.checkout_start_date = "";
+	                            requestEntity.checkout_end_date = "";
+	                            requestEntity.start_date = "";
+	                            requestEntity.end_date = "";
+	                        } else {
+	                            requestEntity.start_date = this.params.timeStartList[index];
+	                            requestEntity.end_date = end_date;
+	                            requestEntity.checkout_start_date = "";
+	                            requestEntity.checkout_end_date = "";
+	                            requestEntity.sign_start_date = "";
+	                            requestEntity.sign_end_date = "";
+	                        }
+	                    }
 	                }
 	                // console.log("timePosition"+timePosition);
 	                //状态设置
@@ -51121,7 +51145,7 @@
 	        // console.log(statusList);
 	        var list = React.createElement(ListView, { ref: function ref(theApp) {
 	                listviewInd = theApp;
-	            }, getItems: this.getItem, marginTop: 193, pullUpHandler: this.pullUpEvent,
+	            }, getItems: this.getItem, marginTop: 204, pullUpHandler: this.pullUpEvent,
 	            backGroud: gVar.Color_background, getCoreObject: this.getCoreObject });
 	        if (orderList != null && orderList.length == 0) {
 	            list = React.createElement(
@@ -52102,7 +52126,7 @@
 	        // console.log(statusList);
 	        var list = React.createElement(ListView, { ref: function ref(theApp) {
 	                listviewInd = theApp;
-	            }, getItems: this.getItem, marginTop: 193, pullUpHandler: this.pullUpEvent,
+	            }, getItems: this.getItem, marginTop: 204, pullUpHandler: this.pullUpEvent,
 	            backGroud: gVar.Color_background, getCoreObject: this.getCoreObject });
 	        if (predictList != null && predictList.length == 0) {
 	            list = React.createElement(
@@ -52971,7 +52995,7 @@
 	  render: function render() {
 	    var content;
 	    if (this.privateVar.status == 1) {
-	      content = _react2.default.createElement(ListView, { getCoreObj: this.getListCore, marginTop: 205, backGroud: '#eeeeee', pullDownHandler: this.pullUpEvent, pullUpHandler: this.pullUpEvent, getItems: this.renderItem });
+	      content = _react2.default.createElement(ListView, { getCoreObj: this.getListCore, marginTop: 211, backGroud: '#eeeeee', pullDownHandler: this.pullUpEvent, pullUpHandler: this.pullUpEvent, getItems: this.renderItem });
 	    } else if (this.privateVar.status == 2) {
 	      content = _react2.default.createElement(
 	        'div',
