@@ -50939,9 +50939,9 @@
 	                    //今日时间
 	                    requestEntity.time_name = this.params.timeList[1];
 	                    // requestEntity.start_date = this.params.timeStartList[1];
-	                    // requestEntity.end_date = timeUtil.getCurrentDateFormat();
+	                    var end_date = timeUtil.getCurrentDateFormat();
 	                    if (this.props.todayDataName.indexOf("已出库") >= 0) {
-	                        requestEntity.checkout_start_date = this.params.timeStartList[index];
+	                        requestEntity.checkout_start_date = this.params.timeStartList[1];
 	                        requestEntity.checkout_end_date = end_date;
 	                        requestEntity.sign_start_date = "";
 	                        requestEntity.sign_end_date = "";
@@ -50949,14 +50949,14 @@
 	                        requestEntity.end_date = "";
 	                    } else {
 	                        if (this.props.todayDataName.indexOf("已签收") >= 0) {
-	                            requestEntity.sign_start_date = this.params.timeStartList[index];
+	                            requestEntity.sign_start_date = this.params.timeStartList[1];
 	                            requestEntity.sign_end_date = end_date;
 	                            requestEntity.checkout_start_date = "";
 	                            requestEntity.checkout_end_date = "";
 	                            requestEntity.start_date = "";
 	                            requestEntity.end_date = "";
 	                        } else {
-	                            requestEntity.start_date = this.params.timeStartList[index];
+	                            requestEntity.start_date = this.params.timeStartList[1];
 	                            requestEntity.end_date = end_date;
 	                            requestEntity.checkout_start_date = "";
 	                            requestEntity.checkout_end_date = "";
