@@ -10,9 +10,14 @@
 #define MyConfig_h
 
 //支付宝支付需要的网址， 在发布时需要从测试网址更改到线上环境的网址
-#define GOBANK_URL  @"http://192.168.1.201:7001/gotobank.aspx"
-//#define GOBANK_URL  @"http://pay.birdex.cn/gotobank.aspx"
+//#define GOBANK_URL  @"http://192.168.1.201:7001/gotobank.aspx"
+#define GOBANK_URL  @"http://pay.birdex.cn/gotobank.aspx"
 
+
+//#define UPLOAD_IDCARD_URL   @"http://192.168.1.207:8090/upload/IDCard"
+#define UPLOAD_IDCARD_URL   @"http://file.b.birdex.cn/upload/IDCard"
+
+#define UPLOAD_HEAD_URL     @"http://file.b.birdex.cn/upload/companyLogo"
 
 //设备系统版本号
 #define IOS_VERSION_7_OR_ABOVE (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)? (YES):(NO))

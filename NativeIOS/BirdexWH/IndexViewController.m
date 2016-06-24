@@ -596,7 +596,9 @@ static NSString * idImageUrlBack = nil;
     
     NSMutableDictionary *pram=[[NSMutableDictionary alloc]init];
     
-    [HttpApiUtils startMultiPartUploadTaskWithURL:@"http://192.168.1.207:8090/upload/IDCard"
+    NSString * tempUrl = (which == 2 ? UPLOAD_HEAD_URL : UPLOAD_IDCARD_URL);
+    
+    [HttpApiUtils startMultiPartUploadTaskWithURL:tempUrl
                                             image:(which == 0 ? idImageFront : idImageBack)
                                             parameterOfimages:@""
                                             parametersDict:pram

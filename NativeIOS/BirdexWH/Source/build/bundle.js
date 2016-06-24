@@ -27535,7 +27535,7 @@
 
 
 	// module
-	exports.push([module.id, ".tipBox{\n    position:absolute;\n    width: auto;\n    height: auto;\n    border: 1px solid #303D42;\n    background-color: #111;\n    color: #fff;\n    border-radius: 5px;\n    padding: 5px 8px; \n    display:none;\n    z-index:100000;\n    margin:0 16px;\n    opacity: 0.5;\n}\n", ""]);
+	exports.push([module.id, ".tipBox{\r\n    position:absolute;\r\n    width: auto;\r\n    height: auto;\r\n    border: 1px solid #303D42;\r\n    background-color: #111;\r\n    color: #fff;\r\n    border-radius: 5px;\r\n    padding: 5px 8px; \r\n    display:none;\r\n    z-index:100000;\r\n    margin:0 16px;\r\n    opacity: 0.5;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -29693,27 +29693,16 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var warned = {};
-
 	function deprecated(propType, explanation) {
 	  return function validate(props, propName, componentName) {
 	    if (props[propName] != null) {
-	      var message = '"' + propName + '" property of "' + componentName + '" has been deprecated.\n' + explanation;
-	      if (!warned[message]) {
-	        _warning2['default'](false, message);
-	        warned[message] = true;
-	      }
+	      _warning2['default'](false, '"' + propName + '" property of "' + componentName + '" has been deprecated.\n' + explanation);
 	    }
 
 	    return propType(props, propName, componentName);
 	  };
 	}
 
-	function _resetWarned() {
-	  warned = {};
-	}
-
-	deprecated._resetWarned = _resetWarned;
 	module.exports = exports['default'];
 
 /***/ },
