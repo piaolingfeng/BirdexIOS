@@ -123,12 +123,12 @@ var LW = React.createClass({
 						</button>
 					</div>
 				</form>
-
+				{/** 因为苹果的审核要求, 需要隐藏这一部分
 				<div style={{ position: "absolute", bottom: 10, width: "80%", left: "10%", height: "40px" }}>
 					<img src={footerimg} style={{ width: "100%" }}/>
 					<button style={{ position: "absolute", bottom: 0, left: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" }}>用户注册</button>
 					<button style={{ position: "absolute", bottom: 0, right: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" }}>忘记密码</button>
-				</div>
+				</div> */}
 			</div>);
 	}
 });

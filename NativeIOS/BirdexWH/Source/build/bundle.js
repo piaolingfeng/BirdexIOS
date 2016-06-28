@@ -55605,21 +55605,6 @@
 							'登录'
 						)
 					)
-				),
-				React.createElement(
-					'div',
-					{ style: { position: "absolute", bottom: 10, width: "80%", left: "10%", height: "40px" } },
-					React.createElement('img', { src: footerimg, style: { width: "100%" } }),
-					React.createElement(
-						'button',
-						{ style: { position: "absolute", bottom: 0, left: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" } },
-						'用户注册'
-					),
-					React.createElement(
-						'button',
-						{ style: { position: "absolute", bottom: 0, right: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" } },
-						'忘记密码'
-					)
 				)
 			);
 		}
@@ -59185,7 +59170,7 @@
 	        return React.createElement(
 	            'div',
 	            { className: 'titlebar_extend_head', style: { backgroundColor: gVar.Color_background } },
-	            React.createElement(Titlebar, { title: '我的消息', backNoneDisplay: backNoneDisplay, setting: 'true' }),
+	            React.createElement(Titlebar, { title: '我的消息', backNoneDisplay: backNoneDisplay, setting: 'false' }),
 	            React.createElement(
 	                'div',
 	                { className: 'titlebar_head_down' },
