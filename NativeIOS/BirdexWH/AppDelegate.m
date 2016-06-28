@@ -95,10 +95,10 @@
     
     
     //设置 AppKey 及 LaunchOptions
-    [UMessage startWithAppkey:@"575e7b6467e58e9cfe000657" launchOptions:launchOptions];
+    //[UMessage startWithAppkey:@"575e7b6467e58e9cfe000657" launchOptions:launchOptions];
     
     //1.3.0版本开始简化初始化过程。如不需要交互式的通知，下面用下面一句话注册通知即可。
-    [UMessage registerForRemoteNotifications];
+    //[UMessage registerForRemoteNotifications];
     
     /**  如果你期望使用交互式(只有iOS 8.0及以上有)的通知，请参考下面注释部分的初始化代码
      //register remoteNotification types （iOS 8.0及其以上版本）
@@ -130,7 +130,7 @@
      */
     
     //for log
-    [UMessage setLogEnabled:YES];
+    //[UMessage setLogEnabled:YES];
     
     //检查Web部分是否需要更新
     [self checkWebUpgrade];
