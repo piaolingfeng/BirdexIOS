@@ -180,7 +180,7 @@ var MM = React.createClass({
 
             <div className="titlebar_extend_head" style={{ backgroundColor: gVar.Color_background }}>
                 {/**推送尚未实现,所以暂时把setting设为false */}
-                <Titlebar title="我的消息" backNoneDisplay={backNoneDisplay} setting="false" />
+                <Titlebar title="我的消息" backNoneDisplay={backNoneDisplay} setting={false} />
                 <div className="titlebar_head_down" >
                     <div className="mymessage_item" onClick={this.onItemClick.bind(this, 0) }
                         id={0}

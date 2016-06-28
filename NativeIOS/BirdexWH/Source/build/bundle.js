@@ -59170,7 +59170,7 @@
 	        return React.createElement(
 	            'div',
 	            { className: 'titlebar_extend_head', style: { backgroundColor: gVar.Color_background } },
-	            React.createElement(Titlebar, { title: '我的消息', backNoneDisplay: backNoneDisplay, setting: 'false' }),
+	            React.createElement(Titlebar, { title: '我的消息', backNoneDisplay: backNoneDisplay, setting: false }),
 	            React.createElement(
 	                'div',
 	                { className: 'titlebar_head_down' },
