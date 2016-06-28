@@ -115,7 +115,7 @@ var LW = React.createClass({
 							<input id="remember" type="checkbox" />记住密码
 						</label>
 					</div>
-					<div style={{ margin: "50px 50px 0 50px" }}>
+					<div style={{ margin: "100px 50px 0 50px" }}>
 						<button id="login" onClick={this.login} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", borderColor: gVar.Color_blue_head }}
 							onTouchStart = {gVar.btnhandleTouchStart.bind(this, "login") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "login") }
 							onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "login") }>

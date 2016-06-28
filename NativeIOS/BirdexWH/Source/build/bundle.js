@@ -51695,13 +51695,6 @@
 	                    "物流跟踪"
 	                ),
 	                React.createElement("span", { className: "orderlist_line" }),
-	                React.createElement(
-	                    "span",
-	                    { id: "contactCustomer" + this.props.position, className: "orderlist_btn", onClick: this.contactCustomer,
-	                        onTouchStart: this.btnhandleTouchStart.bind(this, "contactCustomer"), onTouchEnd: this.btnhandleTouchEnd.bind(this, "contactCustomer"),
-	                        onTouchCancel: this.btnhandleTouchEnd.bind(this, "contactCustomer") },
-	                    "联系客服"
-	                ),
 	                React.createElement("span", { ref: "changeAddr_line", className: "orderlist_line" }),
 	                React.createElement(
 	                    "span",
@@ -55596,7 +55589,7 @@
 					),
 					React.createElement(
 						'div',
-						{ style: { margin: "50px 50px 0 50px" } },
+						{ style: { margin: "100px 50px 0 50px" } },
 						React.createElement(
 							'button',
 							{ id: 'login', onClick: this.login, type: 'button', className: 'btn btn-default btn-block', style: { color: "#039FFF", borderColor: gVar.Color_blue_head },
