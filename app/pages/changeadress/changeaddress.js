@@ -83,7 +83,7 @@ var CA = React.createClass({
             EventBus.addEventListener("changeAddress", this.changeAddress, this);
 
         var valo = $("#area").attr("data-areaid");
-        // 默认值  ,valueo:"10064 10043 10375"   出现定位bug 暂时无法解决
+        // 默认值  ,valueo:"5843 5861 5865"   出现定位bug 暂时无法解决
         $('#area').scroller('destroy').scroller({ preset: 'area', theme: 'android-ics light', display: 'bottom', mode: 'scroller' });
 
         this.init();
