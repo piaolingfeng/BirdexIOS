@@ -50202,7 +50202,7 @@
 	            if (statuName == "待复核") {
 	                confirmDisplay = 'block';
 	                reConfirmDisplay = 'none';
-	                reConfirmReasonDisplay = 'block';
+	                reConfirmReasonDisplay = 'table-row';
 	                // $('#confirm').css({ display: "block" });
 	                // $('#reConfirm').css({ display: "none" });
 	                // $('#reConfirmReason').css({ display: "block" });
@@ -86048,8 +86048,8 @@
 	        var tar = trackings[index];
 	        return React.createElement(
 	            'div',
-	            { key: key, style: { width: "90%", height: "55px", margin: "0 auto" } },
-	            React.createElement('img', { src: point, style: { width: "8px", height: "8px", verticalAlign: "center", marginTop: "-5px" } }),
+	            { key: key, style: { width: "90%", margin: "0 auto" } },
+	            React.createElement('img', { src: point, style: { width: "8px", height: "8px", verticalAlign: "top", marginTop: "10px" } }),
 	            ' ',
 	            React.createElement(
 	                'span',
@@ -86057,7 +86057,7 @@
 	                tar.context
 	            ),
 	            React.createElement('div', null),
-	            React.createElement('span', { style: { width: "1px", height: "30px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' } }),
+	            React.createElement('span', { style: { width: "1px", height: "0px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' } }),
 	            React.createElement(
 	                'span',
 	                { style: { marginLeft: "8px", width: "80%", verticalAlign: "top" } },
