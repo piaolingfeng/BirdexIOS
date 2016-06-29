@@ -149,10 +149,10 @@ var Logistics = React.createClass({
 
     renderItem: function (index, key) {
         var tar = trackings[index];
-        return <div key={key} style={{ width: "90%", height: "55px", margin: "0 auto" }}>
-            <img src={point} style={{ width: "8px", height: "8px", verticalAlign: "center", marginTop: "-5px" }}></img> <span style={{ display: "inline-block", marginTop: "5px", width: "90%" }}>{tar.context}</span>
+        return <div key={key} style={{ width: "90%",  margin: "0 auto"}}>
+            <img src={point} style={{ width: "8px", height: "8px", verticalAlign: "top", marginTop: "10px" }}></img> <span style={{ display: "inline-block", marginTop: "5px", width: "90%" }}>{tar.context}</span>
             <div></div>
-            <span style={{ width: "1px", height: "30px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' }}></span>
+            <span style={{ width: "1px", height: "0px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' }}></span>
             <span style={{ marginLeft: "8px", width: "80%", verticalAlign: "top" }}>{tar.time}</span>
         </div>;
     },

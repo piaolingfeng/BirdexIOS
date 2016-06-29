@@ -146,7 +146,7 @@ var PredictProduct = React.createClass({
             if (statuName == "待复核") {
                 confirmDisplay = 'block';
                 reConfirmDisplay = 'none';
-                reConfirmReasonDisplay = 'block';
+                reConfirmReasonDisplay = 'table-row';
                 // $('#confirm').css({ display: "block" });
                 // $('#reConfirm').css({ display: "none" });
                 // $('#reConfirmReason').css({ display: "block" });
