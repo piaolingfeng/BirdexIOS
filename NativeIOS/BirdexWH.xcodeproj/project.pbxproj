@@ -35,6 +35,7 @@
 		ABB435F61D0E97E100DDA3C4 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435F41D0E97E100DDA3C4 /* libcrypto.a */; };
 		ABB435F71D0E97E100DDA3C4 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB435F51D0E97E100DDA3C4 /* libssl.a */; };
 		ABF5C8E11D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */; };
+		CC445E461D24AD7200B4662E /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = CC445E451D24AD7200B4662E /* UIView+Toast.m */; };
 		CC51E1721D17CCEA001D3383 /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = CC51E1511D17CCEA001D3383 /* aescrypt.c */; };
 		CC51E1731D17CCEA001D3383 /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = CC51E1521D17CCEA001D3383 /* aeskey.c */; };
 		CC51E1741D17CCEA001D3383 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = CC51E1541D17CCEA001D3383 /* aestab.c */; };
@@ -117,6 +118,8 @@
 		ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.3.0.a; path = UMessage_Sdk_1.3.0/libUMessage_Sdk_1.3.0.a; sourceTree = "<group>"; };
 		ABF5C8E01D0EB72A001D45BA /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = UMessage_Sdk_1.3.0/UMessage.h; sourceTree = "<group>"; };
 		BFABA78FB3D2531D176317C0 /* Pods-BirdexWH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdexWH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BirdexWH/Pods-BirdexWH.debug.xcconfig"; sourceTree = "<group>"; };
+		CC445E441D24AD7200B4662E /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		CC445E451D24AD7200B4662E /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		CC51E14F1D17CCEA001D3383 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		CC51E1501D17CCEA001D3383 /* aes_via_ace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes_via_ace.h; sourceTree = "<group>"; };
 		CC51E1511D17CCEA001D3383 /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
@@ -229,6 +232,7 @@
 		AB7C1EB91D015A3E004E3073 /* BirdexWH */ = {
 			isa = PBXGroup;
 			children = (
+				CC445E431D24AD7200B4662E /* Toast */,
 				CC51E14D1D17CCEA001D3383 /* SSZipArchive */,
 				ABF5C8DF1D0EB72A001D45BA /* libUMessage_Sdk_1.3.0.a */,
 				ABF5C8E01D0EB72A001D45BA /* UMessage.h */,
@@ -302,6 +306,15 @@
 				FDAC8DA4EC2B55DD05D0B784 /* libPods-BirdexWH.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CC445E431D24AD7200B4662E /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				CC445E441D24AD7200B4662E /* UIView+Toast.h */,
+				CC445E451D24AD7200B4662E /* UIView+Toast.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 		CC51E14D1D17CCEA001D3383 /* SSZipArchive */ = {
@@ -546,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC445E461D24AD7200B4662E /* UIView+Toast.m in Sources */,
 				CC51E1771D17CCEA001D3383 /* hmac.c in Sources */,
 				CC51E17B1D17CCEA001D3383 /* ioapi.c in Sources */,
 				AB7C1EC21D015A3E004E3073 /* ViewController.m in Sources */,
