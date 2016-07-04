@@ -110,8 +110,8 @@ var WillInDetail = React.createClass({
                 name = '缺失商品名';
             }
             return (<div>
-                <div className="willin_item">{name}</div>
-                <div className="willin_item">商品编码：{this.privateVar.productEntity.external_no}</div>
+                <div className="willin_item" style={{color:"#4A4A4A"}}>{name}</div>
+                <div className="willin_item" style={{color:"#4A4A4A"}}>商品编码：{this.privateVar.productEntity.external_no}</div>
             </div>);
         } else {
             if (index < 1) {
@@ -159,13 +159,16 @@ var WillInDetail = React.createClass({
             return (<table className="table">
                 <thead><tr style={{ width: "100%", backgroundColor: "#e5e5e5" }}>
                     <td className="willin_item_left" style={{
-                        paddingRight: "0px"
+                        paddingRight: "0px",
+                        color:"#4A4A4A"
                     }}>待入仓库：</td>
                     <td className="willin_item_right1" style={{
-                        paddingLeft: "0px"
+                        paddingLeft: "0px",
+                        color:"#4A4A4A"
                     }}>{itemObj.warehouse_name}</td>
                     <td className="willin_item_right2" style={{
-                        paddingLeft: "0px", textAlign: "right"
+                        paddingLeft: "0px", textAlign: "right",
+                        color:"#4A4A4A"
                     }}>数量：{count}</td>
                 </tr></thead>
                 <tbody style={{ backgroundColor: "#eeeeee" }}>
