@@ -101,7 +101,9 @@ var FragmentIndex = React.createClass({
         //对数据进行赋值
         for (var i = 0; i < today.dataJsonName.length; i++) {
             if (data == null)
-                today.dataCount[i] = '--';
+            {
+                   //today.dataCount[i] = '--';
+            }
             else 
                 today.dataCount[i] = data.data[today.dataJsonName[i]];
 
