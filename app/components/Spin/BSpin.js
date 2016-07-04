@@ -3,6 +3,10 @@ var ReactDOM = require('react-dom');
 
 var spinner = null;
 
+//引用计数, 每调一次show增加1, 每调一次hide减少1
+//增加好几处代码同时调用showLoading/hideLoading的健壮性
+var refCount = 0;
+
 //message暂时不实现
 function showLoading(message) {
     var opts = {
@@ -28,42 +32,52 @@ function showLoading(message) {
         , position: 'absolute' // Element positioning
     };
 
-    var divMask = document.createElement("div");
-    divMask.setAttribute("id", "pagemask1289");
-    divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;background-color:rgba(4, 4, 4, 0);z-index:100");
-    document.body.appendChild(divMask);
+    if (refCount == 0) //hide之后的第一次调用
+    {
+        var divMask = document.createElement("div");
+        divMask.setAttribute("id", "pagemask1289");
+        divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;background-color:rgba(4, 4, 4, 0);z-index:100");
+        document.body.appendChild(divMask);
 
-    var divBack = document.createElement("div");
-    divBack.setAttribute('style', "border-radius:6px;position:absolute;left:40vw;top:45vh;width:20vw;height:10vh;");
-    divMask.appendChild(divBack);
+        var divBack = document.createElement("div");
+        divBack.setAttribute('style', "border-radius:6px;position:absolute;left:40vw;top:45vh;width:20vw;height:10vh;");
+        divMask.appendChild(divBack);
 
-    /*var divSpin = document.createElement("div");
-    divSpin.setAttribute('style', "position:absolute;left:0;top:0;width:100%;height:50%;");
-    divBack.appendChild(divSpin);
-    
-    var divMsg = document.createElement("div");
-    divMsg.setAttribute('style', "padding-top:5px;text-align:center;position:absolute;left:0;top:50%;width:100%;height:50%;");
-    divMsg.innerText = "请稍候";
-    divMask.appendChild(divMsg);*/
+        /*var divSpin = document.createElement("div");
+        divSpin.setAttribute('style', "position:absolute;left:0;top:0;width:100%;height:50%;");
+        divBack.appendChild(divSpin);
+        
+        var divMsg = document.createElement("div");
+        divMsg.setAttribute('style', "padding-top:5px;text-align:center;position:absolute;left:0;top:50%;width:100%;height:50%;");
+        divMsg.innerText = "请稍候";
+        divMask.appendChild(divMsg);*/
 
-    if (spinner == null) {
-        spinner = new Spinner(opts).spin(divBack);
+        if (spinner == null) {
+            spinner = new Spinner(opts).spin(divBack);
+        }
+        else {
+            spinner.spin(divBack);
+        }
     }
-    else {
-        spinner.spin(divBack);
-    }
 
+    refCount ++;
     // console.log("show spin");
 }
 
 function hideLoading() {
-    if (spinner != null) {
-        spinner.stop();
-    }
 
-    var div = document.getElementById("pagemask1289");
-    if (div != null) {
-        document.body.removeChild(div);
+    refCount --;
+
+    if (refCount == 0)
+    {
+        if (spinner != null) {
+            spinner.stop();
+        }
+
+        var div = document.getElementById("pagemask1289");
+        if (div != null) {
+            document.body.removeChild(div);
+        }
     }
 }
 
