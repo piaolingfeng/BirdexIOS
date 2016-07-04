@@ -27204,7 +27204,7 @@
 	    todayData: {
 	        dataTitle: ["今日订单数", "今日已出库", "今日等待出库", "今日已取消订单", "审核不通过订单", "今日已签收", "库存异常订单", "今日已入库预报", "待确认预报单", "审核不通过预报", "库存预警", "身份证异常订单"],
 	        dataJsonName: ["today_create_order_count", "today_checkout_order_count", "today_wait_checkout_order_count", "today_cancel_order_count", "no_pass_order_count", "today_sign_order_count", "stock_exception_order_count", "today_confirm_storage_count", "wait_confirm_storage_count", "no_pass_storage_count", "warning_stock_count", "id_card_exception_order_count"],
-	        dataCount: ["?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"], //保存每个类别的数值
+	        dataCount: ["--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--"], //保存每个类别的数值
 	        dataOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], //控制显示的顺序, -1表示对应的项不
 
 	        IsDisplay: [false, false, false, false, false, false, false, false, false, false, false, false],
@@ -59451,7 +59451,9 @@
 	        }
 	        //对数据进行赋值
 	        for (var i = 0; i < today.dataJsonName.length; i++) {
-	            if (data == null) today.dataCount[i] = '--';else today.dataCount[i] = data.data[today.dataJsonName[i]];
+	            if (data == null) {
+	                //today.dataCount[i] = '--';
+	            } else today.dataCount[i] = data.data[today.dataJsonName[i]];
 
 	            if (today.displayList.indexOf(today.dataTitle[i]) >= 0) {
 	                today.IsDisplay[i] = true;
