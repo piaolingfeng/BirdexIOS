@@ -441,7 +441,16 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.window makeToast:@"热升级成功，请彻底退出并重新运行" duration:4.0 position:CSToastPositionBottom];
+                //[self.window makeToast:@"热升级成功，请彻底退出并重新运行" duration:4.0 position:CSToastPositionBottom];
+                
+                
+                UIAlertView *aletView=[[UIAlertView alloc] initWithTitle:@"版本更新"
+                                                                 message:@"热升级成功，是否立即启用新版本？"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"下次启用"
+                                                       otherButtonTitles:@"立即启用", nil];
+                [aletView show];
+                
             });
         }
         
@@ -491,6 +500,29 @@
     
     //add notification
     //[self presentNotification];
+}
+
+//热升级成功，用户选择了立即启用或下次启用
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) //确定
+    {
+        //获取加载位置
+        NSURL * url = [self getWebIndexHtmlUrl];
+    
+        //开始加载网页
+        NSURLRequest *localRequest=[NSURLRequest requestWithURL:url];
+        [g_webView loadRequest:localRequest];
+        
+        //显示转圈圈
+        UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        testActivityIndicator.color = [UIColor grayColor];
+        testActivityIndicator.center = g_webView.center;//只能设置中心，不能设置大小
+        testActivityIndicator.tag = 9999;
+        testActivityIndicator.hidesWhenStopped = YES;
+        [g_webView addSubview:testActivityIndicator];
+        [testActivityIndicator startAnimating];
+    }
 }
 
 @end
