@@ -19,10 +19,10 @@ var gVar = {
             "today_cancel_order_count", "no_pass_order_count", "today_sign_order_count", "stock_exception_order_count"
             , "today_confirm_storage_count", "wait_confirm_storage_count", "no_pass_storage_count",
             "warning_stock_count", "id_card_exception_order_count"],
-        dataCount: ["?", "?", "?"
-            , "?", "?", "?"
-            , "?", "?", "?"
-            , "?", "?", "?"], //保存每个类别的数值
+        dataCount: ["--", "--", "--"
+            , "--", "--", "--"
+            , "--", "--", "--"
+            , "--", "--", "--"], //保存每个类别的数值
         dataOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], //控制显示的顺序, -1表示对应的项不
 
         IsDisplay: [false, false, false,

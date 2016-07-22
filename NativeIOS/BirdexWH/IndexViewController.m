@@ -404,6 +404,7 @@ static NSString * idImageUrlBack = nil;
             [UIView transitionFromView:imageView toView:self.wv_page duration:0.6 options:UIViewAnimationOptionTransitionCurlUp completion:nil];
         }
         
+        
         return YES;
     }
     
@@ -426,6 +427,12 @@ static NSString * idImageUrlBack = nil;
 }
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     //加载结束调用
+    
+    UIActivityIndicatorView * loading = [self.wv_page viewWithTag:9999];
+    if (loading != nil)
+    {
+        [loading stopAnimating];
+    }
     
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

@@ -27204,7 +27204,7 @@
 	    todayData: {
 	        dataTitle: ["今日订单数", "今日已出库", "今日等待出库", "今日已取消订单", "审核不通过订单", "今日已签收", "库存异常订单", "今日已入库预报", "待确认预报单", "审核不通过预报", "库存预警", "身份证异常订单"],
 	        dataJsonName: ["today_create_order_count", "today_checkout_order_count", "today_wait_checkout_order_count", "today_cancel_order_count", "no_pass_order_count", "today_sign_order_count", "stock_exception_order_count", "today_confirm_storage_count", "wait_confirm_storage_count", "no_pass_storage_count", "warning_stock_count", "id_card_exception_order_count"],
-	        dataCount: ["?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"], //保存每个类别的数值
+	        dataCount: ["--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--"], //保存每个类别的数值
 	        dataOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], //控制显示的顺序, -1表示对应的项不
 
 	        IsDisplay: [false, false, false, false, false, false, false, false, false, false, false, false],
@@ -27551,6 +27551,10 @@
 
 	var spinner = null;
 
+	//引用计数, 每调一次show增加1, 每调一次hide减少1
+	//增加好几处代码同时调用showLoading/hideLoading的健壮性
+	var refCount = 0;
+
 	//message暂时不实现
 	function showLoading(message) {
 	    var opts = {
@@ -27576,41 +27580,50 @@
 	        , position: 'absolute' // Element positioning
 	    };
 
-	    var divMask = document.createElement("div");
-	    divMask.setAttribute("id", "pagemask1289");
-	    divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;background-color:rgba(4, 4, 4, 0);z-index:100");
-	    document.body.appendChild(divMask);
+	    if (refCount == 0) //hide之后的第一次调用
+	        {
+	            var divMask = document.createElement("div");
+	            divMask.setAttribute("id", "pagemask1289");
+	            divMask.setAttribute('style', "position:absolute;left:0;top:0;width:100vw;height:100vh;background-color:rgba(4, 4, 4, 0);z-index:100");
+	            document.body.appendChild(divMask);
 
-	    var divBack = document.createElement("div");
-	    divBack.setAttribute('style', "border-radius:6px;position:absolute;left:40vw;top:45vh;width:20vw;height:10vh;");
-	    divMask.appendChild(divBack);
+	            var divBack = document.createElement("div");
+	            divBack.setAttribute('style', "border-radius:6px;position:absolute;left:40vw;top:45vh;width:20vw;height:10vh;");
+	            divMask.appendChild(divBack);
 
-	    /*var divSpin = document.createElement("div");
-	    divSpin.setAttribute('style', "position:absolute;left:0;top:0;width:100%;height:50%;");
-	    divBack.appendChild(divSpin);
-	    
-	    var divMsg = document.createElement("div");
-	    divMsg.setAttribute('style', "padding-top:5px;text-align:center;position:absolute;left:0;top:50%;width:100%;height:50%;");
-	    divMsg.innerText = "请稍候";
-	    divMask.appendChild(divMsg);*/
+	            /*var divSpin = document.createElement("div");
+	            divSpin.setAttribute('style', "position:absolute;left:0;top:0;width:100%;height:50%;");
+	            divBack.appendChild(divSpin);
+	            
+	            var divMsg = document.createElement("div");
+	            divMsg.setAttribute('style', "padding-top:5px;text-align:center;position:absolute;left:0;top:50%;width:100%;height:50%;");
+	            divMsg.innerText = "请稍候";
+	            divMask.appendChild(divMsg);*/
 
-	    if (spinner == null) {
-	        spinner = new Spinner(opts).spin(divBack);
-	    } else {
-	        spinner.spin(divBack);
-	    }
+	            if (spinner == null) {
+	                spinner = new Spinner(opts).spin(divBack);
+	            } else {
+	                spinner.spin(divBack);
+	            }
+	        }
 
+	    refCount++;
 	    // console.log("show spin");
 	}
 
 	function hideLoading() {
-	    if (spinner != null) {
-	        spinner.stop();
-	    }
 
-	    var div = document.getElementById("pagemask1289");
-	    if (div != null) {
-	        document.body.removeChild(div);
+	    refCount--;
+
+	    if (refCount == 0) {
+	        if (spinner != null) {
+	            spinner.stop();
+	        }
+
+	        var div = document.getElementById("pagemask1289");
+	        if (div != null) {
+	            document.body.removeChild(div);
+	        }
 	    }
 	}
 
@@ -50202,7 +50215,7 @@
 	            if (statuName == "待复核") {
 	                confirmDisplay = 'block';
 	                reConfirmDisplay = 'none';
-	                reConfirmReasonDisplay = 'block';
+	                reConfirmReasonDisplay = 'table-row';
 	                // $('#confirm').css({ display: "block" });
 	                // $('#reConfirm').css({ display: "none" });
 	                // $('#reConfirmReason').css({ display: "block" });
@@ -54024,7 +54037,7 @@
 	                        null,
 	                        React.createElement(
 	                            'td',
-	                            { colSpan: '2', style: { fontSize: "16px", borderTopWidth: "0px" } },
+	                            { colSpan: '2', style: { fontSize: "16px", borderTopWidth: "0px", color: "#4A4A4A" } },
 	                            '商品编码: ',
 	                            this.props.itemObj.upc
 	                        )
@@ -59418,9 +59431,8 @@
 	        gVar.sendRequest(params, url, this.dealTodayData, false);
 	    },
 
-	    //处理数据,将每一个是否显示由displaylist内部的成员来控制
-	    dealTodayData: function dealTodayData(data) {
-	        Data = data;
+	    //根据data来填充今日数据的, 如data为null, 则显示?
+	    prepareTodayData: function prepareTodayData(data) {
 	        var today = gVar.todayData;
 	        //第一步先获取本地displaylist,
 	        if (firstEnter == true) {
@@ -59439,13 +59451,24 @@
 	        }
 	        //对数据进行赋值
 	        for (var i = 0; i < today.dataJsonName.length; i++) {
-	            today.dataCount[i] = data.data[today.dataJsonName[i]];
+	            if (data == null) {
+	                //today.dataCount[i] = '--';
+	            } else today.dataCount[i] = data.data[today.dataJsonName[i]];
+
 	            if (today.displayList.indexOf(today.dataTitle[i]) >= 0) {
 	                today.IsDisplay[i] = true;
 	            } else {
 	                today.IsDisplay[i] = false;
 	            }
 	        }
+	    },
+
+
+	    //处理数据,将每一个是否显示由displaylist内部的成员来控制
+	    dealTodayData: function dealTodayData(data) {
+	        Data = data;
+
+	        this.prepareTodayData(data);
 
 	        this.setState({});
 	    },
@@ -59515,6 +59538,9 @@
 	            console.log(firstEnter, "firstEnter");
 	            localStorage.setItem("firstEnter", false);
 	        }
+
+	        this.prepareTodayData(null);
+	        this.setState({});
 	        // localStorage.clear();
 	        // console.log(this.params.myScroll);
 	        // if(this.params.myScroll!=null){
@@ -86048,8 +86074,8 @@
 	        var tar = trackings[index];
 	        return React.createElement(
 	            'div',
-	            { key: key, style: { width: "90%", height: "55px", margin: "0 auto" } },
-	            React.createElement('img', { src: point, style: { width: "8px", height: "8px", verticalAlign: "center", marginTop: "-5px" } }),
+	            { key: key, style: { width: "90%", margin: "0 auto" } },
+	            React.createElement('img', { src: point, style: { width: "8px", height: "8px", verticalAlign: "top", marginTop: "10px" } }),
 	            ' ',
 	            React.createElement(
 	                'span',
@@ -86057,7 +86083,7 @@
 	                tar.context
 	            ),
 	            React.createElement('div', null),
-	            React.createElement('span', { style: { width: "1px", height: "30px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' } }),
+	            React.createElement('span', { style: { width: "1px", height: "0px", display: "inline-block", background: "#D7D7D7", marginLeft: '3px' } }),
 	            React.createElement(
 	                'span',
 	                { style: { marginLeft: "8px", width: "80%", verticalAlign: "top" } },
@@ -88153,12 +88179,12 @@
 	                null,
 	                React.createElement(
 	                    'div',
-	                    { className: 'willin_item' },
+	                    { className: 'willin_item', style: { color: "#4A4A4A" } },
 	                    name
 	                ),
 	                React.createElement(
 	                    'div',
-	                    { className: 'willin_item' },
+	                    { className: 'willin_item', style: { color: "#4A4A4A" } },
 	                    '商品编码：',
 	                    this.privateVar.productEntity.external_no
 	                )
@@ -88293,21 +88319,24 @@
 	                        React.createElement(
 	                            'td',
 	                            { className: 'willin_item_left', style: {
-	                                    paddingRight: "0px"
+	                                    paddingRight: "0px",
+	                                    color: "#4A4A4A"
 	                                } },
 	                            '待入仓库：'
 	                        ),
 	                        React.createElement(
 	                            'td',
 	                            { className: 'willin_item_right1', style: {
-	                                    paddingLeft: "0px"
+	                                    paddingLeft: "0px",
+	                                    color: "#4A4A4A"
 	                                } },
 	                            itemObj.warehouse_name
 	                        ),
 	                        React.createElement(
 	                            'td',
 	                            { className: 'willin_item_right2', style: {
-	                                    paddingLeft: "0px", textAlign: "right"
+	                                    paddingLeft: "0px", textAlign: "right",
+	                                    color: "#4A4A4A"
 	                                } },
 	                            '数量：',
 	                            count

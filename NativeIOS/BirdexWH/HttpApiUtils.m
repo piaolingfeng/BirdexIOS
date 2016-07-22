@@ -36,6 +36,8 @@
         [httpManager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     }
     
+    httpManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    
     [httpManager GET:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if(success)
         {

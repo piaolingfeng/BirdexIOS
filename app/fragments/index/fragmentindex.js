@@ -80,9 +80,8 @@ var FragmentIndex = React.createClass({
         gVar.sendRequest(params, url, this.dealTodayData, false);
     },
 
-    //处理数据,将每一个是否显示由displaylist内部的成员来控制
-    dealTodayData(data) {
-        Data = data;
+    //根据data来填充今日数据的, 如data为null, 则显示?
+    prepareTodayData(data) {
         var today = gVar.todayData;
         //第一步先获取本地displaylist,
         if (firstEnter == true) {//第一次打开软件
@@ -101,13 +100,26 @@ var FragmentIndex = React.createClass({
         }
         //对数据进行赋值
         for (var i = 0; i < today.dataJsonName.length; i++) {
-            today.dataCount[i] = data.data[today.dataJsonName[i]];
+            if (data == null)
+            {
+                   //today.dataCount[i] = '--';
+            }
+            else 
+                today.dataCount[i] = data.data[today.dataJsonName[i]];
+
             if (today.displayList.indexOf(today.dataTitle[i]) >= 0) {
                 today.IsDisplay[i] = true;
             } else {
                 today.IsDisplay[i] = false;
             }
         }
+    },
+
+    //处理数据,将每一个是否显示由displaylist内部的成员来控制
+    dealTodayData(data) {
+        Data = data;
+        
+        this.prepareTodayData(data);
 
         this.setState({});
     },
@@ -173,6 +185,9 @@ var FragmentIndex = React.createClass({
             console.log(firstEnter, "firstEnter");
             localStorage.setItem("firstEnter", false);
         }
+
+        this.prepareTodayData(null);
+        this.setState({});
         // localStorage.clear();
         // console.log(this.params.myScroll);
         // if(this.params.myScroll!=null){

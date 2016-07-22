@@ -13,7 +13,7 @@ extern UIWebView * g_webView;
 @class IndexViewController;
 extern IndexViewController * g_indexVC;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, NSURLSessionDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate, NSURLSessionDelegate, UIAlertViewDelegate> {
     float _newVer;
 }
 

@@ -13,6 +13,7 @@
 #import "UMessage.h"
 #import "HttpApiUtils.h"
 #import "SSZipArchive/SSZipArchive.h"
+#import "Toast/UIView+Toast.h"
 
 @interface AppDelegate ()
 
@@ -52,11 +53,7 @@
             NSLog(@"---- index.html not exist %@", temp);
             
             //重置使用local
-            [defaults setInteger:ENTRY_HTML_LOCAL forKey:kEntryHtmlPosition];
-            [defaults synchronize];
-            
-            NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Source/index" ofType:@"html"];
-            return [NSURL fileURLWithPath:filePath];
+            return [self resetWebToLocal];
         }
     }
     else
@@ -70,20 +67,29 @@
         NSFileManager * fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:temp])
         {
-            NSLog(@"---- index.html not exist %@", temp);
-            
             return [NSURL fileURLWithPath:temp];
         }
         else
         {
-            //重置使用local
-            [defaults setInteger:ENTRY_HTML_LOCAL forKey:kEntryHtmlPosition];
-            [defaults synchronize];
+            NSLog(@"---- index.html not exist %@", temp);
             
-            NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Source/index" ofType:@"html"];
-            return [NSURL fileURLWithPath:filePath];
+            //重置使用local
+            return [self resetWebToLocal];
         }
     }
+}
+
+//重置使用local, 在升级出错时此函数会被调用
+- (NSURL *)resetWebToLocal
+{
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setInteger:ENTRY_HTML_LOCAL forKey:kEntryHtmlPosition];
+    [defaults removeObjectForKey:kWebVer];
+    [defaults synchronize];
+    
+    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Source/index" ofType:@"html"];
+    return [NSURL fileURLWithPath:filePath];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -133,7 +139,8 @@
     //[UMessage setLogEnabled:YES];
     
     //检查Web部分是否需要更新
-    [self checkWebUpgrade];
+    //延迟执行的目的是，保证getWebIndexHtmlUrl在这之前已经被调用过
+    [self performSelector:@selector(checkWebUpgrade) withObject:nil afterDelay:0.1];
     
     return YES;
 }
@@ -432,11 +439,22 @@
                 
                 NSLog(@"---- upgrade web to version %.2f success, A active", _newVer);
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //[self.window makeToast:@"热升级成功，请彻底退出并重新运行" duration:4.0 position:CSToastPositionBottom];
+                
+                
+                UIAlertView *aletView=[[UIAlertView alloc] initWithTitle:@"版本更新"
+                                                                 message:@"热升级成功，是否立即启用新版本？"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"下次启用"
+                                                       otherButtonTitles:@"立即启用", nil];
+                [aletView show];
+                
+            });
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-        });
+        
     } else {
         NSLog(@"Error during the copy");
     }
@@ -451,6 +469,10 @@
         NSLog(@"Task: %@ completed successfully", task);
     } else {
         NSLog(@"Task: %@ completed with error: %@", task, [error localizedDescription]);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.window makeToast:@"热升级包下载失败"];
+        });
     }
     
     double progress = (double)task.countOfBytesReceived / (double)task.countOfBytesExpectedToReceive;
@@ -478,6 +500,29 @@
     
     //add notification
     //[self presentNotification];
+}
+
+//热升级成功，用户选择了立即启用或下次启用
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) //确定
+    {
+        //获取加载位置
+        NSURL * url = [self getWebIndexHtmlUrl];
+    
+        //开始加载网页
+        NSURLRequest *localRequest=[NSURLRequest requestWithURL:url];
+        [g_webView loadRequest:localRequest];
+        
+        //显示转圈圈
+        UIActivityIndicatorView *testActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        testActivityIndicator.color = [UIColor grayColor];
+        testActivityIndicator.center = g_webView.center;//只能设置中心，不能设置大小
+        testActivityIndicator.tag = 9999;
+        testActivityIndicator.hidesWhenStopped = YES;
+        [g_webView addSubview:testActivityIndicator];
+        [testActivityIndicator startAnimating];
+    }
 }
 
 @end

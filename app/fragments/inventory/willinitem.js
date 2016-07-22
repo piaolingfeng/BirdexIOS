@@ -47,7 +47,7 @@ var WillinItem = React.createClass({
             <div style = {{ marginTop: "8px", backgroundColor: "#ffffff", paddingTop: "5px" }} onClick={this.itemOnClick} >
                 <table className="table" style={{ width: "100%", marginBottom: "0px" }}>
                     <tbody>
-                        <tr><td colSpan="2" style={{ fontSize: "16px", borderTopWidth: "0px" }}>商品编码: {this.props.itemObj.upc}</td></tr>
+                        <tr><td colSpan="2" style={{ fontSize: "16px", borderTopWidth: "0px", color: "#4A4A4A" }}>商品编码: {this.props.itemObj.upc}</td></tr>
                         <tr>
                             <td className="wrapline" style={{ width: "70%", fontSize: "16px" }}>{this.props.itemObj.name}</td>
                             <td style={{ width: "25%", textAlign: "center" }}>
