@@ -21,7 +21,7 @@ var MyTool = require('../pages/mytool/mytool.js');
 
 var LoginWindow = require('../pages/birdlogin/login.js');
 
-var Log = require('../pages/birdlogin/log.js');
+// var Log = require('../pages/birdlogin/log.js');
 
 var Portal = require('../pages/portal/portal.js');
 var TestPopMenu = require('../pages/testpopmenu/testpopmenu.js');
@@ -164,7 +164,6 @@ ReactDOM.render(
             <Route path="accountmanager" component={AccountManager}/>
             <Route path="uploadIdcard" component={uploadIdcard}/>
             <Route path="changeIcon" component={changeIcon}/>
-            <Route path="log" component={Log}/>
         </Route> 
     </Router>,
     

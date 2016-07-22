@@ -49,8 +49,10 @@ var LW = React.createClass({
 			if ($("#remember").is(':checked')) {//判断是否存储账户密码
 				// console.log(name,password);
 				localStorage.setItem("log_password", password);
+				localStorage.setItem('remember',$("#remember").is(':checked'));
 			} else {
 				localStorage.removeItem("log_password");
+				localStorage.removeItem("remember");
 			}
 			if (data.data) {
 				try {
@@ -81,6 +83,9 @@ var LW = React.createClass({
 		if (localStorage.getItem("log_password")) {
 			$("#password").val(localStorage.getItem("log_password"));
 		}
+		if (localStorage.getItem("remember")) {
+			$("#remember").prop("checked", localStorage.getItem("remember"));
+		}
 		// $("#name").click(function () {
 		// 	$(this).focus();
 		// })
@@ -110,7 +115,7 @@ var LW = React.createClass({
 							<input id="remember" type="checkbox" />记住密码
 						</label>
 					</div>
-					<div style={{ margin: "50px 50px 0 50px" }}>
+					<div style={{ margin: "100px 50px 0 50px" }}>
 						<button id="login" onClick={this.login} type="button" className="btn btn-default btn-block" style={{ color: "#039FFF", borderColor: gVar.Color_blue_head }}
 							onTouchStart = {gVar.btnhandleTouchStart.bind(this, "login") } onTouchEnd = {gVar.btnhandleTouchEnd.bind(this, "login") }
 							onTouchCancel={gVar.btnhandleTouchEnd.bind(this, "login") }>
@@ -118,12 +123,12 @@ var LW = React.createClass({
 						</button>
 					</div>
 				</form>
-
+				{/** 因为苹果的审核要求, 需要隐藏这一部分
 				<div style={{ position: "absolute", bottom: 10, width: "80%", left: "10%", height: "40px" }}>
 					<img src={footerimg} style={{ width: "100%" }}/>
 					<button style={{ position: "absolute", bottom: 0, left: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" }}>用户注册</button>
 					<button style={{ position: "absolute", bottom: 0, right: 10, color: "#999", borderStyle: "none", backgroundColor: "transparent" }}>忘记密码</button>
-				</div>
+				</div> */}
 			</div>);
 	}
 });

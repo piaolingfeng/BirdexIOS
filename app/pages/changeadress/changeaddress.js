@@ -213,7 +213,7 @@ var CA = React.createClass({
                         <tr className="changeaddress-tr">
                             <td className="changeaddress-td1">收货人：</td>
                             <td className="changeaddress-td2">
-                                <input id="consignee" type="text" className="changeaddress-input"></input>
+                                <input isInputText="yes" id="consignee" type="text" className="changeaddress-input"></input>
                             </td>
                             <td className="changeaddress-td3" rowSpan="2">
                                 <img onClick={this.imgClick} src={headImg} className="changeaddress-img"></img>
@@ -222,19 +222,19 @@ var CA = React.createClass({
                         <tr className="changeaddress-tr">
                             <td className="changeaddress-td1">联系电话：</td>
                             <td className="changeaddress-td2">
-                                <input id="phone" type="text" className="changeaddress-input"></input>
+                                <input isInputText="yes"  id="phone" type="text" className="changeaddress-input"></input>
                             </td>
                         </tr>
                         <tr className="changeaddress-tr">
                             <td className="changeaddress-td1">所在地区：</td>
                             <td className="changeaddress-td2-1" colSpan="2">
-                                <input id="area" placeholder="请选择所在地区" data-areaid="10064 10043 10375" readonly="" className="changeaddress-input" style={{ width: "100%" }}></input>
+                                <input isInputText="yes"  id="area" placeholder="请选择所在地区" data-areaid="10064 10043 10375" readonly="" className="changeaddress-input" style={{ width: "100%" }}></input>
                             </td>
                         </tr>
                         <tr className="changeaddress-tr">
                             <td className="changeaddress-td1">详细地址：</td>
                             <td className="changeaddress-td2-1" colSpan="2">
-                                <input id="detail_adress" type="text" className="changeaddress-input"  style={{ width: "100%" }}></input>
+                                <input isInputText="yes"  id="detail_adress" type="text" className="changeaddress-input"  style={{ width: "100%" }}></input>
                             </td>
                         </tr>
                     </table>

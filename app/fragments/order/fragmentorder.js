@@ -112,6 +112,7 @@ var FragmentOrder = React.createClass({
     },
     //简化订单状态
     dealOrderStatus(data) {
+        console.log(data.data, "ddddd");
         statusList = data.data;
         statusList.splice(0, 0, { status: '', status_name: '全部状态' });
         var dealStatus = ['全部状态', "待审核", "等待出库", "出库中", "已出库", "运输中",
@@ -191,8 +192,32 @@ var FragmentOrder = React.createClass({
             if (this.props.todayDataName) {
                 if (this.props.todayDataName.indexOf("今日") >= 0) {//今日时间
                     requestEntity.time_name = this.params.timeList[1];
-                    requestEntity.start_date = this.params.timeStartList[1];
-                    requestEntity.end_date = timeUtil.getCurrentDateFormat();;
+                    // requestEntity.start_date = this.params.timeStartList[1];
+                    var end_date = timeUtil.getCurrentDateFormat();
+                    if (this.props.todayDataName.indexOf("已出库") >= 0) {
+                        requestEntity.checkout_start_date = this.params.timeStartList[1];
+                        requestEntity.checkout_end_date = end_date;
+                        requestEntity.sign_start_date = "";
+                        requestEntity.sign_end_date = "";
+                        requestEntity.start_date = "";
+                        requestEntity.end_date = "";
+                    } else {
+                        if (this.props.todayDataName.indexOf("已签收") >= 0) {
+                            requestEntity.sign_start_date = this.params.timeStartList[1];
+                            requestEntity.sign_end_date = end_date;
+                            requestEntity.checkout_start_date = "";
+                            requestEntity.checkout_end_date = "";
+                            requestEntity.start_date = "";
+                            requestEntity.end_date = "";
+                        } else {
+                            requestEntity.start_date = this.params.timeStartList[1];
+                            requestEntity.end_date = end_date;
+                            requestEntity.checkout_start_date = "";
+                            requestEntity.checkout_end_date = "";
+                            requestEntity.sign_start_date = "";
+                            requestEntity.sign_end_date = "";
+                        }
+                    }
                 }
                 // console.log("timePosition"+timePosition);
                 //状态设置
@@ -369,7 +394,7 @@ var FragmentOrder = React.createClass({
     render: function () {
         // console.log(warehouseList);
         // console.log(statusList);
-        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={193} pullUpHandler={this.pullUpEvent}
+        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={204} pullUpHandler={this.pullUpEvent}
             backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (orderList != null && orderList.length == 0) {
             list = <div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>;

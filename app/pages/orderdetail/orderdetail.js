@@ -17,7 +17,7 @@ var CallIOS = require('../../util/CallIOS.js');
 var OrderDetail = React.createClass({
     myScroll: null,
     Data: null,
-    shouldUpdate:true,
+    shouldUpdate: true,
     idCheck: function () {
         // alert("idCheck");
         this.shouldUpdate = false;//不给刷新界面
@@ -115,14 +115,15 @@ var OrderDetail = React.createClass({
                 // $('#idCheck').removeAttr("onClick");
             }
         }
-        if (detailData.status_name == "等待出库" || detailData.status_name == "准备出库" || detailData.status_name == "待下架" ||
-            detailData.status_name == "出库中" || detailData.status_name == "下架中" || detailData.status_name == "审核不通过"
+        if (detailData.status_name == "等待出库" || detailData.status_name == "准备出库" ||
+            detailData.status_name == "待下架" || detailData.status_name == "下架中" || detailData.status_name == "审核不通过"
             || detailData.status_name == "身份证异常") {
             // console.log("changeaddr");
             $('#changeAddr').click(function () {
                 func.changeAddr();
             });
         } else {
+            $("#changeAddr").css("color","#9b9b9b");
             toast("当前状态不能修改地址哦!");
         }
         if (this.myScroll != null)

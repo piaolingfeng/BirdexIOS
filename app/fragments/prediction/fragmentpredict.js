@@ -64,8 +64,8 @@ var FragmentPrediciton = React.createClass({
         if (index != 0) {
             end_date = timeUtil.getCurrentDateFormat();
         }
-        requestEntity.start_date = this.params.timeStartList[index];
-        requestEntity.end_date = end_date;
+        requestEntity.updated_start_date = this.params.timeStartList[index];
+        requestEntity.updated_end_date = end_date;
         requestEntity.time_name = this.params.timeList[index];
         this.getPredicitionList();
     },
@@ -154,8 +154,8 @@ var FragmentPrediciton = React.createClass({
             if (this.props.todayDataName) {
                 if (this.props.todayDataName.indexOf("今日") >= 0) {//今日时间
                     requestEntity.time_name = this.params.timeList[1];
-                    requestEntity.start_date = this.params.timeStartList[1];
-                    requestEntity.end_date = timeUtil.getCurrentDateFormat();;
+                    requestEntity.updated_start_date = this.params.timeStartList[1];
+                    requestEntity.updated_end_date = timeUtil.getCurrentDateFormat();;
                 }
                 // console.log("timePosition"+timePosition);
                 //状态设置
@@ -314,7 +314,7 @@ var FragmentPrediciton = React.createClass({
     render: function () {
         //<TitleBar title="预报管理"/>
         // console.log(statusList);
-        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={193} pullUpHandler={this.pullUpEvent}
+        var list = <ListView ref={function (theApp) { listviewInd = theApp; } } getItems={this.getItem} marginTop={204} pullUpHandler={this.pullUpEvent}
             backGroud={gVar.Color_background} getCoreObject={this.getCoreObject}/>;
         if (predictList != null && predictList.length == 0) {
             list = <div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>;

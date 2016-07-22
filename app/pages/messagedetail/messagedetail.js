@@ -178,7 +178,7 @@ var MessageDetail = React.createClass({
         var params = {
             msg_type: this.msg_type,
         };
-        var url = gVar.getBASE_URL() + 'Message/clear';
+        var url = gVar.getBASE_URL() + 'Message/clearMessage';
         gVar.sendRequest(params, url, this.dealClearMsg,true,this.errorCallBack);
     },
 

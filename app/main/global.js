@@ -113,6 +113,8 @@ var gVar = {
         requestEntity.sign_end_date = "";
         requestEntity.checkout_start_date = "";//出库的时间
         requestEntity.checkout_end_date = "";
+        requestEntity.updated_start_date="";
+        requestEntity.updated_end_date="";
         requestEntity.time_name = "不限时间";
         requestEntity.status = "";//	N		订单状态10:'待审核'; 11: '已删除'; 2:'等待出库'; 20: '准备出库'; 21: '包裹出库中'; 30: '审核不通过'; 40: '已出库'; 5: '运输中'; 50: '包裹空运中'; 51: '待清关'; 52: '包裹清关中'; 53: '包裹已清关'; 60: '已签收';
         requestEntity.statusName = "全部状态";
@@ -122,14 +124,15 @@ var gVar = {
         return requestEntity;
     },
 
-    SERVER_ADDRESS: "192.168.1.207",
-    //   SERVER_ADDRESS = "api.b.birdex.cn",
-    PORT: "8089",//8002
+    // SERVER_ADDRESS: "192.168.1.207",
+      SERVER_ADDRESS : "api.b.birdex.cn",
+    // PORT: "8089",//8002
 
     getBASE_URL: function () {
         // var SERVER_ADDRESS = "192.168.1.207";
         // var PORT = "8089";//
-        return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
+        // return "http://" + this.SERVER_ADDRESS + ":" + this.PORT + "/";//
+        return "http://" + this.SERVER_ADDRESS+ "/";
     },
 
     randomString(len) {
@@ -199,7 +202,7 @@ var gVar = {
                     waitDailog.hideLoading();
                 // ;
             }.bind(this),
-            timeout: 5000,
+            timeout: 30000,
         });
     },
     //id是模块名字,模块点击后显示颜色

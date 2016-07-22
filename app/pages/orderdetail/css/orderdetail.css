@@ -17,7 +17,7 @@
     text-align: right;
     vertical-align: top;
     width: 23%;
-    padding: 6px;
+    line-height: 36px;
     padding-left: 0px;
 }
 .orderdetail_right{
@@ -31,9 +31,11 @@
     float: right;
 }
 .orderdetail_right_div_padding{
-    height: 36px;
-    line-height: 36px;
+    /*line-height: 36px;*/
+    word-break: break-all;
+    padding: 8px;
     padding-left: 4px;
+    padding-right: 0px;
 }
 div,td,span,button{
     font-size: 14px;

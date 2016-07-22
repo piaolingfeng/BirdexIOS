@@ -132,9 +132,11 @@ var OrderList = React.createClass({
                         onTouchStart = {this.btnhandleTouchStart.bind(this, "logisticsTracking") } onTouchEnd = {this.btnhandleTouchEnd.bind(this, "logisticsTracking") }
                         onTouchCancel={this.btnhandleTouchEnd.bind(this, "logisticsTracking") }>物流跟踪</span>
                     <span className="orderlist_line"></span>
+                    {/** 因为苹果的审核政策, 要去掉没有实现的功能按钮
                     <span id={"contactCustomer" + this.props.position} className="orderlist_btn" onClick={this.contactCustomer}
                         onTouchStart = {this.btnhandleTouchStart.bind(this, "contactCustomer") } onTouchEnd = {this.btnhandleTouchEnd.bind(this, "contactCustomer") }
                         onTouchCancel={this.btnhandleTouchEnd.bind(this, "contactCustomer") }>联系客服</span>
+                    */}
                     <span ref="changeAddr_line"className="orderlist_line"></span>
                     <span id = {"changeAddr" + this.props.position} ref="changeAddr" className="orderlist_btn" onClick={this.changeAddr}
                         onTouchStart = {this.btnhandleTouchStart.bind(this, "changeAddr") } onTouchEnd = {this.btnhandleTouchEnd.bind(this, "changeAddr") }

@@ -192,6 +192,7 @@ var Inventory = React.createClass({
     if (this.props.todayDataName) {
       // inventoryIndex=2;
       this.privateVar.inventoryIndex = 2;
+      this.privateVar.params.stock_status = "20";
       this.setState({});
     }
     this.setDataSource(this.privateVar.listCore);
@@ -305,7 +306,7 @@ var Inventory = React.createClass({
   render: function () {
     var content;
     if (this.privateVar.status == 1) {
-      content = (<ListView getCoreObj={this.getListCore} marginTop={205} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />);
+      content = (<ListView getCoreObj={this.getListCore} marginTop={211} backGroud="#eeeeee" pullDownHandler={this.pullUpEvent} pullUpHandler={this.pullUpEvent}  getItems={this.renderItem} />);
     } else if (this.privateVar.status == 2) {
       content = (<div style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "22px", marginTop: "100px" }}>暂时没有数据哦！</div>);
     } else {
